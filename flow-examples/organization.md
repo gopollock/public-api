@@ -12,7 +12,7 @@ We will provide you with organization **admin access token** and **school id** c
 
 ## Create teachers
 
-With admin access token you would be allowed to create users within your organization. Account.createAccount is a responsible method:
+With admin access token you would be allowed to create users within your organization. `Account.createAccount` is a responsible method:
 
 ```
 curl -v https://www.classtime.com/service/public/Account/createAccount \
@@ -28,7 +28,7 @@ Response: { accountId: "unique-id-of-created-account" }
 
 ## Assign teacher to school
 
-Now when there is a teacher within organization you would need to add him to your school. School.associateTeacher is a responsible method:
+Now when there is a teacher within organization you would need to add him to your school. `School.associateTeacher` is a responsible method:
 
 ```
 curl -v https://www.classtime.com/service/public/School/associateTeacher \
@@ -44,7 +44,7 @@ Response: {}
 
 ## Create user access token
 
-Finally, you could create an access token for users within your organization. Account.createToken is a responsible method:
+Finally, you could create an access token for users within your organization. `Account.createToken` is a responsible method:
 
 ```
 curl -v https://www.classtime.com/service/public/Account/createToken \
@@ -63,7 +63,7 @@ Response: {
 
 ## Use user token
 
-Now you could validly perform any calls from a name of teacher you have assigned an access token. For example:
+Now you could validly perform any calls as a teacher with his access token. For example:
 ```
 curl -v https://www.classtime.com/service/public/Account/getMyAccountInfo \
     -X POST \
