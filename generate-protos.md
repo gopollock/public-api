@@ -32,3 +32,24 @@ Another more custom approach would be to:
 2. Create your own proto generation script, where you could control input and output directories for each service.
 
 Here you could find [a `protoc` CLI documentation](https://protobuf.dev/overview/).
+
+## Code dependency
+
+Additionally, to protobuf generated classes you would need a protobuf community library dependency in your project. It is used to resolve some common classes implementations like Timestamp, Duration, etc.
+
+**PHP**:
+```
+pecl install protobuf
+```
+
+**Java**:
+```
+dependencies {
+  implementation 'com.google.protobuf:protobuf-java:3.18.0'
+}
+```
+
+**Javascript**
+```
+npm install protobuf
+```
