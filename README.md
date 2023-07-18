@@ -103,7 +103,9 @@ curl -v https://www.classtime.com/service/public/Account/login \
     -H 'Accept: application/json,*/*' \
     -d '{ provider: "Google", role: "Teacher" }'
 ```
-Response: `{ "redirectUrl": "https://accounts.google.com..." }`
+```
+Response: { "redirectUrl": "https://accounts.google.com..." }
+```
 
 
 **Restricted AccountService.getPublicUserProfile call**:
@@ -116,7 +118,14 @@ curl -v https://www.classtime.com/service/public/Account/getPublicUserProfile \
     -d '{ account_id: ${yourAccountId} }'
 
 ```
-Response: `{ "email": "you@email.com", "firstName": "first", "lastName": ... }`
+```
+Response: {
+    "email": "you@email.com",
+    "firstName": "John",
+    "lastName": "White",
+    ...,
+}
+```
 
 ## Binary requests
 
