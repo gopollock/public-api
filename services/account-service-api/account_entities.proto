@@ -1,0 +1,94 @@
+syntax = "proto3";
+
+package classtime.service.account;
+
+import "google/protobuf/timestamp.proto";
+import "role.proto";
+
+option java_multiple_files = true;
+option java_outer_classname = "AccountEntitiesProto";
+option java_package = "classtime.service.account";
+
+enum AuthenticationProvider {
+  Password = 0;
+  Google = 1;
+  Facebook = 2;
+  Microsoft = 3;
+  Clever = 4;
+  Sanis = 5; // IDM Niedersachsen
+  Teams = 6;
+  NONE = 7;
+  Baselland = 8;
+  AdminTool = 9;
+  Nickname = 10;
+  EmailVerification = 11;
+  IServ = 12;
+  WebUntis = 13;
+  Edulog = 14;
+  External = 15;
+}
+
+message UserProfile {
+  bool is_new = 1;
+  string first_name = 3;
+  string last_name = 4;
+  string picture = 5;
+}
+
+message AuthenticationMethod {
+  int32 id = 5;
+  AuthenticationProvider provider = 1;
+  string email = 2;
+
+  // Unique identifier for the user in the given provider.
+  string subject = 4;
+
+  oneof secrets {
+    bytes password_hash_hash = 3;
+    // Additional fields required in case of SAML authentication, TBD
+  }
+
+  int32 failed_login_attempts = 6;
+  google.protobuf.Timestamp last_success_login_at = 7;
+}
+
+message Account {
+  reserved 5, 6, 8;
+  UserProfile user_profile = 1;
+  int32 primary_authentication_method_id = 2;
+  repeated AuthenticationMethod authentication_methods = 4;
+  google.protobuf.Timestamp blocked_at = 7;
+  classtime.service.common.Role role = 9;
+  string locale = 10;
+}
+
+message AccountExtensionState {
+  reserved 1;
+  string account_extension_id = 2;
+  bytes account_extension_secret_hash = 3;
+}
+
+message AccountExtensionInfo {
+  reserved 1;
+  message User {
+    string first_name = 1;
+    string last_name = 2;
+    string email = 3;
+    string picture = 4;
+  }
+
+  message AccountInfo {
+    bool is_on_premium = 1;
+    bool is_on_school_license = 2;
+    int32 question_set_count = 3;
+    int32 session_count = 4;
+    int32 class_count = 5;
+  }
+
+  string extended_account_id = 7;
+  bool is_merge = 2;
+  User primary_user = 3;
+  User secondary_user = 4;
+  AccountInfo primary_user_extra_info = 5;
+  AccountInfo secondary_user_extra_info = 6;
+}
