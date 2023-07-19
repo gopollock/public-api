@@ -1,12 +1,12 @@
 # Classtime public API
 
-Classtime server works on gRCP-based API. In this repository under [the services directory](https://github.com/gopollock/public-api/tree/main/services), you would be able to find all interface definitions and protobuf messages. However, we also support plain JSON requests based protobuf messages.
+Classtime server works on gRCP-based API. In this repository under [the services directory](https://github.com/gopollock/public-api/tree/main/services), you would be able to find all interface definitions and protobuf messages. However, we also support plain [JSON requests](https://github.com/gopollock/public-api/tree/main#json-requests) based on protobuf messages.
 
 To become familiar with service usage you could jump right into specific [flow examples](https://github.com/gopollock/public-api/tree/main/flow-examples). Or you could follow this ReadMe for some general explanations and examples.
 
 ## Interface sample
 
-We will use this interface and proto messages as samples in the examples below:
+We will use this interface and proto messages as a sample in the examples below:
 
 ```kt
 @Public
@@ -63,7 +63,7 @@ Any desired endpoint constructs of 3 joined blocks:
 - Service name (e.g. Account, School, Library)
 - Service method name (e.g. createAccount, login, associateTeacher)
 
-Based on [interface sample](https://github.com/gopollock/public-api/tree/guidance#interface-sample), we could specify such endpoints:
+Based on [interface sample](https://github.com/gopollock/public-api/tree/main#interface-sample), we could specify such endpoints:
 ```
 https://www.classtime.com/service/public/Account/login
 https://www.classtime.com/service/public/Account/getPublicUserProfile
@@ -71,15 +71,15 @@ https://www.classtime.com/service/public/Account/getPublicUserProfile
 
 ## Role permissions
 
-Each service and service's methods contain an annotation limiting access to specific roles. And of course, methods annotations have higher priority. For example, in the [interface sample](https://github.com/gopollock/public-api/tree/guidance#interface-sample), there are:
+Each service and service's methods contain an annotation limiting access to specific roles. And of course, methods annotations have higher priority. For example, in the [interface sample](https://github.com/gopollock/public-api/tree/main#interface-sample), there are:
 - `AccountService` with `@Public` service annotation, which makes all methods available for all.
-- `login` method without any annotation. As a result, it uses `AccountService` scope - `@Public`.
+- `login` method without an annotation. And as a result, it uses `AccountService` scope - `@Public`.
 - `getPublicUserProfile` method with `@RequireRole(Role.Teacher)`. Only teachers are allowed to call this endpoint.
 
 ### Auth Header
 
 To get access scope of some roles, you need to have an access token tied to an account with that role.  
-Your access token must be sent in Auth header with a request:
+Your access token must be sent in Auth header with a request in the following schema:
 
 ```
 Authorization: JWT ${accessToken}
@@ -88,7 +88,7 @@ Authorization: JWT ${accessToken}
 #### Get testing access token
 The easiest way to get an access token for some test purposes is through classtime website:
 1. Go to a [Classtime website](https://www.classtime.com/auth/login) and authorize using any method (e.g. with Google).
-2. Open "classtime.com" cookies in the developer console of the browser. (see e.g. [how to do it in Google chrome](https://developer.chrome.com/docs/devtools/application/cookies/#open))
+2. Open "classtime.com" cookies in the developer console of the browser. (see e.g. [how to do it in Google Chrome](https://developer.chrome.com/docs/devtools/application/cookies/#open))
 3. Copy a value of a cookie with the name: "service-jwt-0". It is your's teacher account access token.
 
 ## JSON requests
@@ -108,8 +108,9 @@ curl -v https://www.classtime.com/service/public/Account/login \
 Response: { "redirectUrl": "https://accounts.google.com..." }
 ```
 
-
 **Restricted AccountService.getPublicUserProfile call**:
+Pre-requirement: you must know your account id and access token. You could obtain it following [this small guide](https://github.com/gopollock/public-api/blob/main/flow-examples/my-account-id.md).
+
 ```
 curl -v https://www.classtime.com/service/public/Account/getPublicUserProfile \
     -X POST \
@@ -117,13 +118,15 @@ curl -v https://www.classtime.com/service/public/Account/getPublicUserProfile \
     -H 'Accept: application/json,*/*' \
     -H 'Authorization: JWT ${yourTeacherAccessToken}' \
     -d '{ account_id: ${yourAccountId} }'
-
 ```
 ```
 Response: {
     "email": "you@email.com",
-    "firstName": "John",
-    "lastName": "White",
+    userProfile: {
+      "firstName": "John",
+      "lastName": "White",
+      "picture": "",
+    }
     ...,
 }
 ```
@@ -131,7 +134,7 @@ Response: {
 ## Binary requests
 
 Pre-requirement for binary requests are generated protobuf. They would help you to serialize requests and deserialize responses.  
-The full process of protobuf generation and usage is described in [generate-protos guide](https://github.com/gopollock/public-api/blob/main/generate-protos.md).
+The full process of protobuf generation and usage is described in [generating protos guide](https://github.com/gopollock/public-api/blob/main/generate-protos.md).
 
 **Public AccountService.login call**:
 ```
@@ -148,6 +151,8 @@ Response: `LoginResponse` in binary format
 You could replace it with your serialized value.
 
 **Restricted AccountService.getPublicUserProfile call**:
+Pre-requirement: you must know your account id and access token. You could obtain it following [this small guide](https://github.com/gopollock/public-api/blob/main/flow-examples/my-account-id.md).
+
 ```
 curl -v https://www.classtime.com/service/public/Account/getPublicUserProfile \
     -X POST \
@@ -162,7 +167,7 @@ Response: `UserProfileResponse` in binary format
 
 ## Rate limits
 
-Classtime limits requests to 800 (requests / min) per IP-address or authorized account.
+Classtime limits requests to 800 (requests / min) per IP address or authorized account.
 Please, contact our support@classtime.com, if you believe it's a too low value for you.
 
 ## API versions
@@ -170,4 +175,4 @@ Please, contact our support@classtime.com, if you believe it's a too low value f
 Currently, there is only 1 ongoing continuously developed real-time version of API.  
 Unfortunately, this strategy might have a high rate of introducing breaking changes.  
 
-We are planning introducing versioning somewhere in the future.
+We are planning to introduce versioning somewhere in the future.
