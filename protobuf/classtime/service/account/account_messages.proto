@@ -2,11 +2,11 @@ syntax = "proto3";
 
 package classtime.service.account;
 
-import "account_entities.proto";
-import "common.proto";
+import "classtime/service/account/account_entities.proto";
+import "classtime/service/common/role.proto";
+import "classtime/service/common/common.proto";
 import "google/protobuf/duration.proto";
 import "google/protobuf/timestamp.proto";
-import "role.proto";
 
 option java_multiple_files = true;
 option java_outer_classname = "AccountMessagesProto";

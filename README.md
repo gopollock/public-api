@@ -109,7 +109,7 @@ Response: { "redirectUrl": "https://accounts.google.com..." }
 ```
 
 ### Restricted AccountService.getPublicUserProfile call:
-Pre-requirement: you must know your account id and access token. You could obtain it following [this small guide](https://github.com/gopollock/public-api/blob/main/flow-examples/my-account-id.md).
+Pre-requirement: you must know your account id and access token. You could obtain it following [this small guide](./flow-examples/my-account-id.md).
 
 ```
 curl -v https://www.classtime.com/service/public/Account/getPublicUserProfile \
@@ -134,7 +134,7 @@ Response: {
 ## Binary requests
 
 Pre-requirement for binary requests are generated protobuf. They would help you to serialize requests and deserialize responses.  
-The full process of protobuf generation and usage is described in [generating protos guide](https://github.com/gopollock/public-api/blob/main/generate-protos.md).
+The full process of protobuf generation and usage is described in [generating protos guide](./protobuf/README.md).
 
 ### Public AccountService.login call:
 ```
@@ -151,7 +151,7 @@ Response: `LoginResponse` in binary format
 You could replace it with your serialized value.
 
 ### Restricted AccountService.getPublicUserProfile call:
-Pre-requirement: you must know your account id and access token. You could obtain it following [this small guide](https://github.com/gopollock/public-api/blob/main/flow-examples/my-account-id.md).
+Pre-requirement: you must know your account id and access token. You could obtain it following [this small guide](./flow-examples/my-account-id.md).
 
 ```
 curl -v https://www.classtime.com/service/public/Account/getPublicUserProfile \
