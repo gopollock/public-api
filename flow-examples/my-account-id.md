@@ -1,6 +1,6 @@
 # Get my account id flow
 
-1. You need to have an access token. You could follow [this guide](https://github.com/gopollock/public-api/tree/main#get-testing-access-token).
+1. You need to have an access token. You could follow [this guide](../README.md#get-testing-access-token).
 2. You need to perform an Account.getMyAccountInfo request.
 3. In response you will find your account id.
 

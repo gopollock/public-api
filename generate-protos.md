@@ -21,7 +21,7 @@ protoc --version  # Ensure compiler version is 3+
 ### Strait-forward
 The simplest way to generate and consume protobufs in your code is to:
 1. submodule this repository (or simply copy it) into yours repository.
-2. Run `/public-api/proto-genrators/generate_protos.sh ${language}` script, which generates protobufs.
+2. Run `public-api/generate_protos.sh ${language}` script, which generates protobufs.
 
 The list of supported params instead of `${language}` are: ("php" "java" "python" "cpp" "csharp" "dart" "go" "kotlin" "objc" "ruby")
 
