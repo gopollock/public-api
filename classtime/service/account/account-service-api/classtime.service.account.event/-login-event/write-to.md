@@ -1,0 +1,6 @@
+//[account-service-api](../../../index.md)/[classtime.service.account.event](../index.md)/[LoginEvent](index.md)/[writeTo](write-to.md)
+
+# writeTo
+
+[jvm]\
+open fun [writeTo](write-to.md)(output: CodedOutputStream)

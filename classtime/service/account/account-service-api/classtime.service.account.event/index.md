@@ -1,0 +1,39 @@
+//[account-service-api](../../index.md)/[classtime.service.account.event](index.md)
+
+# Package-level declarations
+
+## Types
+
+| Name | Summary |
+|---|---|
+| [AccountBlockedEvent](-account-blocked-event/index.md) | [jvm]<br>class [AccountBlockedEvent](-account-blocked-event/index.md) : GeneratedMessageV3, [AccountBlockedEventOrBuilder](-account-blocked-event-or-builder/index.md)<br>Protobuf type `classtime.service.account.event.AccountBlockedEvent` |
+| [AccountBlockedEventKt](-account-blocked-event-kt/index.md) | [jvm]<br>object [AccountBlockedEventKt](-account-blocked-event-kt/index.md) |
+| [AccountBlockedEventOrBuilder](-account-blocked-event-or-builder/index.md) | [jvm]<br>interface [AccountBlockedEventOrBuilder](-account-blocked-event-or-builder/index.md) : MessageOrBuilder |
+| [AccountEventsProto](-account-events-proto/index.md) | [jvm]<br>class [AccountEventsProto](-account-events-proto/index.md) |
+| [FailedPasswordLoginEvent](-failed-password-login-event/index.md) | [jvm]<br>class [FailedPasswordLoginEvent](-failed-password-login-event/index.md) : GeneratedMessageV3, [FailedPasswordLoginEventOrBuilder](-failed-password-login-event-or-builder/index.md)<br>Protobuf type `classtime.service.account.event.FailedPasswordLoginEvent` |
+| [FailedPasswordLoginEventKt](-failed-password-login-event-kt/index.md) | [jvm]<br>object [FailedPasswordLoginEventKt](-failed-password-login-event-kt/index.md) |
+| [FailedPasswordLoginEventOrBuilder](-failed-password-login-event-or-builder/index.md) | [jvm]<br>interface [FailedPasswordLoginEventOrBuilder](-failed-password-login-event-or-builder/index.md) : MessageOrBuilder |
+| [LoginEvent](-login-event/index.md) | [jvm]<br>class [LoginEvent](-login-event/index.md) : GeneratedMessageV3, [LoginEventOrBuilder](-login-event-or-builder/index.md)<br>Protobuf type `classtime.service.account.event.LoginEvent` |
+| [LoginEventKt](-login-event-kt/index.md) | [jvm]<br>object [LoginEventKt](-login-event-kt/index.md) |
+| [LoginEventOrBuilder](-login-event-or-builder/index.md) | [jvm]<br>interface [LoginEventOrBuilder](-login-event-or-builder/index.md) : MessageOrBuilder |
+| [PasswordResetEvent](-password-reset-event/index.md) | [jvm]<br>class [PasswordResetEvent](-password-reset-event/index.md) : GeneratedMessageV3, [PasswordResetEventOrBuilder](-password-reset-event-or-builder/index.md)<br>Protobuf type `classtime.service.account.event.PasswordResetEvent` |
+| [PasswordResetEventKt](-password-reset-event-kt/index.md) | [jvm]<br>object [PasswordResetEventKt](-password-reset-event-kt/index.md) |
+| [PasswordResetEventOrBuilder](-password-reset-event-or-builder/index.md) | [jvm]<br>interface [PasswordResetEventOrBuilder](-password-reset-event-or-builder/index.md) : MessageOrBuilder |
+| [RequestPasswordResetEvent](-request-password-reset-event/index.md) | [jvm]<br>class [RequestPasswordResetEvent](-request-password-reset-event/index.md) : GeneratedMessageV3, [RequestPasswordResetEventOrBuilder](-request-password-reset-event-or-builder/index.md)<br>Protobuf type `classtime.service.account.event.RequestPasswordResetEvent` |
+| [RequestPasswordResetEventKt](-request-password-reset-event-kt/index.md) | [jvm]<br>object [RequestPasswordResetEventKt](-request-password-reset-event-kt/index.md) |
+| [RequestPasswordResetEventOrBuilder](-request-password-reset-event-or-builder/index.md) | [jvm]<br>interface [RequestPasswordResetEventOrBuilder](-request-password-reset-event-or-builder/index.md) : MessageOrBuilder |
+| [SignupEvent](-signup-event/index.md) | [jvm]<br>class [SignupEvent](-signup-event/index.md) : GeneratedMessageV3, [SignupEventOrBuilder](-signup-event-or-builder/index.md)<br>Protobuf type `classtime.service.account.event.SignupEvent` |
+| [SignupEventKt](-signup-event-kt/index.md) | [jvm]<br>object [SignupEventKt](-signup-event-kt/index.md) |
+| [SignupEventOrBuilder](-signup-event-or-builder/index.md) | [jvm]<br>interface [SignupEventOrBuilder](-signup-event-or-builder/index.md) : MessageOrBuilder |
+
+## Functions
+
+| Name | Summary |
+|---|---|
+| [accountBlockedEvent](account-blocked-event.md) | [jvm]<br>inline fun [accountBlockedEvent](account-blocked-event.md)(block: [AccountBlockedEventKt.Dsl](-account-blocked-event-kt/-dsl/index.md).() -&gt; [Unit](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)): [AccountBlockedEvent](-account-blocked-event/index.md) |
+| [copy](copy.md) | [jvm]<br>inline fun [AccountBlockedEvent](-account-blocked-event/index.md).[copy](copy.md)(block: [AccountBlockedEventKt.Dsl](-account-blocked-event-kt/-dsl/index.md).() -&gt; [Unit](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)): [AccountBlockedEvent](-account-blocked-event/index.md)<br>inline fun [FailedPasswordLoginEvent](-failed-password-login-event/index.md).[copy](copy.md)(block: [FailedPasswordLoginEventKt.Dsl](-failed-password-login-event-kt/-dsl/index.md).() -&gt; [Unit](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)): [FailedPasswordLoginEvent](-failed-password-login-event/index.md)<br>inline fun [LoginEvent](-login-event/index.md).[copy](copy.md)(block: [LoginEventKt.Dsl](-login-event-kt/-dsl/index.md).() -&gt; [Unit](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)): [LoginEvent](-login-event/index.md)<br>inline fun [PasswordResetEvent](-password-reset-event/index.md).[copy](copy.md)(block: [PasswordResetEventKt.Dsl](-password-reset-event-kt/-dsl/index.md).() -&gt; [Unit](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)): [PasswordResetEvent](-password-reset-event/index.md)<br>inline fun [RequestPasswordResetEvent](-request-password-reset-event/index.md).[copy](copy.md)(block: [RequestPasswordResetEventKt.Dsl](-request-password-reset-event-kt/-dsl/index.md).() -&gt; [Unit](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)): [RequestPasswordResetEvent](-request-password-reset-event/index.md)<br>inline fun [SignupEvent](-signup-event/index.md).[copy](copy.md)(block: [SignupEventKt.Dsl](-signup-event-kt/-dsl/index.md).() -&gt; [Unit](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)): [SignupEvent](-signup-event/index.md) |
+| [failedPasswordLoginEvent](failed-password-login-event.md) | [jvm]<br>inline fun [failedPasswordLoginEvent](failed-password-login-event.md)(block: [FailedPasswordLoginEventKt.Dsl](-failed-password-login-event-kt/-dsl/index.md).() -&gt; [Unit](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)): [FailedPasswordLoginEvent](-failed-password-login-event/index.md) |
+| [loginEvent](login-event.md) | [jvm]<br>inline fun [loginEvent](login-event.md)(block: [LoginEventKt.Dsl](-login-event-kt/-dsl/index.md).() -&gt; [Unit](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)): [LoginEvent](-login-event/index.md) |
+| [passwordResetEvent](password-reset-event.md) | [jvm]<br>inline fun [passwordResetEvent](password-reset-event.md)(block: [PasswordResetEventKt.Dsl](-password-reset-event-kt/-dsl/index.md).() -&gt; [Unit](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)): [PasswordResetEvent](-password-reset-event/index.md) |
+| [requestPasswordResetEvent](request-password-reset-event.md) | [jvm]<br>inline fun [requestPasswordResetEvent](request-password-reset-event.md)(block: [RequestPasswordResetEventKt.Dsl](-request-password-reset-event-kt/-dsl/index.md).() -&gt; [Unit](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)): [RequestPasswordResetEvent](-request-password-reset-event/index.md) |
+| [signupEvent](signup-event.md) | [jvm]<br>inline fun [signupEvent](signup-event.md)(block: [SignupEventKt.Dsl](-signup-event-kt/-dsl/index.md).() -&gt; [Unit](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)): [SignupEvent](-signup-event/index.md) |

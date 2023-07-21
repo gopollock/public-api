@@ -1,0 +1,13 @@
+//[account-service-api](../../../../index.md)/[classtime.service.account](../../index.md)/[AuthorizationResponseKt](../index.md)/[Dsl](index.md)/[redirectUrl](redirect-url.md)
+
+# redirectUrl
+
+[jvm]\
+
+@get:[JvmName](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-name/index.html)(name = &quot;getRedirectUrl&quot;)
+
+@set:[JvmName](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-name/index.html)(name = &quot;setRedirectUrl&quot;)
+
+var [redirectUrl](redirect-url.md): [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)
+
+<code>string redirect_url = 1;</code>

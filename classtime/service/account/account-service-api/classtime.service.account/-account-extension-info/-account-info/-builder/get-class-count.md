@@ -1,0 +1,12 @@
+//[account-service-api](../../../../../index.md)/[classtime.service.account](../../../index.md)/[AccountExtensionInfo](../../index.md)/[AccountInfo](../index.md)/[Builder](index.md)/[getClassCount](get-class-count.md)
+
+# getClassCount
+
+[jvm]\
+open fun [getClassCount](get-class-count.md)(): [Int](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)
+
+`int32 class_count = 5;`
+
+#### Return
+
+The classCount.

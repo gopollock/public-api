@@ -1,0 +1,13 @@
+//[account-service-api](../../../../index.md)/[classtime.service.account](../../index.md)/[LoginRequestKt](../index.md)/[Dsl](index.md)/[openIdConnect](open-id-connect.md)
+
+# openIdConnect
+
+[jvm]\
+
+@get:[JvmName](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-name/index.html)(name = &quot;getOpenIdConnect&quot;)
+
+@set:[JvmName](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-name/index.html)(name = &quot;setOpenIdConnect&quot;)
+
+var [openIdConnect](open-id-connect.md): [OpenIdConnectLoginInfo](../../-open-id-connect-login-info/index.md)
+
+<code>.classtime.service.account.OpenIdConnectLoginInfo open_id_connect = 7;</code>
