@@ -1,0 +1,27 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+$dokka.location:classtime.service.account////PointingToDeclaration/account-service-api/classtime.service.account/index.html
+$dokka.location:classtime.service.account//ACCOUNT_SERVICE_NAME/#/PointingToDeclaration/account-service-api/classtime.service.account/-a-c-c-o-u-n-t_-s-e-r-v-i-c-e_-n-a-m-e.html
+$dokka.location:classtime.service.account//getOrganizations/[Error type: Unresolved type for Account]#/PointingToDeclaration/account-service-api/classtime.service.account/get-organizations.html
+$dokka.location:classtime.service.account//getPrimaryAuthenticationMethod/[Error type: Unresolved type for Account]#/PointingToDeclaration/account-service-api/classtime.service.account/get-primary-authentication-method.html
+$dokka.location:classtime.service.account//getSubjectsOrg/#kotlin.String/PointingToDeclaration/account-service-api/classtime.service.account/get-subjects-org.html
+$dokka.location:classtime.service.account/AccountService.Companion///PointingToDeclaration/account-service-api/classtime.service.account/-account-service/-companion/index.html
+$dokka.location:classtime.service.account/AccountService.Companion/NAME/#/PointingToDeclaration/account-service-api/classtime.service.account/-account-service/-companion/-n-a-m-e.html
+$dokka.location:classtime.service.account/AccountService///PointingToDeclaration/account-service-api/classtime.service.account/-account-service/index.html
+$dokka.location:classtime.service.account/AccountService/accountExtension/#classtime.service.RequestContext#[Error type: Unresolved type for AccountExtensionRequest]/PointingToDeclaration/account-service-api/classtime.service.account/-account-service/account-extension.html
+$dokka.location:classtime.service.account/AccountService/authorize/#classtime.service.RequestContext#[Error type: Unresolved type for AuthorizationRequest]/PointingToDeclaration/account-service-api/classtime.service.account/-account-service/authorize.html
+$dokka.location:classtime.service.account/AccountService/createAccount/#classtime.service.RequestContext#[Error type: Unresolved type for CreateAccountRequest]/PointingToDeclaration/account-service-api/classtime.service.account/-account-service/create-account.html
+$dokka.location:classtime.service.account/AccountService/createToken/#classtime.service.RequestContext#[Error type: Unresolved type for CreateTokenRequest]/PointingToDeclaration/account-service-api/classtime.service.account/-account-service/create-token.html
+$dokka.location:classtime.service.account/AccountService/finishAccountCreation/#classtime.service.RequestContext#[Error type: Unresolved type for FinishAccountCreationRequest]/PointingToDeclaration/account-service-api/classtime.service.account/-account-service/finish-account-creation.html
+$dokka.location:classtime.service.account/AccountService/getAccountInfo/#classtime.service.RequestContext#[Error type: Unresolved type for AccountInfoRequest]/PointingToDeclaration/account-service-api/classtime.service.account/-account-service/get-account-info.html
+$dokka.location:classtime.service.account/AccountService/getMyAccountInfo/#classtime.service.RequestContext#[Error type: Unresolved type for AccountInfoRequest]/PointingToDeclaration/account-service-api/classtime.service.account/-account-service/get-my-account-info.html
+$dokka.location:classtime.service.account/AccountService/getPrivateAccountData/#classtime.service.RequestContext#[Error type: Unresolved type for GetPrivateAccountDataRequest]/PointingToDeclaration/account-service-api/classtime.service.account/-account-service/get-private-account-data.html
+$dokka.location:classtime.service.account/AccountService/getPublicUserProfile/#classtime.service.RequestContext#[Error type: Unresolved type for UserProfileRequest]/PointingToDeclaration/account-service-api/classtime.service.account/-account-service/get-public-user-profile.html
+$dokka.location:classtime.service.account/AccountService/getUserProfile/#classtime.service.RequestContext#[Error type: Unresolved type for UserProfileRequest]/PointingToDeclaration/account-service-api/classtime.service.account/-account-service/get-user-profile.html
+$dokka.location:classtime.service.account/AccountService/login/#classtime.service.RequestContext#[Error type: Unresolved type for LoginRequest]/PointingToDeclaration/account-service-api/classtime.service.account/-account-service/login.html
+$dokka.location:classtime.service.account/AccountService/logout/#classtime.service.RequestContext#[Error type: Unresolved type for LogoutRequest]/PointingToDeclaration/account-service-api/classtime.service.account/-account-service/logout.html
+$dokka.location:classtime.service.account/AccountService/refreshToken/#classtime.service.RequestContext#[Error type: Unresolved type for RefreshTokenRequest]/PointingToDeclaration/account-service-api/classtime.service.account/-account-service/refresh-token.html
+$dokka.location:classtime.service.account/AccountService/resetPassword/#classtime.service.RequestContext#[Error type: Unresolved type for ResetPasswordRequest]/PointingToDeclaration/account-service-api/classtime.service.account/-account-service/reset-password.html
+$dokka.location:classtime.service.account/AccountService/updateAccountInfo/#classtime.service.RequestContext#[Error type: Unresolved type for UpdateAccountInfoRequest]/PointingToDeclaration/account-service-api/classtime.service.account/-account-service/update-account-info.html
+classtime.service.account
+
