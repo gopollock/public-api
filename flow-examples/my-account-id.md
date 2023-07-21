@@ -4,7 +4,7 @@
 2. You need to perform an Account.getMyAccountInfo request.
 3. In response you will find your account id.
 
-```
+```bash
 curl -v https://www.classtime.com/service/public/Account/getMyAccountInfo \
     -X POST \
     -H 'Content-Type: application/json' \
@@ -12,9 +12,8 @@ curl -v https://www.classtime.com/service/public/Account/getMyAccountInfo \
     -H 'Authorization: JWT ${yourAccessToken}' \
     -d '{ }'
 ```
-```
+```json
 Response: {
-    classtimeId: "your-id",
-    ...
+    "classtimeId": "your-id",
 }
 ```

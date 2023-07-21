@@ -1,6 +1,6 @@
 # Classtime public API
 
-Classtime servers communicate using a protobuf-over-HTTP protocol. In this repository under [the services directory](./services/), you would be able to find all interface definitions and protobuf messages. However, we also support plain [JSON requests](./README.md#json-requests) based on protobuf messages.
+Classtime servers communicate using a protobuf-over-HTTP protocol. In this repository under [the services directory](./classtime/services/), you would be able to find all interface definitions and protobuf messages. However, we also support plain [JSON requests](./README.md#json-requests) based on protobuf messages.
 
 To become familiar with service usage you could jump right into specific [flow examples](./flow-examples/). Or you could follow this ReadMe for some general explanations and examples.
 
@@ -8,14 +8,9 @@ To become familiar with service usage you could jump right into specific [flow e
 
 We will use this interface and proto messages as a sample in the examples below:
 
-```kt
+```kotlin
 @Public
 interface AccountService : Service {
-
-    companion object {
-        const val NAME = "Account"
-    }
-
 
     /**
      * Initiates a log in process. It will redirect the user to the authentication provider.
@@ -23,18 +18,18 @@ interface AccountService : Service {
     fun login(context: RequestContext, request: LoginRequest): LoginResponse
 
     /**
-     * Return account's public profile data by id provided in request.
+     * Updates part of the user's account info.
      *
-     * @throws ServiceError.NotFound there is no account with provided id.
+     * @return all information about the user's account.
      */
     @RequireRole(Role.Teacher)
-    fun getPublicUserProfile(context: RequestContext, request: UserProfileRequest): UserProfileResponse
+    fun updateAccountInfo(context: RequestContext, request: UpdateAccountInfoRequest): AccountInfoResponse
 
     ...
 }
 ```
 
-```
+```protobuf
 message LoginRequest {
   AuthenticationProvider provider = 1;
   classtime.service.common.Role role = 2;
@@ -71,7 +66,7 @@ https://www.classtime.com/service/public/Account/getPublicUserProfile
 
 ## Role permissions
 
-Each service and service's methods contain an annotation limiting access to specific roles. And of course, methods annotations have higher priority. For example, in the [interface sample](./README.md#interface-sample), there are:
+Each service and service method contains an annotation limiting access to specific roles. And of course, method annotations have higher priority. For example, in the [interface sample](./README.md#interface-sample), there are:
 - `AccountService` with `@Public` service annotation, which makes all methods available for all.
 - `login` method without an annotation. And as a result, it uses `AccountService` scope - `@Public`.
 - `getPublicUserProfile` method with `@RequireRole(Role.Teacher)`. Only teachers are allowed to call this endpoint.
@@ -97,37 +92,36 @@ JSON requests are the easiest point to start. However, we are recommending to us
 Note: **All requests use the HTTP POST method**
 
 ### Public AccountService.login call:
-```
+```bash
 curl -v https://www.classtime.com/service/public/Account/login \
     -X POST \
     -H 'Content-Type: application/json' \
     -H 'Accept: application/json,*/*' \
     -d '{ provider: "Google", role: "Teacher" }'
 ```
-```
+```json
 Response: { "redirectUrl": "https://accounts.google.com..." }
 ```
 
 ### Restricted AccountService.getPublicUserProfile call:
 Pre-requirement: you must know your account id and access token. You could obtain it following [this small guide](./flow-examples/my-account-id.md).
 
-```
-curl -v https://www.classtime.com/service/public/Account/getPublicUserProfile \
+```bash
+curl -v https://www.classtime.com/service/public/Account/updateAccountInfo \
     -X POST \
     -H 'Content-Type: application/json' \
     -H 'Accept: application/json,*/*' \
     -H 'Authorization: JWT ${yourTeacherAccessToken}' \
-    -d '{ account_id: ${yourAccountId} }'
+    -d '{ user_profile: { firstName: "John", lastName: "White" } }'
 ```
-```
+```json
 Response: {
     "email": "you@email.com",
-    userProfile: {
+    "userProfile": {
       "firstName": "John",
       "lastName": "White",
       "picture": "",
     }
-    ...,
 }
 ```
 
@@ -137,7 +131,7 @@ Pre-requirement for binary requests are generated protobuf. They would help you 
 The full process of protobuf generation and usage is described in [generating protos guide](./generate_porotos.md).
 
 ### Public AccountService.login call:
-```
+```bash
 curl -v https://www.classtime.com/service/public/Account/login \
     -X POST \
     -H 'Content-Type: application/protobuf' \
@@ -153,8 +147,8 @@ You could replace it with your serialized value.
 ### Restricted AccountService.getPublicUserProfile call:
 Pre-requirement: you must know your account id and access token. You could obtain it following [this small guide](./flow-examples/my-account-id.md).
 
-```
-curl -v https://www.classtime.com/service/public/Account/getPublicUserProfile \
+```bash
+curl -v https://www.classtime.com/service/public/Account/updateAccountInfo \
     -X POST \
     -H 'Content-Type: application/protobuf' \
     -H 'Accept: application/protobuf,*/*' \
