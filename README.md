@@ -134,7 +134,7 @@ Response: {
 ## Binary requests
 
 Pre-requirement for binary requests are generated protobuf. They would help you to serialize requests and deserialize responses.  
-The full process of protobuf generation and usage is described in [generating protos guide](./protobuf/README.md).
+The full process of protobuf generation and usage is described in [generating protos guide](./generate_porotos.md).
 
 ### Public AccountService.login call:
 ```
