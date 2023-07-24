@@ -1,6 +1,0 @@
-//[account-service-api](../../../index.md)/[classtime.service.account](../index.md)/[LogoutRequest](index.md)/[getParserForType](get-parser-for-type.md)
-
-# getParserForType
-
-[jvm]\
-open fun [getParserForType](get-parser-for-type.md)(): Parser&lt;[LogoutRequest](index.md)&gt;
