@@ -1,0 +1,81 @@
+syntax = "proto3";
+
+package classtime.service.common;
+
+option java_multiple_files = true;
+option java_outer_classname = "CommonProto";
+option java_package = "classtime.service.common";
+
+enum FeedbackMode {
+  Manual = 0;
+  PerQuestion = 1;
+  PerSession = 2;
+}
+
+enum GameStatus {
+  None = 0;
+  Setup = 1;
+  Started = 2;
+  Finished = 3;
+}
+
+enum SessionMode {
+  Flexible = 0;
+  RoundBased = 1;
+}
+
+enum QuestionKind {
+  Boolean = 0;
+  Categorizer = 1;
+  CategorizerMultiple = 2;
+  Cloze = 3;
+  Gap = 4;
+  Hotspot = 5;
+  MultipleChoice = 6;
+  SingleChoice = 7;
+  Sorter = 8;
+  Text = 9;
+  Essay = 10;
+}
+
+message Team {
+  int32 id = 1;
+  repeated string members = 2;
+}
+
+// Make sure always sync with getAcquisitionChannel implementation.
+message AcquisitionChannel {
+  string utm_source = 1;
+  string utm_medium = 2;
+  oneof channel {
+    string referrer = 3;
+    string utm_campaign = 4;
+    string gclid = 5;
+    string gclsrc = 6;
+    string fbclid = 7;
+  }
+  string landing_page = 8;
+}
+
+message SebConfig {
+  message UrlFilter {
+    string url = 1;
+    bool are_allowed_subpaths = 2;
+  }
+  string start_url = 1;
+  string start_password = 2;
+  string quit_password = 3;
+  string admin_password = 4;
+  repeated UrlFilter url_filters = 5;
+  bool is_manual = 6;
+  bool is_enabled = 7;
+}
+
+message FeatureFlag {
+  string flag_name = 1;
+  oneof flag_value {
+    bool boolean_value = 2;
+    string string_value = 3;
+    int32 number_value = 4;
+  }
+}

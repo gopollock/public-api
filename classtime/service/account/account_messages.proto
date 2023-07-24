@@ -1,0 +1,264 @@
+syntax = "proto3";
+
+package classtime.service.account;
+
+import "classtime/service/account/account_entities.proto";
+import "classtime/service/common/role.proto";
+import "classtime/service/common/common.proto";
+import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
+
+option java_multiple_files = true;
+option java_outer_classname = "AccountMessagesProto";
+option java_package = "classtime.service.account";
+
+message OpenIdConnectLoginInfo {
+  map<string, string> extra_params = 1;
+}
+
+enum AuthTokenSource {
+  COOKIE = 0;
+  URL_PARAM = 1;
+}
+
+message LoginRequest {
+  reserved 2;
+  AuthenticationProvider provider = 1;
+  string extended_account_id = 3;
+  classtime.service.common.Role role = 4;
+  /*
+   * Redirect url, where user will land after authentication process succeeds.
+   * Must use the same protocol and host as classtime server.
+   */
+  string success_redirect_url = 5;
+  /* Narrows token audience. Value is added as postfix to a token role's audience. */
+  string audience_permission = 6;
+  /* Defines where client will expect to find a token. */
+  AuthTokenSource token_source = 8;
+  oneof login_info {
+    OpenIdConnectLoginInfo open_id_connect = 7;
+  }
+}
+
+message LoginState {
+  reserved 2, 3, 4, 6, 7, 8;
+  bytes csrf_token_hash = 1;
+  AccountExtensionState account_extension = 5;
+  LoginRequest login_request = 9;
+}
+
+message LoginResponse {
+  // If set, the client should redirect the browser to the given url.
+  string redirect_url = 1;
+
+  // If set, the client should pass along the state in the subsequent AuthorizationRequest.
+  LoginState login_state = 2;
+}
+
+message OpenIdConnectAuthInfo {
+  reserved 2;
+  string code = 1;
+  repeated string scope = 3;
+}
+
+message EmailPasswordAuthInfo {
+  reserved 3;
+  string email = 1;
+  bytes password_hash = 2;
+  // Reference to EmailLinkVerification entity.
+  string email_link_secret_id = 5;
+  //  Email verification secret query parameter.
+  string token = 4;
+}
+
+message EmailVerificationAuthInfo {
+  oneof aim {
+    string send_to_email = 1;
+    string email_link_verification_id = 2;
+  }
+  string token = 3;
+}
+
+message TeamsUserAuthInfo {
+  string email = 1;
+  string first_name = 2;
+  string last_name = 3;
+  string ms_access_token = 4;
+  string subject = 5;
+}
+
+enum SamlBinding {
+  POST = 0;
+  GET = 1;
+}
+
+message SamlAuthInfo {
+  string saml_deflate_base64_response = 1;
+  SamlBinding binding = 2;
+}
+
+message MsTeamsAuthInfo {
+  // token that was created by MS Teams JS SDK
+  string auth_token = 1;
+  // id of a tenant in MS Azure Active Directory
+  string aad_tenant_id = 2;
+}
+
+message AuthorizationRequest {
+  reserved 1;
+  LoginState login_state = 4;
+  oneof auth_info {
+    EmailPasswordAuthInfo email_password = 2;
+    OpenIdConnectAuthInfo open_id_connect = 3;
+    TeamsUserAuthInfo teams_user = 5;
+    SamlAuthInfo saml_response = 6;
+    string nickname = 7;
+    EmailVerificationAuthInfo email_verification_auth_info = 8;
+    MsTeamsAuthInfo ms_teams = 9;
+  }
+}
+
+message AuthorizationResponse {
+  reserved 2;
+  string redirect_url = 1;
+}
+
+message AccountInfoRequest {}
+
+message AuthenticationInfo {
+  int32 authentication_id = 4;
+  AuthenticationProvider provider = 2;
+  string email = 3;
+}
+
+message AccountInfoResponse {
+  reserved 1;
+  reserved 8;
+  string classtime_id = 12;
+  UserProfile user_profile = 2;
+  int32 primary_authentication_id = 9;
+  repeated AuthenticationInfo authentication_infos = 4;
+  google.protobuf.Timestamp token_expiration = 5; // Read from cookie that the user sends to us.
+  google.protobuf.Timestamp token_creation = 10;
+  google.protobuf.Duration remaining_token_lifetime = 11;
+  bool is_logged_in = 6;
+  classtime.service.common.Role role = 7;
+  string organization = 13;
+}
+
+message UpdateAccountInfoRequest {
+  oneof update {
+    // If set, overwrites all fields of the user profile.
+    UserProfile user_profile = 1;
+
+    // If set, the given AID will be removed from the account.
+    // Returns error, if trying to remove primary AID.
+    int32 removed_authentication_id = 2;
+
+    // If set, request to change the primary AID.
+    int32 primary_authentication_id = 3;
+  }
+}
+
+message RefreshTokenRequest {}
+message RefreshTokenResponse {
+  google.protobuf.Timestamp token_creation = 1;
+  google.protobuf.Timestamp token_expiration = 2;
+  google.protobuf.Duration remaining_token_lifetime = 3;
+}
+
+message LogoutRequest {}
+message LogoutResponse {}
+
+message AccountExtension {
+  reserved 1;
+  /* Id of account that requested an extension. */
+  string account_id = 5;
+  /*
+   * Source of authentication details without direct connection to some user account.
+   * Its id fields is unreliable.
+   */
+  AuthenticationMethod authentication_method = 2;
+  string account_extension_secret = 3;
+  google.protobuf.Timestamp expiration_date = 4;
+}
+
+message AccountExtensionRequest {
+  reserved 1;
+  /* Indicates relation to a pending AccountExtension entity. */
+  string extension_id = 2;
+}
+message AccountExtensionResponse {}
+
+message ResetPasswordRequest {
+  reserved 3;
+  string email = 1;
+  classtime.service.common.Role role = 5;
+  /* ResetPassword endpoint is used both for reset password operation and signup. */
+  bool is_signup = 2;
+  /* If set, asks to extend the account with given id. Only valid for sign ups. */
+  string extended_account_id = 4;
+}
+message ResetPasswordResponse {
+  string redirect_url = 1;
+}
+
+message FinishAccountCreationRequest {
+  reserved 3, 4;
+  string referral_id = 5;
+  string referral_info = 6;
+  string locale = 7;
+  classtime.service.common.AcquisitionChannel acquisition_channel = 8;
+
+  // TODO(https://app.asana.com/0/1159784169821178/1203896436150486/f): Remove following fields after next micro-server release
+  string deprecated_email = 1;
+  AuthenticationProvider deprecated_provider = 2;
+}
+
+message UserProfileRequest {
+  reserved 1;
+  string account_id = 2;
+}
+
+message UserProfileResponse {
+  // TODO(Micha): Remove field 1,3,4,5.
+  bool is_new = 1;
+  string first_name = 3;
+  string last_name = 4;
+  string picture = 5;
+  classtime.service.common.Role role = 7;
+
+  UserProfile user_profile = 2;
+  string email = 6;
+}
+
+message CreateTokenRequest {
+  reserved 2;
+  string classtime_id = 1;
+  string permission = 3;
+}
+
+message CreateTokenResponse {
+  string token = 1;
+  google.protobuf.Timestamp valid_until = 2;
+}
+
+message GetPrivateAccountDataRequest {
+  string account_id = 1;
+}
+
+message GetPrivateAccountDataResponse {
+  Account account = 1;
+}
+
+message CreateAccountRequest {
+  classtime.service.common.Role role = 1;
+  UserProfile user_profile = 2;
+  // Unique identifier for the user in the given provider.
+  string subject = 3;
+  string locale = 4;
+}
+
+message CreateAccountResponse {
+  string account_id = 1;
+}
