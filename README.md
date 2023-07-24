@@ -99,8 +99,9 @@ curl -v https://www.classtime.com/service/public/Account/login \
     -H 'Accept: application/json,*/*' \
     -d '{ provider: "Google", role: "Teacher" }'
 ```
+Response:
 ```json
-Response: { "redirectUrl": "https://accounts.google.com..." }
+{ "redirectUrl": "https://accounts.google.com..." }
 ```
 
 ### Restricted AccountService.getPublicUserProfile call:
@@ -114,8 +115,9 @@ curl -v https://www.classtime.com/service/public/Account/updateAccountInfo \
     -H 'Authorization: JWT ${yourTeacherAccessToken}' \
     -d '{ user_profile: { firstName: "John", lastName: "White" } }'
 ```
+Response:
 ```json
-Response: {
+{
     "email": "you@email.com",
     "userProfile": {
       "firstName": "John",

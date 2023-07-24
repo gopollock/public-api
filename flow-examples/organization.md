@@ -22,8 +22,9 @@ curl -v https://www.classtime.com/service/public/Account/createAccount \
     -H 'Authorization: JWT ${mySchoolAdminToken}' \
     -d '{ role: "Teacher", subject: "some-unique-id", userProfile: { firstName: "John", lastName: "White" } }'
 ```
+Response:
 ```json
-Response: { "accountId": "unique-id-of-created-account" }
+{ "accountId": "unique-id-of-created-account" }
 ```
 
 ## Assign teacher to school
@@ -38,8 +39,9 @@ curl -v https://www.classtime.com/service/public/School/associateTeacher \
     -H 'Authorization: JWT ${mySchoolAdminToken}' \
     -d '{ schoolId: ${mySchoolId}, accountId: ${organizationTeacherId} }'
 ```
+Response:
 ```json
-Response: {}
+{}
 ```
 
 ## Create user access token
@@ -54,8 +56,9 @@ curl -v https://www.classtime.com/service/public/Account/createToken \
     -H 'Authorization: JWT ${mySchoolAdminToken}' \
     -d '{ classtime_id: ${userId} }'
 ```
+Response:
 ```json
-Response: {
+{
     "token": "teacher access token",
     "validUntil": 1689694256, // Timestamp of token expiration date
 }
@@ -72,8 +75,9 @@ curl -v https://www.classtime.com/service/public/Account/getMyAccountInfo \
     -H 'Authorization: JWT ${createdTeacherAccessToken}' \
     -d ''
 ```
+Response:
 ```json
-Response: {
+{
     "userProfile": {
         "firstName": "John",
         "lastName": "White",

@@ -12,8 +12,7 @@ curl -v https://www.classtime.com/service/public/Account/getMyAccountInfo \
     -H 'Authorization: JWT ${yourAccessToken}' \
     -d '{ }'
 ```
+Response:
 ```json
-Response: {
-    "classtimeId": "your-id",
-}
+{ "classtimeId": "your-id", }
 ```
