@@ -79,3 +79,7 @@ message FeatureFlag {
     int32 number_value = 4;
   }
 }
+
+message GradingPoint {
+  int32 points_centis = 1; // Points multiplied by a factor 100
+}
