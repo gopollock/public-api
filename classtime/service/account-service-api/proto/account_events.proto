@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package classtime.service.account.event;
+
+import "account_entities.proto";
+
+option java_multiple_files = true;
+option java_outer_classname = "AccountEventsProto";
+option java_package = "classtime.service.account.event";
+
+message SignupEvent {
+  string referral_id = 1;
+  string acquisition_channel = 2;
+  AuthenticationProvider provider = 3;
+  string email = 4;
+}
+
+message LoginEvent {
+  AuthenticationProvider provider = 1;
+}
+
+message PasswordResetEvent {}
+
+message RequestPasswordResetEvent {}
+
+message FailedPasswordLoginEvent {
+  string email = 1;
+}
+
+message AccountBlockedEvent {}
