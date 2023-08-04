@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package classtime.service.common;
+
+option java_multiple_files = true;
+option java_outer_classname = "CommonRoleProto";
+option java_package = "classtime.service.common";
+
+enum Role {
+  Teacher = 0;
+  Student = 1;
+  Machine = 2;
+  Unknown = 3;
+  SchoolAdmin = 4;
+}
