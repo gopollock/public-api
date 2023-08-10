@@ -1,0 +1,110 @@
+syntax = "proto3";
+
+package classtime.service.library.api;
+
+import "library_entities.proto";
+
+option java_multiple_files = true;
+option java_outer_classname = "LibraryMessagesProto";
+option java_package = "classtime.service.library.api";
+
+message CreateFolderRequest {
+  string resource_pool_id = 1;
+  string parent_folder_id = 2;
+  string title = 3;
+}
+
+message CreateFolderResponse {
+  FolderInfo folder_info = 1;
+}
+
+message UpdateFolderRequest {
+  string folder_id = 1;
+  string title = 2;
+}
+
+message UpdateFolderResponse {
+  FolderInfo folder_info = 1;
+}
+
+message MoveFolderRequest {
+  string folder_id = 1;
+  string target_parent_folder_id = 2;
+}
+
+message MoveFolderResponse {
+  FolderInfo folder_info = 1;
+}
+
+message GetFolderRequest {
+  string folder_id = 1;
+}
+
+message GetFolderResponse {
+  FolderInfo folder_info = 1;
+  repeated FolderInfo child_folders = 2;
+  repeated QuestionSetInfo child_question_sets = 3;
+}
+
+message SetFolderStatusRequest {
+  string folder_id = 1;
+  repeated string folder_ids = 2;
+  EntityStatus status = 3;
+}
+
+message SetFolderStatusResponse {}
+
+message GetQuestionSetRequest {
+  string question_set_id = 1;
+}
+message GetQuestionSetResponse {
+  QuestionSetInfo question_set_info = 1;
+}
+
+message CreateQuestionSetRequest {
+  string folder_id = 1;
+  string title = 2;
+}
+message CreateQuestionSetResponse {
+  QuestionSetInfo question_set_info = 1;
+}
+
+message UpdateQuestionSetRequest {
+  string question_set_id = 1;
+  string title = 2;
+}
+
+message UpdateQuestionSetResponse {
+  QuestionSetInfo question_set_info = 1;
+}
+
+message MoveQuestionsRequest {
+  repeated string question_ids = 1;
+  string target_question_set_id = 2;
+}
+
+message MoveQuestionsResponse {}
+
+message MoveQuestionSetsRequest {
+  repeated string question_set_id = 1;
+  string target_parent_folder_id = 2;
+}
+
+message MoveQuestionSetsResponse {
+  repeated string question_set_id = 1;
+}
+
+message SetQuestionSetsStatusRequest {
+  repeated string question_set_ids = 1;
+  EntityStatus status = 2;
+}
+message SetQuestionSetsStatusResponse {}
+
+message SetQuestionsStatusRequest {
+  repeated string question_ids = 1;
+  EntityStatus status = 2;
+  // When unarchiving questions, you need to set the target QuestionSet
+  string target_question_set_id = 3;
+}
+
+message SetQuestionsStatusResponse {}
