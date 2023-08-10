@@ -1,0 +1,69 @@
+syntax = "proto3";
+
+package classtime.service.library.api;
+
+import "common_messages.proto";
+import "google/protobuf/timestamp.proto";
+
+option java_multiple_files = true;
+option java_outer_classname = "LibraryEntitiesProto";
+option java_package = "classtime.service.library.api";
+
+message FolderInfo {
+  string id = 1;
+  string title = 2;
+  string parent_id = 3;
+  bool is_shared = 4;
+  bool is_readonly = 5;
+  bool is_archived = 6;
+  string resource_pool_id = 7;
+  google.protobuf.Timestamp modified_at = 9;
+  string root_folder_id = 10;
+  string icon_image = 11;
+}
+
+enum QuestionSetPrivacy {
+  Default = 0;
+  Protected = 1;
+  Moderation = 2;
+  Approved = 3;
+  Rejected = 4;
+}
+
+message QuestionInfo {
+  string id = 1;
+  string title = 2;
+  classtime.service.common.QuestionKind kind = 3;
+  google.protobuf.Timestamp created_at = 4;
+  google.protobuf.Timestamp modified_at = 5;
+  classtime.service.common.GradingPoint weight = 6;
+  bool is_poll = 7;
+  bool is_archived = 8;
+  bool is_shared = 9;
+  bool is_readonly = 10;
+  repeated classtime.service.common.QuestionTag tags = 11;
+}
+
+message QuestionSetInfo {
+  string id = 1;
+  string title = 2;
+  int32 question_count = 3;
+  classtime.service.common.GradingPoint max_points = 4;
+  string parent_folder_id = 5;
+  bool is_shared = 6;
+  bool is_readonly = 7;
+  bool is_archived = 8;
+  string resource_pool_id = 9;
+  google.protobuf.Timestamp created_at = 10;
+  google.protobuf.Timestamp modified_at = 11;
+  string root_folder_id = 12;
+  bool is_onboarding = 13;
+  QuestionSetPrivacy privacy = 14;
+  repeated QuestionInfo questions = 15;
+}
+
+enum EntityStatus {
+  Alive = 0;
+  Archived = 1;
+  Deleted = 2;
+}
