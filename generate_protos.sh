@@ -11,29 +11,15 @@ if [[ " ${supported_language[*]} " != *" $target_language "* ]]; then
 fi
 
 this_script_path="$(cd "$(dirname "$0")" && pwd)"
-protobuf_root_path=$this_script_path
-services_path="${protobuf_root_path}/classtime/service"
-dist_path="${protobuf_root_path}/generated-protos"
+source_path="${this_script_path}/classtime/service/proto"
+dist_path="${this_script_path}/generated-protos"
 
-build_proto_service () {
-  src_path=${1}
+echo "Builing protos..."
+mkdir -p $dist_path
+protoc \
+  --proto_path $source_path \
+  "--${target_language}_out" $dist_path \
+  $source_path/*.proto
 
-  mkdir -p $dist_path
-  protoc \
-    --proto_path $protobuf_root_path \
-    "--${target_language}_out" $dist_path \
-    $src_path/*.proto
-}
-
-for service_path in $services_path/*/; do
-  # Remove the trailing slash from the directory name
-  service_path=${service_path%/}
-  # Extract processed directory name from its full path
-  tail_service_path_name=$(basename "$service_path")
-
-  echo "Builing $tail_service_path_name protos..."
-  build_proto_service ${service_path}
-
-done
 
 echo "All protobufs are successfully built!"
