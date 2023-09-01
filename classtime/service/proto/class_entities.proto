@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package classtime.service.class_.api;
+
+import "common_messages.proto";
+import "entity_store_messages.proto";
+import "google/protobuf/timestamp.proto";
+
+option java_multiple_files = true;
+option java_outer_classname = "ClassEntitiesProto";
+option java_package = "classtime.service.class_.api";
+
+message ClassInfo {
+  string code = 1;
+  string id = 2;
+  string title = 3;
+  string subject = 4;
+  int32 teacher_count = 5;
+  int32 student_count = 6;
+  classtime.entity.EntityRef owner_ref = 7;
+  bool is_archived = 8;
+  bool is_google_classroom = 9;
+  int32 assigned_sessions_count = 10;
+}

@@ -108,3 +108,30 @@ message SetQuestionsStatusRequest {
 }
 
 message SetQuestionsStatusResponse {}
+
+message CopyQuestionSetRequest {
+  string question_set_id = 1;
+  string target_parent_folder_id = 2;
+}
+
+message CopyQuestionSetResponse {}
+
+message CopyQuestionRequest {
+  string question_id = 1;
+}
+
+message CopyQuestionResponse {
+  QuestionInfo question = 1;
+}
+
+message ChangeFolderCollaboratorsRequest {
+  string folder_id = 1;
+  string school_id = 2;
+  repeated string added_account_ids = 3;
+  repeated string removed_account_ids = 4;
+}
+
+message ChangeFolderCollaboratorsResponse {
+  FolderInfo folder_info = 1;
+  repeated string collaborator_ids = 2;
+}
