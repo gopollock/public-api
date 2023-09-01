@@ -13,6 +13,7 @@ message SignupEvent {
   string acquisition_channel = 2;
   AuthenticationProvider provider = 3;
   string email = 4;
+  string referral_info = 5;
 }
 
 message LoginEvent {
