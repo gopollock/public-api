@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package classtime.entity;
+
+option java_multiple_files = true;
+option java_outer_classname = "EntityStoreMessagesProto";
+option java_package = "classtime.entity";
+
+message EntityRef {
+  reserved 2;
+  // Sequence of local ids of the entity, empty if it is a root entity.
+  repeated uint64 local_ids = 1;
+  // The id of the root entity under which the entity is nested.
+  // Empty, if an entity that is nested under the same root entity is referenced
+  string root_id = 4;
+  // For referencing legacy entities in django.
+  string django_id = 3;
+}
+
+enum EntityStatus {
+  Active = 0; // default value
+  Archived = 1;
+  Deleted = 2;
+  Frozen = 3;
+}
