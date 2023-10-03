@@ -24,7 +24,7 @@ The library, using Webpack, adds to object window the following data:
 - callbacks - an object, which now accepts 1 property ***onClose***
   * onClose - a callback, which will be called when question modal is closed. Accepts 1 boolean argument, which shows whether a question was saved or not, after closing the modal
 - theme - an object in which you can overwrite colors in the app
-  * in order to overwrite 2 mostly used colors, pass such structure:
+  * in order to overwrite 2 mostly used colors (two shades of blue in our UI), pass such structure:
   ```javascript
   {
     palette: {
