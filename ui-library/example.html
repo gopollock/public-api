@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="referrer" content="origin">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script type="text/javascript" src="https://beta.classtime.com/release/Classtime.js"></script>
+    <title>Example Integration</title>
+  </head>
+  <body>
+    <button id="button">open for new question</button>
+    <button id="button2">open for existing question</button>
+    <div id="classtime-app"></div>
+    
+    <script defer="defer">      
+      // fill with your data
+      const questionSetId = '';
+      const authToken = ''
+      const existingQuestionId = ''
+      const sessionCode = ''
+      const onClose = (isSaved) => {
+        console.log('Was a question saved when the modal was closed?:', isSaved)
+      }
+      const theme = {
+        palette: {
+          primary: {
+            main: '#a2c510',
+            light: '#eefeab',
+          },
+        },
+      };
+      const locale = ''
+
+      window.Classtime.init({authToken, rootHTMLElementId: "classtime-app", sessionCode, callbacks: { onClose }, theme, locale})
+
+      button.addEventListener('click', () => {
+        window.Classtime.actions.openQuestionModalForNewQuestion(questionSetId)
+      })
+      button2.addEventListener('click', () => {
+        window.Classtime.actions.openQuestionModalForExistingQuestion(existingQuestionId, questionSetId)
+      })
+    </script>
+  </body>
+</html>
