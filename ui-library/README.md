@@ -36,14 +36,15 @@ The library, using Webpack, adds to object window the following data:
   }
   ```
 - locale - a string, which is used to show needed language in the app (defaults to "en")
-- componentsToRender - an object, which has 2 boolean properties which are true by default:
+- componentsToRender (required if you want to render some component) - an object, which has 2 boolean properties which are false by default:
   * questionEditorModal
   * sessionDashboard
   <br>
-  for example if you don't need to render session dashboard, you can pass such object to this property:
+  for example if you want to render session dashboard and question editor modal, you can pass such object to this property:
   ```javascript 
   {
-    sessionDashboard: false
+    questionEditorModal: true,
+    sessionDashboard: true,
   }
   ```
 

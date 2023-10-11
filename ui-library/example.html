@@ -30,9 +30,13 @@
           },
         },
       };
-      const locale = ''
+      const locale = '';
+      const componentsToRender =  {
+        questionEditorModal: true,
+        sessionDashboard: true,
+      };
 
-      window.Classtime.init({authToken, rootHTMLElementId: "classtime-app", sessionCode, callbacks: { onClose }, theme, locale})
+      window.Classtime.init({authToken, rootHTMLElementId: "classtime-app", sessionCode, callbacks: { onClose }, theme, locale, componentsToRender})
 
       button.addEventListener('click', () => {
         window.Classtime.actions.openQuestionModalForNewQuestion(questionSetId)
