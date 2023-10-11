@@ -18,9 +18,9 @@ The library, using Webpack, adds to object window the following data:
 
   In order to start rendering the applicaltion you need to call ***window.Classtime.init***<br>
   There you need to pass an object with the following data:
-- authToken
-- sessionCode
-- rootHTMLElementId - id of the html element in which you want to render the app (defaults to 'app')
+- authToken (required)
+- sessionCode (required)
+- rootHTMLElementId (required) - id of the html element in which you want to render the app
 - callbacks - an object, which now accepts 1 property ***onClose***
   * onClose - a callback, which will be called when question modal is closed. Accepts 1 boolean argument, which shows whether a question was saved or not, after closing the modal
 - theme - an object in which you can overwrite colors in the app
@@ -36,6 +36,19 @@ The library, using Webpack, adds to object window the following data:
   }
   ```
 - locale - a string, which is used to show needed language in the app (defaults to "en")
+- componentsToRender (required if you want to render some component) - an object, which has 2 boolean properties which are false by default:
+  * questionEditorModal
+  * sessionDashboard
+  <br>
+  for example if you want to render session dashboard and question editor modal, you can pass such object to this property:
+  ```javascript 
+  {
+    questionEditorModal: true,
+    sessionDashboard: true,
+  }
+  ```
+
+
 <br>
 <br>
 3) Functions for opening the question modal:<br>

@@ -16,12 +16,12 @@
     <script defer="defer">      
       // fill with your data
       const questionSetId = '';
-      const authToken = ''
-      const existingQuestionId = ''
-      const sessionCode = ''
+      const authToken = '';
+      const existingQuestionId = '';
+      const sessionCode = '';
       const onClose = (isSaved) => {
         console.log('Was a question saved when the modal was closed?:', isSaved)
-      }
+      };
       const theme = {
         palette: {
           primary: {
@@ -30,16 +30,20 @@
           },
         },
       };
-      const locale = ''
+      const locale = '';
+      const componentsToRender =  {
+        questionEditorModal: true,
+        sessionDashboard: true,
+      };
 
-      window.Classtime.init({authToken, rootHTMLElementId: "classtime-app", sessionCode, callbacks: { onClose }, theme, locale})
+      window.Classtime.init({authToken, rootHTMLElementId: "classtime-app", sessionCode, callbacks: { onClose }, theme, locale, componentsToRender});
 
       button.addEventListener('click', () => {
         window.Classtime.actions.openQuestionModalForNewQuestion(questionSetId)
-      })
+      });
       button2.addEventListener('click', () => {
         window.Classtime.actions.openQuestionModalForExistingQuestion(existingQuestionId, questionSetId)
-      })
+      });
     </script>
   </body>
 </html>
