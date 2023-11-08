@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package classtime.service.library.api;
 
+import "common_messages.proto";
 import "library_entities.proto";
 
 option java_multiple_files = true;
@@ -9,7 +10,7 @@ option java_outer_classname = "LibraryMessagesProto";
 option java_package = "classtime.service.library.api";
 
 message CreateFolderRequest {
-  string resource_pool_id = 1;
+  reserved 1;
   string parent_folder_id = 2;
   string title = 3;
 }
@@ -47,8 +48,8 @@ message GetFolderResponse {
 }
 
 message SetFolderStatusRequest {
-  string folder_id = 1;
-  repeated string folder_ids = 2;
+  string folder_id = 1; // use for (de)archiving
+  repeated string folder_ids = 2; // use for deleting
   EntityStatus status = 3;
 }
 
@@ -127,11 +128,29 @@ message CopyQuestionResponse {
 message ChangeFolderCollaboratorsRequest {
   string folder_id = 1;
   string school_id = 2;
+  // Note: classtime_ids
   repeated string added_account_ids = 3;
   repeated string removed_account_ids = 4;
+  repeated string read_only_access_mode_ids = 5;
 }
 
 message ChangeFolderCollaboratorsResponse {
   FolderInfo folder_info = 1;
+  // Note: classtime_ids
   repeated string collaborator_ids = 2;
 }
+
+message GetFolderCollaboratorsRequest {
+  string folder_id = 1;
+}
+
+message GetFolderCollaboratorsResponse {
+  repeated classtime.service.common.CollaboratorInfo collaborator_infos = 1;
+}
+
+message ReorderQuestionsRequest {
+  string question_set_id = 1;
+  repeated string question_ids = 2;
+}
+
+message ReorderQuestionsResponse {}

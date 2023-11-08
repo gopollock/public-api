@@ -14,10 +14,12 @@ message SignupEvent {
   AuthenticationProvider provider = 3;
   string email = 4;
   string referral_info = 5;
+  repeated string organizations = 6;
 }
 
 message LoginEvent {
   AuthenticationProvider provider = 1;
+  repeated string organizations = 2;
 }
 
 message PasswordResetEvent {}

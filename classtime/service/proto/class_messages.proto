@@ -3,6 +3,7 @@ syntax = "proto3";
 package classtime.service.class_.api;
 
 import "class_entities.proto";
+import "common_messages.proto";
 
 option java_multiple_files = true;
 option java_outer_classname = "ClassMessagesProto";
@@ -14,5 +15,33 @@ message CreateClassRequest {
 }
 
 message CreateClassResponse {
+  ClassInfo class_info = 1;
+}
+
+message UpdateCoTeachersRequest {
+  string class_id = 1;
+  string school_id = 2;
+  repeated string account_ids = 3; // classtime_ids
+}
+
+message UpdateCoTeachersResponse {
+  repeated classtime.service.common.CollaboratorInfo collaborators = 3;
+}
+
+message RemoveStudentsRequest {
+  string class_id = 1;
+  repeated string student_account_ids = 2;
+}
+
+message RemoveStudentsResponse {
+  ClassInfo class_info = 1;
+}
+
+message AddStudentsRequest {
+  string class_id = 1;
+  repeated string student_emails = 2;
+}
+
+message AddStudentsResponse {
   ClassInfo class_info = 1;
 }
