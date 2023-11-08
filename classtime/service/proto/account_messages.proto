@@ -109,6 +109,10 @@ message MsTeamsAuthInfo {
   string aad_tenant_id = 2;
 }
 
+message ExamCenterAuthInfo {
+  string student_id = 1;
+}
+
 message AuthorizationRequest {
   reserved 1;
   LoginState login_state = 4;
@@ -120,6 +124,7 @@ message AuthorizationRequest {
     string nickname = 7;
     EmailVerificationAuthInfo email_verification_auth_info = 8;
     MsTeamsAuthInfo ms_teams = 9;
+    ExamCenterAuthInfo exam_center_auth_info = 10;
   }
 }
 

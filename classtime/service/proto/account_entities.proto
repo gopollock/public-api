@@ -26,6 +26,7 @@ enum AuthenticationProvider {
   WebUntis = 13;
   Edulog = 14;
   External = 15;
+  ExamCenter = 16;
 }
 
 message UserProfile {

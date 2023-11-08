@@ -4,7 +4,6 @@ package classtime.service.class_.api;
 
 import "common_messages.proto";
 import "entity_store_messages.proto";
-import "google/protobuf/timestamp.proto";
 
 option java_multiple_files = true;
 option java_outer_classname = "ClassEntitiesProto";
@@ -21,4 +20,11 @@ message ClassInfo {
   bool is_archived = 8;
   bool is_google_classroom = 9;
   int32 assigned_sessions_count = 10;
+  repeated ClassStudentInfo students = 11;
+}
+
+message ClassStudentInfo {
+  string email = 1;
+  string id = 2;
+  string name = 3;
 }
