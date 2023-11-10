@@ -84,9 +84,21 @@ message GradingPoint {
   int32 points_centis = 1; // Points multiplied by a factor 100
 }
 
+message GradedGap {
+  string answer_id = 1;
+  int32 gap_index = 2;
+  bool is_correct = 3;
+}
+
 message QuestionTag {
   string id = 1;
   string name = 2;
   string description = 3;
   string url = 4;
+}
+
+message CollaboratorInfo {
+  string collaborator_id = 1; // classtime_id
+  string name = 2;
+  string email = 3;
 }
