@@ -26,6 +26,8 @@ message UpdateFolderRequest {
 
 message UpdateFolderResponse {
   FolderInfo folder_info = 1;
+  repeated FolderInfo child_folders = 2;
+  repeated QuestionSetInfo child_question_sets = 3;
 }
 
 message MoveFolderRequest {
@@ -35,6 +37,8 @@ message MoveFolderRequest {
 
 message MoveFolderResponse {
   FolderInfo folder_info = 1;
+  repeated FolderInfo child_folders = 2;
+  repeated QuestionSetInfo child_question_sets = 3;
 }
 
 message GetFolderRequest {
