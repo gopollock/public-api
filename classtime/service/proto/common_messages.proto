@@ -24,20 +24,6 @@ enum SessionMode {
   RoundBased = 1;
 }
 
-enum QuestionKind {
-  Boolean = 0;
-  Categorizer = 1;
-  CategorizerMultiple = 2;
-  Cloze = 3;
-  Gap = 4;
-  Hotspot = 5;
-  MultipleChoice = 6;
-  SingleChoice = 7;
-  Sorter = 8;
-  Text = 9;
-  Essay = 10;
-}
-
 message Team {
   int32 id = 1;
   repeated string members = 2;
@@ -101,4 +87,10 @@ message CollaboratorInfo {
   string collaborator_id = 1; // classtime_id
   string name = 2;
   string email = 3;
+}
+
+message PlaylistEntry {
+  string question_set_id = 1;
+  // Question ids to include or empty to include all questions from the question set.
+  repeated string selected_question_ids = 2;
 }

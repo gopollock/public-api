@@ -4,6 +4,7 @@ package classtime.service.library.api;
 
 import "common_messages.proto";
 import "library_entities.proto";
+import "question_entites.proto";
 
 option java_multiple_files = true;
 option java_outer_classname = "LibraryMessagesProto";
@@ -158,3 +159,16 @@ message ReorderQuestionsRequest {
 }
 
 message ReorderQuestionsResponse {}
+
+message GetPlaylistDetailsRequest {
+  repeated classtime.service.common.PlaylistEntry playlist = 1;
+}
+
+message GetPlaylistDetailsResponse {
+  message PlaylistDetailsEntry {
+    classtime.service.question.api.QuestionGroup question_group = 1;
+    repeated classtime.service.question.api.Question questions = 2;
+  }
+
+  repeated PlaylistDetailsEntry playlist_details = 1;
+}
