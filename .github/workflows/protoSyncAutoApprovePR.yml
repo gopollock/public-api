@@ -1,0 +1,30 @@
+name: Proto Sync Auto Approve and Merge
+
+on:
+  pull_request:
+    types: ['opened']
+
+jobs:
+  auto-approve:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+
+    - name: Auto approve PR
+      id: auto-approve
+      uses: hmarr/auto-approve-action@v3
+      if: |
+        startsWith(github.event.pull_request.body, 'Sync services') &&
+        startsWith(github.event.pull_request.title, 'Sync services "') &&
+        github.event.pull_request.commits == 1
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Auto merge PR
+      if: steps.auto-approve.outputs.result == 'approved'
+      uses: pascalgn/automerge-action@v0.15.6
+      env:
+        GITHUB_TOKEN: "${{ secrets.PROTO_SYNCHRONIZER_GITHUB_TOKEN }}"
+        MERGE_LABELS: ""
+        MERGE_METHOD: "squash"
