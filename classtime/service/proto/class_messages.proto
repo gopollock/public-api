@@ -45,3 +45,11 @@ message AddStudentsRequest {
 message AddStudentsResponse {
   ClassInfo class_info = 1;
 }
+
+message GetClassInfoRequest {
+  string class_id = 1;
+}
+
+message GetClassInfoResponse {
+  ClassInfo class_info = 1;
+}

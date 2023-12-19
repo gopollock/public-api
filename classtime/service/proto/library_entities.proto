@@ -4,6 +4,7 @@ package classtime.service.library.api;
 
 import "common_messages.proto";
 import "google/protobuf/timestamp.proto";
+import "question_entites.proto";
 
 option java_multiple_files = true;
 option java_outer_classname = "LibraryEntitiesProto";
@@ -33,7 +34,7 @@ enum QuestionSetPrivacy {
 message QuestionInfo {
   string id = 1;
   string title = 2;
-  classtime.service.common.QuestionKind kind = 3;
+  classtime.service.question.api.QuestionKind kind = 3;
   google.protobuf.Timestamp created_at = 4;
   google.protobuf.Timestamp modified_at = 5;
   classtime.service.common.GradingPoint weight = 6;
