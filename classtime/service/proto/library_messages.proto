@@ -3,6 +3,7 @@ syntax = "proto3";
 package classtime.service.library.api;
 
 import "common_messages.proto";
+import "entity_store_messages.proto";
 import "library_entities.proto";
 import "question_entities.proto";
 
@@ -83,6 +84,13 @@ message UpdateQuestionSetRequest {
 message UpdateQuestionSetResponse {
   QuestionSetInfo question_set_info = 1;
 }
+
+message SetSoloSessionRefRequest {
+  string question_set_id = 1;
+  classtime.entity.EntityRef entity_store_session_ref = 2;
+}
+
+message SetSoloSessionRefResponse {}
 
 message MoveQuestionsRequest {
   repeated string question_ids = 1;
