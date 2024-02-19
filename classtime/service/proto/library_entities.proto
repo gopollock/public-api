@@ -3,6 +3,7 @@ syntax = "proto3";
 package classtime.service.library.api;
 
 import "common_messages.proto";
+import "entity_store_messages.proto";
 import "google/protobuf/timestamp.proto";
 import "question_entities.proto";
 
@@ -61,6 +62,7 @@ message QuestionSetInfo {
   bool is_onboarding = 13;
   QuestionSetPrivacy privacy = 14;
   repeated QuestionInfo questions = 15;
+  classtime.entity.EntityRef entity_store_session_ref = 16;
 }
 
 enum EntityStatus {

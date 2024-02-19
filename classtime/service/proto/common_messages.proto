@@ -27,6 +27,7 @@ enum SessionMode {
 enum PusherCluster {
   EU = 0;
   US = 1;
+  SOKETI = 2;
 }
 
 message Team {

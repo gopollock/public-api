@@ -31,3 +31,8 @@ message FailedPasswordLoginEvent {
 }
 
 message AccountBlockedEvent {}
+
+message AccountMergeEvent {
+  string main_account_id = 1;
+  string merged_account_id = 2;
+}
