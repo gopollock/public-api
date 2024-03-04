@@ -53,3 +53,13 @@ message GetClassInfoRequest {
 message GetClassInfoResponse {
   ClassInfo class_info = 1;
 }
+
+message GetClassesRequest {}
+
+message GetClassesResponse {
+  message ClassInfo {
+    string id = 1;
+  }
+
+  repeated ClassInfo classes = 1;
+}
