@@ -1,0 +1,358 @@
+syntax = "proto3";
+
+package classtime.service.question.api;
+
+import "common_messages.proto";
+import "entity_store_messages.proto";
+import "google/protobuf/timestamp.proto";
+
+option java_multiple_files = true;
+option java_outer_classname = "QuestionEntitiesProto";
+option java_package = "classtime.service.question.api";
+
+enum QuestionKind {
+  Boolean = 0;
+  Categorizer = 1;
+  CategorizerMultiple = 2;
+  Cloze = 3;
+  Gap = 4;
+  Hotspot = 5;
+  MultipleChoice = 6;
+  SingleChoice = 7;
+  Sorter = 8;
+  Text = 9;
+  Essay = 10;
+}
+
+message QuestionImage {
+  string cloudinary_ref = 1;
+  string source = 2;
+  bool is_protected = 3;
+  classtime.entity.EntityRef owner = 4;
+}
+
+message QuestionAudio {
+  string cloudinary_ref = 1;
+}
+
+message QuestionInfo {
+  reserved 3;
+  string title = 1;
+  QuestionKind kind = 2;
+  string content_draftjs = 14;
+  string provider = 4;
+  classtime.service.common.GradingPoint max_points = 5; // was: 'weight'
+  string video_url = 6;
+  bool is_onboarding = 7;
+  string onboarding_id = 8;
+  bool is_poll = 9;
+  string license = 10;
+  repeated string tags = 11;
+  QuestionImage image = 12;
+  QuestionAudio audio = 13;
+}
+
+// Question Types Messages
+
+message BooleanQuestion {}
+
+// Both Categorizer and CategorizerMultiple
+message CategorizerQuestion {
+  message CategorizerItem {
+    reserved 1;
+    string content_draftjs = 3;
+    string django_uuid = 2;
+  }
+  message CategorizerCategory {
+    reserved 1;
+    string content_draftjs = 3;
+    string django_uuid = 2;
+  }
+
+  repeated CategorizerItem items = 1;
+  repeated CategorizerCategory categories = 2;
+}
+
+message HighlightTextQuestion {
+  message ClozeChoice {
+    string content = 1;
+    string django_uuid = 2;
+  }
+  message Cloze {
+    repeated ClozeChoice cloze_choice = 1;
+    string django_uuid = 2;
+  }
+
+  string content = 1;
+  repeated Cloze clozes = 2;
+}
+
+message HotspotQuestion {
+  bool require_all = 1;
+  string cloudinary_image_ref = 2;
+  string image_alt = 3;
+  int32 width = 4;
+  int32 height = 5;
+}
+
+message Choice {
+  reserved 1;
+  string content_draftjs = 4;
+  string cloudinary_image_ref = 2;
+  string django_uuid = 3;
+}
+
+// Both Single and Multiple
+message ChoiceQuestion {
+  repeated Choice choices = 1;
+}
+
+message SorterQuestion {
+  // Choices in correct order.
+  repeated Choice choices = 1;
+}
+
+message TextQuestion {}
+
+message FillInTheGapQuestion {
+  enum Type {
+    Blank = 0;
+    Choices = 1;
+  }
+  message Choice {
+    string content = 1;
+  }
+  message Gap {
+    Type type = 1;
+    string gap_local_id = 2;
+    repeated Choice choices = 3;
+  }
+
+  string text = 1;
+  repeated Gap gaps = 2;
+}
+
+message EssayQuestion {}
+
+// Answer and Solution Types Messages
+
+message BooleanAnswer {
+  bool is_true = 1;
+}
+
+message BooleanSolution {
+  BooleanAnswer correct_answer = 1;
+}
+
+// Both Categorizer and CategorizerMultiple
+message CategorizerAnswer {
+  message SelectedCategories {
+    repeated int32 category_indices = 1;
+  }
+  // For each item, the selected categories in the order as the items are defined in the question.
+  repeated SelectedCategories selected_categories = 1;
+}
+
+// Both Categorizer and CategorizerMultiple
+message CategorizerSolution {
+  CategorizerAnswer correct_answer = 1;
+}
+
+message CategorizerMultiSolution {
+  CategorizerAnswer correct_answer = 1;
+}
+
+message HighlightTextAnswer {
+  message SelectedChoices {
+    repeated int32 choice_indices = 1;
+  }
+
+  // One entry for each cloze in the same order as in the question.
+  repeated SelectedChoices selected_choices = 1;
+}
+
+message HighlightTextSolution {
+  HighlightTextAnswer correct_answer = 1;
+}
+
+message HotspotPoint {
+  reserved 1, 2;
+  double x = 3;
+  double y = 4;
+}
+
+message HotspotAnswer {
+  repeated HotspotPoint points = 1;
+}
+
+message HotspotSolution {
+  enum ShapeKind {
+    Polygon = 0;
+  }
+  message Shape {
+    ShapeKind kind = 1;
+    repeated HotspotPoint points = 2;
+  }
+
+  repeated Shape shapes = 1;
+}
+
+message SingleChoiceAnswer {
+  // Index of the selected choice as ordered in the question.
+  int32 selected_choice = 1;
+}
+
+message SingleChoiceSolution {
+  SingleChoiceAnswer correct_answer = 1;
+}
+
+message MultipleChoiceAnswer {
+  // Indices of the selected choices as ordered in the question.
+  repeated int32 selected_choices = 1;
+}
+
+message MultipleChoiceSolution {
+  MultipleChoiceAnswer correct_answer = 1;
+}
+
+message SorterAnswer {
+  // Indices of the sorted choices.
+  repeated int32 sorted_choices = 1;
+  // TODO: Remove after migration.
+  repeated classtime.entity.EntityRef sorted_choices_ref = 2;
+}
+
+message SorterSolution {
+  // The choices as listed in the question is the correct order, so no need to specify anything.
+  // TODO: Remove after migration.
+  repeated classtime.entity.EntityRef sorted_choices_ref = 1;
+}
+
+message TextAnswer {
+  string content = 1;
+}
+
+message TextSolution {}
+
+message FillInTheGapAnswer {
+  message Gap {
+    oneof answer {
+      string content = 1;
+      int32 choice_index = 2;
+    }
+  }
+
+  repeated Gap gaps = 1;
+}
+
+message FillInTheGapSolution {
+  FillInTheGapAnswer correct_answer = 1;
+}
+
+message EssayAnswer {
+  string content = 1;
+}
+
+message EssaySolution {}
+
+// Entity nested in Session
+message Question {
+  reserved 3;
+  QuestionInfo question_info = 1;
+  classtime.entity.EntityRef derived_from_question_ref = 2; // UUID reference to django model 'library.Question'
+  string explanation_draftjs = 32;
+  oneof question {
+    BooleanQuestion question_boolean = 10;
+    CategorizerQuestion question_categorizer = 11;
+    CategorizerQuestion question_categorizer_multi = 12;
+    HighlightTextQuestion question_highlight_text = 13;
+    HotspotQuestion question_hotspot = 14;
+    ChoiceQuestion question_multiple_choice = 15;
+    ChoiceQuestion question_single_choice = 16;
+    SorterQuestion question_sorter = 17;
+    TextQuestion question_text = 18;
+    FillInTheGapQuestion question_gap = 19;
+    EssayQuestion question_essay = 30;
+  }
+  oneof solution {
+    BooleanSolution solution_boolean = 20;
+    CategorizerSolution solution_categorizer = 21;
+    CategorizerMultiSolution solution_categorizer_multi = 22;
+    HighlightTextSolution solution_highlight_text = 23;
+    HotspotSolution solution_hotspot = 24;
+    MultipleChoiceSolution solution_multiple_choice = 25;
+    SingleChoiceSolution solution_single_choice = 26;
+    SorterSolution solution_sorter = 27;
+    TextSolution solution_text = 28;
+    FillInTheGapSolution solution_gap = 29;
+    EssaySolution solution_essay = 31;
+  }
+  string django_uuid = 100;
+}
+
+message GapEvaluation {
+  reserved 1;
+  bool is_correct = 2;
+}
+
+message HotspotPointEvaluation {
+  bool is_correct = 1;
+}
+
+message Evaluation {
+  bool is_correct = 1;
+  classtime.service.common.GradingPoint grading_points = 2; // Actual points given for the answer.
+  classtime.service.common.GradingPoint manual_grading_points = 3; // Points manually set.
+  classtime.service.common.GradingPoint automatic_grading_points = 7; // Points automatically computed.
+  classtime.service.common.GradingPoint bonus = 4;
+  repeated GapEvaluation evaluation_gap = 5;
+  string evaluation_explanation = 6;
+  repeated HotspotPointEvaluation evaluation_hotspot = 8;
+}
+
+message PartialEvaluation {
+  map<string, GapEvaluation> gap_evaluations = 1;
+}
+
+// Entity Nested under Participant
+message Answer {
+  reserved 2;
+  classtime.entity.EntityRef question = 1;
+  google.protobuf.Timestamp created_at = 3;
+  oneof evaluation {
+    PartialEvaluation partial_evaluation = 4;
+    Evaluation full_evaluation = 5;
+  }
+  oneof answer {
+    BooleanAnswer answer_boolean = 10;
+    CategorizerAnswer answer_categorizer = 11;
+    CategorizerAnswer answer_categorizer_multi = 12;
+    HighlightTextAnswer answer_highlight_text = 13;
+    HotspotAnswer answer_hotspot = 14;
+    MultipleChoiceAnswer answer_multiple_choice = 15;
+    SingleChoiceAnswer answer_single_choice = 16;
+    SorterAnswer answer_sorter = 17;
+    TextAnswer answer_text = 18;
+    FillInTheGapAnswer answer_gap = 19;
+    EssayAnswer answer_essay = 20;
+  }
+  string django_uuid = 100;
+}
+
+// Entity nested under SessionParticipant
+message DraftAnswer {
+  // Note: Only supported for text, essay and gap questions as of now.
+  classtime.entity.EntityRef question = 1;
+  oneof answer {
+    TextAnswer answer_text = 2;
+    FillInTheGapAnswer answer_gap = 3;
+    EssayAnswer answer_essay = 4;
+  }
+  string django_uuid = 100;
+}
+
+message QuestionGroup {
+  string title = 1;
+  repeated classtime.entity.EntityRef questions = 2; // References SessionQuestion
+  string question_set_id = 3;
+}
