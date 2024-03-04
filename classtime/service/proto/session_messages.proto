@@ -562,7 +562,10 @@ message GetBayernSessionCodeResponse {
 }
 
 message ContainsSessionRequest {
-  string session_code = 1;
+  oneof session {
+    string session_code = 1;
+    string session_id = 2;
+  }
 }
 
 message ContainsSessionResponse {
