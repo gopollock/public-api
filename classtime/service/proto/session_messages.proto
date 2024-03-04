@@ -1,0 +1,649 @@
+syntax = "proto3";
+
+package classtime.service.session.api;
+
+import "common_messages.proto";
+import "entity_store_messages.proto";
+import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
+import "question_entities.proto";
+import "session_entities.proto";
+import "texttospeech_messages.proto";
+
+option java_multiple_files = true;
+option java_outer_classname = "SessionMessagesProto";
+option java_package = "classtime.service.session.api";
+
+message SessionInfo {
+  message AnswersStats {
+    int32 correct_answers_count = 1;
+    int32 wrong_answers_count = 2;
+  }
+
+  reserved 4, 7, 14;
+
+  // Extracted from Session entity:
+  string code = 1;
+  google.protobuf.Timestamp created = 2;
+  classtime.entity.EntityRef label_ref = 5;
+  classtime.entity.EntityRef invited_class_ref = 6;
+  classtime.entity.EntityRef owner_ref = 8;
+  bool has_google_classroom_ref_for_invited_class = 9;
+  repeated classtime.service.question.api.QuestionGroup question_groups = 10;
+  SessionSettings settings = 11;
+  repeated string questions = 15;
+  bool is_partial_grading = 17;
+
+  // Derived from Participants, only set for teachers:
+  int32 participants_count = 3;
+
+  // Derived from Questions, only set for students:
+  classtime.service.common.GradingPoint total_grading_points = 20;
+
+  // Computed from opens_at/closed_at relative to server time when creating the response, only set for students:
+  google.protobuf.Duration time_until_close = 12;
+  google.protobuf.Duration time_until_open = 13;
+
+  // Derived from calling Participant, only set for students:
+  bool is_session_done = 18;
+  google.protobuf.Timestamp handed_in_at = 19;
+
+  // Derived from calling Participant's Answers, only set for students:
+  AnswersStats answers_stats = 16;
+}
+
+message GetSessionDetailsRequest {
+  string code = 1;
+}
+
+message GetSessionDetailsResponse {
+  Session session = 1;
+  map<string, classtime.service.question.api.Question> questions = 2;
+  map<string, ReflectionQuestion> reflection_questions = 3;
+  map<string, SessionParticipant> session_participants = 4; // For student role it only returns the own participant.
+  map<string, ReflectionQuestionAnswer> reflection_answers = 5; // Used for students only
+  google.protobuf.Duration time_since_timer_start = 6;
+  google.protobuf.Duration time_until_session_close = 7;
+}
+
+message GetSessionInfoRequest {
+  string session_code = 1;
+}
+
+message GetSessionInfoResponse {
+  SessionInfo session_info = 2;
+}
+
+message SetSessionSettingsRequest {
+  string session_code = 1;
+  SessionSettings settings = 2;
+}
+
+message SetSessionSettingsResponse {}
+
+message CreateSessionRequest {
+  repeated classtime.service.common.PlaylistEntry playlist = 1;
+  SessionSettings settings = 2;
+}
+
+message ChangeSessionStateRequest {
+  enum State {
+    Archived = 0;
+    Restored = 1;
+    Deleted = 2;
+    Ended = 3;
+    Running = 4;
+    Paused = 5;
+  }
+  string session_code = 1;
+  State state = 2;
+}
+
+message ChangeSessionStateResponse {}
+
+message GetSessionsRequest {
+  bool is_archived = 1;
+}
+
+message GetSessionsResponse {
+  repeated SessionInfo sessions = 1;
+}
+
+message GetGameDataRequest {
+  string session_code = 1;
+}
+
+message TeamWithScore {
+  string id = 1;
+  repeated string participant_ids = 2;
+  int32 score = 3;
+  bool is_healthy = 4;
+}
+
+message GameData {
+  int32 max_points = 1;
+  int32 pass_threshold = 2;
+  repeated TeamWithScore team_with_score = 3;
+}
+
+message GetGameDataResponse {
+  GameData game_data = 1;
+  classtime.service.common.GameStatus game_status = 2;
+}
+
+message SessionParticipantUpdate {
+  reserved 5;
+  string participant_id = 1;
+  optional string name = 2;
+  optional bool is_archived = 3;
+  optional bool is_chat_enabled = 4;
+  optional classtime.service.texttospeech.TextToSpeechConfig text_to_speech_config = 6;
+  optional RequestStatus relogin_request_status = 7;
+  optional bool is_chat_allowed = 8;
+  optional bool is_session_done = 9;
+  optional bool is_unsubmit_session_requested = 10;
+  optional string sid = 11;
+  optional RequestStatus rejoin_request_status = 12;
+  // (-- api-linter: core::0142::time-field-type=disabled--)
+  google.protobuf.Duration timer = 13;
+  optional ChatOverride chat_override = 14;
+  optional bool is_screen_locked = 15;
+}
+
+message UpdateParticipantsRequest {
+  string session_code = 1;
+  repeated SessionParticipantUpdate participants = 2;
+}
+
+message UpdateParticipantsResponse {
+  repeated SessionParticipantUpdate participants = 1;
+}
+
+message DeleteParticipantRequest {
+  string session_code = 1;
+  string participant_id = 2;
+}
+
+message DeleteParticipantResponse {}
+
+message InviteClassRequest {
+  string session_code = 1;
+  string class_code = 2;
+  bool guests_allowed = 3;
+}
+
+message InviteClassResponse {}
+
+message ExportSessionRequest {
+  enum ReportType {
+    SessionInsights = 0; // SessionExportInsightsView
+    ParticipantInsights = 1; // SessionExportParticipantInsightsView, SessionPdfExportView for student
+    ParticipantsInsightsZip = 2; // SessionExportParticipantsInsightsZipView
+    ParticipantsInsightsPdf = 3; // SessionExportParticipantsInsightsPDFView
+    InsightsXlsx = 4; // SessionExportXlsxView
+    EssayInsights = 5; // EssayExportView
+  }
+
+  string session_code = 1;
+  string participant_id = 2;
+  ReportType type = 3;
+  string question_id = 4;
+}
+
+message ExportSessionResponse {
+  bytes file = 1;
+}
+
+message GetAnswersRequest {
+  string session_code = 1;
+  string question_id = 2;
+}
+
+message AnswerInfo {
+  string answer_id = 3;
+  string participant_id = 1;
+
+  // For the student, the Evaluation message in the Answer message will
+  // either present or not (SafeDataAnswerSerializer vs SensitiveAnswerSerializer)
+  classtime.service.question.api.Answer answer = 2;
+}
+
+message GetAnswersResponse {
+  repeated AnswerInfo answer_infos = 1;
+  repeated classtime.service.question.api.DraftAnswer draft_answers = 2;
+}
+
+message DeleteDraftAnswerRequest {
+  string session_code = 1;
+  string question_id = 2;
+}
+
+message DeleteDraftAnswerResponse {}
+
+message ActivateParticipantChatRequest {
+  string session_code = 1;
+  string participant_id = 2;
+}
+
+message ActivateParticipantChatResponse {
+  string participant_id = 1;
+  bool is_chat_enabled = 2;
+  string sender = 3; // "teacher" or "student"
+}
+
+message GetAnswerDetailsRequest {
+  string session_code = 1;
+  string answer_id = 2;
+}
+
+message GetAnswerDetailsResponse {
+  classtime.service.question.api.Answer answer = 1;
+}
+
+message GetAnswersSummaryRequest {
+  string session_code = 1;
+}
+
+message AnswerSummary {
+  reserved 5, 6, 7, 8, 9, 10;
+  string id = 1;
+  string participant_id = 2;
+  string question_id = 4;
+  // Plain text content for text question answers. Cut off to a certain number of characters.
+  string content = 3;
+  // Note: 'explanation' field in Evaluation is empty
+  classtime.service.question.api.Evaluation evaluation = 11;
+}
+
+message GetAnswersSummaryResponse {
+  repeated AnswerSummary answers = 1;
+}
+
+message PredictFreeTextAnswersRequest {
+  string session_code = 1;
+  string question_id = 2;
+}
+
+message PredictFreeTextAnswersResponse {
+  message Prediction {
+    bool is_correct = 1;
+    repeated string answer_ids = 2;
+  }
+  repeated Prediction predictions = 1;
+}
+
+message CreateReflectionAnswerRequest {
+  string session_code = 1;
+  string reflection_question_id = 2;
+  ReflectionQuestionAnswer value = 3;
+}
+
+message CreateReflectionAnswerResponse {}
+
+message GetReflectionQuestionsStatsRequest {
+  string session_code = 1;
+}
+
+message ReflectionQuestionStats {
+  string id = 1;
+  string title = 2;
+  ReflectionQuestionKind kind = 3;
+
+  message StatsEntry {
+    ReflectionQuestionAnswer answer = 1;
+    int32 count = 2;
+  }
+  repeated StatsEntry stats = 4;
+}
+
+message GetReflectionQuestionsStatsResponse {
+  repeated ReflectionQuestionStats reflection_questions_stats = 1;
+}
+
+message GetLabelsRequest {}
+
+message GetLabelsResponse {
+  map<string, SessionLabel> labels = 1;
+}
+
+message CreateLabelRequest {
+  SessionLabel label = 1;
+}
+
+message CreateLabelResponse {
+  string id = 1;
+}
+
+message UpdateLabelRequest {
+  // id is temporary for django.
+  string id = 1;
+  SessionLabel label = 2;
+}
+
+message UpdateLabelResponse {}
+
+message DeleteLabelRequest {
+  string id = 1;
+}
+
+message DeleteLabelResponse {}
+
+message SebConfigRequest {
+  string session_code = 1;
+}
+
+message SebConfigResponse {
+  bytes seb_file = 1;
+}
+
+message SetupTeamGameRequest {
+  string session_code = 1;
+}
+
+message SetupTeamGameResponse {
+  classtime.service.common.GameStatus status = 1;
+  int32 max_points = 2;
+  int32 pass_threshold = 3;
+}
+
+message StartTeamGameRequest {
+  string session_code = 1;
+  int32 students_per_team = 3;
+}
+
+message StartTeamGameResponse {
+  classtime.service.common.GameStatus status = 1;
+  repeated classtime.service.common.Team teams = 2;
+}
+
+message FinishTeamGameRequest {
+  string session_code = 1;
+}
+
+message FinishTeamGameResponse {
+  classtime.service.common.GameStatus status = 1;
+  repeated TeamWithScore results = 2;
+}
+
+message GradeAnswersRequest {
+  message GradedAnswer {
+    string answer_id = 1;
+    bool is_correct = 2;
+    classtime.service.common.GradingPoint grading_points = 3;
+    // Used to call a different Django endpoint for free-text questions:
+    classtime.service.question.api.QuestionKind kind = 4;
+  }
+
+  string session_code = 1;
+  repeated GradedAnswer graded_answers = 2;
+  repeated classtime.service.common.GradedGap graded_gaps = 3;
+}
+
+message GradeAnswersResponse {
+  repeated AnswerInfo answer_infos = 1; // for the student Django currently returns {"manual_grading_points": float, "is_correct": bool}
+}
+
+message UpdateClassroomGradesRequest {
+  string session_code = 1;
+}
+
+message UpdateClassroomGradesResponse {
+  repeated string failed_submission_emails = 1;
+}
+
+message VisitQuestionRequest {
+  string question_id = 1;
+}
+
+message VisitQuestionResponse {
+  bool is_visited = 1;
+}
+
+message CheckSessionHealthRequest {
+  string code = 1;
+}
+
+message CheckSessionHealthResponse {
+  string code = 1;
+  string title = 2;
+  bool is_invited_only = 3;
+  bool is_seb_session = 4;
+  bool is_active = 5;
+  bool is_manual_seb_mode = 6;
+  bool is_solo = 7;
+  bool is_anonymous = 8;
+  google.protobuf.Timestamp closes_at = 9;
+  google.protobuf.Timestamp opens_at = 10;
+  google.protobuf.Duration time_until_open = 11;
+  google.protobuf.Duration time_until_close = 12;
+  repeated classtime.service.common.FeatureFlag feature_flags = 13;
+}
+
+message GetPusherConfigRequest {
+  string session_code = 1;
+}
+
+message GetPusherConfigResponse {
+  string cluster = 1;
+  string api_key = 2;
+}
+
+message TeamGameBonusRequest {
+  string session_code = 1;
+  string answer_id = 2;
+  int32 index = 3;
+}
+
+message TeamGameBonusResponse {
+  int32 bonus = 1;
+}
+
+message JoinSessionRequest {
+  string code = 1;
+  string secret = 2;
+  bool reset = 3;
+  bool request_relogin_approval = 4;
+  bool request_rejoin_approval = 5;
+}
+
+message JoinSessionResponse {
+  SessionParticipant participant = 1;
+  string status = 2; // It will be 'success' or 'error' always
+  string participant_id = 3;
+}
+
+message StartSessionRequest {
+  string session_code = 1;
+}
+
+message StartSessionResponse {
+  google.protobuf.Timestamp started = 1;
+  google.protobuf.Duration time_since_started = 2;
+}
+
+message SoloSessionRequest {
+  string question_set_id = 1;
+}
+
+message SoloSessionResponse {
+  string redirect_url = 1;
+}
+
+message UpdateSessionLabelRequest {
+  string session_code = 1;
+  string label_id = 2;
+}
+
+message UpdateSessionLabelResponse {}
+
+message SetRejoinStatusRequest {
+  string session_code = 1;
+  string participant_id = 2;
+  bool is_rejoin_approved = 3;
+}
+
+message SetRejoinStatusResponse {}
+
+message SetReloginStatusRequest {
+  string session_code = 1;
+  string participant_id = 2;
+  bool is_relogin_approved = 3;
+}
+
+message SetReloginStatusResponse {}
+
+message CreateAnswersRequest {
+  string session_code = 1;
+  oneof answerType {
+    classtime.service.question.api.Answer answer = 2;
+    classtime.service.question.api.DraftAnswer draft_answer = 3;
+  }
+}
+
+message CreateAnswersResponse {
+  classtime.service.question.api.QuestionKind question_kind = 1;
+  classtime.service.question.api.Evaluation evaluation = 2;
+  classtime.entity.EntityRef answer = 3;
+  string solution_explanation_draftjs = 4;
+
+  oneof solution {
+    classtime.service.question.api.BooleanSolution solution_boolean = 10;
+    classtime.service.question.api.CategorizerSolution solution_categorizer = 11;
+    classtime.service.question.api.CategorizerMultiSolution solution_categorizer_multi = 12;
+    classtime.service.question.api.HighlightTextSolution solution_highlight_text = 13;
+    classtime.service.question.api.HotspotSolution solution_hotspot = 14;
+    classtime.service.question.api.MultipleChoiceSolution solution_multiple_choice = 15;
+    classtime.service.question.api.SingleChoiceSolution solution_single_choice = 16;
+    classtime.service.question.api.SorterSolution solution_sorter = 17;
+    classtime.service.question.api.TextSolution solution_text = 18;
+    classtime.service.question.api.FillInTheGapSolution solution_gap = 19;
+    classtime.service.question.api.EssaySolution solution_essay = 20;
+  }
+}
+
+message CreateAnswerRequest {
+  string session_code = 1;
+  classtime.service.question.api.Answer answer = 2;
+}
+
+message CreateAnswerResponse {
+  classtime.service.question.api.QuestionKind question_kind = 1;
+  classtime.service.question.api.Evaluation evaluation = 2;
+  classtime.entity.EntityRef answer = 3;
+  string solution_explanation_draftjs = 4;
+
+  oneof solution {
+    classtime.service.question.api.BooleanSolution solution_boolean = 10;
+    classtime.service.question.api.CategorizerSolution solution_categorizer = 11;
+    classtime.service.question.api.CategorizerMultiSolution solution_categorizer_multi = 12;
+    classtime.service.question.api.HighlightTextSolution solution_highlight_text = 13;
+    classtime.service.question.api.HotspotSolution solution_hotspot = 14;
+    classtime.service.question.api.MultipleChoiceSolution solution_multiple_choice = 15;
+    classtime.service.question.api.SingleChoiceSolution solution_single_choice = 16;
+    classtime.service.question.api.SorterSolution solution_sorter = 17;
+    classtime.service.question.api.TextSolution solution_text = 18;
+    classtime.service.question.api.FillInTheGapSolution solution_gap = 19;
+    classtime.service.question.api.EssaySolution solution_essay = 20;
+  }
+}
+
+message SaveDraftAnswerRequest {
+  string session_code = 1;
+  classtime.service.question.api.DraftAnswer draft_answer = 2;
+}
+
+message SaveDraftAnswerResponse {}
+
+message CreateWelcomeSessionRequest {}
+
+message GetBayernSessionCodeRequest {}
+message GetBayernSessionCodeResponse {
+  string session_code = 1;
+}
+
+message ContainsSessionRequest {
+  string session_code = 1;
+}
+
+message ContainsSessionResponse {
+  bool contains_session = 1;
+}
+
+message GetRealtimeAuthenticationRequest {
+  classtime.service.common.PusherCluster cluster = 1;
+  string channel_name = 2;
+  string socket_id = 3;
+}
+
+message GetRealtimeAuthenticationResponse {
+  string auth = 1;
+  string channel_data = 2;
+}
+
+message PusherSessionParticipantStarted {
+  string participant_id = 1;
+  google.protobuf.Timestamp started = 2;
+  string name = 3;
+}
+
+message PusherSessionChanged {
+  SessionSettings settings = 1;
+  google.protobuf.Duration time_since_timer_start = 2;
+  google.protobuf.Duration time_until_session_close = 3;
+}
+
+message PusherSessionParticipantAdded {
+  string participant_id = 1;
+  SessionParticipant session_participant = 2;
+}
+
+message PusherSessionParticipantUpdated {
+  string participant_id = 1;
+  SessionParticipant session_participant = 2;
+}
+
+message PusherSessionParticipantRemoved {
+  string participant_id = 1;
+}
+
+message PusherReloginApprovalRequested {
+  string participant_id = 1;
+  SessionParticipant session_participant = 2;
+  bool is_popup_triggered = 3;
+}
+
+message PusherReloginRequestStatusChanged {
+  string participant_id = 1;
+  SessionParticipant session_participant = 2;
+}
+
+message PusherRejoinApprovalRequested {
+  string participant_id = 1;
+  SessionParticipant session_participant = 2;
+  bool is_popup_triggered = 3;
+}
+
+message PusherRejoinRequestStatusChanged {
+  string participant_id = 1;
+  SessionParticipant session_participant = 2;
+}
+
+message PusherAnotherLoginApproved {
+  string participant_id = 1;
+  SessionParticipant session_participant = 2;
+}
+
+message PusherAnswerAdded {
+  string answer_id = 1;
+  string participant_id = 2;
+  classtime.service.question.api.Answer answer = 3;
+}
+
+message PusherAllAnswersChanged {}
+
+message PusherAnswerManualGradingUpdated {
+  string answer_id = 1;
+  string participant_id = 2;
+  classtime.service.common.GradingPoint manual_grading_points = 3;
+  string question_id = 4;
+}
