@@ -1,0 +1,183 @@
+syntax = "proto3";
+
+package classtime.service.session.api;
+
+import "common_messages.proto";
+import "entity_store_messages.proto";
+import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
+import "question_entities.proto";
+import "texttospeech_messages.proto";
+
+option java_multiple_files = true;
+option java_outer_classname = "SessionEntitiesProto";
+option java_package = "classtime.service.session.api";
+
+// (-- api-linter: core::0142::time-field-type=disabled
+//     We need to do this because timer and paused_seconds are not timestamps. --)
+message SessionSettings {
+  reserved 19;
+  enum EvaluationMode {
+    FullOrNoPoints = 0; // was: is_partial_grading = False
+    PartialPointsWithPenalty = 1; // was: partial_evaluation_mode = 'with-penalty'
+    PartialPointsWithoutPenalty = 2; //was: partial_evaluation_mode='without-penalty'
+  }
+
+  enum TimerStartMode {
+    None = 0;
+    OnLogin = 1;
+    Central = 2;
+  }
+
+  string title = 1;
+  classtime.service.common.SessionMode mode = 2;
+  bool is_active = 3;
+  bool is_revealed = 4;
+  bool invited_students_only = 5;
+  classtime.service.common.FeedbackMode feedback_mode = 6;
+  bool one_attempt_only = 7; // is_one_attempt
+  bool shuffle_choices = 8; // is_shuffle_choices
+  bool shuffle_questions = 9; // is_shuffle_questions
+  EvaluationMode evaluation_mode = 10; // partial_evaluation_mode
+  bool is_configured = 11;
+  bool has_reflection = 12;
+  bool force_reflection = 13;
+  google.protobuf.Duration timer = 14;
+  google.protobuf.Timestamp opens_at = 15;
+  google.protobuf.Timestamp closed_at = 16;
+  string challenge_slug = 17;
+  string challenge_kind = 18;
+  repeated classtime.entity.EntityRef active_questions = 20; // References 'Question'.
+  classtime.service.common.SebConfig seb_config = 21;
+  bool is_archived = 22;
+  bool is_relogin_approval_required = 23;
+  bool is_logout_on_marked_as_done_enabled = 24;
+  classtime.service.texttospeech.TextToSpeechConfig default_text_to_speech_config = 25;
+  bool is_chat_enabled_by_default = 26;
+  TimerStartMode timer_start_mode = 27;
+  google.protobuf.Timestamp timer_started_at = 28;
+  google.protobuf.Timestamp paused_at = 29;
+  google.protobuf.Duration paused_seconds = 30;
+}
+
+// Root Entity
+message Session {
+  classtime.entity.EntityRef owner_ref = 1; // UUID reference to Django Model 'Owner'
+  string code = 2;
+  classtime.entity.EntityRef label_ref = 3; // Replacement for SessionGroup
+  SessionSettings settings = 4;
+  repeated classtime.service.question.api.QuestionGroup question_groups = 5;
+  classtime.entity.EntityRef preview_question_set_ref = 6; // UUID reference to Django Model 'library.QuestionSet'
+  classtime.entity.EntityRef invited_class_ref = 7; // ID reference to Django Model 'Class'
+  string google_classroom_assignment_ref = 8;
+  bool is_onboarding = 9;
+  bool is_solo = 10;
+  bool is_anonymous = 11;
+  bool is_auto_text_grading_enabled = 12;
+  google.protobuf.Timestamp conducted = 13; // TODO How is this different from creation timestamp?
+  classtime.service.common.PusherCluster pusher_cluster = 14;
+  classtime.service.common.GameStatus game_status = 15; // Move to settings?
+  repeated classtime.entity.EntityRef reflection_questions = 16; // References ReflectionQuestion to order them.
+  google.protobuf.Timestamp created = 17; // TODO Remove when creation and modification timestamps are implemented
+  string teacher_chat_id = 18;
+}
+
+// Root Entity. Holds counter for amount of sessions created
+message NextSessionId {
+  int64 id = 1;
+}
+
+enum SessionParticipantAuthProvider {
+  Google = 0;
+  Microsoft = 1;
+  Clever = 2;
+  Unknown = 3;
+}
+
+enum RequestStatus {
+  NOT_REQUESTED = 0;
+  REQUESTED = 1;
+  DENIED = 2;
+}
+
+enum ChatOverride {
+  OverrideNone = 0;
+  OverrideEnabled = 1;
+  OverrideDisabled = 2;
+}
+
+// Entity nested in Session
+message SessionParticipant {
+  reserved 1, 16;
+  string name = 2;
+  repeated classtime.entity.EntityRef visited_questions = 3; // References SessionQuestion
+  google.protobuf.Timestamp started_at = 4;
+  string team_id = 5; // team
+  bool is_chat_enabled = 6;
+  string django_uuid = 7;
+  google.protobuf.Duration time_since_start = 8; // millisecondsSinceStarted
+  // TODO(https://app.asana.com/0/0/1206263052530138/f): Use isArchived from entity status instead
+  bool is_archived = 9;
+  string email = 10;
+  string chat_partner_id = 11;
+  SessionParticipantAuthProvider provider = 12;
+  string conversation_id = 13;
+  string sid = 14;
+  RequestStatus relogin_request_status = 15;
+  bool is_chat_allowed = 17;
+  classtime.service.texttospeech.TextToSpeechConfig text_to_speech_config = 18;
+  bool is_session_done = 19;
+  bool is_unsubmit_session_requested = 20;
+  RequestStatus rejoin_request_status = 21;
+  // (-- api-linter: core::0142::time-field-type=disabled --)
+  google.protobuf.Duration timer = 22;
+  // (-- api-linter: core::0142::time-field-type=disabled --)
+  google.protobuf.Duration paused_seconds = 23;
+  google.protobuf.Timestamp handed_in_at = 24;
+  ChatOverride chat_override = 25;
+  classtime.entity.EntityRef account_ref = 26;
+  bool is_screen_locked = 27;
+  bool is_verified = 28;
+  bool is_restarted = 29;
+}
+
+message SessionParticipantInfo {
+  bool is_session_done = 1;
+  google.protobuf.Timestamp handed_in_at = 2;
+}
+
+enum ReflectionQuestionKind {
+  Emoji = 0;
+  YesNo = 1;
+}
+
+enum ReflectionQuestionAnswer {
+  Yes = 0;
+  No = 1;
+  Neutral = 2;
+  Upset = 3;
+  Happy = 4;
+}
+
+// Entity nested under SessionParticipant
+message ReflectionAnswer {
+  classtime.entity.EntityRef question_ref = 1;
+  ReflectionQuestionAnswer value = 2;
+}
+
+message ReflectionQuestion {
+  classtime.entity.EntityRef derived_from_question_ref = 1; // UUID reference to django model 'ReflectionQuestion'
+  string title = 2;
+  ReflectionQuestionKind kind = 3;
+}
+
+message InvitedClass {
+  string id = 1;
+  string title = 2;
+  string subject = 3;
+}
+
+message SessionLabel {
+  classtime.entity.EntityRef owner_ref = 1;
+  string title = 2;
+}
