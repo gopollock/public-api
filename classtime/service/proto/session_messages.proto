@@ -644,9 +644,9 @@ message PusherAnswerAdded {
 
 message PusherAllAnswersChanged {}
 
-message PusherAnswerManualGradingUpdated {
+message PusherAnswerChanged {
   string answer_id = 1;
   string participant_id = 2;
-  classtime.service.common.GradingPoint manual_grading_points = 3;
-  string question_id = 4;
+  string question_id = 3;
+  classtime.service.question.api.Evaluation evaluation = 4;
 }
