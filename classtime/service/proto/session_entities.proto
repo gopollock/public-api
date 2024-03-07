@@ -144,6 +144,7 @@ message SessionParticipant {
 message SessionParticipantInfo {
   bool is_session_done = 1;
   google.protobuf.Timestamp handed_in_at = 2;
+  string sid = 3;
 }
 
 enum ReflectionQuestionKind {
