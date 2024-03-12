@@ -17,10 +17,10 @@ enum AuthenticationProvider {
   Clever = 4;
   Sanis = 5; // IDM Niedersachsen
   Teams = 6;
-  NONE = 7;
+  NONE = 7; // Used only in case of not authorized user at all
   Baselland = 8;
   AdminTool = 9;
-  Nickname = 10;
+  Nickname = 10; // Temporary authorized user without an email verification
   EmailVerification = 11;
   IServ = 12;
   WebUntis = 13;
