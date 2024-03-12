@@ -650,3 +650,8 @@ message PusherAnswerChanged {
   string question_id = 3;
   classtime.service.question.api.Evaluation evaluation = 4;
 }
+
+message PusherSessionUnsubmitRequested {
+  string participant_id = 1;
+  bool is_unsubmit_session_requested = 2;
+}
