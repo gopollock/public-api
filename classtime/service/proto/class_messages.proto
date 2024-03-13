@@ -59,6 +59,7 @@ message GetClassesRequest {}
 message GetClassesResponse {
   message ClassInfo {
     string id = 1;
+    bool is_owner = 2; // used for teacher
   }
 
   repeated ClassInfo classes = 1;
