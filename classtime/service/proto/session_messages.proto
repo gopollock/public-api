@@ -50,6 +50,7 @@ message SessionInfo {
 
   // Derived from calling Participant's Answers, only set for students:
   AnswersStats answers_stats = 16;
+  int32 question_count = 21;
 }
 
 message GetSessionDetailsRequest {
