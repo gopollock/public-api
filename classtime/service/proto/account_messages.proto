@@ -162,10 +162,9 @@ message ChangeProfileNames {
 }
 
 message UpdateAccountInfoRequest {
-  oneof update {
-    // If set, overwrites all fields of the user profile.
-    UserProfile user_profile = 1;
+  reserved 1;
 
+  oneof update {
     // If set, the given AID will be removed from the account.
     // Returns error, if trying to remove primary AID.
     int32 removed_authentication_id = 2;
