@@ -655,3 +655,8 @@ message PusherSessionUnsubmitRequested {
   string participant_id = 1;
   bool is_unsubmit_session_requested = 2;
 }
+
+message PusherGameStatusUpdated {
+  classtime.service.common.GameStatus status = 1;
+  repeated TeamWithScore teams_with_score = 2;
+}
