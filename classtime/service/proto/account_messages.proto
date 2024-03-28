@@ -185,7 +185,7 @@ message RefreshTokenResponse {
   google.protobuf.Timestamp token_creation = 1;
   google.protobuf.Timestamp token_expiration = 2;
   google.protobuf.Duration remaining_token_lifetime = 3;
-  optional string header_token = 4;
+  string header_token = 4;
 }
 
 message LogoutRequest {}
