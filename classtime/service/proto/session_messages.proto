@@ -20,7 +20,7 @@ message SessionInfo {
     int32 wrong_answers_count = 2;
   }
 
-  reserved 4, 7, 14;
+  reserved 4, 7, 14, 15;
 
   // Extracted from Session entity:
   string code = 1;
@@ -31,7 +31,6 @@ message SessionInfo {
   bool has_google_classroom_ref_for_invited_class = 9;
   repeated classtime.service.question.api.QuestionGroup question_groups = 10;
   SessionSettings settings = 11;
-  repeated string questions = 15;
   bool is_partial_grading = 17;
 
   // Derived from Participants, only set for teachers:
