@@ -492,35 +492,6 @@ message SetReloginStatusRequest {
 
 message SetReloginStatusResponse {}
 
-message CreateAnswersRequest {
-  string session_code = 1;
-  oneof answerType {
-    classtime.service.question.api.Answer answer = 2;
-    classtime.service.question.api.DraftAnswer draft_answer = 3;
-  }
-}
-
-message CreateAnswersResponse {
-  classtime.service.question.api.QuestionKind question_kind = 1;
-  classtime.service.question.api.Evaluation evaluation = 2;
-  classtime.entity.EntityRef answer = 3;
-  string solution_explanation_draftjs = 4;
-
-  oneof solution {
-    classtime.service.question.api.BooleanSolution solution_boolean = 10;
-    classtime.service.question.api.CategorizerSolution solution_categorizer = 11;
-    classtime.service.question.api.CategorizerMultiSolution solution_categorizer_multi = 12;
-    classtime.service.question.api.HighlightTextSolution solution_highlight_text = 13;
-    classtime.service.question.api.HotspotSolution solution_hotspot = 14;
-    classtime.service.question.api.MultipleChoiceSolution solution_multiple_choice = 15;
-    classtime.service.question.api.SingleChoiceSolution solution_single_choice = 16;
-    classtime.service.question.api.SorterSolution solution_sorter = 17;
-    classtime.service.question.api.TextSolution solution_text = 18;
-    classtime.service.question.api.FillInTheGapSolution solution_gap = 19;
-    classtime.service.question.api.EssaySolution solution_essay = 20;
-  }
-}
-
 message CreateAnswerRequest {
   string session_code = 1;
   classtime.service.question.api.Answer answer = 2;
