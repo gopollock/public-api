@@ -356,3 +356,13 @@ message QuestionGroup {
   repeated classtime.entity.EntityRef questions = 2; // References SessionQuestion
   string question_set_id = 3;
 }
+
+message EvaluationMapEntry {
+  string answer_id = 1;
+  classtime.service.question.api.Evaluation evaluation = 2;
+}
+
+message EvaluationMap {
+  // key: Question ID
+  map<string, EvaluationMapEntry> evaluations = 1;
+}
