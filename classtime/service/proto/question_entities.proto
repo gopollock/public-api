@@ -360,6 +360,7 @@ message QuestionGroup {
 message EvaluationMapEntry {
   string answer_id = 1;
   classtime.service.question.api.Evaluation evaluation = 2;
+  google.protobuf.Timestamp created_at = 3;
 }
 
 message EvaluationMap {
