@@ -631,3 +631,7 @@ message PusherGameStatusUpdated {
   classtime.service.common.GameStatus status = 1;
   repeated TeamWithScore teams_with_score = 2;
 }
+
+message PusherTeamScoreChanged {
+  repeated TeamWithScore teams_with_score = 2;
+}
