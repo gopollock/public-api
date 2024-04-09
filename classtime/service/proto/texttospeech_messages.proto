@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package classtime.service.texttospeech;
+
+option java_multiple_files = true;
+option java_outer_classname = "TexttospeechMessagesProto";
+option java_package = "classtime.service.texttospeech";
+
+message TimeMark {
+  double seconds_passed = 1;
+  string mark_name = 2;
+}
+
+message SynthesizeSpeechRequest {
+  string ssml = 1;
+  double speed_multiplier = 2;
+  string voice_name = 3;
+  string language_code = 4;
+}
+
+message SynthesizeSpeechResponse {
+  bytes audio_file = 1;
+  repeated TimeMark time_marks = 2;
+}
+
+enum TextToSpeechVoiceGender {
+  Female = 0;
+  Male = 1;
+}
+
+message TextToSpeechConfig {
+  bool is_enabled = 1;
+  TextToSpeechVoiceGender voice = 2;
+  string language = 3;
+  double speed = 4;
+}
