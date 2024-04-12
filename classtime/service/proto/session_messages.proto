@@ -576,10 +576,6 @@ message PusherSessionParticipantUpdated {
   SessionParticipant session_participant = 2;
 }
 
-message PusherSessionParticipantRemoved {
-  string participant_id = 1;
-}
-
 message PusherReloginApprovalRequested {
   string participant_id = 1;
   SessionParticipant session_participant = 2;
