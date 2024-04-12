@@ -249,6 +249,9 @@ message CreateAccountRequest {
   // Unique identifier for the user in the given provider.
   string subject = 3;
   string locale = 4;
+  // This must only be provided for internal Classtime request
+  string organisation = 5;
+  string email = 6;
 }
 
 message CreateAccountResponse {
