@@ -359,13 +359,11 @@ message QuestionGroup {
 }
 
 message EvaluationMapEntry {
+  reserved 4, 5;
   string answer_id = 1;
-  classtime.service.question.api.Evaluation legacy_evaluation = 2;
+  classtime.service.question.api.Evaluation evaluation = 2;
   google.protobuf.Timestamp created_at = 3;
-  oneof evaluation {
-    classtime.service.question.api.Evaluation full_evaluation = 4;
-    classtime.service.question.api.PartialEvaluation partial_evaluation = 5;
-  }
+  classtime.service.common.GradingPoint bonus = 6;
 }
 
 message EvaluationMap {
