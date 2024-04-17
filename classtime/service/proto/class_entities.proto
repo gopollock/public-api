@@ -1,13 +1,13 @@
 syntax = "proto3";
 
-package classtime.service.class_.api;
+package classtime.service.classes.api;
 
 import "common_messages.proto";
 import "entity_store_messages.proto";
 
 option java_multiple_files = true;
 option java_outer_classname = "ClassEntitiesProto";
-option java_package = "classtime.service.class_.api";
+option java_package = "classtime.service.classes.api";
 
 message ClassInfo {
   string code = 1;
