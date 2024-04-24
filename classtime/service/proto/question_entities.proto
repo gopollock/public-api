@@ -370,31 +370,3 @@ message EvaluationMap {
   // key: Question ID
   map<string, EvaluationMapEntry> evaluations = 1;
 }
-
-message AnswerEmbedding {
-  string model = 1;
-  repeated float values = 2;
-}
-
-message ManualEvaluation {
-  message EvaluatedAnswer {
-    string canonical_string = 1;
-    bool is_correct = 2;
-    classtime.service.common.GradingPoint manual_grading_points = 3;
-    repeated AnswerEmbedding embeddings = 4; // only for text answers
-  }
-
-  message SingleGapEvaluatedAnswer {
-    int32 gap_index = 1;
-    string content = 2;
-    bool is_correct = 3;
-  }
-
-  oneof manually_evaluated_answer {
-    EvaluatedAnswer evaluated_answer = 1;
-    SingleGapEvaluatedAnswer single_gap_evaluated_answer = 2;
-  }
-
-  bytes question_content_hash = 3;
-  classtime.entity.EntityRef owner_account_id_ref = 4; // owner of the session where ManualEvaluation was created
-}
