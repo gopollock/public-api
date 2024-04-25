@@ -93,3 +93,9 @@ message AccountExtensionInfo {
   AccountInfo primary_user_extra_info = 5;
   AccountInfo secondary_user_extra_info = 6;
 }
+
+message AccountProfile {
+  string name = 1;
+  string email = 2;
+  classtime.service.common.Role role = 3;
+}

@@ -243,6 +243,22 @@ message GetPrivateAccountDataResponse {
   Account account = 1;
 }
 
+message GetAccountProfileRequest {
+  string account_id = 1;
+}
+
+message GetAccountProfileResponse {
+  AccountProfile account_profile = 1;
+}
+
+message GetAccountProfilesRequest {
+  repeated string account_ids = 1;
+}
+
+message GetAccountProfilesResponse {
+  map<string, AccountProfile> account_profiles = 1;
+}
+
 message CreateAccountRequest {
   classtime.service.common.Role role = 1;
   UserProfile user_profile = 2;
