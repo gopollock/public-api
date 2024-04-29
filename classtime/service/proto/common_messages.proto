@@ -7,9 +7,9 @@ option java_outer_classname = "CommonMessagesProto";
 option java_package = "classtime.service.common";
 
 enum FeedbackMode {
+  reserved 2;
   Manual = 0;
   PerQuestion = 1;
-  PerSession = 2;
 }
 
 enum GameStatus {
