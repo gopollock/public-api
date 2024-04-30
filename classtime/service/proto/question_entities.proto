@@ -377,24 +377,19 @@ message AnswerEmbedding {
 }
 
 message ManualEvaluation {
-  message EvaluatedAnswer {
-    string canonical_string = 1;
-    bool is_correct = 2;
-    classtime.service.common.GradingPoint manual_grading_points = 3;
-    repeated AnswerEmbedding embeddings = 4; // only for text answers
+  reserved 1, 2;
+
+  message Evaluation {
+    bool is_correct = 1;
+    classtime.service.common.GradingPoint manual_grading_points = 2;
   }
 
-  message SingleGapEvaluatedAnswer {
-    int32 gap_index = 1;
-    string content = 2;
-    bool is_correct = 3;
-  }
-
-  oneof manually_evaluated_answer {
-    EvaluatedAnswer evaluated_answer = 1;
-    SingleGapEvaluatedAnswer single_gap_evaluated_answer = 2;
-  }
-
-  bytes question_content_hash = 3;
+  bytes owner_question_content_hash = 3;
   classtime.entity.EntityRef owner_account_id_ref = 4; // owner of the session where ManualEvaluation was created
+  // Hash of the canonical answer string
+  // - for full answers: 'full:$canonical_answer_string'
+  // - for blank gaps: 'blank-gap:$gap_index|$content'
+  bytes canonical_answer_hash = 5;
+  Evaluation evaluation = 6;
+  repeated AnswerEmbedding embeddings = 7;
 }
