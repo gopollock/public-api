@@ -4,3 +4,4 @@
 - [library-service-api interface definition with its supported methods](https://static.classtime.com/public-api/library-service-api/html/library-service-api/classtime.service.library.api/-library-service/index.html).
 - [class-service-api interface definition with its supported methods](https://static.classtime.com/public-api/class-service-api/html/class-service-api/classtime.service.classes.api/-class-service/index.html).
 - [session-service-api interface definition with its supported methods](https://static.classtime.com/public-api/session-service-api/html/session-service-api/classtime.service.session.api/-session-service/index.html).
+- [subscription-service-api interface definition with its supported methods](https://static.classtime.com/public-api/subscription-service-api/html/subscription-service-api/classtime.service.subscription.api/-subscription-service/index.html).
