@@ -1,0 +1,190 @@
+syntax = "proto3";
+
+package classtime.service.subscription.api;
+
+import "entity_store_messages.proto";
+import "google/protobuf/timestamp.proto";
+
+option java_multiple_files = true;
+option java_outer_classname = "SubscriptionMessagesProto";
+option java_package = "classtime.service.subscription.api";
+
+// Purchase of licenses to be activated later through an activation code.
+message MultiLicensePurchase {
+  int32 max_activations = 1;
+}
+
+// Purchase of license to be activated for the specified users.
+message UserLicensePurchase {
+  repeated string emails = 1;
+}
+
+enum SubscriptionPeriod {
+  Unlimited = 0;
+  Yearly = 1; // 12 months
+  HalfYearly = 2; // 6 months
+  Quarterly = 3; // 3 months
+}
+
+enum PurchaseRole {
+  Teacher = 0;
+  Student = 1;
+}
+
+message CreatePurchaseRequest {
+  // Unique id for each purchase. This is used to avoid creating multiple purchases in
+  // Classtime in case the request fails in the middle of processing.
+  string purchase_id = 1;
+
+  // Identifies the 'products' for which subscriptions are bought. Must not be empty.
+  repeated string product_ids = 2;
+
+  // Specifies whether the purchase can be activated for students or for teachers.
+  PurchaseRole role = 3;
+
+  SubscriptionPeriod subscription_period = 4;
+
+  oneof license {
+    MultiLicensePurchase multi_license_purchase = 5;
+    UserLicensePurchase user_license_purchase = 6;
+  }
+}
+
+message CreatePurchaseResponse {
+  repeated string activation_codes = 1;
+  repeated PurchaseActivation activations = 2;
+}
+
+message GetPurchaseDetailsRequest {
+  string purchase_id = 1;
+}
+
+message ProductSubscription {
+  string product_id = 1;
+  google.protobuf.Timestamp expires_at = 2;
+}
+
+message PurchaseActivation {
+  // The unique ID of the account.
+  string account_id = 1;
+
+  // Email of the account. May be empty.
+  string email = 2;
+
+  // Time at which the activation code was used.
+  google.protobuf.Timestamp activated_at = 3;
+
+  // The code used to activate the purchase.
+  string activation_code = 4;
+
+  // For each subscribed product gives the new end time.
+  repeated ProductSubscription product_subscriptions = 5;
+}
+
+message GetPurchaseDetailsResponse {
+  repeated string product_ids = 1;
+  PurchaseRole role = 2;
+  SubscriptionPeriod subscription_period = 3;
+  repeated string activation_codes = 4;
+  repeated PurchaseActivation activations = 5;
+}
+
+message ActivatePurchaseRequest {
+  string activation_code = 1;
+}
+
+message ActivatePurchaseResponse {
+  repeated Subscription subscriptions = 1;
+}
+
+enum Provider {
+  Classtime = 0;
+  VerlagsAnstaltHandwerken = 1;
+  Distrinova = 2;
+  Careum = 3;
+}
+
+// An Activation stores the activation of a Purchase for a single Account.
+// It is part of the Purchase entity.
+message Activation {
+  classtime.entity.EntityRef account_ref = 1;
+  classtime.entity.EntityRef subscription_ref = 2;
+  google.protobuf.Timestamp activated_at = 3;
+  string used_activation_code = 4;
+}
+
+// A Purchase stores the purchase of licenses for one or multiple QuestionBanks.
+// Each purchase can be activated for one or multiple accounts according to the
+// max_activation fields. On activation for an account, for each QuestionBank in the
+// Purchase either a new Subscription of the QuestionBank for the account is
+// created or the end time of an existing Subscription is extended.
+// The set of purchased QuestionBanks can only be activated together.
+message Purchase {
+  Provider provider = 1;
+
+  // The ID of the purchase in the provider's system.
+  string external_id = 2;
+
+  // Identifies the 'products' for which subscriptions are bought. Must not be empty.
+  repeated classtime.entity.EntityRef question_banks_ref = 3;
+
+  SubscriptionPeriod subscription_period = 4;
+
+  PurchaseRole role = 5;
+  repeated string unused_activation_codes = 6;
+  repeated Activation activations = 7;
+}
+
+message SubscriptionExtension {
+  classtime.entity.EntityRef purchase_ref = 1;
+  google.protobuf.Timestamp time = 2;
+  google.protobuf.Timestamp new_end = 3;
+}
+
+message QuestionBankSubscription {
+  classtime.entity.EntityRef question_bank_ref = 1;
+}
+
+// Specifies that an Account has access to a QuestionBank for a certain time.
+message Subscription {
+  classtime.entity.EntityRef account_ref = 1;
+
+  oneof product {
+    QuestionBankSubscription question_bank = 2;
+  }
+
+  google.protobuf.Timestamp start = 3;
+
+  google.protobuf.Timestamp end = 4;
+
+  // References all the Purchases which added time to this Subscription (including
+  // the initial one).
+  repeated SubscriptionExtension extensions = 5;
+
+  // Signals whether the Subscription is currently active or not. This should be set based on
+  // whether the current time is within the [start, end + grace period] interval. We will use
+  // this field to synchronize the Resource Pool Access.
+  bool is_active = 6;
+}
+
+message SubscriptionExtensionInfo {
+  string account_id = 1;
+  string product_id = 2;
+  google.protobuf.Timestamp new_end_time = 3;
+}
+
+message SubscriptionBasicInfo {
+  classtime.entity.EntityRef subscription_ref = 1;
+  classtime.entity.EntityRef question_bank_ref = 2;
+}
+
+message GetActivationCodeRequest {
+  string activation_code = 1;
+}
+
+message GetActivationCodeResponse {
+  string purchase_id = 1;
+
+  // Only set when the code has been used
+  PurchaseActivation activation = 2;
+}
