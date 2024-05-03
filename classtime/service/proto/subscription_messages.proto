@@ -74,7 +74,7 @@ message PurchaseActivation {
   // Time at which the activation code was used.
   google.protobuf.Timestamp activated_at = 3;
 
-  // The code used to activate the purchase.
+  // The code used to activate the purchase. (Also set for UserLicensePurchase.)
   string activation_code = 4;
 
   // For each subscribed product gives the new end time.
@@ -108,7 +108,6 @@ enum Provider {
 // It is part of the Purchase entity.
 message Activation {
   classtime.entity.EntityRef account_ref = 1;
-  classtime.entity.EntityRef subscription_ref = 2;
   google.protobuf.Timestamp activated_at = 3;
   string used_activation_code = 4;
 }
