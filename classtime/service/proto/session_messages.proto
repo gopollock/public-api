@@ -609,6 +609,10 @@ message PusherAnswerAdded {
   classtime.service.question.api.Answer answer = 3;
 }
 
+message PusherAnswerEmbeddingAdded {
+  string question_id = 1;
+}
+
 message PusherAllAnswersChanged {}
 
 message PusherAnswerChanged {
