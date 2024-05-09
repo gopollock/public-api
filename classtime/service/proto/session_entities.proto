@@ -176,3 +176,9 @@ message SessionLabel {
   classtime.entity.EntityRef owner_ref = 1;
   string title = 2;
 }
+
+// entity
+message AnswerEmbeddingUsage {
+  classtime.entity.EntityRef account_ref = 1;
+  int32 count = 2;
+}
