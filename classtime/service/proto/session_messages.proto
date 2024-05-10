@@ -71,6 +71,7 @@ message GetSessionDetailsResponse {
   map<string, ReflectionQuestionAnswer> reflection_answers = 5; // Used for students only
   google.protobuf.Duration time_since_timer_start = 6;
   google.protobuf.Duration time_until_session_close = 7;
+  bool are_free_text_predictions_available = 8; // For teacher dashboard only
 }
 
 message GetSessionInfoRequest {
