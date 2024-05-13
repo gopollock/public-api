@@ -11,3 +11,11 @@ message AssociateTeacherRequest {
   string account_id = 2;
 }
 message AssociateTeacherResponse {}
+
+message GetSchoolAssociatedAccountsRequest {
+  string school_title = 1;
+}
+
+message GetSchoolAssociatedAccountsResponse {
+  repeated string account_ids = 1;
+}
