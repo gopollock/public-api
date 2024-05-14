@@ -627,7 +627,10 @@ message PusherAnswerChanged {
   string answer_id = 1;
   string participant_id = 2;
   string question_id = 3;
-  classtime.service.question.api.Evaluation evaluation = 4;
+  oneof evaluation {
+    classtime.service.question.api.Evaluation full_evaluation = 4;
+    classtime.service.question.api.PartialEvaluation partial_evaluation = 5;
+  }
 }
 
 message PusherSessionUnsubmitRequested {
