@@ -115,6 +115,7 @@ message SessionParticipant {
   string team_id = 5; // team
   bool is_chat_enabled = 6;
   string django_uuid = 7;
+  // Only set when Session timer mode is OnLogin and the participant has started the session.
   google.protobuf.Duration time_since_start = 8; // millisecondsSinceStarted
   // TODO(https://app.asana.com/0/0/1206263052530138/f): Use isArchived from entity status instead
   bool is_archived = 9;
