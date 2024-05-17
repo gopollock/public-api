@@ -82,11 +82,6 @@ message Session {
   string teacher_chat_id = 18;
 }
 
-// Root Entity. Holds counter for amount of sessions created
-message NextSessionId {
-  int64 id = 1;
-}
-
 enum SessionParticipantAuthProvider {
   Google = 0;
   Microsoft = 1;
