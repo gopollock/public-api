@@ -391,5 +391,11 @@ message ManualEvaluation {
   // - for blank gaps: 'blank-gap:$gap_index|$content'
   bytes canonical_answer_hash = 5;
   Evaluation evaluation = 6;
-  repeated AnswerEmbedding embeddings = 7;
+
+  message AnswerEmbeddingsInfo {
+    repeated AnswerEmbedding embeddings = 7;
+    repeated string answer_ids = 8;
+  }
+
+  AnswerEmbeddingsInfo answer_embeddings_info = 9;
 }
