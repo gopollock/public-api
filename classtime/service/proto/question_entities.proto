@@ -158,6 +158,7 @@ message CategorizerSolution {
   CategorizerAnswer correct_answer = 1;
 }
 
+//TODO(https://app.asana.com/0/1203796373635132/1207549712623261/f): get rid of CategorizerMultiSolution? if it's the same as CategorizerSolution
 message CategorizerMultiSolution {
   CategorizerAnswer correct_answer = 1;
 }
