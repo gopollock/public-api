@@ -301,19 +301,19 @@ message HotspotPointEvaluation {
 }
 
 message Evaluation {
+  reserved 4;
   bool is_correct = 1;
   classtime.service.common.GradingPoint grading_points = 2; // Actual points given for the answer.
   classtime.service.common.GradingPoint manual_grading_points = 3; // Points manually set.
   classtime.service.common.GradingPoint automatic_grading_points = 7; // Points automatically computed.
-  classtime.service.common.GradingPoint bonus = 4;
   repeated GapEvaluation evaluation_gap = 5;
   string evaluation_explanation = 6;
   repeated HotspotPointEvaluation evaluation_hotspot = 8;
 }
 
 message PartialEvaluation {
+  reserved 2;
   map<string, GapEvaluation> gap_evaluations = 1;
-  classtime.service.common.GradingPoint bonus = 2;
 }
 
 // Entity Nested under Participant
@@ -321,6 +321,7 @@ message Answer {
   reserved 2;
   classtime.entity.EntityRef question = 1;
   google.protobuf.Timestamp created_at = 3;
+  classtime.service.common.GradingPoint bonus = 6;
   oneof evaluation {
     PartialEvaluation partial_evaluation = 4;
     Evaluation full_evaluation = 5;
