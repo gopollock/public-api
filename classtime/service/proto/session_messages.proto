@@ -647,3 +647,11 @@ message PusherGameStatusUpdated {
 message PusherTeamScoreChanged {
   repeated TeamWithScore teams_with_score = 2;
 }
+
+message PusherQuestionsChanged {
+  message ChangedQuestion {
+    string id = 1;
+    bool is_active = 2;
+  }
+  repeated ChangedQuestion questions = 1;
+}
