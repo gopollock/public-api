@@ -563,6 +563,18 @@ message GetRealtimeAuthenticationResponse {
   string channel_data = 2;
 }
 
+message GetClassStudentSuggestionsRequest {}
+
+message GetClassStudentSuggestionsResponse {
+  message Suggestion {
+    string account_id = 1;
+    string email = 2;
+    string name = 3;
+  }
+  repeated Suggestion suggestions = 1;
+}
+
+
 message PusherSessionParticipantStarted {
   string participant_id = 1;
   google.protobuf.Timestamp started = 2;
