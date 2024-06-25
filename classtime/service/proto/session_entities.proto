@@ -157,6 +157,7 @@ message ReflectionAnswer {
 }
 
 message ReflectionQuestion {
+  // TODO(https://app.asana.com/0/1203796373635132/1207630199182967/f): get rid of derived_from_question_ref, as we don't use it in FE anymore
   classtime.entity.EntityRef derived_from_question_ref = 1; // UUID reference to django model 'ReflectionQuestion'
   string title = 2;
   ReflectionQuestionKind kind = 3;
