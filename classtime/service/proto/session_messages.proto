@@ -574,7 +574,6 @@ message GetClassStudentSuggestionsResponse {
   repeated Suggestion suggestions = 1;
 }
 
-
 message PusherSessionParticipantStarted {
   string participant_id = 1;
   google.protobuf.Timestamp started = 2;

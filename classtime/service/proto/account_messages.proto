@@ -259,7 +259,7 @@ message GetAccountProfilesResponse {
   map<string, AccountProfile> account_profiles = 1;
 }
 
-message CreateAccountRequest {
+message CreateExternalAccountRequest {
   classtime.service.common.Role role = 1;
   UserProfile user_profile = 2;
   // Unique identifier for the user in the given provider.
@@ -270,7 +270,7 @@ message CreateAccountRequest {
   string email = 6;
 }
 
-message CreateAccountResponse {
+message CreateExternalAccountResponse {
   string account_id = 1;
 }
 
@@ -291,5 +291,13 @@ message GetAccountIdByEmailRequest {
 }
 
 message GetAccountIdByEmailResponse {
+  string account_id = 1;
+}
+
+message CreateAccountRequest {
+  Account account = 1;
+}
+
+message CreateAccountResponse {
   string account_id = 1;
 }
