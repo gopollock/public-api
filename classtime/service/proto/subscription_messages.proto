@@ -20,17 +20,15 @@ message UserLicensePurchase {
 }
 
 enum SubscriptionPeriod {
-  SUBSCRIPTION_PERIOD_UNSPECIFIED = 0;
-  UNLIMITED = 1;
-  YEARLY = 2; // 12 months
-  HALF_YEARLY = 3; // 6 months
-  QUARTERLY = 4; // 3 months
+  Unlimited = 0;
+  Yearly = 1; // 12 months
+  HalfYearly = 2; // 6 months
+  Quarterly = 3; // 3 months
 }
 
 enum PurchaseRole {
-  PURCHASE_ROLE_UNSPECIFIED = 0;
-  TEACHER = 1;
-  STUDENT = 2;
+  Teacher = 0;
+  Student = 1;
 }
 
 message CreatePurchaseRequest {
