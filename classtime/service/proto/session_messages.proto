@@ -565,13 +565,13 @@ message GetRealtimeAuthenticationResponse {
 
 message GetClassStudentSuggestionsRequest {}
 
+message ClassStudentSuggestion {
+  string account_id = 1;
+  string email = 2;
+  string name = 3;
+}
 message GetClassStudentSuggestionsResponse {
-  message Suggestion {
-    string account_id = 1;
-    string email = 2;
-    string name = 3;
-  }
-  repeated Suggestion suggestions = 1;
+  repeated ClassStudentSuggestion suggestions = 1;
 }
 
 message PusherSessionParticipantStarted {
