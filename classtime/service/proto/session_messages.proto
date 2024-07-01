@@ -666,3 +666,9 @@ message PusherQuestionsChanged {
   }
   repeated ChangedQuestion questions = 1;
 }
+
+message PusherReflectionAnswerAdded {
+  string question_id = 1;
+  ReflectionQuestionAnswer value = 2;
+  optional ReflectionQuestionAnswer previous_value = 3;
+}
