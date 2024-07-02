@@ -19,6 +19,8 @@ message SessionInfo {
     int32 correct_answers_count = 1;
     int32 wrong_answers_count = 2;
     int32 partially_correct_answers_count = 3;
+    int32 fully_correct_answers_count = 4;
+    int32 fully_wrong_answers_count = 5;
   }
 
   reserved 4, 7, 14, 15;
