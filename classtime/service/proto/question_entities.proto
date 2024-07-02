@@ -300,6 +300,12 @@ message HotspotPointEvaluation {
   bool is_correct = 1;
 }
 
+enum Correctness {
+  Correct = 0;
+  PartiallyCorrect = 1;
+  Wrong = 2;
+}
+
 message Evaluation {
   reserved 4;
   bool is_correct = 1;
@@ -309,6 +315,7 @@ message Evaluation {
   repeated GapEvaluation evaluation_gap = 5;
   string evaluation_explanation = 6;
   repeated HotspotPointEvaluation evaluation_hotspot = 8;
+  Correctness correctness = 9;
 }
 
 message PartialEvaluation {
