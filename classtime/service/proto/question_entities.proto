@@ -358,6 +358,7 @@ message DraftAnswer {
     FillInTheGapAnswer answer_gap = 3;
     EssayAnswer answer_essay = 4;
   }
+  optional string undo_history = 5; // only for Essay
   string django_uuid = 100;
 }
 
