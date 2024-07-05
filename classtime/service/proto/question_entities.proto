@@ -158,7 +158,7 @@ message CategorizerSolution {
   CategorizerAnswer correct_answer = 1;
 }
 
-//TODO(https://app.asana.com/0/1203796373635132/1207549712623261/f): get rid of CategorizerMultiSolution? if it's the same as CategorizerSolution
+//TODO(https://app.asana.com/0/1203796373635132/1207715290593991/f): Use solution_categorizer_multiple on BE and remove old field
 message CategorizerMultiSolution {
   CategorizerAnswer correct_answer = 1;
 }
@@ -278,6 +278,7 @@ message Question {
   oneof solution {
     BooleanSolution solution_boolean = 20;
     CategorizerSolution solution_categorizer = 21;
+    CategorizerSolution solution_categorizer_multiple = 33;
     CategorizerMultiSolution solution_categorizer_multi = 22;
     HighlightTextSolution solution_highlight_text = 23;
     HotspotSolution solution_hotspot = 24;

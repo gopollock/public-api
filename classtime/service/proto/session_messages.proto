@@ -517,6 +517,7 @@ message CreateAnswerResponse {
   oneof solution {
     classtime.service.question.api.BooleanSolution solution_boolean = 10;
     classtime.service.question.api.CategorizerSolution solution_categorizer = 11;
+    classtime.service.question.api.CategorizerSolution solution_categorizer_multiple = 21;
     classtime.service.question.api.CategorizerMultiSolution solution_categorizer_multi = 12;
     classtime.service.question.api.HighlightTextSolution solution_highlight_text = 13;
     classtime.service.question.api.HotspotSolution solution_hotspot = 14;
