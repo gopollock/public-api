@@ -103,7 +103,7 @@ enum ChatOverride {
 
 // Entity nested in Session
 message SessionParticipant {
-  reserved 1, 16;
+  reserved 1, 16, 19;
   string name = 2;
   repeated classtime.entity.EntityRef visited_questions = 3; // References SessionQuestion
   google.protobuf.Timestamp started_at = 4;
@@ -122,7 +122,6 @@ message SessionParticipant {
   RequestStatus relogin_request_status = 15;
   bool is_chat_allowed = 17;
   classtime.service.texttospeech.TextToSpeechConfig text_to_speech_config = 18;
-  bool is_session_done = 19;
   bool is_unsubmit_session_requested = 20;
   RequestStatus rejoin_request_status = 21;
   // (-- api-linter: core::0142::time-field-type=disabled --)

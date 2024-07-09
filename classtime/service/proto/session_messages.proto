@@ -23,7 +23,7 @@ message SessionInfo {
     int32 fully_wrong_answers_count = 5;
   }
 
-  reserved 4, 7, 14, 15;
+  reserved 4, 7, 14, 15, 18;
 
   // Extracted from Session entity:
   string code = 1;
@@ -47,7 +47,6 @@ message SessionInfo {
   google.protobuf.Duration time_until_open = 13;
 
   // Derived from calling Participant, only set for students:
-  bool is_session_done = 18;
   google.protobuf.Timestamp handed_in_at = 19;
 
   // Derived from calling Participant's Answers, only set for students:
@@ -56,7 +55,7 @@ message SessionInfo {
 }
 
 message SessionParticipantInfo {
-  bool is_session_done = 1;
+  reserved 1;
   google.protobuf.Timestamp handed_in_at = 2;
   string sid = 3;
   string participant_id = 4;
@@ -260,7 +259,7 @@ message AnswerSummary {
   string id = 1;
   string participant_id = 2;
   string question_id = 4;
-  // Plain text content for text question answers. Cut off to a certain number of characters.
+  // Plain text content for text or essay question answers. Cut off to a certain number of characters.
   string content = 3;
   // Note: 'explanation' field in Evaluation is empty
   classtime.service.question.api.Evaluation evaluation = 11;
@@ -630,6 +629,7 @@ message PusherAnswerAdded {
   string answer_id = 1;
   string participant_id = 2;
   classtime.service.question.api.Answer answer = 3;
+  AnswerSummary answer_summary = 4;
 }
 
 message PusherAnswerEmbeddingAdded {
