@@ -147,7 +147,7 @@ message SessionParticipantUpdate {
   optional string name = 2;
   optional bool is_archived = 3;
   optional bool is_chat_enabled = 4;
-  optional classtime.service.texttospeech.TextToSpeechConfig text_to_speech_config = 6;
+  classtime.service.texttospeech.TextToSpeechConfig text_to_speech_config = 6;
   optional RequestStatus relogin_request_status = 7;
   optional bool is_chat_allowed = 8;
   optional bool is_session_done = 9;
@@ -673,5 +673,5 @@ message PusherQuestionsChanged {
 message PusherReflectionAnswerAdded {
   string question_id = 1;
   ReflectionQuestionAnswer value = 2;
-  optional ReflectionQuestionAnswer previous_value = 3;
+  ReflectionQuestionAnswer previous_value = 3;
 }
