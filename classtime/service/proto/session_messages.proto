@@ -23,7 +23,7 @@ message SessionInfo {
     int32 fully_wrong_answers_count = 5;
   }
 
-  reserved 4, 7, 14, 15, 18;
+  reserved 4, 7, 14, 15, 18, 20;
 
   // Extracted from Session entity:
   string code = 1;
@@ -38,9 +38,6 @@ message SessionInfo {
 
   // Derived from Participants, only set for teachers:
   int32 participants_count = 3;
-
-  // Derived from Questions, only set for students:
-  classtime.service.common.GradingPoint total_grading_points = 20;
 
   // Computed from opens_at/closed_at relative to server time when creating the response, only set for students:
   google.protobuf.Duration time_until_close = 12;
