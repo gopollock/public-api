@@ -627,6 +627,7 @@ message PusherAnswerAdded {
   string participant_id = 2;
   classtime.service.question.api.Answer answer = 3;
   AnswerSummary answer_summary = 4;
+  google.protobuf.Timestamp created_at = 5;
 }
 
 message PusherAnswerEmbeddingAdded {
