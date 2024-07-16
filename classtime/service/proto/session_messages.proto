@@ -33,6 +33,7 @@ message SessionInfo {
   classtime.entity.EntityRef owner_ref = 8;
   bool has_google_classroom_ref_for_invited_class = 9;
   repeated classtime.service.question.api.QuestionGroup question_groups = 10;
+  repeated string question_set_ids = 22;
   SessionSettings settings = 11;
   bool is_partial_grading = 17;
 
