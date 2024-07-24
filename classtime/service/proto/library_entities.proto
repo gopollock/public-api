@@ -22,6 +22,7 @@ message FolderInfo {
   google.protobuf.Timestamp modified_at = 9;
   string root_folder_id = 10;
   string icon_image = 11;
+  google.protobuf.Timestamp expires_at = 12;
 }
 
 enum QuestionSetPrivacy {
