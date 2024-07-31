@@ -18,15 +18,15 @@ option java_package = "classtime.service.session.api";
 message SessionSettings {
   reserved 19;
   enum EvaluationMode {
-    FullOrNoPoints = 0; // was: is_partial_grading = False
-    PartialPointsWithPenalty = 1; // was: partial_evaluation_mode = 'with-penalty'
-    PartialPointsWithoutPenalty = 2; //was: partial_evaluation_mode='without-penalty'
+    FULL_OR_NO_POINTS = 0; // was: is_partial_grading = False
+    PARTIAL_POINTS_WITH_PENALTY = 1; // was: partial_evaluation_mode = 'with-penalty'
+    PARTIAL_POINTS_WITHOUT_PENALTY = 2; //was: partial_evaluation_mode='without-penalty'
   }
 
   enum TimerStartMode {
-    None = 0;
-    OnLogin = 1;
-    Central = 2;
+    NONE = 0;
+    ON_LOGIN = 1;
+    CENTRAL = 2;
   }
 
   string title = 1;
@@ -82,6 +82,8 @@ message Session {
   string teacher_chat_id = 18;
 }
 
+// TODO(https://app.asana.com/0/1206655504022453/1207918188241831): Used in JSON communication through pusher.
+// (-- api-linter: core::0126::upper-snake-values=disabled --)
 enum SessionParticipantAuthProvider {
   Google = 0;
   Microsoft = 1;
@@ -95,6 +97,8 @@ enum RequestStatus {
   DENIED = 2;
 }
 
+// TODO(https://app.asana.com/0/1206655504022453/1207918188241831): Used in JSON communication through pusher.
+// (-- api-linter: core::0126::upper-snake-values=disabled --)
 enum ChatOverride {
   OverrideNone = 0;
   OverrideEnabled = 1;
@@ -137,16 +141,16 @@ message SessionParticipant {
 }
 
 enum ReflectionQuestionKind {
-  Emoji = 0;
-  YesNo = 1;
+  EMOJI = 0;
+  YES_NO = 1;
 }
 
 enum ReflectionQuestionAnswer {
-  Yes = 0;
-  No = 1;
-  Neutral = 2;
-  Upset = 3;
-  Happy = 4;
+  YES = 0;
+  NO = 1;
+  NEUTRAL = 2;
+  UPSET = 3;
+  HAPPY = 4;
 }
 
 // Entity nested under SessionParticipant

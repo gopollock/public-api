@@ -7,9 +7,13 @@ option java_outer_classname = "CommonRoleProto";
 option java_package = "classtime.service.common";
 
 enum Role {
-  Teacher = 0;
-  Student = 1;
-  Machine = 2;
-  Unknown = 3;
+  TEACHER = 0;
+  STUDENT = 1;
+  MACHINE = 2;
+  UNKNOWN = 3;
+  // TODO(https://app.asana.com/0/1206655504022453/1207903505547205/f):
+  // Auth tokens managers cannot handle UPPER_SNAKE_CASE and PascalCase together.
+  // Both django and kotlin implementation require adjustments. Otherwise there will be issues with admins tokens.
+  // (-- api-linter: core::0126::upper-snake-values=disabled --)
   SchoolAdmin = 4;
 }

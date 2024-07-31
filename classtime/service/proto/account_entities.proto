@@ -11,24 +11,24 @@ option java_outer_classname = "AccountEntitiesProto";
 option java_package = "classtime.service.account";
 
 enum AuthenticationProvider {
-  Password = 0;
-  Google = 1;
-  Facebook = 2;
-  Microsoft = 3;
-  Clever = 4;
-  Sanis = 5; // IDM Niedersachsen
-  Teams = 6;
+  PASSWORD = 0;
+  GOOGLE = 1;
+  FACEBOOK = 2;
+  MICROSOFT = 3;
+  CLEVER = 4;
+  SANIS = 5; // IDM Niedersachsen
+  TEAMS = 6;
   NONE = 7; // Used only in case of not authorized user at all
-  Baselland = 8;
-  AdminTool = 9;
-  Nickname = 10; // Temporary authorized user without an email verification
-  EmailVerification = 11;
-  IServ = 12;
-  WebUntis = 13;
-  Edulog = 14;
-  External = 15;
-  ExamCenter = 16;
-  Fobizz = 17;
+  BASELLAND = 8;
+  ADMIN_TOOL = 9;
+  NICKNAME = 10; // Temporary authorized user without an email verification
+  EMAIL_VERIFICATION = 11;
+  I_SERV = 12;
+  WEB_UNTIS = 13;
+  EDULOG = 14;
+  EXTERNAL = 15;
+  EXAM_CENTER = 16;
+  FOBIZZ = 17;
 }
 
 message UserProfile {

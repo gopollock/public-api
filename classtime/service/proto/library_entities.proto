@@ -26,11 +26,11 @@ message FolderInfo {
 }
 
 enum QuestionSetPrivacy {
-  Default = 0;
-  Protected = 1;
-  Moderation = 2;
-  Approved = 3;
-  Rejected = 4;
+  DEFAULT = 0;
+  PROTECTED = 1;
+  MODERATION = 2;
+  APPROVED = 3;
+  REJECTED = 4;
 }
 
 message QuestionInfo {
@@ -67,7 +67,7 @@ message QuestionSetInfo {
 }
 
 enum EntityStatus {
-  Alive = 0;
-  Archived = 1;
-  Deleted = 2;
+  ALIVE = 0;
+  ARCHIVED = 1;
+  DELETED = 2;
 }

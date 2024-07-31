@@ -100,10 +100,10 @@ message ActivatePurchaseResponse {
 }
 
 enum Provider {
-  Classtime = 0;
-  VerlagsAnstaltHandwerken = 1;
-  Distrinova = 2;
-  Careum = 3;
+  CLASSTIME = 0;
+  VERLAGS_ANSTALT_HANDWERKEN = 1;
+  DISTRINOVA = 2;
+  CAREUM = 3;
 }
 
 // An Activation stores the activation of a Purchase for a single Account.
