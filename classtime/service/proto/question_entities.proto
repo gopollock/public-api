@@ -11,17 +11,17 @@ option java_outer_classname = "QuestionEntitiesProto";
 option java_package = "classtime.service.question.api";
 
 enum QuestionKind {
-  Boolean = 0;
-  Categorizer = 1;
-  CategorizerMultiple = 2;
-  Cloze = 3;
-  Gap = 4;
-  Hotspot = 5;
-  MultipleChoice = 6;
-  SingleChoice = 7;
-  Sorter = 8;
-  Text = 9;
-  Essay = 10;
+  BOOLEAN = 0;
+  CATEGORIZER = 1;
+  CATEGORIZER_MULTIPLE = 2;
+  CLOZE = 3;
+  GAP = 4;
+  HOTSPOT = 5;
+  MULTIPLE_CHOICE = 6;
+  SINGLE_CHOICE = 7;
+  SORTER = 8;
+  TEXT = 9;
+  ESSAY = 10;
 }
 
 message QuestionImage {
@@ -116,8 +116,8 @@ message TextQuestion {}
 
 message FillInTheGapQuestion {
   enum Type {
-    Blank = 0;
-    Choices = 1;
+    BLANK = 0;
+    CHOICES = 1;
   }
   message Choice {
     string content = 1;
@@ -188,7 +188,7 @@ message HotspotAnswer {
 
 message HotspotSolution {
   enum ShapeKind {
-    Polygon = 0;
+    POLYGON = 0;
   }
   message Shape {
     ShapeKind kind = 1;
@@ -302,9 +302,9 @@ message HotspotPointEvaluation {
 }
 
 enum Correctness {
-  Correct = 0;
-  PartiallyCorrect = 1;
-  Wrong = 2;
+  CORRECT = 0;
+  PARTIALLY_CORRECT = 1;
+  WRONG = 2;
 }
 
 message Evaluation {

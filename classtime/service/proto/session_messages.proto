@@ -96,12 +96,12 @@ message CreateSessionRequest {
 
 message ChangeSessionStateRequest {
   enum State {
-    Archived = 0;
-    Restored = 1;
-    Deleted = 2;
-    Ended = 3;
-    Running = 4;
-    Paused = 5;
+    ARCHIVED = 0;
+    RESTORED = 1;
+    DELETED = 2;
+    ENDED = 3;
+    RUNNING = 4;
+    PAUSED = 5;
   }
   string session_code = 1;
   State state = 2;
@@ -184,12 +184,12 @@ message InviteClassResponse {}
 
 message ExportSessionRequest {
   enum ReportType {
-    SessionInsights = 0; // SessionExportInsightsView
-    ParticipantInsights = 1; // SessionExportParticipantInsightsView, SessionPdfExportView for student
-    ParticipantsInsightsZip = 2; // SessionExportParticipantsInsightsZipView
-    ParticipantsInsightsPdf = 3; // SessionExportParticipantsInsightsPDFView
-    InsightsXlsx = 4; // SessionExportXlsxView
-    EssayInsights = 5; // EssayExportView
+    SESSION_INSIGHTS = 0; // SessionExportInsightsView
+    PARTICIPANT_INSIGHTS = 1; // SessionExportParticipantInsightsView, SessionPdfExportView for student
+    PARTICIPANTS_INSIGHTS_ZIP = 2; // SessionExportParticipantsInsightsZipView
+    PARTICIPANTS_INSIGHTS_PDF = 3; // SessionExportParticipantsInsightsPDFView
+    INSIGHTS_XLSX = 4; // SessionExportXlsxView
+    ESSAY_INSIGHTS = 5; // EssayExportView
   }
 
   string session_code = 1;

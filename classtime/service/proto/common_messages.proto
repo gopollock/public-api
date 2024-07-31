@@ -8,20 +8,20 @@ option java_package = "classtime.service.common";
 
 enum FeedbackMode {
   reserved 2;
-  Manual = 0;
-  PerQuestion = 1;
+  MANUAL = 0;
+  PER_QUESTION = 1;
 }
 
 enum GameStatus {
-  None = 0;
-  Setup = 1;
-  Started = 2;
-  Finished = 3;
+  NONE = 0;
+  SETUP = 1;
+  STARTED = 2;
+  FINISHED = 3;
 }
 
 enum SessionMode {
-  Flexible = 0;
-  RoundBased = 1;
+  FLEXIBLE = 0;
+  ROUND_BASED = 1;
 }
 
 enum PusherCluster {
