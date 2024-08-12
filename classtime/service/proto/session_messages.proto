@@ -261,6 +261,9 @@ message AnswerSummary {
   string content = 3;
   // Note: 'explanation' field in Evaluation is empty
   classtime.service.question.api.Evaluation evaluation = 11;
+  // Note: The 'bonus' and 'created_at' fields are set only for the new SessionService implementation
+  classtime.service.common.GradingPoint bonus = 12;
+  google.protobuf.Timestamp created_at = 13;
 }
 
 message GetAnswersSummaryResponse {
