@@ -61,6 +61,7 @@ message SebConfig {
   repeated UrlFilter url_filters = 5;
   bool is_manual = 6;
   bool is_enabled = 7;
+  bool seb_file_has_been_downloaded = 8;
 }
 
 message FeatureFlag {
