@@ -182,4 +182,5 @@ message SessionLabel {
 message AnswerEmbeddingUsage {
   classtime.entity.EntityRef account_ref = 1;
   int32 count = 2;
+  google.protobuf.Timestamp last_reset = 3;
 }
