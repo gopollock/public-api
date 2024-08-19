@@ -91,12 +91,18 @@ message GetPurchaseDetailsResponse {
   repeated PurchaseActivation activations = 5;
 }
 
+message ActivatePurchaseUpdate {
+  string product_title = 1;
+  google.protobuf.Timestamp expires_at = 2;
+}
+
 message ActivatePurchaseRequest {
   string activation_code = 1;
 }
 
 message ActivatePurchaseResponse {
   repeated Subscription subscriptions = 1;
+  repeated ActivatePurchaseUpdate updates = 2;
 }
 
 enum Provider {
