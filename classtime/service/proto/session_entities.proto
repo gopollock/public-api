@@ -80,6 +80,7 @@ message Session {
   repeated classtime.entity.EntityRef reflection_questions = 16; // References ReflectionQuestion to order them.
   google.protobuf.Timestamp created = 17; // TODO Remove when creation and modification timestamps are implemented
   string teacher_chat_id = 18;
+  classtime.entity.EntityRef question_bank_ref = 19;
 }
 
 // TODO(https://app.asana.com/0/1206655504022453/1207918188241831): Used in JSON communication through pusher.
