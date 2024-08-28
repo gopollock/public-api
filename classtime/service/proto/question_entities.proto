@@ -395,7 +395,13 @@ message ManualEvaluation {
     classtime.service.common.GradingPoint manual_grading_points = 2;
   }
 
+  // TODO (https://app.asana.com/0/1203796373635132/1208147655534536/f): remove
   bytes owner_question_content_hash = 3;
+
+  oneof key {
+    bytes owner_question_content_hash_key = 10; // used as key for sessions with owner
+    bytes session_question_content_hash_key = 11; // used as key for solo sessions without owner
+  }
   classtime.entity.EntityRef owner_account_id_ref = 4; // owner of the session where ManualEvaluation was created
   // Hash of the canonical answer string
   // - for full answers: 'full:$canonical_answer_string'
