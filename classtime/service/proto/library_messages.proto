@@ -180,3 +180,11 @@ message GetPlaylistDetailsResponse {
 
   repeated PlaylistDetailsEntry playlist_details = 1;
 }
+
+message GetFolderQuestionSetsRequest {
+  string folder_id = 1;
+}
+
+message GetFolderQuestionSetsResponse {
+  repeated QuestionSetInfo question_sets = 1;
+}
