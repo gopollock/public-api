@@ -103,6 +103,7 @@ message ActivatePurchaseRequest {
 message ActivatePurchaseResponse {
   repeated Subscription subscriptions = 1;
   repeated ActivatePurchaseUpdate updates = 2;
+  bool is_new_activation = 3;
 }
 
 enum Provider {
