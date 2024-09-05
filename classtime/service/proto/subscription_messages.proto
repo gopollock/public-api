@@ -94,6 +94,7 @@ message GetPurchaseDetailsResponse {
 message ActivatePurchaseUpdate {
   string product_title = 1;
   google.protobuf.Timestamp expires_at = 2;
+  bool is_renewal = 3;
 }
 
 message ActivatePurchaseRequest {
