@@ -70,6 +70,7 @@ message QuestionSetInfo {
   QuestionSetPrivacy privacy = 14;
   repeated QuestionInfo questions = 15;
   classtime.entity.EntityRef entity_store_session_ref = 16;
+  classtime.entity.EntityRef question_bank_ref = 17;
 }
 
 enum EntityStatus {
