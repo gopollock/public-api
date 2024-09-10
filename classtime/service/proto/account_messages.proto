@@ -274,17 +274,6 @@ message CreateExternalAccountResponse {
   string account_id = 1;
 }
 
-message CreateTestAccountRequest {
-  string email = 1;
-  classtime.service.common.Role role = 2;
-  UserProfile user_profile = 3;
-}
-
-message CreateTestAccountResponse {
-  string token = 1;
-  string account_id = 2;
-}
-
 message GetAccountIdByEmailRequest {
   string email = 1;
   classtime.service.common.Role role = 2;
