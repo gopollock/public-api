@@ -182,19 +182,19 @@ message HotspotPoint {
   double y = 4;
 }
 
+enum ShapeKind {
+  POLYGON = 0;
+}
+message Shape {
+  ShapeKind kind = 1;
+  repeated HotspotPoint points = 2;
+}
+
 message HotspotAnswer {
   repeated HotspotPoint points = 1;
 }
 
 message HotspotSolution {
-  enum ShapeKind {
-    POLYGON = 0;
-  }
-  message Shape {
-    ShapeKind kind = 1;
-    repeated HotspotPoint points = 2;
-  }
-
   repeated Shape shapes = 1;
 }
 
