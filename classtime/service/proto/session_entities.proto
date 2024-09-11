@@ -161,11 +161,19 @@ message ReflectionAnswer {
 }
 
 message ReflectionQuestion {
+  // Temp message, for migration purpose only, to be removed after migration
+  message ReflectionAnswerData {
+    string participant_django_id = 1;
+    google.protobuf.Timestamp created_at = 2;
+    ReflectionQuestionAnswer value = 3;
+  }
+
   reserved 1;
   // TODO(https://app.asana.com/0/1203796373635132/1207898854551222/f): remove title after fully migrated to the new API
   string title = 2;
   ReflectionQuestionKind kind = 3;
   string message_id = 4;
+  repeated ReflectionAnswerData reflection_answers = 5;
 }
 
 message InvitedClass {
