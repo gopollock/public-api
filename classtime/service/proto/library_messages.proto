@@ -4,6 +4,7 @@ package classtime.service.library.api;
 
 import "common_messages.proto";
 import "entity_store_messages.proto";
+import "google/protobuf/struct.proto";
 import "library_entities.proto";
 import "question_entities.proto";
 
@@ -187,4 +188,131 @@ message GetFolderQuestionSetsRequest {
 
 message GetFolderQuestionSetsResponse {
   repeated QuestionSetInfo question_sets = 1;
+}
+
+message LibraryChoice {
+  bool is_correct = 1;
+  int32 order = 2;
+  google.protobuf.Struct content_draftjs = 3;
+  string image = 4;
+  string uuid = 5;
+}
+
+// Both Single and Multiple
+message ChoiceLibraryQuestion {
+  repeated LibraryChoice choices = 1;
+}
+
+message LibraryCategorizerCategory {
+  google.protobuf.Struct content_draftjs = 1;
+  string uuid = 2;
+}
+
+message LibraryCategorizerItem {
+  google.protobuf.Struct content_draftjs = 1;
+  string uuid = 2;
+  repeated string category_uuids = 3;
+}
+
+// Both Categorizer and CategorizerMultiple
+message CategorizerLibraryQuestion {
+  repeated LibraryCategorizerItem items = 1;
+  repeated LibraryCategorizerCategory categories = 2;
+}
+
+message BooleanLibraryQuestion {
+  bool is_true_correct = 1;
+}
+message TextLibraryQuestion {}
+
+message EssayLibraryQuestion {}
+
+message SorterLibraryQuestion {
+  repeated LibraryChoice choices = 1;
+}
+
+message LibraryClozeChoice {
+  bool is_correct = 1;
+  string content = 2;
+}
+
+message LibraryCloze {
+  repeated LibraryClozeChoice cloze_choice = 1;
+  /* referenced in [HighlightTextLibraryQuestion.template_content] */
+  string template_id = 2;
+}
+
+message HighlightTextLibraryQuestion {
+  /* contains plain context text with template ids reference to clozes (e.g. "[cloze_id_1] other plain text") */
+  string template_content = 1;
+  repeated LibraryCloze clozes = 2;
+}
+
+message HotspotLibraryQuestion {
+  int32 width = 1;
+  int32 height = 2;
+  string image = 3;
+  repeated classtime.service.question.api.Shape shapes = 4;
+  bool require_all = 5;
+}
+
+message LibraryGapChoice {
+  string content = 1;
+  int32 index = 2;
+  bool is_correct = 3;
+  string parent_gap_template_id = 4;
+}
+
+message LibraryChoicesGap {
+  repeated LibraryGapChoice choices = 1;
+}
+
+message LibraryBlankGap {
+  string solution = 1;
+}
+
+message LibraryGap {
+  /* referenced in [FillInTheGapLibraryQuestion.gap_template_content] */
+  string gap_template_id = 1;
+  oneof gap {
+    LibraryBlankGap gap_blank = 2;
+    LibraryChoicesGap gap_choices = 3;
+  }
+}
+
+message FillInTheGapLibraryQuestion {
+  /* contains plain context text with template ids reference to gaps (e.g. "[gap_id_1] other plain text") */
+  string gap_template_content = 1;
+  repeated LibraryGap gaps = 2;
+}
+
+message CreateQuestionRequest {
+  string question_set_id = 1;
+  string title = 2;
+  float weight = 3;
+  google.protobuf.Struct description_draftjs = 4;
+  google.protobuf.Struct explanation_draftjs = 5;
+  string image = 6;
+  string audio = 7;
+  string video = 8;
+  repeated string tag_ids = 9;
+  bool is_poll = 10;
+
+  oneof question {
+    ChoiceLibraryQuestion question_single_choice = 11;
+    ChoiceLibraryQuestion question_multiple_choice = 12;
+    BooleanLibraryQuestion question_boolean = 13;
+    TextLibraryQuestion question_text = 14;
+    EssayLibraryQuestion question_essay = 15;
+    SorterLibraryQuestion question_sorter = 16;
+    CategorizerLibraryQuestion question_categorizer = 17;
+    CategorizerLibraryQuestion question_categorizer_multi = 18;
+    HighlightTextLibraryQuestion question_highlight_text = 19;
+    HotspotLibraryQuestion question_hotspot = 20;
+    FillInTheGapLibraryQuestion question_gap = 21;
+  }
+}
+
+message CreateQuestionResponse {
+  string id = 1;
 }
