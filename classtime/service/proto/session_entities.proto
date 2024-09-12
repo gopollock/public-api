@@ -139,6 +139,8 @@ message SessionParticipant {
   bool is_screen_locked = 27;
   bool is_verified = 28;
   bool is_restarted = 29;
+  // Only for migration purpose.
+  google.protobuf.Timestamp django_created_at = 30;
 }
 
 enum ReflectionQuestionKind {
