@@ -290,3 +290,24 @@ message CreateAccountRequest {
 message CreateAccountResponse {
   string account_id = 1;
 }
+
+message GetOrCreateAccountsRequest {
+  message AccountDetails {
+    string email = 1;
+    classtime.service.common.Role role = 2;
+    AuthenticationProvider provider = 3;
+    string subject = 4;
+  }
+
+  repeated AccountDetails accounts_details = 1;
+}
+
+message GetOrCreateAccountsResponse {
+  message AccountInfo {
+    string account_id = 1;
+    AccountProfile account_profile = 2;
+  }
+
+  // Map of account email to AccountInfo
+  map<string, AccountInfo> account_infos = 1;
+}
