@@ -359,8 +359,9 @@ message DraftAnswer {
     FillInTheGapAnswer answer_gap = 3;
     EssayAnswer answer_essay = 4;
   }
-  string undo_history = 5; // only for Essay
+  string undo_history = 5; // Only for Essay.
   string django_uuid = 100;
+  google.protobuf.Timestamp django_created_at = 101; // Only for migration purpose.
 }
 
 message QuestionGroup {
