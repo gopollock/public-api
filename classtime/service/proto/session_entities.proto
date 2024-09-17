@@ -178,6 +178,7 @@ message ReflectionQuestion {
   ReflectionQuestionKind kind = 3;
   string message_id = 4;
   repeated ReflectionAnswerData reflection_answers = 5;
+  int32 order = 100; // Temporary field for migration purpose.
 }
 
 message InvitedClass {
