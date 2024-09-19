@@ -389,7 +389,7 @@ message AnswerEmbedding {
 }
 
 message ManualEvaluation {
-  reserved 1, 2;
+  reserved 1, 2, 10;
 
   message Evaluation {
     bool is_correct = 1;
@@ -399,9 +399,6 @@ message ManualEvaluation {
   oneof key {
     bytes owner_question_content_hash = 3; // used as key for sessions with owner
     bytes session_question_content_hash = 11; // used as key for solo sessions without owner
-
-    // ONLY USE IN CONVERSION COMMAND:
-    bytes owner_question_content_hash_remove_me = 10;
   }
   classtime.entity.EntityRef owner_account_id_ref = 4; // owner of the session where ManualEvaluation was created
   // Hash of the canonical answer string
