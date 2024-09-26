@@ -162,6 +162,8 @@ enum ReflectionQuestionAnswer {
 message ReflectionAnswer {
   classtime.entity.EntityRef question_ref = 1;
   ReflectionQuestionAnswer value = 2;
+  // Temp field, for migration purpose only, to be removed after migration
+  google.protobuf.Timestamp django_created_at = 3;
 }
 
 message ReflectionQuestion {
