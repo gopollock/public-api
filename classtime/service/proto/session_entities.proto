@@ -58,6 +58,9 @@ message SessionSettings {
   google.protobuf.Timestamp timer_started_at = 28;
   google.protobuf.Timestamp paused_at = 29;
   google.protobuf.Duration paused_seconds = 30;
+
+  // Temp field, for migration purpose only, to be removed after migration
+  optional bool is_frozen = 31;
 }
 
 // Root Entity
