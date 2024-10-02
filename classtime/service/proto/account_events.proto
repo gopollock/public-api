@@ -3,6 +3,7 @@ syntax = "proto3";
 package classtime.service.account.event;
 
 import "account_entities.proto";
+import "common_messages.proto";
 
 option java_multiple_files = true;
 option java_outer_classname = "AccountEventsProto";
@@ -10,11 +11,14 @@ option java_package = "classtime.service.account.event";
 
 message SignupEvent {
   string referral_id = 1;
-  string acquisition_channel = 2;
+  // Use acquisition_channel field instead.
+  // We will keep the legacy one in case we need to read all [SignupEvent] entities in the future.
+  string acquisition_channel_legacy = 2 [deprecated = true];
   AuthenticationProvider provider = 3;
   string email = 4;
   string referral_info = 5;
   repeated string organizations = 6;
+  classtime.service.common.AcquisitionChannel acquisition_channel = 7;
 }
 
 message LoginEvent {
