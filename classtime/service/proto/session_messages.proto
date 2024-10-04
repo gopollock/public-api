@@ -23,7 +23,7 @@ message SessionInfo {
     int32 fully_wrong_answers_count = 5;
   }
 
-  reserved 4, 7, 14, 15, 18, 20;
+  reserved 4, 7, 10, 14, 15, 18, 20;
 
   // Extracted from Session entity:
   string code = 1;
@@ -32,7 +32,6 @@ message SessionInfo {
   classtime.entity.EntityRef invited_class_ref = 6;
   classtime.entity.EntityRef owner_ref = 8;
   bool has_google_classroom_ref_for_invited_class = 9;
-  repeated classtime.service.question.api.QuestionGroup question_groups = 10;
   repeated string question_set_ids = 22;
   SessionSettings settings = 11;
   bool is_partial_grading = 17;
