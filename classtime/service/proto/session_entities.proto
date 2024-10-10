@@ -60,7 +60,7 @@ message SessionSettings {
   google.protobuf.Duration paused_seconds = 30;
 
   // Temp field, for migration purpose only, to be removed after migration
-  optional bool is_frozen = 31;
+  bool is_frozen = 31;
 }
 
 // Root Entity
