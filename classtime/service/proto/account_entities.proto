@@ -29,6 +29,7 @@ enum AuthenticationProvider {
   EXTERNAL = 15;
   EXAM_CENTER = 16;
   FOBIZZ = 17;
+  CLASSLINK = 18;
 }
 
 message UserProfile {
