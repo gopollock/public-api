@@ -65,6 +65,7 @@ message SessionSettings {
 
 // Root Entity
 message Session {
+  reserved 13;
   classtime.entity.EntityRef owner_ref = 1; // UUID reference to Django Model 'Owner'
   string code = 2;
   classtime.entity.EntityRef label_ref = 3; // Replacement for SessionGroup
@@ -77,7 +78,6 @@ message Session {
   bool is_solo = 10;
   bool is_anonymous = 11;
   bool is_auto_text_grading_enabled = 12;
-  google.protobuf.Timestamp conducted = 13; // TODO How is this different from creation timestamp?
   classtime.service.common.PusherCluster pusher_cluster = 14;
   classtime.service.common.GameStatus game_status = 15; // Move to settings?
   repeated classtime.entity.EntityRef reflection_questions = 16; // References ReflectionQuestion to order them.
