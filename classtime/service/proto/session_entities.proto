@@ -84,6 +84,9 @@ message Session {
   google.protobuf.Timestamp created = 17; // TODO Remove when creation and modification timestamps are implemented
   string teacher_chat_id = 18;
   classtime.entity.EntityRef question_bank_ref = 19;
+  // The highest threshold of joined session participants reached.
+  // This is used to send session 'activation' events to mixpanel for a specific set of thresholds.
+  int32 activated_count = 20;
 }
 
 // TODO(https://app.asana.com/0/1206655504022453/1207918188241831): Used in JSON communication through pusher.
@@ -142,6 +145,9 @@ message SessionParticipant {
   bool is_screen_locked = 27;
   bool is_verified = 28;
   bool is_restarted = 29;
+  // The time when the participant has joined the session for the first time.
+  // Unset for participants that were invited to a session but have not joined yet.
+  google.protobuf.Timestamp joined_at = 31;
 
   // Temp fields only for migration purpose.
   google.protobuf.Timestamp django_created_at = 30;
