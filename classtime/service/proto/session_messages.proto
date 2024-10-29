@@ -678,7 +678,5 @@ message PusherQuestionsChanged {
 }
 
 message PusherReflectionAnswerAdded {
-  string question_id = 1;
-  ReflectionQuestionAnswer value = 2;
-  ReflectionQuestionAnswer previous_value = 3;
+  reserved 1, 2, 3;
 }
