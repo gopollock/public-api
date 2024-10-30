@@ -23,6 +23,7 @@ message ClassInfo {
   int32 assigned_sessions_count = 10;
   repeated ClassStudentInfo students = 11;
   string google_classroom_ref = 12;
+  string owner_language = 13;
 }
 
 message ClassStudentInfo {
