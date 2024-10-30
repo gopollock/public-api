@@ -158,11 +158,6 @@ message CategorizerSolution {
   CategorizerAnswer correct_answer = 1;
 }
 
-//TODO(https://app.asana.com/0/1203796373635132/1207715290593991/f): Use solution_categorizer_multiple on BE and remove old field
-message CategorizerMultiSolution {
-  CategorizerAnswer correct_answer = 1;
-}
-
 message HighlightTextAnswer {
   message SelectedChoices {
     repeated int32 choice_indices = 1;
@@ -258,7 +253,7 @@ message EssaySolution {}
 
 // Entity nested in Session
 message Question {
-  reserved 3;
+  reserved 3, 22;
   QuestionInfo question_info = 1;
   classtime.entity.EntityRef derived_from_question_ref = 2; // UUID reference to django model 'library.Question'
   string explanation_draftjs = 32;
@@ -279,7 +274,6 @@ message Question {
     BooleanSolution solution_boolean = 20;
     CategorizerSolution solution_categorizer = 21;
     CategorizerSolution solution_categorizer_multiple = 33;
-    CategorizerMultiSolution solution_categorizer_multi = 22;
     HighlightTextSolution solution_highlight_text = 23;
     HotspotSolution solution_hotspot = 24;
     MultipleChoiceSolution solution_multiple_choice = 25;
