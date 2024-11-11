@@ -315,6 +315,7 @@ message Evaluation {
 
 message PartialEvaluation {
   reserved 2;
+  // Key is the index of the gap (starting with "0").
   map<string, GapEvaluation> gap_evaluations = 1;
 }
 
