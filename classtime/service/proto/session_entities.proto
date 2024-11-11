@@ -190,6 +190,7 @@ message ReflectionQuestion {
   string message_id = 4;
   repeated ReflectionAnswerData reflection_answers = 5;
   int32 order = 100; // Temporary field for migration purpose.
+  string reflection_question_id = 101; // Temporary field for migration purpose.
 }
 
 message InvitedClass {
