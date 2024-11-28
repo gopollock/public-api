@@ -683,6 +683,10 @@ message PusherReflectionAnswerAdded {
   reserved 1, 2, 3;
 }
 
+message PusherCommentChange {
+  CommentInfo comment_info = 1;
+}
+
 message CommentInfo {
   string participant_id = 1;
   string comment_id = 2;
