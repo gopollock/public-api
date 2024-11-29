@@ -586,6 +586,30 @@ message GetClassStudentSuggestionsResponse {
   repeated ClassStudentSuggestion suggestions = 1;
 }
 
+message CommentInfo {
+  string participant_id = 1;
+  string comment_id = 2;
+  Comment comment = 3;
+}
+
+message CreateOrUpdateCommentsRequest {
+  string session_code = 1;
+  repeated CommentInfo comment_infos = 2;
+}
+
+message CreateOrUpdateCommentsResponse {
+  repeated string comment_ids = 1;
+}
+
+message GetCommentsRequest {
+  string session_code = 1;
+}
+message GetCommentsResponse {
+  repeated CommentInfo comment_infos = 1; // For students, it contains SAVED comments only.
+}
+
+// Pusher messages
+
 message PusherSessionParticipantStarted {
   string participant_id = 1;
   google.protobuf.Timestamp started = 2;
@@ -685,19 +709,4 @@ message PusherReflectionAnswerAdded {
 
 message PusherCommentChange {
   CommentInfo comment_info = 1;
-}
-
-message CommentInfo {
-  string participant_id = 1;
-  string comment_id = 2;
-  Comment comment = 3;
-}
-
-message CreateOrUpdateCommentsRequest {
-  string session_code = 1;
-  repeated CommentInfo comment_infos = 2;
-}
-
-message CreateOrUpdateCommentsResponse {
-  repeated string comment_ids = 1;
 }
