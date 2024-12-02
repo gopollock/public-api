@@ -604,9 +604,17 @@ message CreateOrUpdateCommentsResponse {
 message GetCommentsRequest {
   string session_code = 1;
 }
+
 message GetCommentsResponse {
   repeated CommentInfo comment_infos = 1; // For students, it contains SAVED comments only.
 }
+
+message DeleteCommentsRequest {
+  string session_code = 1;
+  repeated string comment_ids = 2;
+}
+
+message DeleteCommentsResponse {}
 
 // Pusher messages
 
