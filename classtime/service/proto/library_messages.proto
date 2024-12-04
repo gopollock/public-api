@@ -286,7 +286,7 @@ message FillInTheGapLibraryQuestion {
   repeated LibraryGap gaps = 2;
 }
 
-message CreateQuestionRequest {
+message CreateLegacyQuestionRequest {
   string question_set_id = 1;
   string title = 2;
   float weight = 3;
@@ -311,6 +311,11 @@ message CreateQuestionRequest {
     HotspotLibraryQuestion question_hotspot = 20;
     FillInTheGapLibraryQuestion question_gap = 21;
   }
+}
+
+message CreateLibraryQuestionRequest {
+  string question_set_id = 1;
+  classtime.service.question.api.Question question = 2;
 }
 
 message CreateQuestionResponse {
