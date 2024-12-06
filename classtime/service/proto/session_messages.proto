@@ -718,3 +718,7 @@ message PusherReflectionAnswerAdded {
 message PusherCommentChange {
   CommentInfo comment_info = 1;
 }
+
+message PusherCommentDeleted {
+  string comment_id = 1;
+}
