@@ -394,6 +394,7 @@ message GradeAnswersRequest {
   }
 
   string session_code = 1;
+  string question_id = 4;
   repeated GradedAnswer graded_answers = 2;
   repeated classtime.service.common.GradedGap graded_gaps = 3;
 }
