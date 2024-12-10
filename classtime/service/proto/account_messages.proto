@@ -297,6 +297,8 @@ message GetOrCreateAccountsRequest {
     classtime.service.common.Role role = 2;
     AuthenticationProvider provider = 3;
     string subject = 4;
+    string first_name = 5;
+    string last_name = 6;
   }
 
   repeated AccountDetails accounts_details = 1;
