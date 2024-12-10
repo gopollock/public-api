@@ -722,4 +722,6 @@ message PusherCommentChange {
 
 message PusherCommentDeleted {
   string comment_id = 1;
+  string participant_id = 2;
+  string question_id = 3;
 }
