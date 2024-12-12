@@ -14,19 +14,19 @@
     <div id="classtime-app"></div>
     
     <script defer="defer">      
-      // fill with your data
+      // Fill with your data:
       const questionSetId = '';
       const authToken = '';
       const existingQuestionId = '';
       const sessionCode = '';
       const onClose = (isSaved) => {
-        console.log('Was a question saved when the modal was closed?:', isSaved)
-      };
+        console.log('Was a question created or updated when the modal was closed?:', isSaved);
+      }
       const theme = {
         palette: {
           primary: {
-            main: '<your primary color>',
-            light: '<a lighter version of your primary color, mostly used for hover effects on primary buttons>',
+            main: '#a2c510', // Your primary color.
+            light: '#eefeab', // A lighter version of your primary color, mostly used for hover effects on primary buttons.
           },
         },
       };
@@ -36,13 +36,21 @@
         sessionDashboard: true,
       };
 
-      window.Classtime.init({authToken, rootHTMLElementId: "classtime-app", sessionCode, callbacks: { onClose }, theme, locale, componentsToRender});
-
-      button.addEventListener('click', () => {
-        window.Classtime.actions.openQuestionModalForNewQuestion(questionSetId)
-      });
-      button2.addEventListener('click', () => {
-        window.Classtime.actions.openQuestionModalForExistingQuestion(existingQuestionId, questionSetId)
+      window.Classtime.init({
+        authToken,
+        rootHTMLElementId: "classtime-app",
+        sessionCode,
+        callbacks: { onClose },
+        theme,
+        locale,
+        componentsToRender
+      }).then((classtimeApi) => {
+        button.addEventListener('click', () => {
+          classtimeApi.openQuestionModalForNewQuestion(questionSetId)
+        })
+        button2.addEventListener('click', () => {
+          classtimeApi.openQuestionModalForExistingQuestion(existingQuestionId, questionSetId)
+        })
       });
     </script>
   </body>
