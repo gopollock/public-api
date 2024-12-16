@@ -617,6 +617,14 @@ message DeleteCommentsRequest {
 
 message DeleteCommentsResponse {}
 
+message CreateCommentTemplateRequest {
+  CommentTemplate comment_template = 1;
+}
+
+message CreateCommentTemplateResponse {
+  string comment_template_id = 1;
+}
+
 // Pusher messages
 
 message PusherSessionParticipantStarted {
