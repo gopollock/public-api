@@ -623,6 +623,7 @@ message CreateCommentTemplateRequest {
 
 message CreateCommentTemplateResponse {
   string comment_template_id = 1;
+  CommentTemplate comment_template = 2;
 }
 
 // Pusher messages
