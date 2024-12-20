@@ -47,7 +47,7 @@ message QuestionInfo {
   string onboarding_id = 8;
   bool is_poll = 9;
   string license = 10;
-  repeated string tags = 11;
+  repeated string tags = 11; // tag names
   QuestionImage image = 12;
   QuestionAudio audio = 13;
 }
