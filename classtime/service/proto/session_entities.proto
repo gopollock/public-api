@@ -65,13 +65,12 @@ message SessionSettings {
 
 // Root Entity
 message Session {
-  reserved 13;
+  reserved 13, 6;
   classtime.entity.EntityRef owner_ref = 1; // UUID reference to Django Model 'Owner'
   string code = 2;
   classtime.entity.EntityRef label_ref = 3; // Replacement for SessionGroup
   SessionSettings settings = 4;
   repeated classtime.service.question.api.QuestionGroup question_groups = 5;
-  classtime.entity.EntityRef preview_question_set_ref = 6; // UUID reference to Django Model 'library.QuestionSet'
   classtime.entity.EntityRef invited_class_ref = 7; // ID reference to Django Model 'Class'
   string google_classroom_assignment_ref = 8;
   bool is_onboarding = 9;
