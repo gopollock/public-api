@@ -204,6 +204,15 @@ message ExportSessionResponse {
   bytes file = 1;
 }
 
+message GetEssayPreviewRequest {
+  string session_code = 1;
+  string question_id = 2;
+}
+
+message GetEssayPreviewResponse {
+  bytes file = 1;
+}
+
 message GetAnswersRequest {
   string session_code = 1;
   string question_id = 2;
