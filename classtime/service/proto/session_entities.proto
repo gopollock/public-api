@@ -13,6 +13,21 @@ option java_multiple_files = true;
 option java_outer_classname = "SessionEntitiesProto";
 option java_package = "classtime.service.session.api";
 
+enum ResultsSharingMode {
+  OFF = 0;
+  ON = 1;
+  PER_QUESTION = 2;
+}
+
+message ResultsSharingSettings {
+  ResultsSharingMode question_validation = 1;
+  ResultsSharingMode solution_with_explanation = 2;
+  ResultsSharingMode answer_comment = 3;
+  ResultsSharingMode total_score = 4;
+  ResultsSharingMode session_comment = 5;
+  ResultsSharingMode pdf_export = 6;
+}
+
 // (-- api-linter: core::0142::time-field-type=disabled
 //     We need to do this because timer and paused_seconds are not timestamps. --)
 message SessionSettings {
@@ -61,6 +76,8 @@ message SessionSettings {
 
   // Temp field, for migration purpose only, to be removed after migration
   bool is_frozen = 31;
+
+  ResultsSharingSettings results_sharing_settings = 32;
 }
 
 // Root Entity
