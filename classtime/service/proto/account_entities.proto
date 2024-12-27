@@ -71,6 +71,7 @@ message Account {
   classtime.service.common.Role role = 9;
   string locale = 10;
   repeated AccountMerge merge_history = 11;
+  string country_code = 12;
 }
 
 message AccountExtensionState {
