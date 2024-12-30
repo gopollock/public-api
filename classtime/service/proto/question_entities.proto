@@ -325,6 +325,7 @@ message Answer {
   classtime.entity.EntityRef question = 1;
   google.protobuf.Timestamp created_at = 3;
   classtime.service.common.GradingPoint bonus = 6;
+  classtime.entity.EntityRef manual_evaluation_with_embedding = 7;
   oneof evaluation {
     PartialEvaluation partial_evaluation = 4;
     Evaluation full_evaluation = 5;
