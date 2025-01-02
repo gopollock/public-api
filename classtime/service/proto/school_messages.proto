@@ -19,3 +19,15 @@ message GetSchoolAssociatedAccountsRequest {
 message GetSchoolAssociatedAccountsResponse {
   repeated string account_ids = 1;
 }
+
+message GetTeacherDataRealmRequest {
+  string account_id = 1;
+}
+
+message GetTeacherDataRealmResponse {
+  enum DataRealm {
+    EU = 0;
+    US = 1;
+  }
+  DataRealm data_realm = 1;
+}
