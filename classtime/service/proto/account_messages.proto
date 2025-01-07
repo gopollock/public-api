@@ -260,11 +260,11 @@ message GetAccountProfilesResponse {
 }
 
 message CreateExternalAccountRequest {
+  reserved 4;
   classtime.service.common.Role role = 1;
   UserProfile user_profile = 2;
   // Unique identifier for the user in the given provider.
   string subject = 3;
-  string locale = 4;
   // This must only be provided for internal Classtime request
   string organisation = 5;
   string email = 6;

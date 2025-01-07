@@ -63,13 +63,12 @@ message AccountMerge {
 }
 
 message Account {
-  reserved 5, 6, 8;
+  reserved 5, 6, 8, 10;
   UserProfile user_profile = 1;
   int32 primary_authentication_method_id = 2;
   repeated AuthenticationMethod authentication_methods = 4;
   google.protobuf.Timestamp blocked_at = 7;
   classtime.service.common.Role role = 9;
-  string locale = 10;
   repeated AccountMerge merge_history = 11;
   string country_code = 12;
 }
