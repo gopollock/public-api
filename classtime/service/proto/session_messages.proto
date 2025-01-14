@@ -640,6 +640,13 @@ message CreateCommentTemplateResponse {
   CommentTemplate comment_template = 2;
 }
 
+message GetCommentTemplatesRequest {}
+
+message GetCommentTemplatesResponse {
+  // CommentTemplateId to CommentTemplate
+  map<string, CommentTemplate> comment_templates = 1;
+}
+
 // Pusher messages
 
 message PusherSessionParticipantStarted {
