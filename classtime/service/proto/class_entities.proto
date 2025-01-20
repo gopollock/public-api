@@ -10,6 +10,8 @@ option java_outer_classname = "ClassEntitiesProto";
 option java_package = "classtime.service.classes.api";
 
 message ClassInfo {
+  reserved 9;
+
   string code = 1;
   string id = 2;
   string title = 3;
@@ -18,8 +20,6 @@ message ClassInfo {
   int32 student_count = 6;
   classtime.entity.EntityRef owner_ref = 7;
   bool is_archived = 8;
-  // TODO (https://app.asana.com/0/1177833412654353/1207822643615067/f): remove
-  bool is_google_classroom = 9;
   int32 assigned_sessions_count = 10;
   repeated ClassStudentInfo students = 11;
   string google_classroom_ref = 12;
