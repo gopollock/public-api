@@ -31,3 +31,16 @@ message GetTeacherDataRealmResponse {
   }
   DataRealm data_realm = 1;
 }
+
+message GetOrCreateSchoolRequest {
+  /* School title */
+  string title = 1;
+}
+
+message GetOrCreateSchoolResponse {
+  /* Created school id */
+  string id = 1;
+
+  /* List of school teacher ids */
+  repeated string teachers = 2;
+}
