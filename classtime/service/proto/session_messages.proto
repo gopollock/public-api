@@ -119,6 +119,14 @@ message GetSessionsResponse {
   repeated SessionInfo sessions = 1;
 }
 
+message GetTeacherSessionIdsRequest {
+  string classtime_id = 1;
+}
+
+message GetTeacherSessionIdsResponse {
+  repeated string ids = 1;
+}
+
 message GetGameDataRequest {
   string session_code = 1;
 }
