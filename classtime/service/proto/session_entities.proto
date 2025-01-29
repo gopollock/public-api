@@ -83,7 +83,7 @@ message SessionSettings {
 // Root Entity
 message Session {
   reserved 13, 6;
-  classtime.entity.EntityRef owner_ref = 1; // UUID reference to Django Model 'Owner'
+  classtime.entity.EntityRef owner_ref = 1; // Reference to classtime_id in Django Model 'Teacher'
   string code = 2;
   classtime.entity.EntityRef label_ref = 3; // Replacement for SessionGroup
   SessionSettings settings = 4;
