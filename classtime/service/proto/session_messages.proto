@@ -656,6 +656,12 @@ message GetCommentTemplatesResponse {
   map<string, CommentTemplate> comment_templates = 1;
 }
 
+message DeleteCommentTemplateRequest {
+  string comment_template_id = 1;
+}
+
+message DeleteCommentTemplateResponse {}
+
 // Pusher messages
 
 message PusherSessionParticipantStarted {
