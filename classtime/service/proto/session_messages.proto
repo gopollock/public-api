@@ -19,6 +19,7 @@ message SessionInfo {
     int32 partially_correct_answers_count = 3;
     int32 fully_correct_answers_count = 4;
     int32 fully_wrong_answers_count = 5;
+    classtime.service.common.GradingPoint earned_points = 6;
 
     reserved 1, 2;
   }
@@ -52,6 +53,8 @@ message SessionInfo {
 
   bool is_solo = 23;
   bool is_anonymous = 24;
+
+  classtime.service.common.GradingPoint total_points = 25;
 }
 
 message SessionParticipantInfo {
