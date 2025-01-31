@@ -197,13 +197,12 @@ message InviteClassResponse {}
 
 message ExportSessionRequest {
   enum ReportType {
+    reserved 5;
     SESSION_INSIGHTS = 0; // SessionExportInsightsView
     PARTICIPANT_INSIGHTS = 1; // SessionExportParticipantInsightsView, SessionPdfExportView for student
     PARTICIPANTS_INSIGHTS_ZIP = 2; // SessionExportParticipantsInsightsZipView
     PARTICIPANTS_INSIGHTS_PDF = 3; // SessionExportParticipantsInsightsPDFView
     INSIGHTS_XLSX = 4; // SessionExportXlsxView
-    // TODO(https://app.asana.com/0/1203796373635132/1209233500017483/f): Get rid of ExportSessionRequest.ReportType.ESSAY_INSIGHTS
-    ESSAY_INSIGHTS = 5; // EssayExportView
   }
 
   string session_code = 1;
