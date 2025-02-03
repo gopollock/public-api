@@ -133,6 +133,7 @@ message CopyQuestionSetResponse {}
 
 message CopyQuestionRequest {
   string question_id = 1;
+  string target_question_set_id = 2;
 }
 
 message CopyQuestionResponse {
