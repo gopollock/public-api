@@ -78,6 +78,8 @@ message SessionSettings {
   bool is_frozen = 31;
 
   ResultsSharingSettings results_sharing_settings = 32;
+
+  bool is_session_info_hidden = 33;
 }
 
 // Root Entity
