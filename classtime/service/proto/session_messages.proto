@@ -77,6 +77,7 @@ message GetSessionDetailsResponse {
   google.protobuf.Duration time_since_timer_start = 6;
   google.protobuf.Duration time_until_session_close = 7;
   bool are_free_text_predictions_available = 8; // For teacher dashboard only
+  bool is_archived = 9;
 }
 
 message GetSessionInfoRequest {
