@@ -58,6 +58,14 @@ message CreateOrganizationClassResponse {
   string class_id = 1;
 }
 
+message GetCoTeachersRequest {
+  string class_id = 1;
+}
+
+message GetCoTeachersResponse {
+  repeated classtime.service.common.CollaboratorInfo collaborators = 1;
+}
+
 message UpdateCoTeachersRequest {
   string class_id = 1;
   string school_id = 2;
