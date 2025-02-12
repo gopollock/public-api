@@ -180,6 +180,18 @@ message UpdateAccountInfoRequest {
   }
 }
 
+message UpdateAccountRequest {
+  string account_id = 1;
+  oneof update {
+    // If set, requires both first and last name and sets them in profile.
+    ChangeProfileNames change_names = 2;
+  }
+}
+
+message UpdateAccountResponse {
+  Account account = 1;
+}
+
 message RefreshTokenRequest {}
 message RefreshTokenResponse {
   google.protobuf.Timestamp token_creation = 1;
