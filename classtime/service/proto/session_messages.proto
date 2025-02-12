@@ -665,6 +665,15 @@ message DeleteCommentTemplateRequest {
 
 message DeleteCommentTemplateResponse {}
 
+message SuggestCommentRequest {
+  string session_code = 1;
+  string answer_id = 2;
+}
+
+message SuggestCommentResponse {
+  CommentInfo comment_info = 1;
+}
+
 // Pusher messages
 
 message PusherSessionParticipantStarted {
