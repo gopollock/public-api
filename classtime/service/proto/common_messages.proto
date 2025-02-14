@@ -19,11 +19,6 @@ enum GameStatus {
   FINISHED = 3;
 }
 
-enum SessionMode {
-  FLEXIBLE = 0;
-  ROUND_BASED = 1;
-}
-
 enum PusherCluster {
   EU = 0;
   US = 1;
