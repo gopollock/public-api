@@ -71,6 +71,7 @@ message UpdateCoTeachersRequest {
   string class_id = 1;
   string school_id = 2;
   repeated string account_ids = 3; // classtime_ids
+  string class_owner_id = 4;
 }
 
 message UpdateCoTeachersResponse {
