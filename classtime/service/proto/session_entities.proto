@@ -55,7 +55,7 @@ message SessionSettings {
 
   string title = 1;
   bool is_active = 3;
-  bool is_revealed = 4;
+  bool is_revealed_deprecated = 4 [deprecated = true];
   bool invited_students_only = 5;
   classtime.service.common.FeedbackMode feedback_mode = 6;
   bool one_attempt_only = 7; // is_one_attempt
