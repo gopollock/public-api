@@ -19,6 +19,15 @@ enum ResultsSharingMode {
   PER_QUESTION = 2;
 }
 
+enum ReportType {
+  reserved 5;
+  SESSION_INSIGHTS = 0; // SessionExportInsightsView
+  PARTICIPANT_INSIGHTS = 1; // SessionExportParticipantInsightsView, SessionPdfExportView for student
+  PARTICIPANTS_INSIGHTS_ZIP = 2; // SessionExportParticipantsInsightsZipView
+  PARTICIPANTS_INSIGHTS_PDF = 3; // SessionExportParticipantsInsightsPDFView
+  INSIGHTS_XLSX = 4; // SessionExportXlsxView
+}
+
 message ResultsSharingSettings {
   ResultsSharingMode question_validation = 1;
   ResultsSharingMode solution_with_explanation = 2;
@@ -245,4 +254,13 @@ message CommentTemplate {
   string title = 1;
   string content = 2;
   classtime.entity.EntityRef account_ref = 3;
+}
+
+message SessionExport {
+  ReportType type = 1;
+  string export_link = 2;
+  classtime.entity.EntityRef session_participant = 3;
+  string locale = 4;
+  string auth_token = 5;
+  string email = 6;
 }
