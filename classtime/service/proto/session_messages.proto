@@ -197,18 +197,9 @@ message InviteClassRequest {
 message InviteClassResponse {}
 
 message ExportSessionRequest {
-  enum ReportType {
-    reserved 5;
-    SESSION_INSIGHTS = 0; // SessionExportInsightsView
-    PARTICIPANT_INSIGHTS = 1; // SessionExportParticipantInsightsView, SessionPdfExportView for student
-    PARTICIPANTS_INSIGHTS_ZIP = 2; // SessionExportParticipantsInsightsZipView
-    PARTICIPANTS_INSIGHTS_PDF = 3; // SessionExportParticipantsInsightsPDFView
-    INSIGHTS_XLSX = 4; // SessionExportXlsxView
-  }
-
   string session_code = 1;
   string participant_id = 2;
-  ReportType type = 3;
+  classtime.service.session.api.ReportType type = 3;
   string question_id = 4;
 }
 
