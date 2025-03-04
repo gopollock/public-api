@@ -92,8 +92,9 @@ message SessionSettings {
 
 // Root Entity
 message Session {
-  reserved 13, 6;
-  classtime.entity.EntityRef owner_ref = 1; // Reference to classtime_id in Django Model 'Teacher'
+  reserved 6, 12, 13;
+
+  classtime.entity.EntityRef owner_ref = 1; // Reference to teacher Account ID.
   string code = 2;
   classtime.entity.EntityRef label_ref = 3; // Replacement for SessionGroup
   SessionSettings settings = 4;
@@ -103,9 +104,8 @@ message Session {
   bool is_onboarding = 9;
   bool is_solo = 10;
   bool is_anonymous = 11;
-  bool is_auto_text_grading_enabled = 12;
   classtime.service.common.PusherCluster pusher_cluster = 14;
-  classtime.service.common.GameStatus game_status = 15; // Move to settings?
+  classtime.service.common.GameStatus game_status = 15;
   repeated classtime.entity.EntityRef reflection_questions = 16; // References ReflectionQuestion to order them.
   google.protobuf.Timestamp created = 17; // TODO Remove when creation and modification timestamps are implemented
   string teacher_chat_id = 18;
