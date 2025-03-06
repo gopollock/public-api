@@ -679,6 +679,10 @@ message PusherSessionChanged {
   google.protobuf.Duration time_until_session_close = 3;
 }
 
+message PusherSessionStatusChanged {
+  bool is_archived = 1;
+}
+
 message PusherSessionParticipantAdded {
   string participant_id = 1;
   SessionParticipant session_participant = 2;
