@@ -11,16 +11,20 @@
   <body>
     <button id="button">open for new question</button>
     <button id="button2">open for existing question</button>
+    <button id="button3">open session settings modal</button>
     <div id="classtime-app"></div>
-    
-    <script defer="defer">      
-      // Fill with your data:
+
+    <script defer="defer">
+      // fill with your data
       const questionSetId = '';
-      const authToken = '';
-      const existingQuestionId = '';
-      const sessionCode = '';
-      const onClose = (isSaved) => {
-        console.log('Was a question created or updated when the modal was closed?:', isSaved);
+      const authToken = ''
+      const existingQuestionId = ''
+      const sessionCode = ''
+      const onQuestionModalClose = (wasSaved) => {
+        console.log('Was a question saved when the modal was closed?:', wasSaved)
+      }
+      const onSessionSettingsModalClose = () => {
+        console.log('Session settings modal was closed.')
       }
       const theme = {
         palette: {
@@ -32,15 +36,19 @@
       };
       const locale = '';
       const componentsToRender =  {
-        questionEditorModal: true,
+        questionEditorModal: false,
         sessionDashboard: true,
+        sessionSettingsModal: true,
       };
 
       window.Classtime.init({
         authToken,
         rootHTMLElementId: "classtime-app",
         sessionCode,
-        callbacks: { onClose },
+        callbacks: {
+          onQuestionModalClose,
+          onSessionSettingsModalClose,
+        },
         theme,
         locale,
         componentsToRender
@@ -51,6 +59,9 @@
         button2.addEventListener('click', () => {
           classtimeApi.openQuestionModalForExistingQuestion(existingQuestionId, questionSetId)
         })
+        button3.addEventListener('click', () => {
+          classtimeApi.openSessionSettingsModal()
+        });
       });
     </script>
   </body>
