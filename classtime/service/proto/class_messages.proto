@@ -31,6 +31,17 @@ message CreateClassResponse {
   ClassInfo class_info = 1;
 }
 
+message GetOrCreateClassRequest {
+  string title = 1;
+  string subject = 2;
+  string teacher_classtime_id = 3;
+  string classlink_class_ref = 4;
+}
+
+message GetOrCreateClassResponse {
+  ClassInfo class_info = 1;
+}
+
 message UpdateClassInfoRequest {
   string class_id = 1;
   string title = 2;
