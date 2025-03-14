@@ -86,8 +86,8 @@ message QuestionTag {
 }
 
 message CollaboratorInfo {
+  reserved 2;
   string collaborator_id = 1; // classtime_id
-  string name = 2;
   string email = 3;
 }
 
