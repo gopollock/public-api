@@ -479,13 +479,12 @@ message JoinSessionRequest {
 }
 
 message JoinSessionResponse {
+  reserved 2;
   enum Status {
     ERROR = 0;
     SUCCESS = 1;
   }
   SessionParticipant participant = 1;
-  // TODO(https://app.asana.com/0/1177833412654353/1208090710141436/f): Replace status string by enum.
-  string legacy_status = 2; // It will be 'success' or 'error' always
   string participant_id = 3;
   Status status = 4;
 }
