@@ -40,7 +40,7 @@ message ResultsSharingSettings {
 // (-- api-linter: core::0142::time-field-type=disabled
 //     We need to do this because timer and paused_seconds are not timestamps. --)
 message SessionSettings {
-  reserved 2, 19;
+  reserved 2, 19, 22;
   enum EvaluationMode {
     FULL_OR_NO_POINTS = 0; // was: is_partial_grading = False
     PARTIAL_POINTS_WITH_PENALTY = 1; // was: partial_evaluation_mode = 'with-penalty'
@@ -72,7 +72,6 @@ message SessionSettings {
   string challenge_kind = 18;
   repeated classtime.entity.EntityRef active_questions = 20; // References 'Question'.
   classtime.service.common.SebConfig seb_config = 21;
-  bool is_archived = 22;
   bool is_relogin_approval_required = 23;
   bool is_logout_on_marked_as_done_enabled = 24;
   classtime.service.texttospeech.TextToSpeechConfig default_text_to_speech_config = 25;
