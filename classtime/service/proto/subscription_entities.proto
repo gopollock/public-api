@@ -58,6 +58,7 @@ message Activation {
   classtime.entity.EntityRef account_ref = 1;
   google.protobuf.Timestamp activated_at = 3;
   string used_activation_code = 4;
+  string email = 5;
 }
 
 message SubscriptionExtension {
