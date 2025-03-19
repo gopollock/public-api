@@ -51,10 +51,11 @@ message SessionInfo {
   AnswersStats answers_stats = 16;
   int32 question_count = 21;
 
-  bool is_solo = 23;
-  bool is_anonymous = 24;
+  bool is_solo = 23 [deprecated=true];
+  bool is_anonymous = 24 [deprecated=true];
 
   classtime.service.common.GradingPoint total_points = 25;
+  SessionType session_type = 26;
 }
 
 message SessionParticipantInfo {
@@ -442,13 +443,14 @@ message CheckSessionHealthResponse {
   bool is_seb_session = 4;
   bool is_active = 5;
   bool is_manual_seb_mode = 6;
-  bool is_solo = 7;
-  bool is_anonymous = 8;
+  bool is_solo = 7 [deprecated=true];
+  bool is_anonymous = 8 [deprecated=true];
   google.protobuf.Timestamp closes_at = 9;
   google.protobuf.Timestamp opens_at = 10;
   google.protobuf.Duration time_until_open = 11;
   google.protobuf.Duration time_until_close = 12;
   repeated classtime.service.common.FeatureFlag feature_flags = 13;
+  SessionType session_type = 14;
 }
 
 message GetPusherConfigRequest {

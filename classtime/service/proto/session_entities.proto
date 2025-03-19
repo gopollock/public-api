@@ -89,6 +89,12 @@ message SessionSettings {
   bool is_session_info_hidden = 33;
 }
 
+enum SessionType {
+  DEFAULT_SESSION = 0;
+  ANONYMOUS_SOLO_SESSION = 1;
+  AUTHORIZED_SOLO_SESSION = 2;
+}
+
 // Root Entity
 message Session {
   reserved 6, 12, 13;
@@ -101,8 +107,8 @@ message Session {
   classtime.entity.EntityRef invited_class_ref = 7; // ID reference to Django Model 'Class'
   string google_classroom_assignment_ref = 8;
   bool is_onboarding = 9;
-  bool is_solo = 10;
-  bool is_anonymous = 11;
+  bool is_solo = 10 [deprecated=true];
+  bool is_anonymous = 11 [deprecated=true];
   classtime.service.common.PusherCluster pusher_cluster = 14;
   classtime.service.common.GameStatus game_status = 15;
   repeated classtime.entity.EntityRef reflection_questions = 16; // References ReflectionQuestion to order them.
@@ -112,6 +118,7 @@ message Session {
   // The highest threshold of joined session participants reached.
   // This is used to send session 'activation' events to mixpanel for a specific set of thresholds.
   int32 activated_count = 20;
+  SessionType session_type = 21;
 }
 
 // TODO(https://app.asana.com/0/1206655504022453/1207918188241831): Used in JSON communication through pusher.
