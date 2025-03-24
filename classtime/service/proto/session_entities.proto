@@ -107,8 +107,8 @@ message Session {
   classtime.entity.EntityRef invited_class_ref = 7; // ID reference to Django Model 'Class'
   string google_classroom_assignment_ref = 8;
   bool is_onboarding = 9;
-  bool is_solo = 10 [deprecated=true];
-  bool is_anonymous = 11 [deprecated=true];
+  bool is_solo = 10 [deprecated = true];
+  bool is_anonymous = 11 [deprecated = true];
   classtime.service.common.PusherCluster pusher_cluster = 14;
   classtime.service.common.GameStatus game_status = 15;
   repeated classtime.entity.EntityRef reflection_questions = 16; // References ReflectionQuestion to order them.
