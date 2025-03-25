@@ -16,15 +16,14 @@ option java_package = "classtime.service.session.api";
 
 message SessionInfo {
   message AnswersStats {
+    reserved 1, 2;
     int32 partially_correct_answers_count = 3;
     int32 fully_correct_answers_count = 4;
     int32 fully_wrong_answers_count = 5;
     classtime.service.common.GradingPoint earned_points = 6;
-
-    reserved 1, 2;
   }
 
-  reserved 4, 7, 10, 14, 15, 18, 20;
+  reserved 4, 7, 10, 14, 15, 17, 18, 20;
 
   // Extracted from Session entity:
   string code = 1;
@@ -35,7 +34,9 @@ message SessionInfo {
   bool has_google_classroom_ref_for_invited_class = 9;
   repeated string question_set_ids = 22;
   SessionSettings settings = 11;
-  bool is_partial_grading = 17;
+  bool is_solo = 23 [deprecated = true];
+  bool is_anonymous = 24 [deprecated = true];
+  SessionType session_type = 26;
 
   // Derived from Participants, only set for teachers:
   int32 participants_count = 3;
@@ -50,12 +51,7 @@ message SessionInfo {
   // Derived from calling Participant's Answers, only set for students:
   AnswersStats answers_stats = 16;
   int32 question_count = 21;
-
-  bool is_solo = 23 [deprecated = true];
-  bool is_anonymous = 24 [deprecated = true];
-
   classtime.service.common.GradingPoint total_points = 25;
-  SessionType session_type = 26;
 }
 
 message SessionParticipantInfo {
