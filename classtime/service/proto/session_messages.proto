@@ -202,6 +202,8 @@ message ExportSessionRequest {
 
 message ExportSessionResponse {
   bytes file = 1;
+  string export_link = 2;
+  string session_export_id = 3;
 }
 
 message GetEssayPreviewRequest {
@@ -777,8 +779,8 @@ message PusherCommentDeleted {
 }
 
 message UpdateExportEmailRequest {
- string email = 1;
- string session_export_id = 2;
+  string email = 1;
+  string session_export_id = 2;
 }
 
 message UpdateExportEmailResponse {}
