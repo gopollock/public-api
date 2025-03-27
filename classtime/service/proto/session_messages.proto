@@ -775,3 +775,10 @@ message PusherCommentDeleted {
   string participant_id = 2;
   string question_id = 3;
 }
+
+message UpdateExportEmailRequest {
+ string email = 1;
+ string session_export_id = 2;
+}
+
+message UpdateExportEmailResponse {}

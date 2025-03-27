@@ -99,7 +99,7 @@ enum SessionType {
 message Session {
   reserved 6, 12, 13;
 
-  classtime.entity.EntityRef owner_ref = 1; // Reference to teacher Account ID.
+  classtime.entity.EntityRef owner_ref = 1; // ID of teacher / publisher Account that owns the Session.
   string code = 2;
   classtime.entity.EntityRef label_ref = 3; // Replacement for SessionGroup
   SessionSettings settings = 4;
