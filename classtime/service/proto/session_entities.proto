@@ -53,6 +53,11 @@ message SessionSettings {
     CENTRAL = 2;
   }
 
+  enum EvaluationSchema {
+    LEGACY = 0;
+    DEFAULT = 1;
+  }
+
   string title = 1;
   bool is_active = 3;
   bool is_revealed_deprecated = 4 [deprecated = true];
@@ -87,6 +92,7 @@ message SessionSettings {
   ResultsSharingSettings results_sharing_settings = 32;
 
   bool is_session_info_hidden = 33;
+  EvaluationSchema evaluation_schema = 34;
 }
 
 enum SessionType {
