@@ -63,7 +63,10 @@ message SetFolderStatusRequest {
 message SetFolderStatusResponse {}
 
 message GetQuestionSetRequest {
-  string question_set_id = 1;
+  oneof identifier {
+    string question_set_id = 1;
+    string question_set_secret_link = 2;
+  }
 }
 message GetQuestionSetResponse {
   QuestionSetInfo question_set_info = 1;
