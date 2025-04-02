@@ -354,6 +354,14 @@ message DraftAnswer {
     TextAnswer answer_text = 2;
     FillInTheGapAnswer answer_gap = 3;
     EssayAnswer answer_essay = 4;
+    BooleanAnswer answer_boolean = 6;
+    CategorizerAnswer answer_categorizer = 7;
+    CategorizerAnswer answer_categorizer_multi = 8;
+    HighlightTextAnswer answer_highlight_text = 9;
+    HotspotAnswer answer_hotspot = 10;
+    MultipleChoiceAnswer answer_multiple_choice = 11;
+    SingleChoiceAnswer answer_single_choice = 12;
+    SorterAnswer answer_sorter = 13;
   }
   string undo_history = 5; // Only for Essay.
   string django_uuid = 100;
