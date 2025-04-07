@@ -3,6 +3,7 @@ syntax = "proto3";
 package classtime.service.session.api;
 
 import "common_messages.proto";
+import "common_role.proto";
 import "entity_store_messages.proto";
 import "google/protobuf/duration.proto";
 import "google/protobuf/timestamp.proto";
@@ -73,6 +74,7 @@ message SessionSettings {
   google.protobuf.Duration timer = 14;
   google.protobuf.Timestamp opens_at = 15;
   google.protobuf.Timestamp closed_at = 16;
+  // TODO (https://app.asana.com/0/1177833412654353/1209893107411925/f) replace with Challenge message
   string challenge_slug = 17;
   string challenge_kind = 18;
   repeated classtime.entity.EntityRef active_questions = 20; // References 'Question'.
@@ -276,4 +278,5 @@ message SessionExport {
   string locale = 4;
   string auth_token = 5;
   string email = 6;
+  classtime.service.common.Role role = 7;
 }
