@@ -1,68 +1,93 @@
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="referrer" content="origin">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <script type="text/javascript" src="https://beta.classtime.com/release/Classtime.js"></script>
     <title>Example Integration</title>
-  </head>
-  <body>
+</head>
+<body>
+<div style="height: 100px">
     <button id="button">open for new question</button>
     <button id="button2">open for existing question</button>
     <button id="button3">open session settings modal</button>
-    <div id="classtime-app"></div>
+    <button id="button4">render session dashboard</button>
+    <button id="button5">remove session dashboard</button>
+    <input type="text" id="sessionCodeInput"/>
+    <button id="applyButton" style="padding: 5px;">Apply Changes</button>
+</div>
 
-    <script defer="defer">
-      // fill with your data
-      const questionSetId = '';
-      const authToken = ''
-      const existingQuestionId = ''
-      const sessionCode = ''
-      const onQuestionModalClose = (wasSaved) => {
-        console.log('Was a question saved when the modal was closed?:', wasSaved)
-      }
-      const onSessionSettingsModalClose = () => {
-        console.log('Session settings modal was closed.')
-      }
-      const theme = {
-        palette: {
-          primary: {
-            main: '#a2c510', // Your primary color.
-            light: '#eefeab', // A lighter version of your primary color, mostly used for hover effects on primary buttons.
-          },
-        },
-      };
-      const locale = '';
-      const componentsToRender =  {
-        questionEditorModal: false,
-        sessionDashboard: true,
-        sessionSettingsModal: true,
-      };
+<div>
+    <div id="classtime-app"/>
+</div>
 
-      window.Classtime.init({
-        authToken,
-        rootHTMLElementId: "classtime-app",
-        sessionCode,
-        callbacks: {
-          onQuestionModalClose,
-          onSessionSettingsModalClose,
-        },
-        theme,
-        locale,
-        componentsToRender
-      }).then((classtimeApi) => {
-        button.addEventListener('click', () => {
-          classtimeApi.openQuestionModalForNewQuestion(questionSetId)
-        })
-        button2.addEventListener('click', () => {
-          classtimeApi.openQuestionModalForExistingQuestion(existingQuestionId, questionSetId)
-        })
-        button3.addEventListener('click', () => {
-          classtimeApi.openSessionSettingsModal()
-        });
-      });
-    </script>
-  </body>
+<div id="session-dashboard-parent"/>
+
+<script defer="defer">
+  // fill with your data
+  const questionSetId = '';
+  const authToken = '';
+  const existingQuestionId = '';
+  const locale = '';
+
+  const onQuestionModalClose = (wasSaved) => {
+    console.log('Was a question saved when the modal was closed?:', wasSaved)
+  }
+  const onSessionSettingsModalClose = () => {
+    console.log('Session settings modal was closed.')
+  }
+  const theme = {
+    palette: {
+      primary: {
+        main: '#a2c510',
+        light: '#eefeab',
+      },
+    },
+  };
+
+  window.Classtime.init({
+    authToken,
+    rootHTMLElementId: "classtime-app",
+    sessionCode: document.getElementById('sessionCodeInput').value,
+    callbacks: {
+      onQuestionModalClose,
+      onSessionSettingsModalClose,
+    },
+    theme,
+    locale,
+  }).then((classtimeApi) => {
+
+    document.getElementById('button').addEventListener('click', () => {
+      classtimeApi.openQuestionModalForNewQuestion(questionSetId)
+    });
+    document.getElementById('button2').addEventListener('click', () => {
+      classtimeApi.openQuestionModalForExistingQuestion(existingQuestionId, questionSetId)
+    });
+    document.getElementById('button3').addEventListener('click', () => {
+      classtimeApi.openSessionSettingsModal();
+    })
+    document.getElementById('button4').addEventListener('click', () => {
+      // dynamically add node for rendering the dashboard
+      const childDiv = document.createElement('div');
+      childDiv.id = `classtime-session-dashboard-${Math.random()}`;
+      document.getElementById('session-dashboard-parent').appendChild(childDiv);
+      classtimeApi.renderSessionDashboard(childDiv.id)
+    })
+    document.getElementById('button5').addEventListener('click', () => {
+      document.getElementById('session-dashboard-parent').innerHTML = '';
+    });
+    document.getElementById('applyButton').addEventListener('click', () => {
+      classtimeApi.updateConfig({
+        sessionCode: document.getElementById('sessionCodeInput').value,
+      })
+    })
+
+  }).catch((error) => {
+    console.log('error settings', error)
+  });
+
+</script>
+</body>
 </html>
