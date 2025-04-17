@@ -268,7 +268,7 @@ message GetAnswersSummaryRequest {
 }
 
 message AnswerSummary {
-  reserved 5, 6, 7, 8, 9, 10;
+  reserved 5 to 10;
   string id = 1;
   string participant_id = 2;
   string question_id = 4;
@@ -279,6 +279,7 @@ message AnswerSummary {
   // Note: The 'bonus' and 'created_at' fields are set only for the new SessionService implementation
   classtime.service.common.GradingPoint bonus = 12;
   google.protobuf.Timestamp created_at = 13;
+  bool is_auto_submitted = 14;
   // TODO(https://app.asana.com/0/1177833412654353/1208707421467338/f) Temporary field, remove
   classtime.service.question.api.PartialEvaluation partial_evaluation = 100;
 }
