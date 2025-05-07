@@ -394,17 +394,14 @@ message AnswerEmbedding {
 }
 
 message ManualEvaluation {
-  reserved 1, 2, 10;
+  reserved 1, 2, 10, 11;
 
   message Evaluation {
     bool is_correct = 1;
     classtime.service.common.GradingPoint manual_grading_points = 2;
   }
 
-  oneof key {
-    bytes owner_question_content_hash = 3; // used as key for sessions with owner
-    bytes session_question_content_hash = 11; // used as key for solo sessions without owner
-  }
+  bytes owner_question_content_hash = 3;
   classtime.entity.EntityRef owner_account_id_ref = 4; // owner of the session where ManualEvaluation was created
   // Hash of the canonical answer string
   // - for full answers: 'full:$canonical_answer_string'
