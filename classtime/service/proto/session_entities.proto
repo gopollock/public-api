@@ -278,3 +278,26 @@ message SessionExport {
   string email = 6;
   classtime.service.common.Role role = 7;
 }
+
+enum GradingScaleKind {
+  GRADING_SCALE_UNSPECIFIED = 0;
+  GRADING_SCALE_UKRAINIAN = 1;
+  GRADING_SCALE_SWISS = 2;
+  GRADING_SCALE_GERMAN = 3;
+  GRADING_SCALE_THAILAND = 4;
+  GRADING_SCALE_US_ACADEMIC = 5;
+}
+
+enum Granularity {
+  GRANULARITY_UNSPECIFIED = 0;
+  GRANULARITY_WHOLE = 1;
+  GRANULARITY_HALF = 2;
+  GRANULARITY_QUATER = 3;
+  GRANULARITY_DECIMAL = 4;
+}
+
+enum GradeType {
+  GRADE_TYPE_NUMERIC = 0;
+  GRADE_TYPE_LETTER = 1;
+  GRADE_TYPE_DESCRIPTOR = 2;
+}
