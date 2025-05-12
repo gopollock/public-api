@@ -30,12 +30,21 @@ enum ReportType {
 }
 
 message ResultsSharingSettings {
+  enum ResultsType {
+    NUMERIC_GRADE = 0;
+    LETTER_GRADE = 1;
+    TEXT_DESCRIPTOR = 2;
+    POINTS = 3;
+    PERCENTAGE = 4;
+  }
+
   ResultsSharingMode question_validation = 1;
   ResultsSharingMode solution_with_explanation = 2;
   ResultsSharingMode answer_comment = 3;
   ResultsSharingMode total_score = 4;
   ResultsSharingMode session_comment = 5;
   ResultsSharingMode pdf_export = 6;
+  repeated ResultsType selected_results_types = 7;
 }
 
 // (-- api-linter: core::0142::time-field-type=disabled
