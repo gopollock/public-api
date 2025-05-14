@@ -23,7 +23,7 @@ message SessionInfo {
     classtime.service.common.GradingPoint earned_points = 6;
   }
 
-  reserved 4, 7, 10, 14, 15, 17, 18, 20;
+  reserved 4, 7, 10, 14, 15, 17, 18, 20, 23, 24;
 
   // Extracted from Session entity:
   string code = 1;
@@ -34,8 +34,6 @@ message SessionInfo {
   bool has_google_classroom_ref_for_invited_class = 9;
   repeated string question_set_ids = 22;
   SessionSettings settings = 11;
-  bool is_solo = 23 [deprecated = true];
-  bool is_anonymous = 24 [deprecated = true];
   SessionType session_type = 26;
 
   // Derived from Participants, only set for teachers:
@@ -436,14 +434,14 @@ message CheckSessionHealthRequest {
 }
 
 message CheckSessionHealthResponse {
+  reserved 7, 8;
+
   string code = 1;
   string title = 2;
   bool is_invited_only = 3;
   bool is_seb_session = 4;
   bool is_active = 5;
   bool is_manual_seb_mode = 6;
-  bool is_solo = 7 [deprecated = true];
-  bool is_anonymous = 8 [deprecated = true];
   google.protobuf.Timestamp closes_at = 9;
   google.protobuf.Timestamp opens_at = 10;
   google.protobuf.Duration time_until_open = 11;
