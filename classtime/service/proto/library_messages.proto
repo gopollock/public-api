@@ -181,6 +181,7 @@ message GetPlaylistDetailsResponse {
   message PlaylistDetailsEntry {
     classtime.service.question.api.QuestionGroup question_group = 1;
     repeated classtime.service.question.api.Question questions = 2;
+    string publisher_account_id = 3;
   }
 
   repeated PlaylistDetailsEntry playlist_details = 1;
