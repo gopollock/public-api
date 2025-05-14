@@ -47,6 +47,20 @@ message ResultsSharingSettings {
   repeated ResultsType selected_results_types = 7;
 }
 
+message GradingScaleEntry {
+  classtime.service.common.GradingPoint points_needed = 1;
+  string numeric_grade = 2;
+  string letter_grade = 3;
+  string text_descriptor = 4;
+}
+
+message GradingScaleConfig {
+  GradingScaleKind grading_scale_kind = 1;
+  Granularity granularity_mode = 2;
+  repeated GradeType selected_grade_types = 3;
+  repeated GradingScaleEntry grading_scale_entries = 4;
+}
+
 // (-- api-linter: core::0142::time-field-type=disabled
 //     We need to do this because timer and paused_seconds are not timestamps. --)
 message SessionSettings {
@@ -102,6 +116,7 @@ message SessionSettings {
   bool is_session_info_hidden = 33;
   EvaluationSchema evaluation_schema = 34;
   google.protobuf.Timestamp ended_at = 35;
+  GradingScaleConfig grading_scale_config = 36;
 }
 
 enum SessionType {
