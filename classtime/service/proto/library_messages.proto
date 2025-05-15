@@ -90,8 +90,11 @@ message UpdateQuestionSetResponse {
 }
 
 message SetSoloSessionRefRequest {
-  string question_set_id = 1;
-  classtime.entity.EntityRef entity_store_session_ref = 2;
+  string secret_id = 1;
+  oneof solo_session_ref {
+    classtime.entity.EntityRef anonymous_solo_session_ref = 2;
+    classtime.entity.EntityRef authorized_solo_session_ref = 3;
+  }
 }
 
 message SetSoloSessionRefResponse {}
