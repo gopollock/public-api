@@ -329,3 +329,11 @@ message CreateLibraryQuestionRequest {
 message CreateQuestionResponse {
   string id = 1;
 }
+
+message GetQuestionRequest {
+  string question_id = 1;
+}
+
+message GetQuestionResponse {
+  classtime.service.question.api.Question question = 1;
+}
