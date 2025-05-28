@@ -22,6 +22,7 @@ enum SubscriptionPeriod {
   YEARLY = 2; // 12 months
   HALF_YEARLY = 3; // 6 months
   QUARTERLY = 4; // 3 months
+  BI_YEARLY = 5; // 24 months
 }
 
 enum PurchaseRole {
