@@ -292,15 +292,13 @@ message CommentTemplate {
 }
 
 message SessionExport {
+  reserved 7;
   ReportType type = 1;
   string export_link = 2;
   classtime.entity.EntityRef session_participant = 3;
   string locale = 4;
   string auth_token = 5;
   string email = 6;
-  // TODO(https://app.asana.com/1/29774015570538/project/1200624621639592/task/1210194262386049?focus=true):
-  // remove, role is unused
-  classtime.service.common.Role role = 7;
   classtime.entity.EntityRef account = 8;
 }
 
