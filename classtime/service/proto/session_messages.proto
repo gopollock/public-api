@@ -196,6 +196,7 @@ message ExportSessionRequest {
   string participant_id = 2;
   classtime.service.session.api.ReportType type = 3;
   string question_id = 4;
+  string client_time_zone = 5;
 }
 
 message ExportSessionResponse {

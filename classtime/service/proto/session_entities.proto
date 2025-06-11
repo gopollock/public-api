@@ -300,6 +300,7 @@ message SessionExport {
   string auth_token = 5;
   string email = 6;
   classtime.entity.EntityRef account = 8;
+  string client_time_zone = 9;
 }
 
 enum GradingScaleKind {
