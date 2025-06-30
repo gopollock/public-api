@@ -14,6 +14,7 @@ enum Provider {
   VERLAGS_ANSTALT_HANDWERKEN = 1;
   DISTRINOVA = 2;
   CAREUM = 3;
+  COMPENDIO = 4;
 }
 
 enum SubscriptionPeriod {

@@ -165,6 +165,7 @@ message SessionParticipantUpdate {
   google.protobuf.Duration timer = 13;
   optional ChatOverride chat_override = 14;
   optional bool is_screen_locked = 15;
+  optional bool are_drafts_included = 16;
 }
 
 message UpdateParticipantsRequest {
@@ -200,7 +201,7 @@ message ExportSessionRequest {
 }
 
 message ExportSessionResponse {
-  bytes file = 1;
+  reserved 1;
   string export_link = 2;
   string session_export_id = 3;
 }
@@ -334,6 +335,14 @@ message GetLabelsRequest {}
 
 message GetLabelsResponse {
   map<string, SessionLabel> labels = 1;
+}
+
+message ContainsLabelRequest {
+  string label_id = 1;
+}
+
+message ContainsLabelResponse {
+  bool contains_label = 1;
 }
 
 message CreateLabelRequest {
@@ -500,7 +509,9 @@ message StartSessionResponse {
 }
 
 message SoloSessionRequest {
-  string question_set_id = 1;
+  string secret_link = 1;
+  string owner_account_id = 2;
+  bool is_anonymous = 3;
 }
 
 message SoloSessionResponse {
@@ -792,6 +803,7 @@ message GetGradingScaleSystemRequest {
   classtime.service.common.GradingPoint max_points = 4;
   int32 min_grade_centis = 5;
   int32 max_grade_centis = 6;
+  classtime.service.common.GradingPoint total_session_points = 7;
 }
 
 message GetGradingScaleSystemResponse {
