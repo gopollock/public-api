@@ -208,6 +208,7 @@ message SessionParticipant {
   // The time when the participant has joined the session for the first time.
   // Unset for participants that were invited to a session but have not joined yet.
   google.protobuf.Timestamp joined_at = 31;
+  bool is_handed_in_with_drafts = 32;
 
   // Temp fields only for migration purpose.
   google.protobuf.Timestamp django_created_at = 30;
@@ -262,6 +263,9 @@ message InvitedClass {
 message SessionLabel {
   classtime.entity.EntityRef owner_ref = 1;
   string title = 2;
+  // fields for migration only
+  google.protobuf.Timestamp created_at = 100;
+  bool is_frozen = 101;
 }
 
 // entity
@@ -316,8 +320,9 @@ enum Granularity {
   GRANULARITY_UNSPECIFIED = 0;
   GRANULARITY_WHOLE = 1;
   GRANULARITY_HALF = 2;
-  GRANULARITY_QUATER = 3;
+  GRANULARITY_QUARTER = 3;
   GRANULARITY_DECIMAL = 4;
+  GRANULARITY_CUSTOM = 5;
 }
 
 enum GradeType {
