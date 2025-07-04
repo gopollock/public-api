@@ -117,13 +117,6 @@ message SessionSettings {
   EvaluationSchema evaluation_schema = 34;
   google.protobuf.Timestamp ended_at = 35;
   GradingScaleConfig grading_scale_config = 36;
-
-  message Challenge {
-    string slug = 1;
-    string kind = 2;
-  }
-  
-  Challenge challenge = 37;
 }
 
 enum SessionType {
