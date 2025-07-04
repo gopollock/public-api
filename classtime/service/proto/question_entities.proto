@@ -247,6 +247,7 @@ message FillInTheGapSolution {
 
 message EssayAnswer {
   string content = 1;
+  string selection = 2;
 }
 
 message EssaySolution {}
