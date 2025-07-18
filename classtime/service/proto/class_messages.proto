@@ -76,6 +76,7 @@ message GetCoTeachersRequest {
 
 message GetCoTeachersResponse {
   repeated classtime.service.common.CollaboratorInfo collaborators = 1;
+  classtime.service.common.SchoolInfo school = 2;
 }
 
 message UpdateCoTeachersRequest {
