@@ -96,3 +96,21 @@ message PlaylistEntry {
   // Question ids to include or empty to include all questions from the question set.
   repeated string selected_question_ids = 2;
 }
+
+message SchoolInfo {
+  message SchoolTeacherInfo {
+    string id = 1;
+    string email = 2;
+    string picture = 3;
+    string classtime_id = 4;
+  }
+
+  string id = 1;
+  string title = 2;
+  repeated SchoolTeacherInfo teachers = 3;
+  enum DataRealm {
+    eu = 0;
+    us = 1;
+  }
+  DataRealm data_realm = 4;
+}

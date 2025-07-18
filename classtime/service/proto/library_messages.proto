@@ -156,7 +156,7 @@ message ChangeFolderCollaboratorsRequest {
 }
 
 message ChangeFolderCollaboratorsResponse {
-  FolderInfo folder_info = 1;
+  reserved 1;
   // Note: classtime_ids
   repeated string collaborator_ids = 2;
 }
@@ -167,6 +167,7 @@ message GetFolderCollaboratorsRequest {
 
 message GetFolderCollaboratorsResponse {
   repeated classtime.service.common.CollaboratorInfo collaborator_infos = 1;
+  classtime.service.common.SchoolInfo school = 2;
 }
 
 message ReorderQuestionsRequest {
