@@ -130,6 +130,13 @@ enum SessionType {
   WELCOME_SESSION = 3;
 }
 
+message TeamWithScore {
+  string id = 1;
+  repeated string participant_ids = 2;
+  int32 score = 3;
+  bool is_healthy = 4;
+}
+
 // Root Entity
 message Session {
   reserved 6, 10, 11, 12, 13;
@@ -152,6 +159,7 @@ message Session {
   // This is used to send session 'activation' events to mixpanel for a specific set of thresholds.
   int32 activated_count = 20;
   SessionType session_type = 21;
+  repeated TeamWithScore final_team_score = 22;
 }
 
 // TODO(https://app.asana.com/0/1206655504022453/1207918188241831): Used in JSON communication through pusher.

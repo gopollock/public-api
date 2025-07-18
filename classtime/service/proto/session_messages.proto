@@ -130,13 +130,6 @@ message GetGameDataRequest {
   string session_code = 1;
 }
 
-message TeamWithScore {
-  string id = 1;
-  repeated string participant_ids = 2;
-  int32 score = 3;
-  bool is_healthy = 4;
-}
-
 message GameData {
   int32 max_points = 1;
   int32 pass_threshold = 2;
