@@ -25,6 +25,7 @@ message GetTeacherDataRealmRequest {
 }
 
 message GetTeacherDataRealmResponse {
+  // TODO(https://app.asana.com/1/29774015570538/project/1200624621639592/task/1210844454987421?focus=true): will be deprecated soon
   enum DataRealm {
     EU = 0;
     US = 1;

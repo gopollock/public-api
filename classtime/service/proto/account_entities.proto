@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package classtime.service.account;
 
+import "common_messages.proto";
 import "common_role.proto";
 import "entity_store_messages.proto";
 import "google/protobuf/timestamp.proto";
@@ -109,3 +110,40 @@ message AccountProfile {
   string email = 2;
   classtime.service.common.Role role = 3;
 }
+
+
+enum DataRealm {
+  DATA_REALM_UNSPECIFIED = 0;
+  DATA_REALM_EU = 1;
+  DATA_REALM_US = 2;
+}
+
+enum OrganizationGroup {
+  GROUP_UNSPECIFIED = 0;
+  GROUP_NIEDERSACHSEN = 1;
+  GROUP_BASELLAND = 2;
+  GROUP_UKRAINE_SUPPORT_PROGRAMME_2022 = 3;
+  GROUP_CANTON_ZURICH = 4;
+}
+
+message Organization {
+  string title = 1;
+  DataRealm data_realm = 2;
+  bool is_premium_enabled = 3;
+  string library = 4;
+  bool is_collaboration_disabled = 5;
+  classtime.service.common.Theme theme = 6;
+  string domain = 7;
+  string classlink_ref = 8;
+  bool are_ai_comments_allowed = 9;
+  bool is_account_extension_disabled = 10;
+  string custom_logo_url = 11;
+  classtime.entity.EntityRef admin_account_ref = 12;
+  OrganizationGroup group = 13;
+}
+
+message OrganizationMember {
+  classtime.entity.EntityRef account_ref = 1;
+  bool is_excluded_from_premium = 2;
+}
+
