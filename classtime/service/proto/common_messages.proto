@@ -97,6 +97,35 @@ message PlaylistEntry {
   repeated string selected_question_ids = 2;
 }
 
+enum Theme {
+  THEME_UNSPECIFIED = 0;
+  THEME_BAYERN = 1;
+  THEME_CLASSTIME = 2;
+  THEME_MONEYPARK = 3;
+  THEME_WINGS = 4;
+  THEME_KANTONALE = 5;
+  THEME_ZKB = 6;
+  THEME_DIDAC = 7;
+  THEME_UBO = 8;
+  THEME_SACKMANN = 9;
+  THEME_EMMENTAL = 10;
+  THEME_EMMENTAL_FEEDBACK = 11;
+  THEME_ECODRIVE = 12;
+  THEME_ECODRIVE_FEEDBACK = 13;
+  THEME_ECODRIVE_FEEDBACK_20_DE = 14;
+  THEME_ECODRIVE_FEEDBACK_20_FR = 15;
+  THEME_ECODRIVE_FEEDBACK_20_IT = 16;
+  THEME_ECODRIVE_FEEDBACK_12_DE = 17;
+  THEME_ECODRIVE_FEEDBACK_12_FR = 18;
+  THEME_ECODRIVE_FEEDBACK_12_IT = 19;
+  THEME_ECODRIVE_COOP_SESSION_DE = 20;
+  THEME_ECODRIVE_COOP_SESSION_IT = 21;
+  THEME_ECODRIVE_COOP_SESSION_FR = 22;
+  THEME_KANTISARGANS = 23;
+  THEME_KANTIWATTWIL = 24;
+  THEME_LEXMEA = 25;
+}
+
 message SchoolInfo {
   message SchoolTeacherInfo {
     string id = 1;
@@ -108,6 +137,7 @@ message SchoolInfo {
   string id = 1;
   string title = 2;
   repeated SchoolTeacherInfo teachers = 3;
+  // TODO(https://app.asana.com/1/29774015570538/project/1200624621639592/task/1210844454987421?focus=true): will be deprecated soon
   enum DataRealm {
     eu = 0;
     us = 1;
