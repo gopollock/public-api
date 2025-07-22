@@ -325,3 +325,62 @@ message GetOrCreateAccountsResponse {
   // Map of account email to AccountInfo
   map<string, AccountInfo> account_infos = 1;
 }
+
+message OrganizationMemberInfo {
+  string account_id = 1;
+  string email = 2;
+  string picture = 3;
+  string name = 4;
+}
+
+message OrganizationInfo {
+  string organization_id = 1;
+  string title = 2;
+  string library = 3;
+  DataRealm data_realm = 4;
+}
+
+message GetOrganizationsRequest {
+  string account_id = 1;
+}
+
+message GetOrganizationsResponse {
+  repeated OrganizationInfo organizations = 1;
+}
+
+message AssociateMemberRequest {
+  string organization_id = 1;
+  string account_id = 2;
+}
+
+message AssociateMemberResponse {}
+
+message GetMemberDataRealmRequest {
+  string account_id = 1;
+}
+
+message GetMemberDataRealmResponse {
+  DataRealm data_realm = 1;
+}
+
+message GetOrCreateOrganizationRequest {
+  string title = 1;
+  string classlink_ref = 2;
+}
+
+message GetOrCreateOrganizationResponse {
+  string organization_id = 1;
+  repeated string member_account_ids = 2;
+}
+
+message GetOrganizationRequest {
+  oneof identifier {
+    string organization_id = 1;
+    string title = 2;
+  }
+}
+
+message GetOrganizationResponse {
+  OrganizationInfo organization_info = 1;
+  repeated OrganizationMemberInfo members = 2;
+}

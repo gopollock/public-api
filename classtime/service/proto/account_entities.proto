@@ -111,7 +111,6 @@ message AccountProfile {
   classtime.service.common.Role role = 3;
 }
 
-
 enum DataRealm {
   DATA_REALM_UNSPECIFIED = 0;
   DATA_REALM_EU = 1;
@@ -146,4 +145,3 @@ message OrganizationMember {
   classtime.entity.EntityRef account_ref = 1;
   bool is_excluded_from_premium = 2;
 }
-
