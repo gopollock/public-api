@@ -103,6 +103,7 @@ message AccountExtensionInfo {
   User secondary_user = 4;
   AccountInfo primary_user_extra_info = 5;
   AccountInfo secondary_user_extra_info = 6;
+  string merging_account_token = 8;
 }
 
 message AccountProfile {
