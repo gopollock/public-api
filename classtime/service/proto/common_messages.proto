@@ -144,3 +144,7 @@ message SchoolInfo {
   }
   DataRealm data_realm = 4;
 }
+
+message ContextMaterial {
+  string content = 1;
+}
