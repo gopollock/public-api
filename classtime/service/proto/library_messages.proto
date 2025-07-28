@@ -306,6 +306,7 @@ message CreateLegacyQuestionRequest {
   string video = 8;
   repeated string tag_ids = 9;
   bool is_poll = 10;
+  classtime.service.common.ContextMaterial context_material = 22;
 
   oneof question {
     ChoiceLibraryQuestion question_single_choice = 11;
