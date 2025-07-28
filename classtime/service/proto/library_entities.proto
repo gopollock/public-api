@@ -51,6 +51,7 @@ message QuestionInfo {
   bool is_shared = 9;
   bool is_readonly = 10;
   repeated classtime.service.common.QuestionTag tags = 11;
+  classtime.service.common.ContextMaterial context_material = 12;
 }
 
 message QuestionSetInfo {
