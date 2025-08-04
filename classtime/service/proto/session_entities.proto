@@ -327,6 +327,7 @@ enum GradingScaleKind {
   GRADING_SCALE_GERMAN = 3;
   GRADING_SCALE_THAILAND = 4;
   GRADING_SCALE_US_ACADEMIC = 5;
+  GRADING_SCALE_DEFAULT = 6;
 }
 
 enum Granularity {
