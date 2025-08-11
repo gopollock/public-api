@@ -811,4 +811,5 @@ message GetGradingScaleSystemRequest {
 message GetGradingScaleSystemResponse {
   repeated GradingScaleEntry grading_scale_entries = 1;
   GradeType primary_grade_type = 2;
+  repeated string grade_options = 3;
 }
