@@ -81,7 +81,7 @@ message AccountExtensionState {
 }
 
 message AccountExtensionInfo {
-  reserved 1;
+  reserved 1, 5, 6;
   message User {
     string first_name = 1;
     string last_name = 2;
@@ -89,20 +89,10 @@ message AccountExtensionInfo {
     string picture = 4;
   }
 
-  message AccountInfo {
-    bool is_on_premium = 1;
-    bool is_on_school_license = 2;
-    int32 question_set_count = 3;
-    int32 session_count = 4;
-    int32 class_count = 5;
-  }
-
   string extended_account_id = 7;
   bool is_merge = 2;
   User primary_user = 3;
   User secondary_user = 4;
-  AccountInfo primary_user_extra_info = 5;
-  AccountInfo secondary_user_extra_info = 6;
   string merging_account_token = 8;
 }
 
