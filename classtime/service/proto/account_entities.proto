@@ -100,6 +100,7 @@ message AccountProfile {
   string name = 1;
   string email = 2;
   classtime.service.common.Role role = 3;
+  string picture = 4;
 }
 
 enum DataRealm {
@@ -130,6 +131,7 @@ message Organization {
   string custom_logo_url = 11;
   classtime.entity.EntityRef admin_account_ref = 12;
   OrganizationGroup group = 13;
+  string country_code = 14;
 }
 
 message OrganizationMember {

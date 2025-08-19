@@ -366,6 +366,7 @@ message GetMemberDataRealmResponse {
 message GetOrCreateOrganizationRequest {
   string title = 1;
   string classlink_ref = 2;
+  bool are_ai_comments_allowed = 3;
 }
 
 message GetOrCreateOrganizationResponse {
