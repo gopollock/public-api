@@ -252,13 +252,17 @@ message EssayAnswer {
 
 message EssaySolution {}
 
+message ContextMaterial {
+  string content = 1;
+}
+
 // Entity nested in Session
 message Question {
   reserved 3, 22;
   QuestionInfo question_info = 1;
   classtime.entity.EntityRef derived_from_question_ref = 2; // UUID reference to django model 'library.Question'
   string explanation_draftjs = 32;
-  classtime.service.common.ContextMaterial context_material = 34;
+  ContextMaterial context_material = 34;
   oneof question {
     BooleanQuestion question_boolean = 10;
     CategorizerQuestion question_categorizer = 11;
