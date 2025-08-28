@@ -168,6 +168,7 @@ message GetFolderCollaboratorsRequest {
 message GetFolderCollaboratorsResponse {
   repeated classtime.service.common.CollaboratorInfo collaborator_infos = 1;
   classtime.service.common.SchoolInfo school = 2;
+  string organization_id = 3;
 }
 
 message ReorderQuestionsRequest {
