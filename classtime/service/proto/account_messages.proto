@@ -338,6 +338,7 @@ message OrganizationInfo {
   string title = 2;
   string library = 3;
   DataRealm data_realm = 4;
+  bool is_collaboration_disabled = 5;
 }
 
 message GetOrganizationsRequest {
@@ -384,4 +385,12 @@ message GetOrganizationRequest {
 message GetOrganizationResponse {
   OrganizationInfo organization_info = 1;
   repeated OrganizationMemberInfo members = 2;
+}
+
+message GetMembersRequest {
+  string title = 1;
+}
+
+message GetMembersResponse {
+  repeated OrganizationMemberInfo members = 1;
 }
