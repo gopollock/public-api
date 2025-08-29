@@ -368,6 +368,7 @@ message GetOrCreateOrganizationRequest {
   string title = 1;
   string classlink_ref = 2;
   bool are_ai_comments_allowed = 3;
+  OrganizationGroup group = 4;
 }
 
 message GetOrCreateOrganizationResponse {
@@ -375,22 +376,19 @@ message GetOrCreateOrganizationResponse {
   repeated string member_account_ids = 2;
 }
 
+message GroupTitle {
+  string title = 1;
+  OrganizationGroup group = 2;
+}
+
 message GetOrganizationRequest {
   oneof identifier {
     string organization_id = 1;
-    string title = 2;
+    GroupTitle group_title = 2;
   }
 }
 
 message GetOrganizationResponse {
   OrganizationInfo organization_info = 1;
   repeated OrganizationMemberInfo members = 2;
-}
-
-message GetMembersRequest {
-  string title = 1;
-}
-
-message GetMembersResponse {
-  repeated OrganizationMemberInfo members = 1;
 }
