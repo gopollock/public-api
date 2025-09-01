@@ -790,13 +790,9 @@ message UpdateExportEmailRequest {
 message UpdateExportEmailResponse {}
 
 message GetGradingScaleSystemRequest {
+  reserved 3, 4, 5, 6;
   GradingScaleKind grading_scale_kind = 1;
   Granularity granularity = 2;
-  // Todo(https://app.asana.com/1/29774015570538/project/1176787179185737/task/1210856024293006): remove after migration
-  classtime.service.common.GradingPoint min_points = 3;
-  classtime.service.common.GradingPoint max_points = 4;
-  int32 min_grade_centis = 5;
-  int32 max_grade_centis = 6;
   classtime.service.common.GradingPoint total_session_points = 7;
 
   message GradingScaleRange {
