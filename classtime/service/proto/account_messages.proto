@@ -339,6 +339,9 @@ message OrganizationInfo {
   string library = 3;
   DataRealm data_realm = 4;
   bool is_collaboration_disabled = 5;
+  string custom_logo_url = 6;
+  bool are_ai_comments_allowed = 7;
+  bool is_account_extension_disabled = 8;
 }
 
 message GetOrganizationsRequest {
