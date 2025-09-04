@@ -400,7 +400,7 @@ message FinishTeamGameResponse {
 message GradeAnswersRequest {
   message GradedAnswer {
     string answer_id = 1;
-    bool is_correct = 2;
+    optional bool is_correct = 2;
     classtime.service.common.GradingPoint grading_points = 3;
     // Used to call a different Django endpoint for free-text questions:
     classtime.service.question.api.QuestionKind kind = 4;
