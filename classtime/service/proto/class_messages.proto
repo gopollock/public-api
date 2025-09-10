@@ -36,6 +36,7 @@ message GetOrCreateClassRequest {
   string subject = 2;
   string teacher_classtime_id = 3;
   string classlink_class_ref = 4;
+  string organization_ref = 5;
 }
 
 message GetOrCreateClassResponse {
