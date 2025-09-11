@@ -75,6 +75,7 @@ message GetQuestionSetResponse {
 message CreateQuestionSetRequest {
   string folder_id = 1;
   string title = 2;
+  string target_teacher_email = 3;
 }
 message CreateQuestionSetResponse {
   QuestionSetInfo question_set_info = 1;
