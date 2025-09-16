@@ -342,6 +342,7 @@ message OrganizationInfo {
   string custom_logo_url = 6;
   bool are_ai_comments_allowed = 7;
   bool is_account_extension_disabled = 8;
+  bool is_free_text_auto_validation_disabled = 9;
 }
 
 message GetOrganizationsRequest {
@@ -372,6 +373,7 @@ message GetOrCreateOrganizationRequest {
   string classlink_ref = 2;
   bool are_ai_comments_allowed = 3;
   OrganizationGroup group = 4;
+  bool is_free_text_auto_validation_disabled = 5;
 }
 
 message GetOrCreateOrganizationResponse {
