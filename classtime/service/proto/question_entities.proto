@@ -308,8 +308,7 @@ enum Correctness {
 }
 
 message Evaluation {
-  reserved 4;
-  optional bool is_correct = 1;
+  reserved 1, 4;
   classtime.service.common.GradingPoint grading_points = 2; // Actual points given for the answer.
   classtime.service.common.GradingPoint manual_grading_points = 3; // Points manually set.
   classtime.service.common.GradingPoint automatic_grading_points = 7; // Points automatically computed.
