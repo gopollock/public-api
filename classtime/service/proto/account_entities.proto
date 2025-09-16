@@ -134,6 +134,7 @@ message Organization {
   classtime.entity.EntityRef admin_account_ref = 12;
   OrganizationGroup group = 13;
   string country_code = 14;
+  bool is_free_text_auto_validation_disabled = 15;
 }
 
 message OrganizationMember {
