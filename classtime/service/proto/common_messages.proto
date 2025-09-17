@@ -130,16 +130,10 @@ enum Theme {
 }
 
 message SchoolInfo {
-  message SchoolTeacherInfo {
-    string id = 1;
-    string email = 2;
-    string picture = 3;
-    string classtime_id = 4;
-  }
+  reserved 3;
 
   string id = 1;
   string title = 2;
-  repeated SchoolTeacherInfo teachers = 3;
   // TODO(https://app.asana.com/1/29774015570538/project/1200624621639592/task/1210844454987421?focus=true): will be deprecated soon
   enum DataRealm {
     eu = 0;
