@@ -397,3 +397,9 @@ message GetOrganizationResponse {
   OrganizationInfo organization_info = 1;
   repeated OrganizationMemberInfo members = 2;
 }
+
+message RemoveOrganizationRequest {
+  string organization_id = 1;
+}
+
+message RemoveOrganizationResponse{ }
