@@ -402,8 +402,10 @@ message ManualEvaluation {
   reserved 1, 2, 10, 11;
 
   message Evaluation {
-    bool is_correct = 1;
-    classtime.service.common.GradingPoint manual_grading_points = 2;
+    oneof evaluation {
+      bool is_correct = 1;
+      classtime.service.common.GradingPoint manual_grading_points = 2;
+    }
   }
 
   bytes owner_question_content_hash = 3;
