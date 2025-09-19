@@ -403,4 +403,22 @@ message RemoveOrganizationRequest {
   string organization_id = 1;
 }
 
-message RemoveOrganizationResponse{ }
+message RemoveOrganizationResponse {}
+
+message OrganizationSearchInfo {
+  string organization_id = 1;
+  string title = 2;
+  bool is_collaboration_disabled = 3;
+  bool are_ai_comments_allowed = 4;
+  bool is_account_extension_disabled = 5;
+  bool is_free_text_auto_validation_disabled = 6;
+  bool is_premium_enabled = 7;
+}
+
+message FindOrganizationsByTitleRequest {
+  string search_text = 1;
+}
+
+message FindOrganizationsByTitleResponse {
+  repeated OrganizationSearchInfo organizations = 1;
+}
