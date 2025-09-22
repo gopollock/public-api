@@ -402,8 +402,7 @@ message GetOrganizationResponse {
 message RemoveOrganizationRequest {
   string organization_id = 1;
 }
-
-message RemoveOrganizationResponse {}
+message RemoveOrganizationResponse { }
 
 message OrganizationSearchInfo {
   string organization_id = 1;
@@ -422,3 +421,11 @@ message FindOrganizationsByTitleRequest {
 message FindOrganizationsByTitleResponse {
   repeated OrganizationSearchInfo organizations = 1;
 }
+
+message UpdateOrganizationRequest {
+  string organization_id = 1;
+  Organization organization = 2;
+  repeated string member_account_ids = 3;
+  repeated string excluded_member_account_ids = 4;
+}
+message UpdateOrganizationResponse { }
