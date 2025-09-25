@@ -809,3 +809,14 @@ message GetGradingScaleSystemResponse {
   GradeType primary_grade_type = 2;
   repeated string grade_options = 3;
 }
+
+message GetContextMaterialRequest {
+  string question_id = 1;
+}
+
+message GetContextMaterialResponse {
+  string session_code = 1;
+  string question_title = 2;
+  int32 question_number = 3;
+  classtime.service.question.api.ContextMaterial context_material = 4;
+}
