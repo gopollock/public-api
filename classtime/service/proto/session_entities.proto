@@ -139,7 +139,7 @@ message TeamWithScore {
 
 // Root Entity
 message Session {
-  reserved 6, 10, 11, 12, 13;
+  reserved 6, 9 to 13;
 
   classtime.entity.EntityRef owner_ref = 1; // ID of teacher / publisher Account that owns the Session.
   string code = 2;
@@ -148,7 +148,6 @@ message Session {
   repeated classtime.service.question.api.QuestionGroup question_groups = 5;
   classtime.entity.EntityRef invited_class_ref = 7; // ID reference to Django Model 'Class'
   string google_classroom_assignment_ref = 8;
-  bool is_onboarding = 9 [deprecated = true];
   classtime.service.common.PusherCluster pusher_cluster = 14;
   classtime.service.common.GameStatus game_status = 15;
   repeated classtime.entity.EntityRef reflection_questions = 16; // References ReflectionQuestion to order them.
