@@ -101,8 +101,8 @@ message SessionSettings {
   google.protobuf.Timestamp opens_at = 15;
   google.protobuf.Timestamp closed_at = 16;
   // TODO (https://app.asana.com/0/1177833412654353/1209893107411925/f) replace with Challenge message
-  string challenge_slug = 17;
-  string challenge_kind = 18;
+  string challenge_slug = 17 [deprecated=true];
+  string challenge_kind = 18 [deprecated=true];
   repeated classtime.entity.EntityRef active_questions = 20; // References 'Question'.
   classtime.service.common.SebConfig seb_config = 21;
   bool is_relogin_approval_required = 23;
