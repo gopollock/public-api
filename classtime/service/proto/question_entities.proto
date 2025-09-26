@@ -417,8 +417,8 @@ message ManualEvaluation {
   Evaluation evaluation = 6;
 
   message AnswerEmbeddingsInfo {
+    reserved 8;
     repeated AnswerEmbedding embeddings = 7;
-    repeated string answer_ids = 8;
   }
 
   AnswerEmbeddingsInfo answer_embeddings_info = 9;
