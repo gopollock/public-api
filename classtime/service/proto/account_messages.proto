@@ -154,6 +154,7 @@ message AccountInfoResponse {
   bool is_logged_in = 6;
   classtime.service.common.Role role = 7;
   repeated string organizations = 13;
+  string country_code = 14;
 }
 
 message ChangeProfileNames {
