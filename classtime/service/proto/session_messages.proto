@@ -307,9 +307,8 @@ message GetReflectionQuestionsStatsRequest {
 }
 
 message ReflectionQuestionStats {
+  reserved 2;
   string id = 1;
-  // TODO(https://app.asana.com/0/1203796373635132/1207898854551222/f): remove title after fully migrated to the new API
-  string title = 2;
   string message_id = 5;
   ReflectionQuestionKind kind = 3;
 
