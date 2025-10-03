@@ -64,7 +64,7 @@ message GradingScaleConfig {
 // (-- api-linter: core::0142::time-field-type=disabled
 //     We need to do this because timer and paused_seconds are not timestamps. --)
 message SessionSettings {
-  reserved 2, 4, 6, 19, 22;
+  reserved 2, 4, 6, 19, 22, 31;
   enum EvaluationMode {
     FULL_OR_NO_POINTS = 0; // was: is_partial_grading = False
     PARTIAL_POINTS_WITH_PENALTY = 1; // was: partial_evaluation_mode = 'with-penalty'
@@ -113,8 +113,6 @@ message SessionSettings {
   google.protobuf.Timestamp timer_started_at = 28;
   google.protobuf.Timestamp paused_at = 29;
   google.protobuf.Duration paused_seconds = 30;
-  // Temp field, for migration purpose only, to be removed after migration
-  bool is_frozen = 31;
   ResultsSharingSettings results_sharing_settings = 32;
   bool is_session_info_hidden = 33;
   EvaluationSchema evaluation_schema = 34;
@@ -186,20 +184,18 @@ enum ChatOverride {
 
 // Entity nested in Session
 message SessionParticipant {
-  reserved 1, 16, 19;
+  reserved 1, 7, 12, 16, 19, 30, 100;
   string name = 2;
   repeated classtime.entity.EntityRef visited_questions = 3; // References SessionQuestion
   google.protobuf.Timestamp started_at = 4;
   string team_id = 5; // team
   bool is_chat_enabled = 6;
-  string django_uuid = 7;
   // Only set when Session timer mode is OnLogin and the participant has started the session.
   google.protobuf.Duration time_since_start = 8; // millisecondsSinceStarted
   // TODO(https://app.asana.com/0/0/1206263052530138/f): Use isArchived from entity status instead
   bool is_archived = 9;
   string email = 10;
   string chat_partner_id = 11;
-  SessionParticipantAuthProvider provider = 12;
   string conversation_id = 13;
   string sid = 14;
   RequestStatus relogin_request_status = 15;
@@ -221,10 +217,6 @@ message SessionParticipant {
   // Unset for participants that were invited to a session but have not joined yet.
   google.protobuf.Timestamp joined_at = 31;
   bool is_handed_in_with_drafts = 32;
-
-  // Temp fields only for migration purpose.
-  google.protobuf.Timestamp django_created_at = 30;
-  repeated classtime.service.question.api.DraftAnswer draft_answers = 100;
 }
 
 enum ReflectionQuestionKind {
@@ -242,28 +234,15 @@ enum ReflectionQuestionAnswer {
 
 // Entity nested under SessionParticipant
 message ReflectionAnswer {
+  reserved 3;
   classtime.entity.EntityRef question_ref = 1;
   ReflectionQuestionAnswer value = 2;
-  // Temp field, for migration purpose only, to be removed after migration
-  google.protobuf.Timestamp django_created_at = 3;
 }
 
 message ReflectionQuestion {
-  // Temp message, for migration purpose only, to be removed after migration
-  message ReflectionAnswerData {
-    string participant_django_id = 1;
-    google.protobuf.Timestamp created_at = 2;
-    ReflectionQuestionAnswer value = 3;
-  }
-
-  reserved 1;
-  // TODO(https://app.asana.com/0/1203796373635132/1207898854551222/f): remove title after fully migrated to the new API
-  string title = 2;
+  reserved 1, 2, 5, 100, 101;
   ReflectionQuestionKind kind = 3;
   string message_id = 4;
-  repeated ReflectionAnswerData reflection_answers = 5;
-  int32 order = 100; // Temporary field for migration purpose.
-  string reflection_question_id = 101; // Temporary field for migration purpose.
 }
 
 message InvitedClass {
@@ -273,11 +252,9 @@ message InvitedClass {
 }
 
 message SessionLabel {
+  reserved 100, 101;
   classtime.entity.EntityRef owner_ref = 1;
   string title = 2;
-  // fields for migration only
-  google.protobuf.Timestamp created_at = 100;
-  bool is_frozen = 101;
 }
 
 // entity

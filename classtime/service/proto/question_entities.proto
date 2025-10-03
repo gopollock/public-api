@@ -354,7 +354,7 @@ message Answer {
 
 // Entity nested under SessionParticipant
 message DraftAnswer {
-  // Note: Only supported for text, essay and gap questions as of now.
+  reserved 100, 101;
   classtime.entity.EntityRef question = 1;
   oneof answer {
     TextAnswer answer_text = 2;
@@ -370,8 +370,6 @@ message DraftAnswer {
     SorterAnswer answer_sorter = 13;
   }
   string undo_history = 5; // Only for Essay.
-  string django_uuid = 100;
-  google.protobuf.Timestamp django_created_at = 101; // Only for migration purpose.
 }
 
 message QuestionGroup {
