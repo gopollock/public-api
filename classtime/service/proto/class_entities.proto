@@ -24,7 +24,11 @@ message ClassInfo {
   repeated ClassStudentInfo students = 11;
   string google_classroom_ref = 12;
   string owner_language = 13;
-  string classlink_class_ref = 14;
+
+  oneof roster_ref {
+    string classlink_class_ref = 14;
+    string clever_class_ref = 15;
+  }
 }
 
 message ClassStudentInfo {
