@@ -24,7 +24,11 @@ message CreateClassRequest {
   string title = 1;
   string subject = 2;
   string teacher_classtime_id = 3;
-  string classlink_class_ref = 4;
+
+  oneof roster_ref {
+    string classlink_class_ref = 4;
+    string clever_class_ref = 5;
+  }
 }
 
 message CreateClassResponse {
@@ -35,7 +39,10 @@ message GetOrCreateClassRequest {
   string title = 1;
   string subject = 2;
   string teacher_classtime_id = 3;
-  string classlink_class_ref = 4;
+  oneof roster_ref {
+    string classlink_class_ref = 4;
+    string clever_class_ref = 6;
+  }
   string organization_ref = 5;
 }
 

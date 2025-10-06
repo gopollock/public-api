@@ -371,7 +371,10 @@ message GetMemberDataRealmResponse {
 
 message GetOrCreateOrganizationRequest {
   string title = 1;
-  string classlink_ref = 2;
+  oneof roster_ref {
+    string classlink_ref = 2;
+    string clever_ref = 6;
+  }
   bool are_ai_comments_allowed = 3;
   OrganizationGroup group = 4;
   bool is_free_text_auto_validation_disabled = 5;
