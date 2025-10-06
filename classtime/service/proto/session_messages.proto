@@ -397,6 +397,8 @@ message FinishTeamGameResponse {
 }
 
 message GradeAnswersRequest {
+  reserved 1;
+
   message GradedAnswer {
     reserved 2;
     string answer_id = 1;
@@ -405,7 +407,6 @@ message GradeAnswersRequest {
     classtime.service.question.api.QuestionKind kind = 4;
   }
 
-  string session_code = 1;
   string question_id = 4;
   repeated GradedAnswer graded_answers = 2;
   repeated classtime.service.common.GradedGap graded_gaps = 3;
