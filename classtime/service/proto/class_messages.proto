@@ -39,7 +39,7 @@ message GetOrCreateClassRequest {
   string title = 1;
   string subject = 2;
   string teacher_classtime_id = 3;
-  oneof roster_ref {
+  oneof roster_class_ref {
     string classlink_class_ref = 4;
     string clever_class_ref = 6;
   }
