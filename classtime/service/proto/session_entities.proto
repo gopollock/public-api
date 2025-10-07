@@ -157,6 +157,7 @@ message Session {
   int32 activated_count = 20;
   SessionType session_type = 21;
   repeated TeamWithScore final_team_score = 22;
+  classtime.service.common.GradingPoint total_points = 23;
 }
 
 // TODO(https://app.asana.com/0/1206655504022453/1207918188241831): Used in JSON communication through pusher.
