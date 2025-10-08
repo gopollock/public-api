@@ -395,12 +395,14 @@ message GetOrganizationRequest {
     string organization_id = 1;
     GroupTitle group_title = 2;
   }
+  bool should_include_all_members = 3;
 }
 
 message GetOrganizationResponse {
+  reserved 3;
   OrganizationInfo organization_info = 1;
-  repeated OrganizationMemberInfo members = 2;
-  repeated string member_account_ids = 3;
+  repeated OrganizationMemberInfo members = 2 [deprecated = true];
+  repeated OrganizationMember organization_members = 4;
 }
 
 message RemoveOrganizationRequest {
