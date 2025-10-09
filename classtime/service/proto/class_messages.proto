@@ -44,7 +44,6 @@ message GetOrCreateClassRequest {
     string clever_class_ref = 6;
   }
   string organization_ref = 5;
-  string grade = 7;
 }
 
 message GetOrCreateClassResponse {
@@ -57,7 +56,6 @@ message UpdateClassInfoRequest {
   string subject = 3;
   bool is_archived = 4;
   string owner_classtime_id = 5;
-  string grade = 6;
 }
 
 message UpdateClassInfoResponse {
