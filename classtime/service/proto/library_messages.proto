@@ -328,6 +328,7 @@ message CreateLegacyQuestionRequest {
 message CreateLibraryQuestionRequest {
   string question_set_id = 1;
   classtime.service.question.api.Question question = 2;
+  string target_teacher_email = 3;
 }
 
 message CreateQuestionResponse {
