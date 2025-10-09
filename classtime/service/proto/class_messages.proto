@@ -55,6 +55,7 @@ message UpdateClassInfoRequest {
   string title = 2;
   string subject = 3;
   bool is_archived = 4;
+  string owner_classtime_id = 5;
 }
 
 message UpdateClassInfoResponse {
