@@ -344,6 +344,11 @@ message OrganizationInfo {
   bool are_ai_comments_allowed = 7;
   bool is_account_extension_disabled = 8;
   bool is_free_text_auto_validation_disabled = 9;
+  bool is_premium_enabled = 10;
+  OrganizationGroup group = 11;
+  string country_code = 12;
+  string domain = 13;
+  classtime.service.common.Theme theme = 14;
 }
 
 message GetOrganizationsRequest {
@@ -430,10 +435,10 @@ message FindOrganizationsByTitleResponse {
 }
 
 message UpdateOrganizationRequest {
-  string organization_id = 1;
-  Organization organization = 2;
+  reserved 1, 2;
   repeated string member_account_ids = 3;
   repeated string excluded_member_account_ids = 4;
+  OrganizationInfo organization_info = 5;
 }
 
 message UpdateOrganizationResponse {}
