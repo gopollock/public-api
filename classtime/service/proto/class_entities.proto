@@ -29,6 +29,7 @@ message ClassInfo {
     string clever_class_ref = 15;
   }
   string grade = 16;
+  string owner_classtime_id = 17;
 }
 
 message ClassStudentInfo {
