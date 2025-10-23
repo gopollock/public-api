@@ -671,6 +671,25 @@ message SuggestCommentResponse {
 
 // Pusher messages
 
+// Used for MEMBER_ADDED and MEMBER_REMOVED that are internal events and sent if a member subscribes or unsubscribes to channel
+// https://pusher.com/docs/channels/server_api/webhooks/#member_added
+// https://pusher.com/docs/channels/server_api/webhooks/#member_removed
+message PusherMemberUpdated {
+  message MemberInfo {
+    string id = 1;
+    string role = 2;
+    SessionParticipant data = 3;
+  }
+  string id = 1;
+  MemberInfo info = 2;
+}
+
+// Used for SUBSCRIPTION_SUCCEEDED that is internal events and sent if a member subscribes or unsubscribes to channel
+// https://pusher.com/docs/channels/using_channels/events/#pushersubscription_succeeded-594754223
+message PusherSubscriptionSucceeded {
+  map<string, PusherMemberUpdated.MemberInfo> members = 1;
+}
+
 message PusherSessionParticipantStarted {
   string participant_id = 1;
   google.protobuf.Timestamp started = 2;
