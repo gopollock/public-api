@@ -9,17 +9,6 @@ option java_multiple_files = true;
 option java_outer_classname = "ClassMessagesProto";
 option java_package = "classtime.service.classes.api";
 
-enum ClassOrganization {
-  NONE = 0;
-  GOOGLE_CLASSROOM = 1;
-  CLASSLINK = 2;
-}
-
-message OrganizationRef {
-  ClassOrganization organization = 1;
-  string source_id = 2;
-}
-
 message CreateClassRequest {
   string title = 1;
   string subject = 2;
@@ -63,24 +52,6 @@ message UpdateClassInfoRequest {
 
 message UpdateClassInfoResponse {
   ClassInfo class_info = 1;
-}
-
-message OrganizationCollaborators {
-  string school_id = 1;
-  repeated string collaborator_ids = 2;
-}
-
-message CreateOrganizationClassRequest {
-  string title = 1;
-  string subject = 2;
-  repeated string student_emails = 3;
-  OrganizationCollaborators collaborators = 4;
-  OrganizationRef organization_ref = 5;
-  string classtime_id = 6;
-}
-
-message CreateOrganizationClassResponse {
-  string class_id = 1;
 }
 
 message GetCoTeachersRequest {
