@@ -142,8 +142,7 @@ message AuthenticationInfo {
 }
 
 message AccountInfoResponse {
-  reserved 1;
-  reserved 8;
+  reserved 1, 8;
   string classtime_id = 12;
   UserProfile user_profile = 2;
   int32 primary_authentication_id = 9;
