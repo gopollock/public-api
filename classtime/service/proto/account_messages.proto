@@ -441,3 +441,11 @@ message UpdateOrganizationRequest {
 }
 
 message UpdateOrganizationResponse {}
+
+message GetCustomLogoByDomainRequest {
+  string domain = 1;
+}
+
+message GetCustomLogoByDomainResponse {
+  string custom_logo_url = 1;
+}
