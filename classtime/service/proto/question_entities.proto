@@ -288,6 +288,22 @@ message Question {
   }
 }
 
+message Solution {
+  oneof solution {
+    BooleanSolution solution_boolean = 1;
+    CategorizerSolution solution_categorizer = 2;
+    CategorizerSolution solution_categorizer_multiple = 3;
+    HighlightTextSolution solution_highlight_text = 4;
+    HotspotSolution solution_hotspot = 5;
+    MultipleChoiceSolution solution_multiple_choice = 6;
+    SingleChoiceSolution solution_single_choice = 7;
+    SorterSolution solution_sorter = 8;
+    TextSolution solution_text = 9;
+    FillInTheGapSolution solution_gap = 10;
+    EssaySolution solution_essay = 11;
+  }
+}
+
 message GapEvaluation {
   reserved 1;
   bool is_correct = 2;
