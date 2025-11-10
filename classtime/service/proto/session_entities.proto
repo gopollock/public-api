@@ -22,11 +22,11 @@ enum ResultsSharingMode {
 
 enum ReportType {
   reserved 5;
-  SESSION_INSIGHTS = 0; // SessionExportInsightsView
-  PARTICIPANT_INSIGHTS = 1; // SessionExportParticipantInsightsView, SessionPdfExportView for student
-  PARTICIPANTS_INSIGHTS_ZIP = 2; // SessionExportParticipantsInsightsZipView
-  PARTICIPANTS_INSIGHTS_PDF = 3; // SessionExportParticipantsInsightsPDFView
-  INSIGHTS_XLSX = 4; // SessionExportXlsxView
+  SESSION_INSIGHTS = 0;
+  PARTICIPANT_INSIGHTS = 1;
+  PARTICIPANTS_INSIGHTS_ZIP = 2;
+  PARTICIPANTS_INSIGHTS_PDF = 3;
+  INSIGHTS_XLSX = 4;
 }
 
 message ResultsSharingSettings {
@@ -61,14 +61,12 @@ message GradingScaleConfig {
   repeated GradingScaleEntry grading_scale_entries = 4;
 }
 
-// (-- api-linter: core::0142::time-field-type=disabled
-//     We need to do this because timer and paused_seconds are not timestamps. --)
 message SessionSettings {
   reserved 2, 4, 6, 17, 18, 19, 22, 31;
   enum EvaluationMode {
-    FULL_OR_NO_POINTS = 0; // was: is_partial_grading = False
-    PARTIAL_POINTS_WITH_PENALTY = 1; // was: partial_evaluation_mode = 'with-penalty'
-    PARTIAL_POINTS_WITHOUT_PENALTY = 2; //was: partial_evaluation_mode='without-penalty'
+    FULL_OR_NO_POINTS = 0;
+    PARTIAL_POINTS_WITH_PENALTY = 1;
+    PARTIAL_POINTS_WITHOUT_PENALTY = 2;
   }
 
   enum TimerStartMode {
@@ -88,33 +86,44 @@ message SessionSettings {
   }
 
   string title = 1;
+
   bool is_active = 3;
-  bool invited_students_only = 5;
-  bool one_attempt_only = 7; // is_one_attempt
-  bool shuffle_choices = 8; // is_shuffle_choices
-  bool shuffle_questions = 9; // is_shuffle_questions
-  EvaluationMode evaluation_mode = 10; // partial_evaluation_mode
   bool is_configured = 11;
+  repeated classtime.entity.EntityRef active_questions = 20; // References 'Question'.
+
+  EvaluationMode evaluation_mode = 10;
+  EvaluationSchema evaluation_schema = 34;
+  bool invited_students_only = 5;
+  bool one_attempt_only = 7;
+  bool shuffle_choices = 8;
+  bool shuffle_questions = 9;
+
   bool has_reflection = 12;
   bool force_reflection = 13;
+
+  ResultsSharingSettings results_sharing_settings = 32;
+  bool is_session_info_hidden = 33;
+
+  bool is_logout_on_marked_as_done_enabled = 24;
+  bool is_relogin_approval_required = 23;
+
   google.protobuf.Duration timer = 14;
+  TimerStartMode timer_start_mode = 27;
   google.protobuf.Timestamp opens_at = 15;
   google.protobuf.Timestamp closed_at = 16;
-  repeated classtime.entity.EntityRef active_questions = 20; // References 'Question'.
-  classtime.service.common.SebConfig seb_config = 21;
-  bool is_relogin_approval_required = 23;
-  bool is_logout_on_marked_as_done_enabled = 24;
-  classtime.service.texttospeech.TextToSpeechConfig default_text_to_speech_config = 25;
-  bool is_chat_enabled_by_default = 26;
-  TimerStartMode timer_start_mode = 27;
   google.protobuf.Timestamp timer_started_at = 28;
   google.protobuf.Timestamp paused_at = 29;
   google.protobuf.Duration paused_seconds = 30;
-  ResultsSharingSettings results_sharing_settings = 32;
-  bool is_session_info_hidden = 33;
-  EvaluationSchema evaluation_schema = 34;
   google.protobuf.Timestamp ended_at = 35;
+
+  classtime.service.common.SebConfig seb_config = 21;
+
+  classtime.service.texttospeech.TextToSpeechConfig default_text_to_speech_config = 25;
+
+  bool is_chat_enabled_by_default = 26;
+
   GradingScaleConfig grading_scale_config = 36;
+
   Challenge challenge = 37;
 }
 
@@ -136,25 +145,32 @@ message TeamWithScore {
 message Session {
   reserved 6, 9 to 13;
 
-  classtime.entity.EntityRef owner_ref = 1; // ID of teacher / publisher Account that owns the Session.
   string code = 2;
-  classtime.entity.EntityRef label_ref = 3; // Replacement for SessionGroup
+
+  classtime.entity.EntityRef owner_ref = 1; // ID of teacher / publisher Account that owns the Session.
+  SessionType session_type = 21;
   SessionSettings settings = 4;
+  google.protobuf.Timestamp created = 17;
+
+  classtime.entity.EntityRef question_bank_ref = 19;
   repeated classtime.service.question.api.QuestionGroup question_groups = 5;
-  classtime.entity.EntityRef invited_class_ref = 7; // ID reference to Django Model 'Class'
+  classtime.service.common.GradingPoint total_points = 23;
+
+  repeated classtime.entity.EntityRef reflection_questions = 16; // References ReflectionQuestion to order them.
+
+  classtime.entity.EntityRef label_ref = 3; // Reference to SessionLabel
+  classtime.entity.EntityRef invited_class_ref = 7; // Reference to Django Model 'Class'
   string google_classroom_assignment_ref = 8;
+
   classtime.service.common.PusherCluster pusher_cluster = 14;
   classtime.service.common.GameStatus game_status = 15;
-  repeated classtime.entity.EntityRef reflection_questions = 16; // References ReflectionQuestion to order them.
-  google.protobuf.Timestamp created = 17; // TODO Remove when creation and modification timestamps are implemented
   string teacher_chat_id = 18;
-  classtime.entity.EntityRef question_bank_ref = 19;
+
+  repeated TeamWithScore final_team_score = 22;
+
   // The highest threshold of joined session participants reached.
   // This is used to send session 'activation' events to mixpanel for a specific set of thresholds.
   int32 activated_count = 20;
-  SessionType session_type = 21;
-  repeated TeamWithScore final_team_score = 22;
-  classtime.service.common.GradingPoint total_points = 23;
 }
 
 // TODO(https://app.asana.com/0/1206655504022453/1207918188241831): Used in JSON communication through pusher.
@@ -183,38 +199,46 @@ enum ChatOverride {
 // Entity nested in Session
 message SessionParticipant {
   reserved 1, 7, 12, 16, 19, 30, 100;
+
   string name = 2;
-  repeated classtime.entity.EntityRef visited_questions = 3; // References SessionQuestion
-  google.protobuf.Timestamp started_at = 4;
-  string team_id = 5; // team
-  bool is_chat_enabled = 6;
-  // Only set when Session timer mode is OnLogin and the participant has started the session.
-  google.protobuf.Duration time_since_start = 8; // millisecondsSinceStarted
-  // TODO(https://app.asana.com/0/0/1206263052530138/f): Use isArchived from entity status instead
-  bool is_archived = 9;
   string email = 10;
-  string chat_partner_id = 11;
-  string conversation_id = 13;
-  string sid = 14;
-  RequestStatus relogin_request_status = 15;
-  bool is_chat_allowed = 17;
-  classtime.service.texttospeech.TextToSpeechConfig text_to_speech_config = 18;
-  bool is_unsubmit_session_requested = 20;
-  RequestStatus rejoin_request_status = 21;
-  // (-- api-linter: core::0142::time-field-type=disabled --)
-  google.protobuf.Duration timer = 22;
-  // (-- api-linter: core::0142::time-field-type=disabled --)
-  google.protobuf.Duration paused_seconds = 23;
-  google.protobuf.Timestamp handed_in_at = 24;
-  ChatOverride chat_override = 25;
   classtime.entity.EntityRef account_ref = 26;
-  bool is_screen_locked = 27;
+
+  string sid = 14;
   bool is_verified = 28;
   bool is_restarted = 29;
+  bool is_archived = 9;
+
+  repeated classtime.entity.EntityRef visited_questions = 3; // References SessionQuestion
+
+  google.protobuf.Duration timer = 22;
+
   // The time when the participant has joined the session for the first time.
   // Unset for participants that were invited to a session but have not joined yet.
   google.protobuf.Timestamp joined_at = 31;
+  google.protobuf.Timestamp started_at = 4;
+  google.protobuf.Duration paused_seconds = 23;
+  google.protobuf.Timestamp handed_in_at = 24;
   bool is_handed_in_with_drafts = 32;
+
+  // Only set when Session timer mode is OnLogin and the participant has started the session.
+  google.protobuf.Duration time_since_start = 8;
+
+  string team_id = 5;
+
+  classtime.service.texttospeech.TextToSpeechConfig text_to_speech_config = 18;
+
+  bool is_chat_allowed = 17;
+  bool is_chat_enabled = 6;
+  ChatOverride chat_override = 25;
+  string chat_partner_id = 11;
+  string conversation_id = 13;
+
+  RequestStatus relogin_request_status = 15;
+  RequestStatus rejoin_request_status = 21;
+  bool is_unsubmit_session_requested = 20;
+
+  bool is_screen_locked = 27;
 }
 
 enum ReflectionQuestionKind {
