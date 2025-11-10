@@ -214,14 +214,10 @@ message MultipleChoiceSolution {
 message SorterAnswer {
   // Indices of the sorted choices.
   repeated int32 sorted_choices = 1;
-  // TODO(https://app.asana.com/1/29774015570538/project/1203796373635132/task/1211783847714839?focus=true): Remove after migration.
-  repeated classtime.entity.EntityRef sorted_choices_ref = 2;
 }
 
 message SorterSolution {
   // The choices as listed in the question is the correct order, so no need to specify anything.
-  // TODO(https://app.asana.com/1/29774015570538/project/1203796373635132/task/1211783847714839?focus=true): Remove after migration.
-  repeated classtime.entity.EntityRef sorted_choices_ref = 1;
 }
 
 message TextAnswer {
