@@ -403,9 +403,8 @@ message GetOrganizationRequest {
 }
 
 message GetOrganizationResponse {
-  reserved 3;
+  reserved 2, 3;
   OrganizationInfo organization_info = 1;
-  repeated OrganizationMemberInfo members = 2 [deprecated = true];
   repeated OrganizationMember organization_members = 4;
 }
 
