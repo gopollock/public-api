@@ -286,6 +286,18 @@ message CreateExternalAccountResponse {
   string account_id = 1;
 }
 
+message GetOrCreateExternalAccountRequest {
+  classtime.service.common.Role role = 1;
+  UserProfile user_profile = 2;
+  // Unique identifier for the user in the given provider.
+  string subject = 3;
+  string email = 4;
+}
+
+message GetOrCreateExternalAccountResponse {
+  string account_id = 1;
+}
+
 message GetAccountIdByEmailRequest {
   string email = 1;
   classtime.service.common.Role role = 2;
