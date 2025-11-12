@@ -59,14 +59,12 @@ message BooleanQuestion {}
 // Both Categorizer and CategorizerMultiple
 message CategorizerQuestion {
   message CategorizerItem {
-    reserved 1;
+    reserved 1, 2;
     string content_draftjs = 3;
-    string django_uuid = 2;
   }
   message CategorizerCategory {
-    reserved 1;
+    reserved 1, 2;
     string content_draftjs = 3;
-    string django_uuid = 2;
   }
 
   repeated CategorizerItem items = 1;
@@ -76,11 +74,11 @@ message CategorizerQuestion {
 message HighlightTextQuestion {
   message ClozeChoice {
     string content = 1;
-    string django_uuid = 2;
+    string text_id = 2;
   }
   message Cloze {
     repeated ClozeChoice cloze_choice = 1;
-    string django_uuid = 2;
+    string text_id = 2;
   }
 
   string content = 1;
@@ -96,10 +94,9 @@ message HotspotQuestion {
 }
 
 message Choice {
-  reserved 1;
+  reserved 1, 3;
   string content_draftjs = 4;
   string cloudinary_image_ref = 2;
-  string django_uuid = 3;
 }
 
 // Both Single and Multiple
@@ -254,7 +251,7 @@ message ContextMaterial {
 
 // Entity nested in Session
 message Question {
-  reserved 3, 22;
+  reserved 3, 22, 100;
   QuestionInfo question_info = 1;
   classtime.entity.EntityRef derived_from_question_ref = 2; // UUID reference to django model 'library.Question'
   string explanation_draftjs = 32;
@@ -285,7 +282,6 @@ message Question {
     FillInTheGapSolution solution_gap = 29;
     EssaySolution solution_essay = 31;
   }
-  string django_uuid = 100;
 }
 
 message Solution {
@@ -338,7 +334,7 @@ message PartialEvaluation {
 
 // Entity Nested under Participant
 message Answer {
-  reserved 2;
+  reserved 2, 100;
   classtime.entity.EntityRef question = 1;
   google.protobuf.Timestamp created_at = 3;
   classtime.service.common.GradingPoint bonus = 6;
@@ -361,7 +357,6 @@ message Answer {
     FillInTheGapAnswer answer_gap = 19;
     EssayAnswer answer_essay = 20;
   }
-  string django_uuid = 100;
 }
 
 // Entity nested under SessionParticipant
