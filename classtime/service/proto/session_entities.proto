@@ -171,6 +171,8 @@ message Session {
   // The highest threshold of joined session participants reached.
   // This is used to send session 'activation' events to mixpanel for a specific set of thresholds.
   int32 activated_count = 20;
+
+  string seb_pure_config_key_hash = 24; // Base16 encoded.
 }
 
 // TODO(https://app.asana.com/0/1206655504022453/1207918188241831): Used in JSON communication through pusher.
