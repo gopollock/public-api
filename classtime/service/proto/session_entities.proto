@@ -203,6 +203,8 @@ message SessionParticipant {
   reserved 1, 7, 12, 16, 19, 30, 100;
 
   string name = 2;
+  string first_name = 33;
+  string last_name = 34;
   string email = 10;
   classtime.entity.EntityRef account_ref = 26;
 
