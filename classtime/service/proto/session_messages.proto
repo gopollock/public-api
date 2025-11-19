@@ -537,7 +537,7 @@ message CreateAnswerResponse {
   classtime.service.question.api.Evaluation evaluation = 2;
   classtime.entity.EntityRef answer = 3;
   string solution_explanation_draftjs = 4;
-  classtime.service.question.api.Solution solution_new = 22;
+  classtime.service.question.api.Solution solution = 22;
 }
 
 message SaveDraftAnswerRequest {
