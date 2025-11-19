@@ -36,6 +36,8 @@ message ClassStudentInfo {
   string email = 1;
   string id = 2;
   string name = 3;
+  string first_name = 6;
+  string last_name = 7;
   string classtime_id = 4;
   bool is_subscribed_to_emails = 5;
 }

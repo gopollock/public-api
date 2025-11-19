@@ -329,14 +329,6 @@ message GetLabelsResponse {
   map<string, SessionLabel> labels = 1;
 }
 
-message ContainsLabelRequest {
-  string label_id = 1;
-}
-
-message ContainsLabelResponse {
-  bool contains_label = 1;
-}
-
 message CreateLabelRequest {
   SessionLabel label = 1;
 }
@@ -560,17 +552,6 @@ message CreateWelcomeSessionRequest {}
 message GetBayernSessionCodeRequest {}
 message GetBayernSessionCodeResponse {
   string session_code = 1;
-}
-
-message ContainsSessionRequest {
-  oneof session {
-    string session_code = 1;
-    string session_id = 2;
-  }
-}
-
-message ContainsSessionResponse {
-  bool contains_session = 1;
 }
 
 message GetRealtimeAuthenticationRequest {
