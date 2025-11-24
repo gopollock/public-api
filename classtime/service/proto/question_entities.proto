@@ -428,3 +428,46 @@ message ManualEvaluation {
 
   AnswerEmbeddingsInfo answer_embeddings_info = 9;
 }
+
+message AnswerSummary {
+  reserved 5 to 10;
+  string id = 1;
+  string participant_id = 2;
+  string question_id = 4;
+  // Plain text content for text or essay question answers. Cut off to a certain number of characters.
+  string content = 3;
+  // Note: 'explanation' field in Evaluation is empty
+  classtime.service.question.api.Evaluation evaluation = 11;
+  // Note: The 'bonus' and 'created_at' fields are set only for the new SessionService implementation
+  classtime.service.common.GradingPoint bonus = 12;
+  google.protobuf.Timestamp created_at = 13;
+  bool is_auto_submitted = 14;
+  // TODO(https://app.asana.com/0/1177833412654353/1208707421467338/f) Temporary field, remove
+  classtime.service.question.api.PartialEvaluation partial_evaluation = 100;
+}
+
+// Entity nested under SessionParticipant
+message Comment {
+  enum State {
+    DRAFT = 0;
+    SAVED = 1;
+  }
+
+  State state = 1;
+  string content = 2;
+  classtime.entity.EntityRef question_ref = 3; // if not empty, it is a question comment
+  classtime.entity.EntityRef answer_ref = 4; // must also be set if question_ref is set. Used to filter latest comments to latest answers.
+  string ai_generated_content = 5;
+}
+
+message CommentTemplate {
+  string title = 1;
+  string content = 2;
+  classtime.entity.EntityRef account_ref = 3;
+}
+
+message CommentInfo {
+  string participant_id = 1;
+  string comment_id = 2;
+  Comment comment = 3;
+}

@@ -290,26 +290,6 @@ message AnswerEmbeddingUsage {
   google.protobuf.Timestamp last_reset = 3;
 }
 
-// Entity nested under SessionParticipant
-message Comment {
-  enum State {
-    DRAFT = 0;
-    SAVED = 1;
-  }
-
-  State state = 1;
-  string content = 2;
-  classtime.entity.EntityRef question_ref = 3; // if not empty, it is a question comment
-  classtime.entity.EntityRef answer_ref = 4; // must also be set if question_ref is set. Used to filter latest comments to latest answers.
-  string ai_generated_content = 5;
-}
-
-message CommentTemplate {
-  string title = 1;
-  string content = 2;
-  classtime.entity.EntityRef account_ref = 3;
-}
-
 message SessionExport {
   reserved 7;
   ReportType type = 1;
