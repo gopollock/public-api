@@ -280,25 +280,8 @@ message GetAnswersSummaryRequest {
   string session_code = 1;
 }
 
-message AnswerSummary {
-  reserved 5 to 10;
-  string id = 1;
-  string participant_id = 2;
-  string question_id = 4;
-  // Plain text content for text or essay question answers. Cut off to a certain number of characters.
-  string content = 3;
-  // Note: 'explanation' field in Evaluation is empty
-  classtime.service.question.api.Evaluation evaluation = 11;
-  // Note: The 'bonus' and 'created_at' fields are set only for the new SessionService implementation
-  classtime.service.common.GradingPoint bonus = 12;
-  google.protobuf.Timestamp created_at = 13;
-  bool is_auto_submitted = 14;
-  // TODO(https://app.asana.com/0/1177833412654353/1208707421467338/f) Temporary field, remove
-  classtime.service.question.api.PartialEvaluation partial_evaluation = 100;
-}
-
 message GetAnswersSummaryResponse {
-  repeated AnswerSummary answers = 1;
+  repeated classtime.service.question.api.AnswerSummary answers = 1;
 }
 
 message PredictFreeTextAnswersRequest {
@@ -596,15 +579,9 @@ message GetClassStudentSuggestionsResponse {
   repeated ClassStudentSuggestion suggestions = 1;
 }
 
-message CommentInfo {
-  string participant_id = 1;
-  string comment_id = 2;
-  Comment comment = 3;
-}
-
 message CreateOrUpdateCommentsRequest {
   string session_code = 1;
-  repeated CommentInfo comment_infos = 2;
+  repeated classtime.service.question.api.CommentInfo comment_infos = 2;
 }
 
 message CreateOrUpdateCommentsResponse {
@@ -616,7 +593,7 @@ message GetCommentsRequest {
 }
 
 message GetCommentsResponse {
-  repeated CommentInfo comment_infos = 1; // For students, it contains SAVED comments only.
+  repeated classtime.service.question.api.CommentInfo comment_infos = 1; // For students, it contains SAVED comments only.
 }
 
 message DeleteCommentsRequest {
@@ -627,19 +604,19 @@ message DeleteCommentsRequest {
 message DeleteCommentsResponse {}
 
 message CreateCommentTemplateRequest {
-  CommentTemplate comment_template = 1;
+  classtime.service.question.api.CommentTemplate comment_template = 1;
 }
 
 message CreateCommentTemplateResponse {
   string comment_template_id = 1;
-  CommentTemplate comment_template = 2;
+  classtime.service.question.api.CommentTemplate comment_template = 2;
 }
 
 message GetCommentTemplatesRequest {}
 
 message GetCommentTemplatesResponse {
   // CommentTemplateId to CommentTemplate
-  map<string, CommentTemplate> comment_templates = 1;
+  map<string, classtime.service.question.api.CommentTemplate> comment_templates = 1;
 }
 
 message DeleteCommentTemplateRequest {
@@ -654,7 +631,7 @@ message SuggestCommentRequest {
 }
 
 message SuggestCommentResponse {
-  CommentInfo comment_info = 1;
+  classtime.service.question.api.CommentInfo comment_info = 1;
 }
 
 // Pusher messages
@@ -733,7 +710,7 @@ message PusherAnotherLoginApproved {
 
 message PusherAnswerAdded {
   reserved 1, 2, 3;
-  AnswerSummary answer_summary = 4;
+  classtime.service.question.api.AnswerSummary answer_summary = 4;
   google.protobuf.Timestamp created_at = 5;
 }
 
@@ -780,7 +757,7 @@ message PusherReflectionAnswerAdded {
 }
 
 message PusherCommentChange {
-  CommentInfo comment_info = 1;
+  classtime.service.question.api.CommentInfo comment_info = 1;
 }
 
 message PusherCommentDeleted {
