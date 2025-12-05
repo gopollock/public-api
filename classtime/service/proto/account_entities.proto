@@ -104,6 +104,7 @@ message AccountProfile {
   string email = 2;
   classtime.service.common.Role role = 3;
   string picture = 4;
+  google.protobuf.Timestamp last_success_login_at = 7;
 }
 
 enum DataRealm {
