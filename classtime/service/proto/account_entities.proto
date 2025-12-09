@@ -151,7 +151,7 @@ message Organization {
   bool are_ai_comments_allowed = 9;
   bool is_account_extension_disabled = 10;
   string custom_logo_url = 11;
-  classtime.entity.EntityRef admin_account_ref = 12;
+  repeated classtime.entity.EntityRef admin_account_refs = 12;
   OrganizationGroup group = 13;
   string country_code = 14;
   bool is_free_text_auto_validation_disabled = 15;
