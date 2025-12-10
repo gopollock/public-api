@@ -451,6 +451,8 @@ message UpdateOrganizationRequest {
   repeated string excluded_member_account_ids = 4;
   OrganizationInfo organization_info = 5;
   bytes custom_logo = 6;
+  // Will be removed after schools in django are fully deprecated
+  string original_title = 7;
 }
 
 message UpdateOrganizationResponse {}
