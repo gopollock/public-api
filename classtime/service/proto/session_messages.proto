@@ -142,25 +142,9 @@ message GetGameDataResponse {
 }
 
 message SessionParticipantUpdate {
-  reserved 5;
+  reserved 2 to 10, 12 to 16;
   string participant_id = 1;
-
-  // todo(oleksandr) remove after micro release
-  optional string name = 2 [deprecated = true];
-  optional bool is_archived = 3 [deprecated = true];
-  optional bool is_chat_enabled = 4 [deprecated = true];
-  classtime.service.texttospeech.TextToSpeechConfig text_to_speech_config = 6 [deprecated = true];
-  optional RequestStatus relogin_request_status = 7 [deprecated = true];
-  optional bool is_chat_allowed = 8 [deprecated = true];
-  optional bool is_session_done = 9 [deprecated = true];
-  optional bool is_unsubmit_session_requested = 10 [deprecated = true];
   optional string sid = 11;
-  optional RequestStatus rejoin_request_status = 12 [deprecated = true];
-  // (-- api-linter: core::0142::time-field-type=disabled--)
-  google.protobuf.Duration timer = 13 [deprecated = true];
-  optional ChatOverride chat_override = 14 [deprecated = true];
-  optional bool is_screen_locked = 15 [deprecated = true];
-  optional bool are_drafts_included = 16 [deprecated = true];
 
   oneof update {
     string new_name = 17;
