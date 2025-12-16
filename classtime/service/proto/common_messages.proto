@@ -25,6 +25,11 @@ enum PusherCluster {
   SOKETI = 2;
 }
 
+enum SessionAccess {
+  READ_ONLY = 0;
+  READ_WRITE = 1;
+}
+
 message Team {
   int32 id = 1;
   repeated string members = 2;
