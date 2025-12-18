@@ -136,6 +136,16 @@ enum OrganizationGroup {
   GROUP_CENTURY_COMMUNITY_CHARTER_SCHOOL = 19;
 }
 
+enum OrganizationPlan {
+  ORGANIZATION_PLAN_UNSPECIFIED = 0;
+  ORGANIZATION_PLAN_15 = 1; // this is the minimum tear
+  ORGANIZATION_PLAN_30 = 2;
+  ORGANIZATION_PLAN_50 = 3;
+  ORGANIZATION_PLAN_100 = 4;
+  ORGANIZATION_PLAN_150 = 5;
+  ORGANIZATION_PLAN_UNLIMITED = 6;
+}
+
 message Organization {
   string title = 1;
   DataRealm data_realm = 2;
@@ -155,6 +165,7 @@ message Organization {
   OrganizationGroup group = 13;
   string country_code = 14;
   bool is_free_text_auto_validation_disabled = 15;
+  OrganizationPlan plan = 17;
 }
 
 message OrganizationMember {

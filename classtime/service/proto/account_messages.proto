@@ -464,3 +464,9 @@ message GetCustomLogoByDomainRequest {
 message GetCustomLogoByDomainResponse {
   string custom_logo_url = 1;
 }
+
+enum OrganizationCurrency {
+  ORGANIZATION_CURRENCY_UNSPECIFIED = 0;
+  ORGANIZATION_CURRENCY_EUR = 1; // Euro, default for now
+  ORGANIZATION_CURRENCY_CHF = 2; // Swiss Franc
+}
