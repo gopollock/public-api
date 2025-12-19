@@ -346,20 +346,8 @@ message OrganizationMemberInfo {
 }
 
 message OrganizationInfo {
+  reserved 2 to 14;
   string organization_id = 1;
-  string title = 2 [deprecated = true];
-  string library = 3 [deprecated = true];
-  DataRealm data_realm = 4 [deprecated = true];
-  bool is_collaboration_disabled = 5 [deprecated = true];
-  string custom_logo_url = 6 [deprecated = true];
-  bool are_ai_comments_allowed = 7 [deprecated = true];
-  bool is_account_extension_disabled = 8 [deprecated = true];
-  bool is_free_text_auto_validation_disabled = 9 [deprecated = true];
-  bool is_premium_enabled = 10 [deprecated = true];
-  OrganizationGroup group = 11 [deprecated = true];
-  string country_code = 12 [deprecated = true];
-  string domain = 13 [deprecated = true];
-  classtime.service.common.Theme theme = 14 [deprecated = true];
   Organization organization = 15;
 }
 
