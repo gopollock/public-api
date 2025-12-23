@@ -458,3 +458,22 @@ enum OrganizationCurrency {
   ORGANIZATION_CURRENCY_EUR = 1; // Euro, default for now
   ORGANIZATION_CURRENCY_CHF = 2; // Swiss Franc
 }
+
+message Price {
+  // Whole currency units in the response currency (e.g., 100 means EUR 100 if currency=EUR).
+  uint32 amount_units = 1;
+}
+
+message OrganizationPlanPrice {
+  OrganizationPlan plan = 1;
+  Price price = 2;
+}
+
+message GetOrganizationPlanPricingRequest {
+  string organization_id = 1;
+}
+
+message GetOrganizationPlanPricingResponse {
+  OrganizationCurrency currency = 1;
+  repeated OrganizationPlanPrice plan_prices = 2;
+}
