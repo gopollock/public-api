@@ -147,15 +147,15 @@ message SessionParticipantUpdate {
   optional string sid = 11;
 
   oneof update {
-    string new_name = 17;
-    bool new_is_screen_locked = 18;
-    bool new_is_archived = 19;
-    ChatOverride new_chat_override = 20;
-    google.protobuf.Duration new_timer = 21;
-    classtime.service.texttospeech.TextToSpeechConfig new_text_to_speech_config = 22;
-    RequestStatus new_relogin_request_status = 23;
-    RequestStatus new_rejoin_request_status = 24;
-    SubmissionStateUpdate new_submission_state = 25;
+    string name = 17;
+    bool is_screen_locked = 18;
+    bool is_archived = 19;
+    ChatOverride chat_override = 20;
+    google.protobuf.Duration timer = 21;
+    classtime.service.texttospeech.TextToSpeechConfig text_to_speech_config = 22;
+    RequestStatus relogin_request_status = 23;
+    RequestStatus rejoin_request_status = 24;
+    SubmissionStateUpdate submission_state = 25;
   }
 }
 
