@@ -75,6 +75,8 @@ message GetQuestionSetResponse {
 message CreateQuestionSetRequest {
   string folder_id = 1;
   string title = 2;
+
+  // The following field must only be set when called using a machine role:
   string target_teacher_email = 3;
 }
 message CreateQuestionSetResponse {
@@ -328,6 +330,8 @@ message CreateLegacyQuestionRequest {
 message CreateLibraryQuestionRequest {
   string question_set_id = 1;
   classtime.service.question.api.Question question = 2;
+
+  // The following fields must only be set when called with a machine role:
   string target_teacher_email = 3;
   bool can_solution_be_empty = 4;
 }
