@@ -167,6 +167,7 @@ message Organization {
   string country_code = 14;
   bool is_free_text_auto_validation_disabled = 15;
   OrganizationPlan plan = 17;
+  string django_school_ref = 18;
 }
 
 message OrganizationMember {
