@@ -240,7 +240,6 @@ message CreateTokenRequest {
   reserved 2;
   string classtime_id = 1;
   string permission = 3;
-  classtime.service.common.Role role = 4;
 }
 
 message CreateTokenResponse {
