@@ -70,7 +70,7 @@ message Account {
   int32 primary_authentication_method_id = 2;
   repeated AuthenticationMethod authentication_methods = 4;
   google.protobuf.Timestamp blocked_at = 7;
-  repeated classtime.service.common.Role roles = 9;
+  classtime.service.common.Role role = 9;
   repeated AccountMerge merge_history = 11;
   string country_code = 12;
 }
@@ -102,7 +102,7 @@ message AccountProfile {
   string first_name = 5;
   string last_name = 6;
   string email = 2;
-  repeated classtime.service.common.Role roles = 3;
+  classtime.service.common.Role role = 3;
   string picture = 4;
   google.protobuf.Timestamp last_success_login_at = 7;
 }
