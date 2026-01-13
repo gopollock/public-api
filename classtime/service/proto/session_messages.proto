@@ -788,3 +788,10 @@ message GetContextMaterialResponse {
   int32 question_number = 3;
   classtime.service.question.api.ContextMaterial context_material = 4;
 }
+
+message LogClientEventsRequest {
+  // The events are expected to be in the format of JSON strings.
+  repeated string events = 1;
+}
+
+message LogClientEventsResponse {}
