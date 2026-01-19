@@ -357,3 +357,10 @@ message GetQuestionRequest {
 message GetQuestionResponse {
   classtime.service.question.api.Question question = 1;
 }
+
+message CreateQuestionLockRequest {
+  string question_id = 1;
+}
+
+message CreateQuestionLockResponse {
+}
