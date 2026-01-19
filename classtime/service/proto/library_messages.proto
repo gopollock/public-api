@@ -140,6 +140,16 @@ message CopyQuestionSetRequest {
 
 message CopyQuestionSetResponse {}
 
+message SubmitQuestionSetForReviewRequest {
+  string question_set_id = 1;
+  string author = 2;
+  string extra = 3;
+}
+
+message SubmitQuestionSetForReviewResponse {
+  QuestionSetPrivacy privacy = 1;
+}
+
 message CopyQuestionRequest {
   string question_id = 1;
   string target_question_set_id = 2;
