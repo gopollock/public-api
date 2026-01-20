@@ -364,3 +364,10 @@ message CreateQuestionLockRequest {
 
 message CreateQuestionLockResponse {
 }
+
+message UpdateQuestionLockRequest {
+  string question_id = 1;
+}
+
+message UpdateQuestionLockResponse {
+}
