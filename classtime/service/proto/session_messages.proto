@@ -156,6 +156,7 @@ message SessionParticipantUpdate {
     RequestStatus relogin_request_status = 23;
     RequestStatus rejoin_request_status = 24;
     SubmissionStateUpdate submission_state = 25;
+    BatteryInfo battery_info = 26;
   }
 }
 

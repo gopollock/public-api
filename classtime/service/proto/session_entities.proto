@@ -198,6 +198,21 @@ enum ChatOverride {
   OverrideDisabled = 2;
 }
 
+message BatteryInfo {
+  enum BatteryState {
+    BATTERY_STATE_UNDEFINED = 0;
+    BATTERY_STATE_UNKNOWN = 1;
+    BATTERY_STATE_EMPTY = 2;
+    BATTERY_STATE_FULL = 3;
+    BATTERY_STATE_CHARGING = 4;
+    BATTERY_STATE_DISCHARGING = 5;
+    BATTERY_STATE_IDLE = 6;
+  }
+
+  int32 percent = 1;
+  BatteryState state = 2;
+}
+
 // Entity nested in Session
 message SessionParticipant {
   reserved 1, 7, 12, 16, 19, 30, 100;
@@ -243,6 +258,8 @@ message SessionParticipant {
   bool is_unsubmit_session_requested = 20;
 
   bool is_screen_locked = 27;
+
+  BatteryInfo battery_info = 35;
 }
 
 enum ReflectionQuestionKind {
