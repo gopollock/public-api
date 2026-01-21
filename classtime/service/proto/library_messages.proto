@@ -382,3 +382,11 @@ message DeleteQuestionLockRequest {
 }
 
 message DeleteQuestionLockResponse {}
+
+message GetQuestionSetShareTokenRequest {
+  string question_set_id = 1;
+}
+
+message GetQuestionSetShareTokenResponse {
+  string token = 1;
+}
