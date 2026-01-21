@@ -140,6 +140,13 @@ message CopyQuestionSetRequest {
 
 message CopyQuestionSetResponse {}
 
+message CopyFolderRequest {
+  string folder_id = 1;
+  string parent_folder_id = 2;
+}
+
+message CopyFolderResponse {}
+
 message SubmitQuestionSetForReviewRequest {
   string question_set_id = 1;
   string author = 2;
