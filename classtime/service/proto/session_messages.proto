@@ -75,14 +75,6 @@ message GetSessionDetailsResponse {
   bool is_archived = 9;
 }
 
-message GetSessionInfoRequest {
-  string session_code = 1;
-}
-
-message GetSessionInfoResponse {
-  SessionInfo session_info = 2;
-}
-
 message SetSessionSettingsRequest {
   string session_code = 1;
   SessionSettings settings = 2;
