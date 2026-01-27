@@ -75,6 +75,9 @@ message QuestionSetInfo {
   classtime.entity.EntityRef anonymous_solo_session_ref = 18;
   classtime.entity.EntityRef authorized_solo_session_ref = 19;
   string solo_session_link = 20;
+  classtime.entity.EntityRef publisher_account_ref = 21;
+  string extra = 22;
+  string author = 23;
 }
 
 enum EntityStatus {
