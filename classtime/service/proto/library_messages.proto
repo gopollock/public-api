@@ -390,3 +390,12 @@ message GetQuestionSetShareTokenRequest {
 message GetQuestionSetShareTokenResponse {
   string token = 1;
 }
+
+message ImportSharedQuestionSetRequest {
+  string question_set_id = 1;
+  string token = 2;
+}
+
+message ImportSharedQuestionSetResponse {
+  QuestionSetInfo question_set_info = 1;
+}
