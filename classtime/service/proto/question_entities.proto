@@ -383,6 +383,7 @@ message QuestionGroup {
   string title = 1;
   repeated classtime.entity.EntityRef questions = 2; // References SessionQuestion
   string question_set_id = 3; // It might not be set
+  string derived_from_id = 4;
 }
 
 message EvaluationMapEntry {
