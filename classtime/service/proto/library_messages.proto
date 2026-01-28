@@ -54,6 +54,15 @@ message GetFolderResponse {
   repeated QuestionSetInfo child_question_sets = 3;
 }
 
+message GetCurriculumFolderRequest {
+  string synchronized_from_folder_id = 1;
+  string question_bank_id = 2;
+}
+
+message GetCurriculumFolderResponse {
+  FolderInfo folder_info = 1;
+}
+
 message SetFolderStatusRequest {
   string folder_id = 1; // use for (de)archiving
   repeated string folder_ids = 2; // use for deleting
