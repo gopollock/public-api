@@ -62,6 +62,7 @@ message SebConfig {
   bool is_manual = 6;
   bool is_enabled = 7;
   bool seb_file_has_been_downloaded = 8;
+  bool is_mac_private_clipboard_enabled = 9;
 }
 
 message FeatureFlag {
