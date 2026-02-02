@@ -345,3 +345,8 @@ enum GradeType {
   GRADE_TYPE_LETTER = 1;
   GRADE_TYPE_DESCRIPTOR = 2;
 }
+
+// Entity aggregated under Session
+message SebConfigFile {
+  bytes content = 1;
+}
