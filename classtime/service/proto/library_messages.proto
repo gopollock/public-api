@@ -81,6 +81,16 @@ message GetQuestionSetResponse {
   QuestionSetInfo question_set_info = 1;
 }
 
+message GetCurriculumQuestionSetRequest {
+  string synchronized_from_question_set_id = 1;
+  string question_bank_id = 2;
+  bool has_full_question_info = 3; // Maps to isPrintout in Django.
+}
+
+message GetCurriculumQuestionSetResponse {
+  QuestionSetInfo question_set_info = 1;
+}
+
 message CreateQuestionSetRequest {
   string folder_id = 1;
   string title = 2;
@@ -155,6 +165,14 @@ message CopyFolderRequest {
 }
 
 message CopyFolderResponse {}
+
+message ExportQuestionSetRequest {
+  string question_set_id = 1;
+}
+
+message ExportQuestionSetResponse {
+  bytes pdf_file_content = 1;
+}
 
 message SubmitQuestionSetForReviewRequest {
   string question_set_id = 1;
@@ -407,4 +425,20 @@ message ImportSharedQuestionSetRequest {
 
 message ImportSharedQuestionSetResponse {
   QuestionSetInfo question_set_info = 1;
+}
+
+message GetSharedQuestionSetRequest {
+  string question_set_id = 1;
+  string token = 2;
+}
+
+message SharedQuestionSetInfo {
+  string id = 1;
+  string title = 2;
+  repeated classtime.service.question.api.Question questions = 3;
+  string publisher_account_id = 4;
+}
+
+message GetSharedQuestionSetResponse {
+  SharedQuestionSetInfo question_set_info = 1;
 }
