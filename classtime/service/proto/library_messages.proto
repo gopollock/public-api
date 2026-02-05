@@ -166,6 +166,14 @@ message CopyFolderRequest {
 
 message CopyFolderResponse {}
 
+message GetTrashBinItemsRequest {}
+
+message GetTrashBinItemsResponse {
+  repeated FolderInfo folders = 1;
+  repeated QuestionSetInfo question_sets = 2;
+  repeated QuestionInfo questions = 3;
+}
+
 message ExportQuestionSetRequest {
   string question_set_id = 1;
 }
