@@ -476,3 +476,11 @@ message GetOrganizationPlanPricingResponse {
   OrganizationCurrency currency = 1;
   repeated OrganizationPlanPrice plan_prices = 2;
 }
+
+message SetOrganizationMetaRequest {
+  string country_code = 1;
+  OrganizationGroup group = 2;
+  string organization_id = 3;
+}
+
+message SetOrganizationMetaResponse {}
