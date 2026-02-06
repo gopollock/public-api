@@ -424,6 +424,8 @@ message OrganizationSearchInfo {
   bool is_account_extension_disabled = 5;
   bool is_free_text_auto_validation_disabled = 6;
   bool is_premium_enabled = 7;
+  OrganizationGroup group = 8;
+  string country_code = 9;
 }
 
 message FindOrganizationsByTitleRequest {
