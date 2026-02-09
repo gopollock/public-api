@@ -60,10 +60,12 @@ message SessionParticipantInfo {
 }
 
 message GetSessionDetailsRequest {
+  option (classtime.service.common.public_api) = true;
   string code = 1;
 }
 
 message GetSessionDetailsResponse {
+  option (classtime.service.common.public_api) = true;
   Session session = 1;
   map<string, classtime.service.question.api.Question> questions = 2;
   map<string, ReflectionQuestion> reflection_questions = 3;
@@ -83,6 +85,7 @@ message SetSessionSettingsRequest {
 message SetSessionSettingsResponse {}
 
 message CreateSessionRequest {
+  option (classtime.service.common.public_api) = true;
   repeated classtime.service.common.PlaylistEntry playlist = 1;
   SessionSettings settings = 2;
 }
@@ -167,21 +170,28 @@ message UpdateParticipantsResponse {
 }
 
 message DeleteParticipantRequest {
+  option (classtime.service.common.public_api) = true;
   string session_code = 1;
   string participant_id = 2;
 }
 
-message DeleteParticipantResponse {}
+message DeleteParticipantResponse {
+  option (classtime.service.common.public_api) = true;
+}
 
 message InviteClassRequest {
+  option (classtime.service.common.public_api) = true;
   string session_code = 1;
   string class_code = 2;
   bool guests_allowed = 3;
 }
 
-message InviteClassResponse {}
+message InviteClassResponse {
+  option (classtime.service.common.public_api) = true;
+}
 
 message ExportSessionRequest {
+  option (classtime.service.common.public_api) = true;
   string session_code = 1;
   string participant_id = 2;
   classtime.service.session.api.ReportType type = 3;
@@ -190,6 +200,7 @@ message ExportSessionRequest {
 }
 
 message ExportSessionResponse {
+  option (classtime.service.common.public_api) = true;
   reserved 1;
   string export_link = 2;
   string session_export_id = 3;
@@ -253,10 +264,12 @@ message GetAnswerDetailsResponse {
 }
 
 message GetAnswersSummaryRequest {
+  option (classtime.service.common.public_api) = true;
   string session_code = 1;
 }
 
 message GetAnswersSummaryResponse {
+  option (classtime.service.common.public_api) = true;
   repeated classtime.service.question.api.AnswerSummary answers = 1;
 }
 
@@ -445,6 +458,7 @@ message TeamGameBonusResponse {
 }
 
 message JoinSessionRequest {
+  option (classtime.service.common.public_api) = true;
   string code = 1;
   string secret = 2;
   bool reset = 3;
@@ -453,6 +467,7 @@ message JoinSessionRequest {
 }
 
 message JoinSessionResponse {
+  option (classtime.service.common.public_api) = true;
   reserved 2;
   enum Status {
     ERROR = 0;

@@ -13,42 +13,50 @@ option java_outer_classname = "LibraryMessagesProto";
 option java_package = "classtime.service.library.api";
 
 message CreateFolderRequest {
+  option (classtime.service.common.public_api) = true;
   reserved 1;
   string parent_folder_id = 2;
   string title = 3;
 }
 
 message CreateFolderResponse {
+  option (classtime.service.common.public_api) = true;
   FolderInfo folder_info = 1;
 }
 
 message UpdateFolderRequest {
+  option (classtime.service.common.public_api) = true;
   string folder_id = 1;
   string title = 2;
 }
 
 message UpdateFolderResponse {
+  option (classtime.service.common.public_api) = true;
   FolderInfo folder_info = 1;
   repeated FolderInfo child_folders = 2;
   repeated QuestionSetInfo child_question_sets = 3;
 }
 
 message MoveFolderRequest {
+  option (classtime.service.common.public_api) = true;
   string folder_id = 1;
   string target_parent_folder_id = 2;
 }
 
 message MoveFolderResponse {
+  option (classtime.service.common.public_api) = true;
   FolderInfo folder_info = 1;
   repeated FolderInfo child_folders = 2;
   repeated QuestionSetInfo child_question_sets = 3;
 }
 
 message GetFolderRequest {
+  option (classtime.service.common.public_api) = true;
   string folder_id = 1;
 }
 
 message GetFolderResponse {
+  option (classtime.service.common.public_api) = true;
   FolderInfo folder_info = 1;
   repeated FolderInfo child_folders = 2;
   repeated QuestionSetInfo child_question_sets = 3;
@@ -64,20 +72,25 @@ message GetCurriculumFolderResponse {
 }
 
 message SetFolderStatusRequest {
+  option (classtime.service.common.public_api) = true;
   string folder_id = 1; // use for (de)archiving
   repeated string folder_ids = 2; // use for deleting
   EntityStatus status = 3;
 }
 
-message SetFolderStatusResponse {}
+message SetFolderStatusResponse {
+  option (classtime.service.common.public_api) = true;
+}
 
 message GetQuestionSetRequest {
+  option (classtime.service.common.public_api) = true;
   oneof identifier {
     string question_set_id = 1;
     string question_set_secret_link = 2;
   }
 }
 message GetQuestionSetResponse {
+  option (classtime.service.common.public_api) = true;
   QuestionSetInfo question_set_info = 1;
 }
 
@@ -92,6 +105,7 @@ message GetCurriculumQuestionSetResponse {
 }
 
 message CreateQuestionSetRequest {
+  option (classtime.service.common.public_api) = true;
   string folder_id = 1;
   string title = 2;
 
@@ -99,15 +113,18 @@ message CreateQuestionSetRequest {
   string target_teacher_email = 3;
 }
 message CreateQuestionSetResponse {
+  option (classtime.service.common.public_api) = true;
   QuestionSetInfo question_set_info = 1;
 }
 
 message UpdateQuestionSetRequest {
+  option (classtime.service.common.public_api) = true;
   string question_set_id = 1;
   string title = 2;
 }
 
 message UpdateQuestionSetResponse {
+  option (classtime.service.common.public_api) = true;
   QuestionSetInfo question_set_info = 1;
 }
 
@@ -122,42 +139,56 @@ message SetSoloSessionRefRequest {
 message SetSoloSessionRefResponse {}
 
 message MoveQuestionsRequest {
+  option (classtime.service.common.public_api) = true;
   repeated string question_ids = 1;
   string target_question_set_id = 2;
 }
 
-message MoveQuestionsResponse {}
+message MoveQuestionsResponse {
+  option (classtime.service.common.public_api) = true;
+}
 
 message MoveQuestionSetsRequest {
+  option (classtime.service.common.public_api) = true;
   repeated string question_set_id = 1;
   string target_parent_folder_id = 2;
 }
 
 message MoveQuestionSetsResponse {
+  option (classtime.service.common.public_api) = true;
   repeated string question_set_id = 1;
 }
 
 message SetQuestionSetsStatusRequest {
+  option (classtime.service.common.public_api) = true;
   repeated string question_set_ids = 1;
   EntityStatus status = 2;
 }
-message SetQuestionSetsStatusResponse {}
+message SetQuestionSetsStatusResponse {
+  option (classtime.service.common.public_api) = true;
+}
 
 message SetQuestionsStatusRequest {
+  option (classtime.service.common.public_api) = true;
   repeated string question_ids = 1;
   EntityStatus status = 2;
   // When unarchiving questions, you need to set the target QuestionSet
   string target_question_set_id = 3;
 }
 
-message SetQuestionsStatusResponse {}
+message SetQuestionsStatusResponse {
+  option (classtime.service.common.public_api) = true;
+}
 
 message CopyQuestionSetRequest {
+  option (classtime.service.common.public_api) = true;
   string question_set_id = 1;
   string target_parent_folder_id = 2;
 }
 
-message CopyQuestionSetResponse {}
+message CopyQuestionSetResponse {
+  option (classtime.service.common.public_api) = true;
+}
 
 message CopyFolderRequest {
   string folder_id = 1;
@@ -193,15 +224,18 @@ message SubmitQuestionSetForReviewResponse {
 }
 
 message CopyQuestionRequest {
+  option (classtime.service.common.public_api) = true;
   string question_id = 1;
   string target_question_set_id = 2;
 }
 
 message CopyQuestionResponse {
+  option (classtime.service.common.public_api) = true;
   QuestionInfo question = 1;
 }
 
 message ChangeFolderCollaboratorsRequest {
+  option (classtime.service.common.public_api) = true;
   string folder_id = 1;
   string school_id = 2;
   // Note: classtime_ids
@@ -211,27 +245,33 @@ message ChangeFolderCollaboratorsRequest {
 }
 
 message ChangeFolderCollaboratorsResponse {
+  option (classtime.service.common.public_api) = true;
   reserved 1;
   // Note: classtime_ids
   repeated string collaborator_ids = 2;
 }
 
 message GetFolderCollaboratorsRequest {
+  option (classtime.service.common.public_api) = true;
   string folder_id = 1;
 }
 
 message GetFolderCollaboratorsResponse {
+  option (classtime.service.common.public_api) = true;
   repeated classtime.service.common.CollaboratorInfo collaborator_infos = 1;
   classtime.service.common.SchoolInfo school = 2;
   string organization_id = 3;
 }
 
 message ReorderQuestionsRequest {
+  option (classtime.service.common.public_api) = true;
   string question_set_id = 1;
   repeated string question_ids = 2;
 }
 
-message ReorderQuestionsResponse {}
+message ReorderQuestionsResponse {
+  option (classtime.service.common.public_api) = true;
+}
 
 message GetPlaylistDetailsRequest {
   repeated classtime.service.common.PlaylistEntry playlist = 1;
