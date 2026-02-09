@@ -237,6 +237,7 @@ message ResetPasswordResponse {
 }
 
 message CreateTokenRequest {
+  option (classtime.service.common.public_api) = true;
   reserved 2;
   string classtime_id = 1;
   string permission = 3;
@@ -244,6 +245,7 @@ message CreateTokenRequest {
 }
 
 message CreateTokenResponse {
+  option (classtime.service.common.public_api) = true;
   string token = 1;
   google.protobuf.Timestamp valid_until = 2;
 }
@@ -317,6 +319,7 @@ message CreateAccountResponse {
 }
 
 message GetOrCreateAccountsRequest {
+  option (classtime.service.common.public_api) = true;
   message AccountDetails {
     string email = 1;
     classtime.service.common.Role role = 2;
@@ -330,6 +333,7 @@ message GetOrCreateAccountsRequest {
 }
 
 message GetOrCreateAccountsResponse {
+  option (classtime.service.common.public_api) = true;
   message AccountInfo {
     string account_id = 1;
     AccountProfile account_profile = 2;

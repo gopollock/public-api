@@ -2,12 +2,17 @@ syntax = "proto3";
 
 package classtime.service.school;
 
+import "common_messages.proto";
+
 option java_multiple_files = true;
 option java_outer_classname = "SchoolMessagesProto";
 option java_package = "classtime.service.school";
 
 message AssociateTeacherRequest {
+  option (classtime.service.common.public_api) = true;
   string school_id = 1;
   string account_id = 2;
 }
-message AssociateTeacherResponse {}
+message AssociateTeacherResponse {
+  option (classtime.service.common.public_api) = true;
+}

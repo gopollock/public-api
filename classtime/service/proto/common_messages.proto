@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package classtime.service.common;
 
+import "google/protobuf/descriptor.proto";
+
 option java_multiple_files = true;
 option java_outer_classname = "CommonMessagesProto";
 option java_package = "classtime.service.common";
@@ -146,4 +148,8 @@ message SchoolInfo {
     us = 1;
   }
   DataRealm data_realm = 4;
+}
+
+extend google.protobuf.MessageOptions {
+  bool public_api = 50001;
 }

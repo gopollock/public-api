@@ -10,6 +10,7 @@ option java_outer_classname = "ClassMessagesProto";
 option java_package = "classtime.service.classes.api";
 
 message CreateClassRequest {
+  option (classtime.service.common.public_api) = true;
   string title = 1;
   string subject = 2;
   string teacher_classtime_id = 3;
@@ -21,6 +22,7 @@ message CreateClassRequest {
 }
 
 message CreateClassResponse {
+  option (classtime.service.common.public_api) = true;
   ClassInfo class_info = 1;
 }
 
@@ -65,6 +67,7 @@ message GetCoTeachersResponse {
 }
 
 message UpdateCoTeachersRequest {
+  option (classtime.service.common.public_api) = true;
   string class_id = 1;
   string school_id = 2;
   repeated string account_ids = 3; // classtime_ids
@@ -72,6 +75,7 @@ message UpdateCoTeachersRequest {
 }
 
 message UpdateCoTeachersResponse {
+  option (classtime.service.common.public_api) = true;
   repeated classtime.service.common.CollaboratorInfo collaborators = 3;
 }
 
