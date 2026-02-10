@@ -177,4 +177,5 @@ message OrganizationMember {
   classtime.entity.EntityRef account_ref = 1;
   bool is_excluded_from_premium = 2;
   google.protobuf.Timestamp added_at = 3;
+  bool is_admin = 4;
 }
