@@ -490,3 +490,31 @@ message SetOrganizationMetaRequest {
 }
 
 message SetOrganizationMetaResponse {}
+
+message OrganizationMemberUpdate {
+  message MemberAdded {
+    string account_id = 1;
+    bool is_admin = 2;
+    bool is_excluded_from_premium = 3;
+  }
+  message MemberUpdated {
+    string member_id = 1;
+    bool is_admin = 2;
+    bool is_excluded_from_premium = 3;
+  }
+  message MemberRemoved {
+    string member_id = 1;
+  }
+  oneof update {
+    MemberAdded member_added = 1;
+    MemberUpdated member_updated = 2;
+    MemberRemoved member_removed = 3;
+  }
+}
+
+message UpdateOrganizationMembersRequest {
+  string organization_id = 1;
+  repeated OrganizationMemberUpdate organization_member_updates = 2;
+}
+
+message UpdateOrganizationMembersResponse {}
