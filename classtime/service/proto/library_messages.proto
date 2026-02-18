@@ -490,3 +490,20 @@ message SharedQuestionSetInfo {
 message GetSharedQuestionSetResponse {
   SharedQuestionSetInfo question_set_info = 1;
 }
+
+message GetProtectedQuestionsRequest {
+  oneof identifier {
+    string folder_id = 1;
+    string question_set_id = 2;
+  }
+}
+
+message GetProtectedQuestionsResponse {
+  message ShortQuestionInfo {
+    string id = 1;
+    string title = 2;
+    classtime.service.question.api.QuestionKind kind = 3;
+  }
+
+  repeated ShortQuestionInfo questions = 1;
+}
