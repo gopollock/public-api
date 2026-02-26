@@ -153,3 +153,8 @@ message SchoolInfo {
 extend google.protobuf.MessageOptions {
   bool public_api = 50001;
 }
+
+message RawFileUpload {
+  bytes content = 1;
+  string name = 2;
+}
