@@ -171,6 +171,13 @@ message Organization {
   bool is_free_text_auto_validation_disabled = 15;
   OrganizationPlan plan = 17;
   string django_school_ref = 18;
+  repeated OrganizationMerge merge_history = 19;
+}
+
+message OrganizationMerge {
+  google.protobuf.Timestamp merged_at = 1;
+  classtime.entity.EntityRef main_organization_ref = 2;
+  classtime.entity.EntityRef merged_organization_ref = 3;
 }
 
 message OrganizationMember {
