@@ -163,6 +163,7 @@ message Session {
   string google_classroom_assignment_ref = 8;
 
   classtime.service.common.PusherCluster pusher_cluster = 14;
+  bool pusher_disable_websockets = 25;
   classtime.service.common.GameStatus game_status = 15;
   string teacher_chat_id = 18;
 
