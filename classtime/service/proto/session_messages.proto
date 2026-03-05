@@ -141,7 +141,7 @@ message SessionParticipantUpdate {
   string participant_id = 1;
 
   oneof update {
-    string name = 17;
+    string nickname = 17;
     bool is_screen_locked = 18;
     bool is_archived = 19;
     ChatOverride chat_override = 20;
