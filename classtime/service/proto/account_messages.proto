@@ -518,3 +518,10 @@ message UpdateOrganizationMembersRequest {
 }
 
 message UpdateOrganizationMembersResponse {}
+
+message MergeOrganizationsRequest {
+  GroupTitle main_organization_title = 1;
+  GroupTitle merged_organization_title = 2;
+}
+
+message MergeOrganizationsResponse {}
