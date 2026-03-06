@@ -445,6 +445,7 @@ message GetPusherConfigRequest {
 message GetPusherConfigResponse {
   string cluster = 1;
   string api_key = 2;
+  bool pusher_disable_websockets = 3;
 }
 
 message TeamGameBonusRequest {
