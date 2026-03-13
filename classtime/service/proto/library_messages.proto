@@ -507,3 +507,14 @@ message GetProtectedQuestionsResponse {
 
   repeated ShortQuestionInfo questions = 1;
 }
+
+message UpdateQuestionRequest {
+  // This field will eventually be removed. Since Question has its own ID, we do not need to provide QS ID
+  string question_set_id = 1;
+  string question_id = 2;
+  classtime.service.question.api.Question question = 3;
+}
+
+message UpdateQuestionResponse {
+  classtime.service.question.api.Question question = 1;
+}
