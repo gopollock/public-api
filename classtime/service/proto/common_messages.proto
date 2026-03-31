@@ -158,3 +158,13 @@ message RawFileUpload {
   bytes content = 1;
   string name = 2;
 }
+
+message SearchFilter {
+  string id = 1;
+  string value = 2;
+}
+
+message TagBreadcrumb {
+  string tag = 1;
+  string description = 2;
+}
