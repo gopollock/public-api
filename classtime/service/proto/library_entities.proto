@@ -32,11 +32,13 @@ message FolderInfo {
 }
 
 enum QuestionSetPrivacy {
-  DEFAULT = 0;
-  PROTECTED = 1;
-  MODERATION = 2;
-  APPROVED = 3;
-  REJECTED = 4;
+  QUESTION_SET_PRIVACY_UNSPECIFIED = 0;
+  QUESTION_SET_PRIVACY_DEFAULT = 1;
+  QUESTION_SET_PRIVACY_PROTECTED = 2;
+  QUESTION_SET_PRIVACY_MODERATION = 3;
+  QUESTION_SET_PRIVACY_APPROVED = 4;
+  QUESTION_SET_PRIVACY_REJECTED = 5;
+  QUESTION_SET_PRIVACY_PUBLIC = 6;
 }
 
 message QuestionInfo {
@@ -84,4 +86,60 @@ enum EntityStatus {
   ALIVE = 0;
   ARCHIVED = 1;
   DELETED = 2;
+}
+
+message ResourcePool {
+  oneof owner_ref {
+    classtime.entity.EntityRef owner_account_ref = 1;
+    classtime.entity.EntityRef organization_ref = 2;
+  }
+}
+
+enum AccessPermission {
+  ACCESS_PERMISSION_UNSPECIFIED = 0;
+  ACCESS_PERMISSION_READ_ONLY = 1;
+  ACCESS_PERMISSION_READ_WRITE = 2;
+  ACCESS_PERMISSION_READ_WRITE_SHARED = 3;
+}
+
+message Access {
+  classtime.entity.EntityRef account_ref = 1;
+  AccessPermission permission = 2;
+  google.protobuf.Timestamp expires_at = 3;
+}
+
+message Folder {
+  string permanent_id = 1;
+  string title = 2;
+  classtime.entity.EntityRef parent_folder_ref = 3;
+  classtime.entity.EntityRef synchronized_from_ref = 4;
+}
+
+message QuestionSet {
+  string permanent_id = 1;
+  string title = 2;
+  bool is_onboarding = 3;
+  QuestionSetPrivacy privacy = 4;
+  string secret_link = 5;
+
+  message PublicInfo {
+    string extra = 1;
+    string author_name = 2;
+    string description = 3;
+  }
+  PublicInfo public_info = 6;
+
+  enum License {
+    QUESTION_SET_LICENSE_UNSPECIFIED = 0;
+    QUESTION_SET_LICENSE_ZNO = 1;
+    QUESTION_SET_LICENSE_KHAN = 2;
+  }
+  License license = 7;
+
+  classtime.entity.EntityRef parent_folder_ref = 8;
+  classtime.entity.EntityRef derived_from_ref = 9;
+  classtime.entity.EntityRef synchronized_from_ref = 10;
+  classtime.entity.EntityRef anonymous_solo_session_ref = 11;
+  classtime.entity.EntityRef authorized_solo_session_ref = 12;
+  repeated classtime.entity.EntityRef ordered_questions = 13;
 }
