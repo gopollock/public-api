@@ -525,3 +525,15 @@ message MergeOrganizationsRequest {
 }
 
 message MergeOrganizationsResponse {}
+
+message UpdateRosteredOrganizationRequest {
+  string organization_id = 1;
+  string title = 2;
+  OrganizationGroup group = 3;
+  oneof roster_ref {
+    string classlink_ref = 4;
+    string clever_ref = 5;
+  }
+}
+
+message UpdateRosteredOrganizationResponse {}
