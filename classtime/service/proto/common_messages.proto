@@ -168,3 +168,9 @@ message TagBreadcrumb {
   string tag = 1;
   string description = 2;
 }
+
+message BreadCrumb {
+  string id = 1;
+  string title = 2;
+  string icon_image = 3;
+}
