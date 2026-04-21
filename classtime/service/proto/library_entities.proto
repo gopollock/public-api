@@ -80,6 +80,7 @@ message QuestionSetInfo {
   classtime.entity.EntityRef publisher_account_ref = 21;
   string extra = 22;
   string author = 23;
+  repeated common.BreadCrumb breadcrumbs = 24;
 }
 
 enum EntityStatus {
