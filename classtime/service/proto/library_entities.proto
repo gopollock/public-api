@@ -52,6 +52,8 @@ message QuestionInfo {
   bool is_archived = 8;
   bool is_shared = 9;
   bool is_readonly = 10;
+  bool is_onboarding = 13;
+  bool is_solution_empty = 14;
   repeated classtime.service.common.QuestionTag tags = 11;
   classtime.service.question.api.ContextMaterial context_material = 12;
 }
