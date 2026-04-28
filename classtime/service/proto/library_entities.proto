@@ -29,6 +29,7 @@ message FolderInfo {
   string icon_image = 11;
   google.protobuf.Timestamp expires_at = 12;
   LibraryItemProvider provider = 13;
+  repeated common.BreadCrumb breadcrumbs = 14;
 }
 
 enum QuestionSetPrivacy {
