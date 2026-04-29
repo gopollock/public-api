@@ -438,6 +438,7 @@ message GetQuestionRequest {
 
 message GetQuestionResponse {
   classtime.service.question.api.Question question = 1;
+  repeated QuestionLock locks = 2;
 }
 
 message CreateQuestionLockRequest {

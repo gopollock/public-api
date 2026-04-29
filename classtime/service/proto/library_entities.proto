@@ -86,6 +86,11 @@ message QuestionSetInfo {
   repeated common.BreadCrumb breadcrumbs = 24;
 }
 
+message QuestionLock {
+  string id = 1;
+  classtime.entity.EntityRef owner_account_ref = 2;
+}
+
 enum EntityStatus {
   ALIVE = 0;
   ARCHIVED = 1;
