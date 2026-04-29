@@ -45,7 +45,11 @@ message Purchase {
   string external_id = 2;
 
   // Identifies the 'products' for which subscriptions are bought. Must not be empty.
-  repeated classtime.entity.EntityRef question_banks_ref = 3;
+  // WARNING: This is NOT a reference by entity ID. Instead it references the 'product_id' field of the
+  //          QuestionBank entity!
+  // TODO(https://app.asana.com/1/29774015570538/project/1177833412654353/task/1214392079033219?focus=true):
+  //     Replace by a simple 'string' type field.
+  repeated classtime.entity.EntityRef product_ids = 3;
 
   SubscriptionPeriod subscription_period = 4;
 
@@ -70,7 +74,11 @@ message SubscriptionExtension {
 }
 
 message QuestionBankSubscription {
-  classtime.entity.EntityRef question_bank_ref = 1;
+  // WARNING: This is NOT a reference by entity ID. Instead it references the 'product_id' field of the
+  //          QuestionBank entity!
+  // TODO(https://app.asana.com/1/29774015570538/project/1177833412654353/task/1214392079033219?focus=true):
+  //     Replace by a simple 'string' type field.
+  classtime.entity.EntityRef product_id = 1;
 }
 
 // Specifies that an Account has access to a QuestionBank for a certain time.
@@ -103,5 +111,5 @@ message SubscriptionExtensionInfo {
 
 message SubscriptionBasicInfo {
   classtime.entity.EntityRef subscription_ref = 1;
-  classtime.entity.EntityRef question_bank_ref = 2;
+  classtime.entity.EntityRef product_id = 2;
 }
