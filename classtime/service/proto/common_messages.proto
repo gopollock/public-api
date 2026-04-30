@@ -3,6 +3,7 @@ syntax = "proto3";
 package classtime.service.common;
 
 import "google/protobuf/descriptor.proto";
+import "google/protobuf/timestamp.proto";
 
 option java_multiple_files = true;
 option java_outer_classname = "CommonMessagesProto";
@@ -173,4 +174,11 @@ message BreadCrumb {
   string id = 1;
   string title = 2;
   string icon_image = 3;
+}
+
+message QuestionBank {
+  int32 id = 1;
+  bool is_subscribed = 2;
+  bool is_paid_content = 3;
+  google.protobuf.Timestamp subscription_period_end = 4;
 }

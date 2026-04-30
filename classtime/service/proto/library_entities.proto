@@ -30,6 +30,7 @@ message FolderInfo {
   google.protobuf.Timestamp expires_at = 12;
   LibraryItemProvider provider = 13;
   repeated common.BreadCrumb breadcrumbs = 14;
+  common.QuestionBank derived_question_bank_details = 15;
 }
 
 enum QuestionSetPrivacy {
