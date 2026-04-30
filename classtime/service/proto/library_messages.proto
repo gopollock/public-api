@@ -71,6 +71,13 @@ message GetCurriculumFolderResponse {
   FolderInfo folder_info = 1;
 }
 
+message DeleteCurriculumFolderRequest {
+  string question_bank_id = 2;
+}
+
+message DeleteCurriculumFolderResponse {
+}
+
 message SetFolderStatusRequest {
   option (classtime.service.common.public_api) = true;
   string folder_id = 1; // use for (de)archiving
