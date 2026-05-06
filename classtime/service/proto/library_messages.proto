@@ -75,8 +75,7 @@ message DeleteCurriculumFolderRequest {
   string question_bank_id = 2;
 }
 
-message DeleteCurriculumFolderResponse {
-}
+message DeleteCurriculumFolderResponse {}
 
 message SetFolderStatusRequest {
   option (classtime.service.common.public_api) = true;
