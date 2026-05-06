@@ -64,6 +64,11 @@ message AccountMerge {
   classtime.entity.EntityRef main_account_ref = 3;
 }
 
+message AdminPermissions {
+  repeated DataRealm data_realms = 1;
+  bool has_full_access = 2;
+}
+
 message Account {
   reserved 5, 6, 8, 10;
   UserProfile user_profile = 1;
@@ -73,6 +78,7 @@ message Account {
   repeated classtime.service.common.Role roles = 9;
   repeated AccountMerge merge_history = 11;
   string country_code = 12;
+  AdminPermissions admin_permissions = 13;
 }
 
 message AccountExtensionState {

@@ -537,3 +537,16 @@ message UpdateRosteredOrganizationRequest {
 }
 
 message UpdateRosteredOrganizationResponse {}
+
+message SuperLoginRequest {
+  oneof identifier {
+    string classtime_id = 1;
+    string email = 2;
+  }
+  classtime.service.common.Role role = 3;
+  string justification = 4;
+}
+
+message SuperLoginResponse {
+  string token = 1;
+}

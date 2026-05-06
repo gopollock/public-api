@@ -40,3 +40,8 @@ message AccountMergeEvent {
   string main_account_id = 1;
   string merged_account_id = 2;
 }
+
+message SuperLoginEvent {
+  string justification = 1;
+  string target_account_id = 2;
+}
