@@ -384,11 +384,9 @@ message GradeAnswersRequest {
   reserved 1;
 
   message GradedAnswer {
-    reserved 2;
+    reserved 2, 4;
     string answer_id = 1;
     classtime.service.common.GradingPoint grading_points = 3;
-    // Used to call a different Django endpoint for free-text questions:
-    classtime.service.question.api.QuestionKind kind = 4;
   }
 
   string question_id = 4;
