@@ -158,6 +158,7 @@ extend google.protobuf.MessageOptions {
 message RawFileUpload {
   bytes content = 1;
   string name = 2;
+  optional string content_type = 3;
 }
 
 message SearchFilter {
