@@ -69,6 +69,55 @@ message AdminPermissions {
   bool has_full_access = 2;
 }
 
+enum Gender {
+  GENDER_UNSPECIFIED = 0;
+  GENDER_MALE = 1;
+  GENDER_FEMALE = 2;
+}
+
+// Represents Clever format
+enum Race {
+  RACE_UNSPECIFIED = 0;
+  RACE_AMERICAN_INDIAN = 1;
+  RACE_ASIAN = 2;
+  RACE_BLACK_OR_AFRICAN_AMERICAN = 3;
+  RACE_CAUCASIAN = 4;
+  RACE_TWO_OR_MORE_RACES = 5;
+  RACE_HAWAIIAN_OR_PACIFIC_ISLANDER = 6;
+}
+
+message ClasslinkDemographicDetails {
+  bool is_american_indian_or_alaska_native = 1;
+  bool is_asian = 2;
+  bool is_black_or_african_american = 3;
+  bool is_native_hawaiian_or_other_pacific_islander = 4;
+  bool is_white = 5;
+  bool is_two_or_more_races = 6;
+  bool is_hispanic_or_latino = 7;
+}
+
+message CleverDemographicDetails {
+  Race race = 1;
+  bool hispanic_ethnicity = 2;
+}
+
+message StudentMetadata {
+  string grade = 1;
+  bool is_english_learner = 2;
+  bool has_special_education_status = 3;
+  Gender gender = 4;
+  oneof demographics {
+    ClasslinkDemographicDetails classlink_details = 5;
+    CleverDemographicDetails clever_details = 6;
+  }
+}
+
+message AccountMetadata {
+  oneof kind {
+    StudentMetadata student = 1;
+  }
+}
+
 message Account {
   reserved 5, 6, 8, 10;
   UserProfile user_profile = 1;
@@ -79,6 +128,7 @@ message Account {
   repeated AccountMerge merge_history = 11;
   string country_code = 12;
   AdminPermissions admin_permissions = 13;
+  AccountMetadata metadata = 14;
 }
 
 message AccountExtensionState {
