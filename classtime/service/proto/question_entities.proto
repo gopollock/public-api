@@ -50,6 +50,8 @@ message QuestionInfo {
   repeated string tags = 11; // tag names
   QuestionImage image = 12;
   QuestionAudio audio = 13;
+  classtime.entity.EntityRef image_ref = 15;
+  classtime.entity.EntityRef audio_ref = 16;
 }
 
 // Question Types Messages
@@ -251,12 +253,11 @@ message ContextMaterial {
 
 // Entity nested in Session
 message Question {
-  reserved 3, 22, 100;
+  reserved 3, 22, 35, 100;
   QuestionInfo question_info = 1;
   classtime.entity.EntityRef derived_from_question_ref = 2; // UUID reference to django model 'library.Question'
   string explanation_draftjs = 32;
   ContextMaterial context_material = 34;
-  repeated string tags = 35;
   string permanent_id = 36;
   oneof question {
     BooleanQuestion question_boolean = 10;
