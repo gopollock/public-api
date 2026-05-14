@@ -30,6 +30,7 @@ message ClassInfo {
   }
   string grade = 16;
   string owner_classtime_id = 17;
+  string period = 18;
 }
 
 message ClassStudentInfo {
