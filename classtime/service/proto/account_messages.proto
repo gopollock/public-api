@@ -180,6 +180,14 @@ message UpdateAccountInfoRequest {
   }
 }
 
+message UpdateRosteredAccountRequest {
+  string account_id = 1;
+  ChangeProfileNames names = 2;
+  AccountMetadata metadata = 3;
+}
+
+message UpdateRosteredAccountResponse {}
+
 message UpdateAccountRequest {
   string account_id = 1;
   oneof update {
