@@ -31,6 +31,7 @@ message FolderInfo {
   LibraryItemProvider provider = 13;
   repeated common.BreadCrumb breadcrumbs = 14;
   common.QuestionBank derived_question_bank_details = 15;
+  string synchronized_from_ref = 16;
 }
 
 enum QuestionSetPrivacy {
