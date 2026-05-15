@@ -51,6 +51,7 @@ message UpdateClassInfoRequest {
   string subject = 3;
   string owner_classtime_id = 5;
   string grade = 6;
+  string period = 7;
 }
 
 message UpdateClassInfoResponse {
