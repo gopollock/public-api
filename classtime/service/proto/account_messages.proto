@@ -568,3 +568,10 @@ message SuperLoginRequest {
 message SuperLoginResponse {
   string token = 1;
 }
+
+message InviteToOrganizationRequest {
+  string organization_id = 1;
+  repeated string teacher_emails = 2;
+}
+
+message InviteToOrganizationResponse {}
