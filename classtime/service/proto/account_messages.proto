@@ -406,6 +406,8 @@ message GetOrCreateOrganizationRequest {
   bool are_ai_comments_allowed = 3;
   OrganizationGroup group = 4;
   bool is_free_text_auto_validation_disabled = 5;
+  string country_code = 7;
+  DataRealm data_realm = 8;
 }
 
 message GetOrCreateOrganizationResponse {
