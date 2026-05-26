@@ -79,7 +79,7 @@ message HighlightTextQuestion {
     string text_id = 2;
   }
   message Cloze {
-    repeated ClozeChoice cloze_choice = 1;
+    repeated ClozeChoice cloze_choices = 1;
     string text_id = 2;
   }
 

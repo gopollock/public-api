@@ -348,7 +348,7 @@ message LibraryClozeChoice {
 }
 
 message LibraryCloze {
-  repeated LibraryClozeChoice cloze_choice = 1;
+  repeated LibraryClozeChoice cloze_choices = 1;
   /* referenced in [HighlightTextLibraryQuestion.template_content] */
   string template_id = 2;
 }
