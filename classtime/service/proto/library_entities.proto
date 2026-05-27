@@ -86,6 +86,7 @@ message QuestionSetInfo {
   string extra = 22;
   string author = 23;
   repeated common.BreadCrumb breadcrumbs = 24;
+  classtime.entity.EntityRef derived_from_ref = 25;
 }
 
 message QuestionLock {
