@@ -233,6 +233,7 @@ message Organization {
   OrganizationPlan plan = 17;
   string django_school_ref = 18;
   repeated OrganizationMerge merge_history = 19;
+  string client_id = 20;
 }
 
 message OrganizationMerge {
