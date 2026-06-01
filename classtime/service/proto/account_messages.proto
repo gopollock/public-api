@@ -450,6 +450,7 @@ message OrganizationSearchInfo {
   bool is_premium_enabled = 7;
   OrganizationGroup group = 8;
   string country_code = 9;
+  int32 members_count = 10;
 }
 
 message FindOrganizationsByTitleRequest {
