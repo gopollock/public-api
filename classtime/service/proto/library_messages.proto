@@ -5,6 +5,7 @@ package classtime.service.library.api;
 import "common_messages.proto";
 import "entity_store_messages.proto";
 import "google/protobuf/struct.proto";
+import "google/protobuf/timestamp.proto";
 import "library_entities.proto";
 import "question_entities.proto";
 
@@ -445,6 +446,7 @@ message GetQuestionRequest {
 message GetQuestionResponse {
   classtime.service.question.api.Question question = 1;
   repeated QuestionLock locks = 2;
+  google.protobuf.Timestamp modified_at = 3;
 }
 
 message CreateQuestionLockRequest {
@@ -520,8 +522,10 @@ message UpdateQuestionRequest {
   string question_set_id = 1;
   string question_id = 2;
   classtime.service.question.api.Question question = 3;
+  google.protobuf.Timestamp modified_at = 4;
 }
 
 message UpdateQuestionResponse {
   classtime.service.question.api.Question question = 1;
+  google.protobuf.Timestamp modified_at = 2;
 }
