@@ -578,3 +578,10 @@ message InviteToOrganizationRequest {
 }
 
 message InviteToOrganizationResponse {}
+
+message UpdateMergedPipedriveOrgClientIdRequest {
+  string main_client_id = 1;
+  string merged_client_id = 2;
+}
+
+message UpdateMergedPipedriveOrgClientIdResponse {}
