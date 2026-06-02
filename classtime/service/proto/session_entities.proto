@@ -61,6 +61,18 @@ message GradingScaleConfig {
   repeated GradingScaleEntry grading_scale_entries = 4;
 }
 
+enum SpellCheckMode {
+  SPELL_CHECK_MODE_UNSPECIFIED = 0;
+  SPELL_CHECK_MODE_UNDERLINE = 1;
+  SPELL_CHECK_MODE_SUGGEST = 2;
+}
+
+message SpellCheckConfig {
+  bool is_enabled = 1;
+  SpellCheckMode mode = 2;
+  string language = 3;
+}
+
 message SessionSettings {
   reserved 2, 4, 6, 17, 18, 19, 22, 31;
   enum EvaluationMode {
@@ -125,6 +137,8 @@ message SessionSettings {
   GradingScaleConfig grading_scale_config = 36;
 
   Challenge challenge = 37;
+
+  SpellCheckConfig spell_check_config = 38;
 }
 
 enum SessionType {
