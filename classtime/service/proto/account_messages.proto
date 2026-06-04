@@ -582,6 +582,7 @@ message InviteToOrganizationResponse {}
 message UpdateMergedPipedriveOrgClientIdRequest {
   string main_client_id = 1;
   string merged_client_id = 2;
+  string authentication = 3;
 }
 
 message UpdateMergedPipedriveOrgClientIdResponse {}
