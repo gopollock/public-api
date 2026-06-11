@@ -447,6 +447,7 @@ message GetQuestionResponse {
   classtime.service.question.api.Question question = 1;
   repeated QuestionLock locks = 2;
   google.protobuf.Timestamp modified_at = 3;
+  repeated classtime.service.common.QuestionTag tags = 4;
 }
 
 message CreateQuestionLockRequest {
