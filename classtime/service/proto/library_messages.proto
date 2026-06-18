@@ -91,11 +91,14 @@ message SetFolderStatusResponse {
 
 message GetQuestionSetRequest {
   option (classtime.service.common.public_api) = true;
-  oneof identifier {
-    string question_set_id = 1;
-    string question_set_secret_link = 2;
-  }
+  reserved 2;
+  string question_set_id = 1;
 }
+
+message GetQuestionSetBySecretRequest {
+  string question_set_secret_link = 1;
+}
+
 message GetQuestionSetResponse {
   option (classtime.service.common.public_api) = true;
   QuestionSetInfo question_set_info = 1;
