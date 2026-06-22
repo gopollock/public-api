@@ -75,6 +75,7 @@ message GetSessionDetailsResponse {
   google.protobuf.Duration time_until_session_close = 7;
   bool are_free_text_predictions_available = 8; // For teacher dashboard only
   bool is_archived = 9;
+  map<string, string> context_material_access_tokens = 10; // question ID -> token
 }
 
 message SetSessionSettingsRequest {
@@ -786,6 +787,7 @@ message GetGradingScaleSystemResponse {
 
 message GetContextMaterialRequest {
   string question_id = 1;
+  string access_token = 2;
 }
 
 message GetContextMaterialResponse {
