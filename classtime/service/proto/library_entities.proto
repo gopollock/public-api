@@ -88,6 +88,8 @@ message QuestionSetInfo {
   string author = 23;
   repeated common.BreadCrumb breadcrumbs = 24;
   classtime.entity.EntityRef derived_from_ref = 25;
+  // We need it because django returns only questionIds. Should be removed after switching to implementation
+  bool has_questions_with_empty_solutions = 27 [deprecated = true];
 }
 
 message QuestionLock {
