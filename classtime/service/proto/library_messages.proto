@@ -173,6 +173,9 @@ message SetQuestionSetsStatusRequest {
   option (classtime.service.common.public_api) = true;
   repeated string question_set_ids = 1;
   EntityStatus status = 2;
+  // TODO(https://app.asana.com/1/29774015570538/project/1176787179185737/task/1215965454264578?focus=true)
+  // This field will be removed after the migration off Django is complete.
+  string parent_folder_id = 3 [deprecated = true];
 }
 message SetQuestionSetsStatusResponse {
   option (classtime.service.common.public_api) = true;
