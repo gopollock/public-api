@@ -586,3 +586,11 @@ message UpdateMergedPipedriveOrgClientIdRequest {
 }
 
 message UpdateMergedPipedriveOrgClientIdResponse {}
+
+message MigrateCleverSubjectRequest {
+  string account_id = 1;
+  string v3_subject = 2;
+  string legacy_subject = 3;
+}
+
+message MigrateCleverSubjectResponse {}
