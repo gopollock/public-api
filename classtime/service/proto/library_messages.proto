@@ -104,6 +104,16 @@ message GetQuestionSetResponse {
   QuestionSetInfo question_set_info = 1;
 }
 
+message GetQuestionSetForPrintoutRequest {
+  string question_set_id = 1;
+}
+
+message GetQuestionSetForPrintoutResponse {
+  string title = 1;
+  string secret_link = 2;
+  repeated classtime.service.question.api.Question questions = 3;
+}
+
 message GetCurriculumQuestionSetRequest {
   string synchronized_from_question_set_id = 1;
   string question_bank_id = 2;
