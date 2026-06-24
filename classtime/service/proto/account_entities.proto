@@ -56,6 +56,8 @@ message AuthenticationMethod {
 
   int32 failed_login_attempts = 6;
   google.protobuf.Timestamp last_success_login_at = 7;
+
+  string legacy_subject = 8;
 }
 
 message AccountMerge {
