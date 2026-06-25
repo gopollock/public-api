@@ -111,10 +111,10 @@ message ResourcePool {
 }
 
 enum AccessPermission {
+  reserved 3;
   ACCESS_PERMISSION_UNSPECIFIED = 0;
   ACCESS_PERMISSION_READ_ONLY = 1;
   ACCESS_PERMISSION_READ_WRITE = 2;
-  ACCESS_PERMISSION_READ_WRITE_SHARED = 3;
 }
 
 message Access {
