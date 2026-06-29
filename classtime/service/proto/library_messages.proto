@@ -13,6 +13,78 @@ option java_multiple_files = true;
 option java_outer_classname = "LibraryMessagesProto";
 option java_package = "classtime.service.library.api";
 
+message FolderInfo {
+  string id = 1;
+  string title = 2;
+  string parent_id = 3;
+  bool is_shared = 4;
+  bool is_readonly = 5;
+  bool is_archived = 6;
+  string resource_pool_id = 7;
+  google.protobuf.Timestamp modified_at = 9;
+  string root_folder_id = 10;
+  string icon_image = 11;
+  google.protobuf.Timestamp expires_at = 12;
+  LibraryItemProvider provider = 13;
+  repeated common.BreadCrumb breadcrumbs = 14;
+  common.QuestionBank derived_question_bank_details = 15;
+  string synchronized_from_ref = 16;
+}
+
+message QuestionSetInfo {
+  string id = 1;
+  string title = 2;
+  int32 question_count = 3;
+  classtime.service.common.GradingPoint max_points = 4;
+  string parent_folder_id = 5;
+  bool is_shared = 6;
+  bool is_readonly = 7;
+  bool is_archived = 8;
+  string resource_pool_id = 9;
+  google.protobuf.Timestamp created_at = 10;
+  google.protobuf.Timestamp modified_at = 11;
+  string root_folder_id = 12;
+  bool is_onboarding = 13;
+  QuestionSetPrivacy privacy = 14;
+  repeated QuestionInfo questions = 15;
+  classtime.entity.EntityRef entity_store_session_ref = 16;
+  string entity_store_session_id = 28;
+  classtime.entity.EntityRef question_bank_ref = 17;
+  string question_bank_id = 29;
+  classtime.entity.EntityRef anonymous_solo_session_ref = 18;
+  string anonymous_solo_session_id = 30;
+  classtime.entity.EntityRef authorized_solo_session_ref = 19;
+  string authorized_solo_session_id = 31;
+  string solo_session_link = 20;
+  string secret_link = 26;
+  classtime.entity.EntityRef publisher_account_ref = 21;
+  string publisher_account_id = 32;
+  string extra = 22;
+  string author = 23;
+  repeated common.BreadCrumb breadcrumbs = 24;
+  classtime.entity.EntityRef derived_from_ref = 25;
+  string derived_from_id = 33;
+  // We need it because django returns only questionIds. Should be removed after switching to implementation
+  bool has_questions_with_empty_solutions = 27 [deprecated = true];
+}
+
+message QuestionInfo {
+  string id = 1;
+  string title = 2;
+  classtime.service.question.api.QuestionKind kind = 3;
+  google.protobuf.Timestamp created_at = 4;
+  google.protobuf.Timestamp modified_at = 5;
+  classtime.service.common.GradingPoint weight = 6;
+  bool is_poll = 7;
+  bool is_archived = 8;
+  bool is_shared = 9;
+  bool is_readonly = 10;
+  bool is_onboarding = 13;
+  bool is_solution_empty = 14;
+  repeated classtime.service.common.QuestionTag tags = 11;
+  classtime.service.question.api.ContextMaterial context_material = 12;
+}
+
 message CreateFolderRequest {
   option (classtime.service.common.public_api) = true;
   reserved 1;
