@@ -343,6 +343,7 @@ message AccountInfo {
 message GetOrCreateRosteredAccountRequest {
   AccountDetails account_details = 1;
   AccountMetadata metadata = 2;
+  string legacy_subject = 3;
 }
 
 message GetOrCreateRosteredAccountResponse {
