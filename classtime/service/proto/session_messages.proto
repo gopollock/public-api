@@ -203,7 +203,7 @@ message ExportSessionRequest {
 message ExportSessionResponse {
   option (classtime.service.common.public_api) = true;
   reserved 1;
-  string export_link = 2;
+  string secret_export_link = 2;
   string session_export_id = 3;
 }
 
