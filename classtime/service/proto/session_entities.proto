@@ -324,7 +324,7 @@ message AnswerEmbeddingUsage {
 message SessionExport {
   reserved 7;
   ReportType type = 1;
-  string export_link = 2;
+  string secret_export_link = 2;
   classtime.entity.EntityRef session_participant = 3;
   string locale = 4;
   string auth_token = 5;
