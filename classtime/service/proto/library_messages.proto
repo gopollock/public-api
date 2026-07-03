@@ -566,6 +566,9 @@ message GetQuestionSetShareTokenResponse {
 
 message ImportSharedQuestionSetRequest {
   string question_set_id = 1;
+  string secret_link = 3;
+
+  // TODO(https://app.asana.com/1/29774015570538/project/1176787179185737/task/1216244677554412): Remove legacy field.
   string token = 2;
 }
 
@@ -575,7 +578,10 @@ message ImportSharedQuestionSetResponse {
 
 message GetSharedQuestionSetRequest {
   string question_set_id = 1;
-  string token = 2;
+  string secret_link = 3;
+
+  // TODO(https://app.asana.com/1/29774015570538/project/1176787179185737/task/1216244677554412): Remove legacy field.
+  string token = 2; // Legacy field. Will be removed.
 }
 
 message SharedQuestionSetInfo {
