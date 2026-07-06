@@ -52,8 +52,6 @@ message QuestionSetInfo {
   repeated QuestionInfo questions = 15;
   classtime.entity.EntityRef entity_store_session_ref = 16;
   string entity_store_session_id = 28;
-  classtime.entity.EntityRef question_bank_ref = 17;
-  string question_bank_id = 29;
   classtime.entity.EntityRef anonymous_solo_session_ref = 18;
   string anonymous_solo_session_id = 30;
   classtime.entity.EntityRef authorized_solo_session_ref = 19;
@@ -69,6 +67,10 @@ message QuestionSetInfo {
   string derived_from_id = 33;
   // We need it because django returns only questionIds. Should be removed after switching to implementation
   bool has_questions_with_empty_solutions = 27 [deprecated = true];
+
+  // curriculum fields, to be removed after the switch to curriculum service endpoints
+  classtime.entity.EntityRef question_bank_ref = 17;
+  string question_bank_id = 29;
 }
 
 message QuestionInfo {
