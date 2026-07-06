@@ -23,10 +23,13 @@ message FolderInfo {
   string resource_pool_id = 7;
   google.protobuf.Timestamp modified_at = 9;
   string root_folder_id = 10;
-  string icon_image = 11;
   google.protobuf.Timestamp expires_at = 12;
-  LibraryItemProvider provider = 13;
   repeated common.BreadCrumb breadcrumbs = 14;
+
+  // TODO(https://app.asana.com/1/29774015570538/project/1176787179185737/task/1216299425862178):
+  // curriculum fields, to be removed after the switch to curriculum service endpoints
+  string icon_image = 11;
+  LibraryItemProvider provider = 13;
   common.QuestionBank derived_question_bank_details = 15;
   string synchronized_from_ref = 16;
 }
