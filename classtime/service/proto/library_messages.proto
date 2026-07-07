@@ -629,3 +629,11 @@ message UpdateQuestionResponse {
   classtime.service.question.api.Question question = 1;
   google.protobuf.Timestamp modified_at = 2;
 }
+
+message ContainsQuestionRequest {
+  string permanent_id = 1;
+}
+
+message ContainsQuestionResponse {
+  bool contains_question = 1;
+}
