@@ -381,6 +381,7 @@ message GetOrganizationsRequest {
 
 message GetOrganizationsResponse {
   repeated OrganizationInfo organizations = 1;
+  repeated string admin_organization_ids = 2;
 }
 
 message AssociateMemberRequest {
