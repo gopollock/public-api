@@ -157,6 +157,14 @@ message SetFolderStatusResponse {
   option (classtime.service.common.public_api) = true;
 }
 
+message ContainsFoldersRequest {
+  repeated string permanent_ids = 1;
+}
+
+message ContainsFoldersResponse {
+  bool contains_folders = 1;
+}
+
 message GetQuestionSetRequest {
   option (classtime.service.common.public_api) = true;
   reserved 2;
