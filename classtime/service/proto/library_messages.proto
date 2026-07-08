@@ -629,6 +629,14 @@ message UpdateQuestionResponse {
   google.protobuf.Timestamp modified_at = 2;
 }
 
+message ContainsQuestionSetsRequest {
+  repeated string permanent_ids = 1;
+}
+
+message ContainsQuestionSetsResponse {
+  bool contains_question_sets = 1;
+}
+
 message ContainsQuestionRequest {
   string permanent_id = 1;
 }
