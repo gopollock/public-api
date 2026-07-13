@@ -637,10 +637,10 @@ message ContainsQuestionSetsResponse {
   bool contains_question_sets = 1;
 }
 
-message ContainsQuestionRequest {
-  string permanent_id = 1;
+message ContainsQuestionsRequest {
+  repeated string permanent_ids = 1;
 }
 
-message ContainsQuestionResponse {
-  bool contains_question = 1;
+message ContainsQuestionsResponse {
+  bool contains_questions = 1;
 }
