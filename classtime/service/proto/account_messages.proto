@@ -318,6 +318,21 @@ message GetAccountIdByEmailResponse {
   string account_id = 1;
 }
 
+message SearchAccountsByEmailRequest {
+  string query = 1;
+  classtime.service.common.Role role = 2;
+  int32 limit = 3;
+}
+
+message AccountSearchResult {
+  string account_id = 1;
+  string email = 2;
+}
+
+message SearchAccountsByEmailResponse {
+  repeated AccountSearchResult results = 1;
+}
+
 message CreateAccountRequest {
   Account account = 1;
 }
