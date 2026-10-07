@@ -13,6 +13,17 @@ option java_multiple_files = true;
 option java_outer_classname = "LibraryMessagesProto";
 option java_package = "classtime.service.library.api";
 
+enum EntityStatus {
+  ENTITY_STATUS_ALIVE = 0;
+  ENTITY_STATUS_ARCHIVED = 1;
+  ENTITY_STATUS_DELETED = 2;
+}
+
+message LibraryItemProvider {
+  string title = 1;
+  string description = 2;
+}
+
 message FolderInfo {
   string id = 1;
   string title = 2;
@@ -35,6 +46,7 @@ message FolderInfo {
 }
 
 message QuestionSetInfo {
+  reserved 34;
   string id = 1;
   string title = 2;
   int32 question_count = 3;
@@ -49,7 +61,8 @@ message QuestionSetInfo {
   string root_folder_id = 12;
   bool is_onboarding = 13;
   QuestionSetPrivacy privacy = 14;
-  repeated QuestionInfo questions = 15;
+  // Should use `question_infos` on GetQuestionSetResponse / GetCurriculumQuestionSetResponse instead.
+  repeated QuestionInfo questions = 15 [deprecated = true];
   classtime.entity.EntityRef entity_store_session_ref = 16;
   string entity_store_session_id = 28;
   classtime.entity.EntityRef anonymous_solo_session_ref = 18;
@@ -65,8 +78,7 @@ message QuestionSetInfo {
   repeated common.BreadCrumb breadcrumbs = 24;
   classtime.entity.EntityRef derived_from_ref = 25;
   string derived_from_id = 33;
-  // We need it because django returns only questionIds. Should be removed after switching to implementation
-  bool has_questions_with_empty_solutions = 27 [deprecated = true];
+  bool has_questions_with_empty_solutions = 27;
 
   // curriculum fields, to be removed after the switch to curriculum service endpoints
   classtime.entity.EntityRef question_bank_ref = 17;
@@ -86,7 +98,8 @@ message QuestionInfo {
   bool is_readonly = 10;
   bool is_onboarding = 13;
   bool is_solution_empty = 14;
-  repeated classtime.service.common.QuestionTag tags = 11;
+  repeated classtime.service.common.QuestionTag tags = 11 [deprecated = true];
+  repeated string tag_names = 15;
   classtime.service.question.api.ContextMaterial context_material = 12;
 }
 
@@ -126,6 +139,7 @@ message MoveFolderResponse {
   FolderInfo folder_info = 1;
   repeated FolderInfo child_folders = 2;
   repeated QuestionSetInfo child_question_sets = 3;
+  string operation_id = 4;
 }
 
 message GetFolderRequest {
@@ -148,13 +162,17 @@ message DeleteCurriculumFolderResponse {}
 
 message SetFolderStatusRequest {
   option (classtime.service.common.public_api) = true;
-  string folder_id = 1; // use for (de)archiving
-  repeated string folder_ids = 2; // use for deleting
+  // Deprecated: use folder_ids instead.
+  // TODO(https://app.asana.com/1/29774015570538/task/1217909098955338?focus=true): drop the field
+  string folder_id = 1 [deprecated = true];
+  repeated string folder_ids = 2;
   EntityStatus status = 3;
+  string target_folder_id = 4;
 }
 
 message SetFolderStatusResponse {
   option (classtime.service.common.public_api) = true;
+  string operation_id = 1;
 }
 
 message ContainsFoldersRequest {
@@ -178,6 +196,7 @@ message GetQuestionSetBySecretRequest {
 message GetQuestionSetResponse {
   option (classtime.service.common.public_api) = true;
   QuestionSetInfo question_set_info = 1;
+  repeated QuestionInfo question_infos = 2;
 }
 
 message GetQuestionSetForPrintoutRequest {
@@ -198,6 +217,7 @@ message GetCurriculumQuestionSetRequest {
 
 message GetCurriculumQuestionSetResponse {
   QuestionSetInfo question_set_info = 1;
+  repeated QuestionInfo question_infos = 2;
 }
 
 message CreateQuestionSetRequest {
@@ -211,6 +231,7 @@ message CreateQuestionSetRequest {
 message CreateQuestionSetResponse {
   option (classtime.service.common.public_api) = true;
   QuestionSetInfo question_set_info = 1;
+  repeated QuestionInfo question_infos = 2;
 }
 
 message UpdateQuestionSetRequest {
@@ -222,6 +243,7 @@ message UpdateQuestionSetRequest {
 message UpdateQuestionSetResponse {
   option (classtime.service.common.public_api) = true;
   QuestionSetInfo question_set_info = 1;
+  repeated QuestionInfo question_infos = 2;
 }
 
 message SetSoloSessionRefRequest {
@@ -259,9 +281,7 @@ message SetQuestionSetsStatusRequest {
   option (classtime.service.common.public_api) = true;
   repeated string question_set_ids = 1;
   EntityStatus status = 2;
-  // TODO(https://app.asana.com/1/29774015570538/project/1176787179185737/task/1215965454264578?focus=true)
-  // This field will be removed after the migration off Django is complete.
-  string parent_folder_id = 3 [deprecated = true];
+  string parent_folder_id = 3;
 }
 message SetQuestionSetsStatusResponse {
   option (classtime.service.common.public_api) = true;
@@ -294,7 +314,9 @@ message CopyFolderRequest {
   string parent_folder_id = 2;
 }
 
-message CopyFolderResponse {}
+message CopyFolderResponse {
+  string operation_id = 1;
+}
 
 message GetTrashBinItemsRequest {}
 
@@ -336,7 +358,7 @@ message CopyQuestionResponse {
 message ChangeFolderCollaboratorsRequest {
   option (classtime.service.common.public_api) = true;
   string folder_id = 1;
-  string school_id = 2;
+  string organization_id = 2;
   // Note: classtime_ids
   repeated string added_account_ids = 3;
   repeated string removed_account_ids = 4;
@@ -348,6 +370,7 @@ message ChangeFolderCollaboratorsResponse {
   reserved 1;
   // Note: classtime_ids
   repeated string collaborator_ids = 2;
+  string operation_id = 3;
 }
 
 message GetFolderCollaboratorsRequest {
@@ -357,8 +380,9 @@ message GetFolderCollaboratorsRequest {
 
 message GetFolderCollaboratorsResponse {
   option (classtime.service.common.public_api) = true;
+  reserved 2;
+
   repeated classtime.service.common.CollaboratorInfo collaborator_infos = 1;
-  classtime.service.common.SchoolInfo school = 2;
   string organization_id = 3;
 }
 
@@ -381,6 +405,7 @@ message GetPlaylistDetailsResponse {
     classtime.service.question.api.QuestionGroup question_group = 1;
     repeated classtime.service.question.api.Question questions = 2;
     string publisher_account_id = 3;
+    bytes question_set_version_hash = 4;
   }
 
   repeated PlaylistDetailsEntry playlist_details = 1;
@@ -535,6 +560,11 @@ message GetQuestionRequest {
   string question_id = 1;
 }
 
+message QuestionLock {
+  string id = 1;
+  classtime.entity.EntityRef owner_account_ref = 2;
+}
+
 message GetQuestionResponse {
   classtime.service.question.api.Question question = 1;
   repeated QuestionLock locks = 2;
@@ -635,6 +665,15 @@ message ContainsQuestionSetsRequest {
 
 message ContainsQuestionSetsResponse {
   bool contains_question_sets = 1;
+  repeated string contained_permanent_ids = 2;
+}
+
+message ContainsQuestionSetBySecretLinkRequest {
+  string secret_link = 1;
+}
+
+message ContainsQuestionSetBySecretLinkResponse {
+  bool contains_question_set = 1;
 }
 
 message ContainsQuestionsRequest {
@@ -643,4 +682,30 @@ message ContainsQuestionsRequest {
 
 message ContainsQuestionsResponse {
   bool contains_questions = 1;
+}
+
+// ResourcePoolOperation.State ROLLING_BACK maps to IN_PROGRESS
+enum ResourcePoolOperationStatus {
+  RESOURCE_POOL_OPERATION_STATUS_UNSPECIFIED = 0;
+  RESOURCE_POOL_OPERATION_STATUS_IN_PROGRESS = 1;
+  RESOURCE_POOL_OPERATION_STATUS_COMPLETED = 2;
+  RESOURCE_POOL_OPERATION_STATUS_FAILED = 3;
+}
+
+message GetResourcePoolOperationsRequest {
+  option (classtime.service.common.public_api) = true;
+  repeated string operation_ids = 1;
+}
+
+message ResourcePoolOperationProgress {
+  option (classtime.service.common.public_api) = true;
+  string operation_id = 1;
+  ResourcePoolOperationStatus status = 2;
+  int32 total_batches = 3;
+  int32 processed_batches = 4;
+}
+
+message GetResourcePoolOperationsResponse {
+  option (classtime.service.common.public_api) = true;
+  repeated ResourcePoolOperationProgress operations = 1;
 }

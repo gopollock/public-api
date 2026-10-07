@@ -352,6 +352,14 @@ message SebConfigResponse {
   bytes seb_file = 1;
 }
 
+message GetSebHyperLinkRequest {
+  string session_code = 1;
+}
+
+message GetSebHyperLinkResponse {
+  string hyperlink = 1;
+}
+
 message SetupTeamGameRequest {
   string session_code = 1;
 }
@@ -414,6 +422,21 @@ message VisitQuestionRequest {
 message VisitQuestionResponse {
   bool is_visited = 1;
 }
+
+message UpdateQuestionRubricRequest {
+  string question_id = 1;
+  string rubric = 2;
+}
+
+message UpdateQuestionRubricResponse {
+  int32 rubric_version = 1;
+}
+
+message GenerateSessionQuestionRubricRequest {
+  string question_id = 1;
+}
+
+message GenerateSessionQuestionRubricResponse {}
 
 message CheckSessionHealthRequest {
   string code = 1;
@@ -625,6 +648,53 @@ message SuggestCommentResponse {
   classtime.service.question.api.CommentInfo comment_info = 1;
 }
 
+message UpdateExportEmailRequest {
+  string email = 1;
+  string session_export_id = 2;
+}
+
+message UpdateExportEmailResponse {}
+
+message GetGradingScaleSystemRequest {
+  reserved 3, 4, 5, 6;
+  GradingScaleKind grading_scale_kind = 1;
+  Granularity granularity = 2;
+  classtime.service.common.GradingPoint total_session_points = 7;
+
+  message GradingScaleRange {
+    classtime.service.common.GradingPoint min_points = 1;
+    classtime.service.common.GradingPoint max_points = 2;
+    string min_grade = 3;
+    string max_grade = 4;
+  }
+  GradingScaleRange grading_scale_range = 8;
+}
+
+message GetGradingScaleSystemResponse {
+  repeated GradingScaleEntry grading_scale_entries = 1;
+  GradeType primary_grade_type = 2;
+  repeated string grade_options = 3;
+}
+
+message GetContextMaterialRequest {
+  string question_id = 1;
+  string access_token = 2;
+}
+
+message GetContextMaterialResponse {
+  string session_code = 1;
+  string question_title = 2;
+  int32 question_number = 3;
+  classtime.service.question.api.ContextMaterial context_material = 4;
+}
+
+message LogClientEventsRequest {
+  // The events are expected to be in the format of JSON strings.
+  repeated string events = 1;
+}
+
+message LogClientEventsResponse {}
+
 // Pusher messages
 
 // Used for MEMBER_ADDED and MEMBER_REMOVED that are internal events and sent if a member subscribes or unsubscribes to channel
@@ -757,49 +827,14 @@ message PusherCommentDeleted {
   string question_id = 3;
 }
 
-message UpdateExportEmailRequest {
-  string email = 1;
-  string session_export_id = 2;
-}
-
-message UpdateExportEmailResponse {}
-
-message GetGradingScaleSystemRequest {
-  reserved 3, 4, 5, 6;
-  GradingScaleKind grading_scale_kind = 1;
-  Granularity granularity = 2;
-  classtime.service.common.GradingPoint total_session_points = 7;
-
-  message GradingScaleRange {
-    classtime.service.common.GradingPoint min_points = 1;
-    classtime.service.common.GradingPoint max_points = 2;
-    string min_grade = 3;
-    string max_grade = 4;
-  }
-  GradingScaleRange grading_scale_range = 8;
-}
-
-message GetGradingScaleSystemResponse {
-  repeated GradingScaleEntry grading_scale_entries = 1;
-  GradeType primary_grade_type = 2;
-  repeated string grade_options = 3;
-}
-
-message GetContextMaterialRequest {
+message PusherSessionQuestionRubricUpdated {
   string question_id = 1;
-  string access_token = 2;
+  string rubric = 2;
+  int32 rubric_version = 3;
 }
 
-message GetContextMaterialResponse {
-  string session_code = 1;
-  string question_title = 2;
-  int32 question_number = 3;
-  classtime.service.question.api.ContextMaterial context_material = 4;
+message PusherAiPredictionGenerated {
+  string answer_id = 1;
+  classtime.service.question.api.AiPrediction ai_prediction = 2;
+  string question_id = 3;
 }
-
-message LogClientEventsRequest {
-  // The events are expected to be in the format of JSON strings.
-  repeated string events = 1;
-}
-
-message LogClientEventsResponse {}

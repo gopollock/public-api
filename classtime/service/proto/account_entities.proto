@@ -2,9 +2,9 @@ syntax = "proto3";
 
 package classtime.service.account;
 
-import "common_messages.proto";
 import "common_role.proto";
 import "entity_store_messages.proto";
+import "feature_flag_entities.proto";
 import "google/protobuf/timestamp.proto";
 
 option java_multiple_files = true;
@@ -42,6 +42,8 @@ message UserProfile {
 }
 
 message AuthenticationMethod {
+  reserved 8;
+
   int32 id = 5;
   AuthenticationProvider provider = 1;
   string email = 2;
@@ -56,8 +58,6 @@ message AuthenticationMethod {
 
   int32 failed_login_attempts = 6;
   google.protobuf.Timestamp last_success_login_at = 7;
-
-  string legacy_subject = 8;
 }
 
 message AccountMerge {
@@ -67,7 +67,7 @@ message AccountMerge {
 }
 
 message AdminPermissions {
-  repeated DataRealm data_realms = 1;
+  repeated classtime.service.featureflag.api.DataRealm data_realms = 1;
   bool has_full_access = 2;
 }
 
@@ -112,6 +112,7 @@ message StudentMetadata {
     ClasslinkDemographicDetails classlink_details = 5;
     CleverDemographicDetails clever_details = 6;
   }
+  string sis_id = 7;
 }
 
 message AccountMetadata {
@@ -165,46 +166,11 @@ message AccountProfile {
   google.protobuf.Timestamp last_success_login_at = 7;
 }
 
-enum DataRealm {
-  DATA_REALM_UNSPECIFIED = 0;
-  DATA_REALM_EU = 1;
-  DATA_REALM_US = 2;
-}
-
-enum OrganizationGroup {
-  GROUP_UNSPECIFIED = 0;
-  GROUP_NIEDERSACHSEN = 1;
-  GROUP_BASELLAND = 2;
-  GROUP_UKRAINE_SUPPORT_PROGRAMME_2022 = 3;
-  GROUP_CANTON_ZURICH = 4;
-  GROUP_COMPTON_UNIFIED_SCHOOL_DISTRICT = 5;
-  GROUP_DESERT_SANDS_UNIFIED_SCHOOL_DISTRICT = 6;
-  GROUP_PARAMOUNT_UNIFIED_SCHOOL_DISTRICT = 7;
-  GROUP_ONTARIO_MONTCLAIR_SCHOOL_DISTRICT = 8;
-  GROUP_PALM_SPRINGS_UNIFIED_SCHOOL_DISTRICT = 9;
-  GROUP_BEVERLY_HILLS_UNIFIED_SCHOOL_DISTRICT = 10;
-  GROUP_FONTANA_UNIFIED_SCHOOL_DISTRICT = 11;
-  GROUP_ORANGE_UNIFIED_SCHOOL_DISTRICT = 12;
-  GROUP_RIALTO_UNIFIED_SCHOOL_DISTRICT = 13;
-  GROUP_PUC_TRIUMPH_CHARTER_ACADEMY = 14;
-  GROUP_SOUTH_FORK_UNION_SCHOOL_DISTRICT = 15;
-  GROUP_ALLEGIANCE_STEAM_ACADEMY_THRIVE = 16;
-  GROUP_ALLEGIANCE_STEAM_ACADEMY_CHINO = 17;
-  GROUP_ALVIEW_DAIRYLAND_UNION_ELEMENTARY_SCHOOL_DISTRICT = 18;
-  GROUP_CENTURY_COMMUNITY_CHARTER_SCHOOL = 19;
-  GROUP_TUSTIN_UNIFIED_SCHOOL_DISTRICT = 20;
-  GROUP_RIVERSIDE_UNIFIED_SCHOOL_DISTRICT = 21;
-  GROUP_SAN_BENITO_HIGH_SCHOOL_DISTRICT = 22;
-  GROUP_PLACENTIA_YORBA_LINDA_UNIFIED_SCHOOL_DISTRICT = 23;
-  GROUP_SANTA_BARBARA_UNIFIED_SCHOOL_DISTRICT = 24;
-  GROUP_OCEANSIDE_UNIFIED_SCHOOL_DISTRICT = 25;
-  GROUP_BANNING_UNIFIED_SCHOOL_DISTRICT = 26;
-  GROUP_REDONDO_BEACH_UNIFIED_SCHOOL_DISTRICT = 27;
-  GROUP_LOS_ANGELES_UNIFIED_SCHOOL_DISTRICT = 28;
-  GROUP_BUTTONWILLOW_SCHOOL_DISTRICT = 29;
-  GROUP_NATOMAS_UNIFIED_SCHOOL_DISTRICT = 30;
-  GROUP_WESTERN_PLACER_UNIFIED_SCHOOL_DISTRICT = 31;
-  GROUP_SAN_BENITO_CO_OFFICE_ED = 32;
+message ResourceLink {
+  string title = 1;
+  string url = 2;
+  string icon_name = 3;
+  string tracking_key = 4;
 }
 
 enum OrganizationPlan {
@@ -218,12 +184,14 @@ enum OrganizationPlan {
 }
 
 message Organization {
+  reserved 12, 18;
+
   string title = 1;
-  DataRealm data_realm = 2;
+  classtime.service.featureflag.api.DataRealm data_realm = 2;
   bool is_premium_enabled = 3;
   string library = 4;
   bool is_collaboration_disabled = 5;
-  classtime.service.common.Theme theme = 6;
+  classtime.service.featureflag.api.Theme theme = 6;
   string domain = 7;
   oneof roster_ref {
     string classlink_ref = 8;
@@ -232,14 +200,16 @@ message Organization {
   bool are_ai_comments_allowed = 9;
   bool is_account_extension_disabled = 10;
   string custom_logo_url = 11;
-  repeated classtime.entity.EntityRef admin_account_refs = 12;
-  OrganizationGroup group = 13;
+  classtime.service.featureflag.api.OrganizationGroup group = 13;
   string country_code = 14;
   bool is_free_text_auto_validation_disabled = 15;
   OrganizationPlan plan = 17;
-  string django_school_ref = 18;
   repeated OrganizationMerge merge_history = 19;
   string client_id = 20;
+  classtime.entity.EntityRef parent_organization_ref = 21;
+  repeated ResourceLink resource_links = 22;
+  bool is_session_deletion_prevented = 23;
+  repeated string question_bank_product_ids = 24;
 }
 
 message OrganizationMerge {
