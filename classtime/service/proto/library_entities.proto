@@ -4,14 +4,41 @@ package classtime.service.library.api;
 
 import "entity_store_messages.proto";
 import "google/protobuf/timestamp.proto";
+import "question_entities.proto";
 
 option java_multiple_files = true;
 option java_outer_classname = "LibraryEntitiesProto";
 option java_package = "classtime.service.library.api";
 
-message LibraryItemProvider {
-  string title = 1;
-  string description = 2;
+// Root Entity
+message ResourcePool {
+  oneof owner_ref {
+    classtime.entity.EntityRef owner_account_ref = 1;
+    classtime.entity.EntityRef organization_ref = 2;
+  }
+  bool is_dissolving = 3;
+}
+
+enum AccessPermission {
+  reserved 3;
+  ACCESS_PERMISSION_UNSPECIFIED = 0;
+  ACCESS_PERMISSION_READ_ONLY = 1;
+  ACCESS_PERMISSION_READ_WRITE = 2;
+}
+
+// Entity aggregated under ResourcePool
+message Access {
+  classtime.entity.EntityRef account_ref = 1;
+  AccessPermission permission = 2;
+  google.protobuf.Timestamp expires_at = 3;
+}
+
+// Entity aggregated under ResourcePool
+message Folder {
+  string permanent_id = 1;
+  string title = 2;
+  classtime.entity.EntityRef parent_folder_ref = 3;
+  classtime.entity.EntityRef synchronized_from_ref = 4;
 }
 
 enum QuestionSetPrivacy {
@@ -24,45 +51,9 @@ enum QuestionSetPrivacy {
   QUESTION_SET_PRIVACY_PUBLIC = 6;
 }
 
-message QuestionLock {
-  string id = 1;
-  classtime.entity.EntityRef owner_account_ref = 2;
-}
-
-enum EntityStatus {
-  ALIVE = 0;
-  ARCHIVED = 1;
-  DELETED = 2;
-}
-
-message ResourcePool {
-  oneof owner_ref {
-    classtime.entity.EntityRef owner_account_ref = 1;
-    classtime.entity.EntityRef organization_ref = 2;
-  }
-}
-
-enum AccessPermission {
-  reserved 3;
-  ACCESS_PERMISSION_UNSPECIFIED = 0;
-  ACCESS_PERMISSION_READ_ONLY = 1;
-  ACCESS_PERMISSION_READ_WRITE = 2;
-}
-
-message Access {
-  classtime.entity.EntityRef account_ref = 1;
-  AccessPermission permission = 2;
-  google.protobuf.Timestamp expires_at = 3;
-}
-
-message Folder {
-  string permanent_id = 1;
-  string title = 2;
-  classtime.entity.EntityRef parent_folder_ref = 3;
-  classtime.entity.EntityRef synchronized_from_ref = 4;
-}
-
+// Entity aggregated under ResourcePool
 message QuestionSet {
+  reserved 13;
   string permanent_id = 1;
   string title = 2;
   bool is_onboarding = 3;
@@ -88,5 +79,66 @@ message QuestionSet {
   classtime.entity.EntityRef synchronized_from_ref = 10;
   classtime.entity.EntityRef anonymous_solo_session_ref = 11;
   classtime.entity.EntityRef authorized_solo_session_ref = 12;
-  repeated classtime.entity.EntityRef ordered_questions = 13;
+}
+
+// Root entity.
+// Stores the Question payload plus QuestionSet membership and display order.
+message OrderedQuestion {
+  classtime.service.question.api.Question question = 1;
+  classtime.entity.EntityRef question_set_ref = 2; // References QuestionSet
+  int32 order = 3; // sparse, always positive when in a set
+}
+
+// Index value for OrderedQuestionByQuestionSetId (order without loading the full entity).
+message OrderedQuestionMembership {
+  int32 order = 1;
+  string permanent_id = 2;
+}
+
+message QuestionImageIds {
+  repeated string image_ids = 1;
+}
+
+// Entity aggregated under OrderedQuestion
+message SoftLock {
+  classtime.entity.EntityRef owner_account_ref = 1;
+}
+
+// One packed transaction. References SOURCE ids only — target ids are assigned at create time by
+// the parent nested-id counter and cannot be pre-generated. Stored canonical top-down (parent
+// before child); a DELETE job walks them in reverse for bottom-up.
+message ResourcePoolBatchDescriptor {
+  repeated classtime.entity.EntityRef source_folder_refs = 1;
+  repeated classtime.entity.EntityRef source_question_set_refs = 2; // each implies all its questions
+}
+
+message ResourcePoolOperation {
+  enum Type {
+    TYPE_UNSPECIFIED = 0;
+    TYPE_COPY = 1;
+    TYPE_CLONE = 2;
+    TYPE_DELETE = 3;
+  }
+
+  enum State {
+    STATE_UNSPECIFIED = 0;
+    STATE_IN_PROGRESS = 1;
+    STATE_ROLLING_BACK = 2;
+    STATE_COMPLETED = 3;
+    STATE_FAILED = 4;
+    STATE_PENDING = 5;
+  }
+
+  Type operation_type = 1;
+  State state = 2;
+  classtime.entity.EntityRef account_ref = 3;
+  repeated classtime.entity.EntityRef source_folder_refs = 4;
+  classtime.entity.EntityRef target_parent_folder_ref = 5;
+  classtime.entity.EntityRef target_resource_pool_ref = 6;
+  repeated ResourcePoolBatchDescriptor batches = 7;
+  int32 cursor = 8;
+  int32 attempt_count = 9;
+  map<string, string> entity_id_map = 10;
+  classtime.entity.EntityRef follow_up_operation_ref = 11;
+  classtime.entity.EntityRef dissolving_resource_pool_ref = 12;
 }

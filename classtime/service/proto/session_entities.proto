@@ -61,16 +61,26 @@ message GradingScaleConfig {
   repeated GradingScaleEntry grading_scale_entries = 4;
 }
 
-enum SpellCheckMode {
-  SPELL_CHECK_MODE_UNSPECIFIED = 0;
-  SPELL_CHECK_MODE_UNDERLINE = 1;
-  SPELL_CHECK_MODE_SUGGEST = 2;
-}
-
 message SpellCheckConfig {
   bool is_enabled = 1;
-  SpellCheckMode mode = 2;
+  classtime.service.common.SpellCheckMode mode = 2;
   string language = 3;
+}
+
+message SebConfig {
+  message UrlFilter {
+    string url = 1;
+    bool are_allowed_subpaths = 2;
+  }
+  string start_url = 1;
+  string start_password = 2;
+  string quit_password = 3;
+  string admin_password = 4;
+  repeated UrlFilter url_filters = 5;
+  bool is_manual = 6;
+  bool is_enabled = 7;
+  bool seb_file_has_been_downloaded = 8;
+  bool is_mac_private_clipboard_enabled = 9;
 }
 
 message SessionSettings {
@@ -128,7 +138,7 @@ message SessionSettings {
   google.protobuf.Duration paused_seconds = 30;
   google.protobuf.Timestamp ended_at = 35;
 
-  classtime.service.common.SebConfig seb_config = 21;
+  SebConfig seb_config = 21;
 
   classtime.service.texttospeech.TextToSpeechConfig default_text_to_speech_config = 25;
 
@@ -188,6 +198,12 @@ message Session {
   int32 activated_count = 20;
 
   string seb_pure_config_key_hash = 24; // Base16 encoded.
+
+  message SoloSessionSource {
+    string question_set_id = 1;
+    bytes question_set_version_hash = 2;
+  }
+  SoloSessionSource solo_session_source = 26;
 }
 
 // TODO(https://app.asana.com/0/1206655504022453/1207918188241831): Used in JSON communication through pusher.
@@ -343,6 +359,7 @@ enum GradingScaleKind {
   GRADING_SCALE_DEFAULT = 6;
   GRADING_SCALE_GERMAN_FIFTEEN_POINTS = 7;
   GRADING_SCALE_GERMAN_FIFTEEN_POINTS_SIMPLIFIED = 8;
+  GRADING_SCALE_GERMAN_IHK = 9;
 }
 
 enum Granularity {

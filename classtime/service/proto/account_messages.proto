@@ -5,6 +5,8 @@ package classtime.service.account;
 import "account_entities.proto";
 import "common_messages.proto";
 import "common_role.proto";
+import "entity_store_messages.proto";
+import "feature_flag_entities.proto";
 import "google/protobuf/duration.proto";
 import "google/protobuf/timestamp.proto";
 
@@ -154,6 +156,7 @@ message AccountInfoResponse {
   classtime.service.common.Role role = 7;
   repeated string organizations = 13;
   string country_code = 14;
+  AdminPermissions admin_permissions = 15;
 }
 
 message ChangeProfileNames {
@@ -178,26 +181,6 @@ message UpdateAccountInfoRequest {
     // If set, requires both first and last name and sets them in profile.
     ChangeProfileNames change_names = 5;
   }
-}
-
-message UpdateRosteredAccountRequest {
-  string account_id = 1;
-  ChangeProfileNames names = 2;
-  AccountMetadata metadata = 3;
-}
-
-message UpdateRosteredAccountResponse {}
-
-message UpdateAccountRequest {
-  string account_id = 1;
-  oneof update {
-    // If set, requires both first and last name and sets them in profile.
-    ChangeProfileNames change_names = 2;
-  }
-}
-
-message UpdateAccountResponse {
-  Account account = 1;
 }
 
 message RefreshTokenRequest {}
@@ -244,12 +227,19 @@ message ResetPasswordResponse {
   string redirect_url = 1;
 }
 
+enum TokenUsagePurpose {
+  TOKEN_USAGE_PURPOSE_UNSPECIFIED = 0;
+  TOKEN_USAGE_PURPOSE_SERVER_INTERNAL = 1;
+  TOKEN_USAGE_PURPOSE_CLIENT = 2;
+}
+
 message CreateTokenRequest {
   option (classtime.service.common.public_api) = true;
   reserved 2;
   string classtime_id = 1;
   string permission = 3;
   classtime.service.common.Role role = 4;
+  TokenUsagePurpose usage_purpose = 5;
 }
 
 message CreateTokenResponse {
@@ -302,7 +292,7 @@ message GetOrCreateExternalAccountRequest {
   UserProfile user_profile = 2;
   // Unique identifier for the user in the given provider.
   string subject = 3;
-  string email = 4;
+  string organization_id = 4;
 }
 
 message GetOrCreateExternalAccountResponse {
@@ -327,9 +317,20 @@ message SearchAccountsByEmailRequest {
 message AccountSearchResult {
   string account_id = 1;
   string email = 2;
+  AccountProfile profile = 4;
 }
 
 message SearchAccountsByEmailResponse {
+  repeated AccountSearchResult results = 1;
+}
+
+message SearchAccountsRequest {
+  string query = 1;
+  repeated classtime.service.common.Role roles = 2;
+  int32 limit = 3;
+}
+
+message SearchAccountsResponse {
   repeated AccountSearchResult results = 1;
 }
 
@@ -353,16 +354,6 @@ message AccountDetails {
 message AccountInfo {
   string account_id = 1;
   AccountProfile account_profile = 2;
-}
-
-message GetOrCreateRosteredAccountRequest {
-  AccountDetails account_details = 1;
-  AccountMetadata metadata = 2;
-  string legacy_subject = 3;
-}
-
-message GetOrCreateRosteredAccountResponse {
-  AccountInfo account_info = 1;
 }
 
 message GetOrCreateAccountsRequest {
@@ -400,18 +391,21 @@ message GetOrganizationsResponse {
 }
 
 message AssociateMemberRequest {
+  option (classtime.service.common.public_api) = true;
   string organization_id = 1;
   string account_id = 2;
 }
 
-message AssociateMemberResponse {}
+message AssociateMemberResponse {
+  option (classtime.service.common.public_api) = true;
+}
 
 message GetMemberDataRealmRequest {
   string account_id = 1;
 }
 
 message GetMemberDataRealmResponse {
-  DataRealm data_realm = 1;
+  classtime.service.featureflag.api.DataRealm data_realm = 1;
 }
 
 message GetOrCreateOrganizationRequest {
@@ -421,10 +415,12 @@ message GetOrCreateOrganizationRequest {
     string clever_ref = 6;
   }
   bool are_ai_comments_allowed = 3;
-  OrganizationGroup group = 4;
+  classtime.service.featureflag.api.OrganizationGroup group = 4;
   bool is_free_text_auto_validation_disabled = 5;
   string country_code = 7;
-  DataRealm data_realm = 8;
+  classtime.service.featureflag.api.DataRealm data_realm = 8;
+  string client_id = 9;
+  classtime.entity.EntityRef parent_organization_ref = 10;
 }
 
 message GetOrCreateOrganizationResponse {
@@ -434,7 +430,7 @@ message GetOrCreateOrganizationResponse {
 
 message GroupTitle {
   string title = 1;
-  OrganizationGroup group = 2;
+  classtime.service.featureflag.api.OrganizationGroup group = 2;
 }
 
 message GetOrganizationRequest {
@@ -465,13 +461,15 @@ message OrganizationSearchInfo {
   bool is_account_extension_disabled = 5;
   bool is_free_text_auto_validation_disabled = 6;
   bool is_premium_enabled = 7;
-  OrganizationGroup group = 8;
+  classtime.service.featureflag.api.OrganizationGroup group = 8;
   string country_code = 9;
   int32 members_count = 10;
+  string client_id = 11;
 }
 
 message FindOrganizationsByTitleRequest {
   string search_text = 1;
+  classtime.service.featureflag.api.OrganizationGroup group = 2;
 }
 
 message FindOrganizationsByTitleResponse {
@@ -521,7 +519,7 @@ message GetOrganizationPlanPricingResponse {
 
 message SetOrganizationMetaRequest {
   string country_code = 1;
-  OrganizationGroup group = 2;
+  classtime.service.featureflag.api.OrganizationGroup group = 2;
   string organization_id = 3;
 }
 
@@ -555,24 +553,23 @@ message UpdateOrganizationMembersRequest {
 
 message UpdateOrganizationMembersResponse {}
 
+enum OrganizationMergeFieldResolution {
+  ORGANIZATION_MERGE_FIELD_RESOLUTION_UNSPECIFIED = 0;
+  ORGANIZATION_MERGE_FIELD_RESOLUTION_KEEP_MAIN = 1;
+  ORGANIZATION_MERGE_FIELD_RESOLUTION_KEEP_MERGED = 2;
+}
+
+message OrganizationMergeConflictResolution {
+  OrganizationMergeFieldResolution client_id = 1;
+}
+
 message MergeOrganizationsRequest {
   GroupTitle main_organization_title = 1;
   GroupTitle merged_organization_title = 2;
+  OrganizationMergeConflictResolution conflict_resolution = 3;
 }
 
 message MergeOrganizationsResponse {}
-
-message UpdateRosteredOrganizationRequest {
-  string organization_id = 1;
-  string title = 2;
-  OrganizationGroup group = 3;
-  oneof roster_ref {
-    string classlink_ref = 4;
-    string clever_ref = 5;
-  }
-}
-
-message UpdateRosteredOrganizationResponse {}
 
 message SuperLoginRequest {
   oneof identifier {
@@ -593,19 +590,3 @@ message InviteToOrganizationRequest {
 }
 
 message InviteToOrganizationResponse {}
-
-message UpdateMergedPipedriveOrgClientIdRequest {
-  string main_client_id = 1;
-  string merged_client_id = 2;
-  string authentication = 3;
-}
-
-message UpdateMergedPipedriveOrgClientIdResponse {}
-
-message MigrateCleverSubjectRequest {
-  string account_id = 1;
-  string v3_subject = 2;
-  string legacy_subject = 3;
-}
-
-message MigrateCleverSubjectResponse {}

@@ -72,7 +72,7 @@ message GetCoTeachersResponse {
 message UpdateCoTeachersRequest {
   option (classtime.service.common.public_api) = true;
   string class_id = 1;
-  string school_id = 2;
+  string organization_id = 2;
   repeated string account_ids = 3; // classtime_ids
   string class_owner_id = 4;
 }
