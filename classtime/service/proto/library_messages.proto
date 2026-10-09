@@ -46,7 +46,7 @@ message FolderInfo {
 }
 
 message QuestionSetInfo {
-  reserved 34;
+  reserved 16, 21, 28, 32, 34;
   string id = 1;
   string title = 2;
   int32 question_count = 3;
@@ -63,16 +63,12 @@ message QuestionSetInfo {
   QuestionSetPrivacy privacy = 14;
   // Should use `question_infos` on GetQuestionSetResponse / GetCurriculumQuestionSetResponse instead.
   repeated QuestionInfo questions = 15 [deprecated = true];
-  classtime.entity.EntityRef entity_store_session_ref = 16;
-  string entity_store_session_id = 28;
   classtime.entity.EntityRef anonymous_solo_session_ref = 18;
   string anonymous_solo_session_id = 30;
   classtime.entity.EntityRef authorized_solo_session_ref = 19;
   string authorized_solo_session_id = 31;
   string solo_session_link = 20;
   string secret_link = 26;
-  classtime.entity.EntityRef publisher_account_ref = 21;
-  string publisher_account_id = 32;
   string extra = 22;
   string author = 23;
   repeated common.BreadCrumb breadcrumbs = 24;
