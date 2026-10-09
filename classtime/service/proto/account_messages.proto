@@ -42,6 +42,7 @@ message LoginRequest {
   string referral_id = 9;
   classtime.service.common.AcquisitionChannel acquisition_channel = 10;
   string referral_info = 11;
+  bool is_login = 12;
   oneof login_info {
     OpenIdConnectLoginInfo open_id_connect = 7;
   }
