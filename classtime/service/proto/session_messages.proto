@@ -4,6 +4,7 @@ package classtime.service.session.api;
 
 import "common_messages.proto";
 import "entity_store_messages.proto";
+import "feature_flag_messages.proto";
 import "google/protobuf/duration.proto";
 import "google/protobuf/timestamp.proto";
 import "question_entities.proto";
@@ -608,6 +609,14 @@ message GetCommentsRequest {
 
 message GetCommentsResponse {
   repeated classtime.service.question.api.CommentInfo comment_infos = 1; // For students, it contains SAVED comments only.
+}
+
+message GetSessionFeatureFlagsRequest {
+  string session_code = 1;
+}
+
+message GetSessionFeatureFlagsResponse {
+  classtime.service.featureflag.api.FeatureFlags features = 1;
 }
 
 message DeleteCommentsRequest {
