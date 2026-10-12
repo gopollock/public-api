@@ -5,3 +5,4 @@
 - [class-service-api interface definition with its supported methods](https://static.classtime.com/public-api/class-service-api/html/class-service-api/classtime.service.classes.api/-class-service/index.html).
 - [session-service-api interface definition with its supported methods](https://static.classtime.com/public-api/session-service-api/html/session-service-api/classtime.service.session.api/-session-service/index.html).
 - [subscription-service-api interface definition with its supported methods](https://static.classtime.com/public-api/subscription-service-api/html/subscription-service-api/classtime.service.subscription.api/-subscription-service/index.html).
+- [feature-flag-service-api interface definition with its supported methods](https://static.classtime.com/public-api/feature-flag-service-api/html/feature-flag-service-api/classtime.service.featureflag.api/-feature-flag-service/index.html).

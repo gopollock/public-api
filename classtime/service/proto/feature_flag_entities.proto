@@ -1,0 +1,165 @@
+syntax = "proto3";
+
+package classtime.service.featureflag.api;
+
+import "entity_store_messages.proto";
+
+option java_multiple_files = true;
+option java_outer_classname = "FeatureFlagEntitiesProto";
+option java_package = "classtime.service.featureflag.api";
+
+enum DataRealm {
+  DATA_REALM_UNSPECIFIED = 0;
+  DATA_REALM_EU = 1;
+  DATA_REALM_US = 2;
+  DATA_REALM_OTHER = 3;
+}
+
+/* Test-only experiment variant, unused by any app. Exists purely so ExperimentToggle is testable end-to-end. */
+enum TestExperimentVariant {
+  TEST_EXPERIMENT_VARIANT_UNSPECIFIED = 0;
+  TEST_EXPERIMENT_VARIANT_A = 1;
+  TEST_EXPERIMENT_VARIANT_B = 2;
+}
+
+enum OrganizationGroup {
+  GROUP_UNSPECIFIED = 0;
+  GROUP_NIEDERSACHSEN = 1;
+  GROUP_BASELLAND = 2;
+  GROUP_UKRAINE_SUPPORT_PROGRAMME_2022 = 3;
+  GROUP_CANTON_ZURICH = 4;
+  GROUP_COMPTON_UNIFIED_SCHOOL_DISTRICT = 5;
+  GROUP_DESERT_SANDS_UNIFIED_SCHOOL_DISTRICT = 6;
+  GROUP_PARAMOUNT_UNIFIED_SCHOOL_DISTRICT = 7;
+  GROUP_ONTARIO_MONTCLAIR_SCHOOL_DISTRICT = 8;
+  GROUP_PALM_SPRINGS_UNIFIED_SCHOOL_DISTRICT = 9;
+  GROUP_BEVERLY_HILLS_UNIFIED_SCHOOL_DISTRICT = 10;
+  GROUP_FONTANA_UNIFIED_SCHOOL_DISTRICT = 11;
+  GROUP_ORANGE_UNIFIED_SCHOOL_DISTRICT = 12;
+  GROUP_RIALTO_UNIFIED_SCHOOL_DISTRICT = 13;
+  GROUP_PUC_TRIUMPH_CHARTER_ACADEMY = 14;
+  GROUP_SOUTH_FORK_UNION_SCHOOL_DISTRICT = 15;
+  GROUP_ALLEGIANCE_STEAM_ACADEMY_THRIVE = 16;
+  GROUP_ALLEGIANCE_STEAM_ACADEMY_CHINO = 17;
+  GROUP_ALVIEW_DAIRYLAND_UNION_ELEMENTARY_SCHOOL_DISTRICT = 18;
+  GROUP_CENTURY_COMMUNITY_CHARTER_SCHOOL = 19;
+  GROUP_TUSTIN_UNIFIED_SCHOOL_DISTRICT = 20;
+  GROUP_RIVERSIDE_UNIFIED_SCHOOL_DISTRICT = 21;
+  GROUP_SAN_BENITO_HIGH_SCHOOL_DISTRICT = 22;
+  GROUP_PLACENTIA_YORBA_LINDA_UNIFIED_SCHOOL_DISTRICT = 23;
+  GROUP_SANTA_BARBARA_UNIFIED_SCHOOL_DISTRICT = 24;
+  GROUP_OCEANSIDE_UNIFIED_SCHOOL_DISTRICT = 25;
+  GROUP_BANNING_UNIFIED_SCHOOL_DISTRICT = 26;
+  GROUP_REDONDO_BEACH_UNIFIED_SCHOOL_DISTRICT = 27;
+  GROUP_LOS_ANGELES_UNIFIED_SCHOOL_DISTRICT = 28;
+  GROUP_BUTTONWILLOW_SCHOOL_DISTRICT = 29;
+  GROUP_NATOMAS_UNIFIED_SCHOOL_DISTRICT = 30;
+  GROUP_WESTERN_PLACER_UNIFIED_SCHOOL_DISTRICT = 31;
+  GROUP_SAN_BENITO_CO_OFFICE_ED = 32;
+  GROUP_ABLE_CHARTER_SCHOOLS = 33;
+  GROUP_HOPE_ELEM_SCHOOL_DISTRICT = 34;
+  GROUP_BEAUMONT_UNIFIED_SCHOOL_DISTRICT = 35;
+  GROUP_BELLFLOWER_UNIFIED_SCHOOL_DISTRICT = 36;
+  GROUP_LANCASTER_DISTRICT = 37;
+  GROUP_ADELANTO_ELEMENTARY_SCHOOL_DISTRICT = 38;
+  GROUP_MAXBRAIN = 39;
+  GROUP_PUBLISHERS = 40;
+  GROUP_ARVIN_UNION_SCHOOL_DISTRICT = 41;
+  GROUP_MONROVIA_UNIFIED_SCHOOL_DISTRICT = 42;
+  GROUP_KANTONSSCHULE_SOLOTHURN = 43;
+  GROUP_SAN_BERNARDINO_CITY_UNIFIED_SCHOOL_DISTRICT = 44;
+  GROUP_WESTMINSTER_SCHOOL_DISTRICT = 45;
+  GROUP_LOST_HILLS_UNION_ELEMENTARY_SCHOOL_DISTRICT = 46;
+  GROUP_NORWALK_LA_MIRADA_UNIFIED_SCHOOL_DISTRICT = 47;
+}
+
+enum Theme {
+  THEME_UNSPECIFIED = 0;
+  THEME_BAYERN = 1;
+  THEME_CLASSTIME = 2;
+  THEME_MONEYPARK = 3;
+  THEME_WINGS = 4;
+  THEME_KANTONALE = 5;
+  THEME_ZKB = 6;
+  THEME_DIDAC = 7;
+  THEME_UBO = 8;
+  THEME_SACKMANN = 9;
+  THEME_EMMENTAL = 10;
+  THEME_EMMENTAL_FEEDBACK = 11;
+  THEME_ECODRIVE = 12;
+  THEME_ECODRIVE_FEEDBACK = 13;
+  THEME_ECODRIVE_FEEDBACK_20_DE = 14;
+  THEME_ECODRIVE_FEEDBACK_20_FR = 15;
+  THEME_ECODRIVE_FEEDBACK_20_IT = 16;
+  THEME_ECODRIVE_FEEDBACK_12_DE = 17;
+  THEME_ECODRIVE_FEEDBACK_12_FR = 18;
+  THEME_ECODRIVE_FEEDBACK_12_IT = 19;
+  THEME_ECODRIVE_COOP_SESSION_DE = 20;
+  THEME_ECODRIVE_COOP_SESSION_IT = 21;
+  THEME_ECODRIVE_COOP_SESSION_FR = 22;
+  THEME_KANTISARGANS = 23;
+  THEME_KANTIWATTWIL = 24;
+  THEME_LEXMEA = 25;
+  THEME_ECODRIVE_PARTNER = 26;
+  THEME_ECODRIVE_PARTNER_FR = 27;
+  THEME_ECODRIVE_PARTNER_IT = 28;
+}
+
+/*
+ * All supported groups. Groups can be static (boolean, enum groups) and dynamic (string, int groups).
+ * Dynamic groups allow to store additional information for each user and allows indefinite group branching.
+ */
+message UserGroupType {
+  reserved 6;
+  oneof this_group {
+    bool group_all_users = 3;
+
+    bool group_classtime = 1;
+    bool group_classtime_testers = 15;
+    bool group_beta_testers = 2;
+    bool group_careum = 13;
+    bool group_lexmea = 14;
+    bool group_wings = 17;
+
+    bool group_is_grading_tooltip_visible = 16;
+    bool group_is_trial_available = 12;
+    bool group_new_onboarding = 25;
+    bool group_with_ai_comments_enabled = 21;
+    bool group_with_ai_validation_disabled = 18;
+    bool group_with_disabled_websockets = 19;
+    bool group_with_new_resource_pool = 22;
+    bool group_with_organization = 7;
+    bool group_with_organization_collaboration = 8;
+    bool group_with_premium_subscription = 9;
+    bool group_with_purchased_challenge_legacy = 20;
+
+    string group_with_custom_logo = 4;
+    Theme group_with_custom_theme = 11;
+    DataRealm group_with_data_realm = 10;
+    string group_with_organization_country_code = 5;
+    OrganizationGroup group_with_organization_group = 24;
+    string group_with_primary_email = 23;
+  }
+}
+
+/*
+ * Root entity.
+ * Controls the list of groups with which account is associated. It defines a features available for the account.
+ */
+message UserGroup {
+  classtime.entity.EntityRef account_ref = 1;
+  repeated UserGroupType user_groups = 2;
+}
+
+/* defines for which groups and their percentage is feature available */
+message UserGroupPercentLaunch {
+  UserGroupType group = 1;
+  int32 percent = 2;
+}
+
+/* Root entity. Controls the visibility of features for different groups */
+message LaunchControl {
+  /* reference numeric value of the FeatureFlags field */
+  int32 feature_flag_field_id = 1;
+  repeated UserGroupPercentLaunch user_group_percent_launched = 2;
+}
