@@ -847,3 +847,7 @@ message PusherAiPredictionGenerated {
   classtime.service.question.api.AiPrediction ai_prediction = 2;
   string question_id = 3;
 }
+
+message PusherAiPredictionsCleared {
+  repeated string question_ids = 1;
+}
