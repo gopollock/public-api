@@ -97,6 +97,13 @@ message QuestionInfo {
   classtime.service.question.api.ContextMaterial context_material = 12;
 }
 
+message QuestionMetadata {
+  string id = 1;
+  google.protobuf.Timestamp created_at = 2;
+  google.protobuf.Timestamp modified_at = 3;
+  bool is_archived = 4;
+}
+
 message CreateFolderRequest {
   option (classtime.service.common.public_api) = true;
   reserved 1;
@@ -190,7 +197,11 @@ message GetQuestionSetBySecretRequest {
 message GetQuestionSetResponse {
   option (classtime.service.common.public_api) = true;
   QuestionSetInfo question_set_info = 1;
-  repeated QuestionInfo question_infos = 2;
+  repeated QuestionInfo question_infos = 2 [deprecated = true];
+  repeated QuestionMetadata question_metadata_entries = 3;
+  map<string, classtime.service.question.api.ContextMaterial> context_materials = 4; // question ID -> context material
+  map<string, classtime.service.question.api.QuestionInfo> questions = 5; // question ID -> question info
+  repeated string incomplete_solution_question_ids = 6;
 }
 
 message GetQuestionSetForPrintoutRequest {
@@ -211,7 +222,9 @@ message GetCurriculumQuestionSetRequest {
 
 message GetCurriculumQuestionSetResponse {
   QuestionSetInfo question_set_info = 1;
-  repeated QuestionInfo question_infos = 2;
+  repeated QuestionInfo question_infos = 2 [deprecated = true];
+  repeated QuestionMetadata question_metadata_entries = 3;
+  map<string, classtime.service.question.api.QuestionInfo> questions = 4; // question ID -> question info
 }
 
 message CreateQuestionSetRequest {
@@ -225,7 +238,8 @@ message CreateQuestionSetRequest {
 message CreateQuestionSetResponse {
   option (classtime.service.common.public_api) = true;
   QuestionSetInfo question_set_info = 1;
-  repeated QuestionInfo question_infos = 2;
+  repeated QuestionInfo question_infos = 2 [deprecated = true];
+  map<string, classtime.service.question.api.QuestionInfo> questions = 3; // question ID -> question info
 }
 
 message UpdateQuestionSetRequest {
@@ -237,7 +251,11 @@ message UpdateQuestionSetRequest {
 message UpdateQuestionSetResponse {
   option (classtime.service.common.public_api) = true;
   QuestionSetInfo question_set_info = 1;
-  repeated QuestionInfo question_infos = 2;
+  repeated QuestionInfo question_infos = 2 [deprecated = true];
+  repeated QuestionMetadata question_metadata_entries = 3;
+  map<string, classtime.service.question.api.ContextMaterial> context_materials = 4; // question ID -> context material
+  map<string, classtime.service.question.api.QuestionInfo> questions = 5; // question ID -> question info
+  repeated string incomplete_solution_question_ids = 6;
 }
 
 message SetSoloSessionRefRequest {
@@ -317,7 +335,9 @@ message GetTrashBinItemsRequest {}
 message GetTrashBinItemsResponse {
   repeated FolderInfo folders = 1;
   repeated QuestionSetInfo question_sets = 2;
-  repeated QuestionInfo questions = 3;
+  repeated QuestionInfo questions = 3 [deprecated = true];
+  repeated QuestionMetadata question_metadata_entries = 4;
+  map<string, classtime.service.question.api.QuestionInfo> question_infos = 5; // question ID -> question info
 }
 
 message ExportQuestionSetRequest {
@@ -346,7 +366,10 @@ message CopyQuestionRequest {
 
 message CopyQuestionResponse {
   option (classtime.service.common.public_api) = true;
-  QuestionInfo question = 1;
+  QuestionInfo question = 1 [deprecated = true];
+  QuestionMetadata question_metadata = 2;
+  classtime.service.question.api.QuestionInfo question_info = 3;
+  bool is_solution_incomplete = 4;
 }
 
 message ChangeFolderCollaboratorsRequest {
