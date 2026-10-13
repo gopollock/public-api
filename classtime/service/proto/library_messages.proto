@@ -82,6 +82,7 @@ message QuestionSetInfo {
 }
 
 message QuestionInfo {
+  reserved 11;
   string id = 1;
   string title = 2;
   classtime.service.question.api.QuestionKind kind = 3;
@@ -94,7 +95,6 @@ message QuestionInfo {
   bool is_readonly = 10;
   bool is_onboarding = 13;
   bool is_solution_empty = 14;
-  repeated classtime.service.common.QuestionTag tags = 11 [deprecated = true];
   repeated string tag_names = 15;
   classtime.service.question.api.ContextMaterial context_material = 12;
 }
