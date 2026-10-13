@@ -46,7 +46,7 @@ message FolderInfo {
 }
 
 message QuestionSetInfo {
-  reserved 16, 21, 28, 32, 34;
+  reserved 15, 16, 21, 28, 32, 34;
   string id = 1;
   string title = 2;
   int32 question_count = 3;
@@ -61,8 +61,6 @@ message QuestionSetInfo {
   string root_folder_id = 12;
   bool is_onboarding = 13;
   QuestionSetPrivacy privacy = 14;
-  // Should use `question_infos` on GetQuestionSetResponse / GetCurriculumQuestionSetResponse instead.
-  repeated QuestionInfo questions = 15 [deprecated = true];
   classtime.entity.EntityRef anonymous_solo_session_ref = 18;
   string anonymous_solo_session_id = 30;
   classtime.entity.EntityRef authorized_solo_session_ref = 19;
