@@ -37,7 +37,7 @@ enum PremiumStatus {
  * e.g. `bool is_some_ab_test = 12 [(is_launch_experiment) = true];
  */
 message FeatureFlags {
-  reserved 10, 32, 39, 44, 66;
+  reserved 10, 14, 17, 19, 21, 23 to 25, 27, 29, 32 to 34, 38 to 44, 46 to 55, 66, 85;
   bool analytics_report_enabled = 1 [(is_launch_controlled) = true];
 
   bool app_dark_theme = 12 [(is_launch_controlled) = true];
@@ -53,34 +53,21 @@ message FeatureFlags {
   bool app_is_user_settings_service_used_by_teach = 78 [(is_launch_controlled) = true];
   Theme app_theme = 11;
 
-  bool challenge_is_browser_warning_active = 14;
-
   PremiumStatus classes_feature_classes = 15;
   bool classes_feature_is_co_teachers_enabled = 16;
-  bool classes_is_welcome_banner_visible = 17;
 
   bool curriculum_are_preview_categories_available = 18;
-  bool curriculum_is_welcome_banner_visible = 19;
 
   string custom_logo = 20;
 
   bool library_create_in_new_db = 79 [(is_launch_controlled) = true];
-  bool library_has_preselected_onboarding_question_sets = 21;
   bool library_is_collaboration_enabled = 22;
-  bool library_is_context_material_tooltip_visible = 23;
-  bool library_is_create_question_set_tooltip_visible = 24;
-  bool library_is_import_question_set_tooltip_visible = 25;
   bool library_is_media_service_used_by_teach = 26 [(is_launch_controlled) = true];
-  bool library_is_menu_tooltip_visible = 27;
   bool library_is_navigation_in_question_editor_enabled = 37;
-  bool library_is_navigation_in_question_editor_tooltip_visible = 38;
   bool library_is_question_image_copyright_enabled = 28 [(is_launch_controlled) = true];
   bool library_is_question_set_import_enabled = 80;
-  bool library_is_question_type_tooltip_visible = 29;
   bool library_is_service_used_by_teach_library_page = 31;
   bool library_is_service_used_by_teach_question_modal = 30;
-  bool library_is_start_session_tooltip_visible = 33;
-  bool library_is_welcome_banner_visible = 34;
   int32 library_max_audio_file_size_bytes = 35;
 
   bool school_license_management_enabled = 77 [(is_launch_controlled) = true];
@@ -103,22 +90,7 @@ message FeatureFlags {
   bool session_feature_is_new_answers_modals_navigation_enabled = 73;
   bool session_feature_spell_check = 75 [(is_launch_controlled) = true];
   PremiumStatus session_feature_text_to_speech = 67;
-  bool session_has_heatmap_header = 40;
-  bool session_is_answers_overview_tooltip_visible = 41;
-  bool session_is_end_session_tooltip_visible = 42;
-  bool session_is_heatmap_tooltip_visible = 43;
   bool session_is_new_evaluation_schema_enabled = 45;
-  bool session_is_rubric_tooltip_visible = 85;
-  bool session_is_session_grading_tooltip_visible = 49;
-  bool session_is_session_share_comment_tooltip_visible = 46;
-  bool session_is_session_share_results_tooltip_in_pdf_export_visible = 47;
-  bool session_is_session_share_results_tooltip_visible = 48;
-  bool session_is_share_code_tooltip_visible = 50;
-  bool session_is_spellcheck_tooltip_visible = 51;
-  bool session_is_start_challenge_tooltip_visible = 52;
-  bool session_is_start_preview_tooltip_visible = 53;
-  bool session_is_start_tooltip_visible = 54;
-  bool session_is_welcome_banner_visible = 55;
   bool session_nickname_auth_disabled = 60 [(is_launch_controlled) = true];
   int32 session_participant_limit = 56;
   bool session_student_has_export_pdf = 58 [(is_launch_controlled) = true];
