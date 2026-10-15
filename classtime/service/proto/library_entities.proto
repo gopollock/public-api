@@ -17,6 +17,7 @@ message ResourcePool {
     classtime.entity.EntityRef organization_ref = 2;
   }
   bool is_dissolving = 3;
+  string django_uuid = 4;
 }
 
 enum AccessPermission {
