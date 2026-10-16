@@ -81,6 +81,7 @@ message SebConfig {
   bool is_enabled = 7;
   bool seb_file_has_been_downloaded = 8;
   bool is_mac_private_clipboard_enabled = 9;
+  bool is_screen_reader_support_enabled = 10;
 }
 
 message SessionSettings {
