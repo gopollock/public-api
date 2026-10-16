@@ -86,6 +86,7 @@ message FeatureFlags {
   PremiumStatus session_feature_full_session_history = 65;
   bool session_feature_grading_scale = 72;
   bool session_feature_ihk_grading_scale = 82;
+  bool session_feature_dach_standard_linear_grading_scale = 86 [(is_launch_controlled) = true];
   bool session_feature_is_free_text_auto_validation_disabled = 74;
   bool session_feature_is_new_answers_modals_navigation_enabled = 73;
   bool session_feature_spell_check = 75 [(is_launch_controlled) = true];
