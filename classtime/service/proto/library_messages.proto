@@ -184,6 +184,14 @@ message ContainsFoldersResponse {
   bool contains_folders = 1;
 }
 
+message ContainsDefaultResourcePoolRequest {
+  string target_teacher_email = 1;
+}
+
+message ContainsDefaultResourcePoolResponse {
+  bool contains_default_resource_pool = 1;
+}
+
 message GetQuestionSetRequest {
   option (classtime.service.common.public_api) = true;
   reserved 2;
