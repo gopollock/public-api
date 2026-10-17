@@ -261,8 +261,9 @@ message Rubric {
 
 // Entity nested in Session
 message Question {
-  reserved 2, 3, 22, 35, 37, 100;
+  reserved 3, 22, 35, 37, 100;
   QuestionInfo question_info = 1;
+  classtime.entity.EntityRef derived_from_question_ref = 2 [deprecated = true];
   string explanation_draftjs = 32;
   ContextMaterial context_material = 34;
   string permanent_id = 36;
