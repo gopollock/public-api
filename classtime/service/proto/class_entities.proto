@@ -18,7 +18,7 @@ message ClassInfo {
   string subject = 4;
   int32 teacher_count = 5;
   int32 student_count = 6;
-  classtime.entity.EntityRef owner_ref = 7;
+  classtime.entity.EntityRef owner_ref = 7 [deprecated = true];
   bool is_archived = 8;
   int32 assigned_sessions_count = 10;
   repeated ClassStudentInfo students = 11;
