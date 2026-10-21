@@ -56,6 +56,7 @@ message Purchase {
   PurchaseRole role = 5;
   repeated string unused_activation_codes = 6;
   repeated Activation activations = 7;
+  repeated string question_bank_product_ids = 8;
 }
 
 // An Activation stores the activation of a Purchase for a single Account.
@@ -79,6 +80,7 @@ message QuestionBankSubscription {
   // TODO(https://app.asana.com/1/29774015570538/project/1177833412654353/task/1214392079033219?focus=true):
   //     Replace by a simple 'string' type field.
   classtime.entity.EntityRef product_id = 1;
+  string question_bank_product_id = 2;
 }
 
 // Specifies that an Account has access to a QuestionBank for a certain time.
@@ -112,4 +114,5 @@ message SubscriptionExtensionInfo {
 message SubscriptionBasicInfo {
   classtime.entity.EntityRef subscription_ref = 1;
   classtime.entity.EntityRef product_id = 2;
+  string question_bank_product_id = 3;
 }
