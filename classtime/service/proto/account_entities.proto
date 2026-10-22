@@ -132,6 +132,7 @@ message Account {
   string country_code = 12;
   AdminPermissions admin_permissions = 13;
   AccountMetadata metadata = 14;
+  google.protobuf.Timestamp previous_last_success_login_at = 15;
 }
 
 message AccountExtensionState {
