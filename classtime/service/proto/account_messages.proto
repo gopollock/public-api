@@ -158,6 +158,7 @@ message AccountInfoResponse {
   repeated string organizations = 13;
   string country_code = 14;
   AdminPermissions admin_permissions = 15;
+  google.protobuf.Timestamp previous_last_success_login_at = 16;
 }
 
 message ChangeProfileNames {
