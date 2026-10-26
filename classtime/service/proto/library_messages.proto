@@ -150,12 +150,6 @@ message GetFolderResponse {
   repeated QuestionSetInfo child_question_sets = 3;
 }
 
-message DeleteCurriculumFolderRequest {
-  string question_bank_id = 2;
-}
-
-message DeleteCurriculumFolderResponse {}
-
 message SetFolderStatusRequest {
   option (classtime.service.common.public_api) = true;
   // Deprecated: use folder_ids instead.
@@ -211,19 +205,6 @@ message GetQuestionSetForPrintoutResponse {
   string title = 1;
   string secret_link = 2;
   repeated classtime.service.question.api.Question questions = 3;
-}
-
-message GetCurriculumQuestionSetRequest {
-  string synchronized_from_question_set_id = 1;
-  string question_bank_id = 2;
-  bool has_full_question_info = 3; // Maps to isPrintout in Django.
-}
-
-message GetCurriculumQuestionSetResponse {
-  QuestionSetInfo question_set_info = 1;
-  repeated QuestionInfo question_infos = 2 [deprecated = true];
-  repeated QuestionMetadata question_metadata_entries = 3;
-  map<string, classtime.service.question.api.QuestionInfo> questions = 4; // question ID -> question info
 }
 
 message CreateQuestionSetRequest {
