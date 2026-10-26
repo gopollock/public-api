@@ -45,7 +45,7 @@ message FolderInfo {
 }
 
 message QuestionSetInfo {
-  reserved 15, 16, 21, 28, 32, 34;
+  reserved 15, 16, 18, 19, 21, 28, 30, 31, 32, 34;
   string id = 1;
   string title = 2;
   int32 question_count = 3;
@@ -60,10 +60,6 @@ message QuestionSetInfo {
   string root_folder_id = 12;
   bool is_onboarding = 13;
   QuestionSetPrivacy privacy = 14;
-  classtime.entity.EntityRef anonymous_solo_session_ref = 18;
-  string anonymous_solo_session_id = 30;
-  classtime.entity.EntityRef authorized_solo_session_ref = 19;
-  string authorized_solo_session_id = 31;
   string solo_session_link = 20;
   string secret_link = 26;
   string extra = 22;
@@ -260,16 +256,6 @@ message UpdateQuestionSetResponse {
   map<string, classtime.service.question.api.QuestionInfo> questions = 5; // question ID -> question info
   repeated string incomplete_solution_question_ids = 6;
 }
-
-message SetSoloSessionRefRequest {
-  string secret_id = 1;
-  oneof solo_session_ref {
-    classtime.entity.EntityRef anonymous_solo_session_ref = 2;
-    classtime.entity.EntityRef authorized_solo_session_ref = 3;
-  }
-}
-
-message SetSoloSessionRefResponse {}
 
 message MoveQuestionsRequest {
   option (classtime.service.common.public_api) = true;
