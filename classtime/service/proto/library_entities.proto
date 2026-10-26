@@ -54,7 +54,7 @@ enum QuestionSetPrivacy {
 
 // Entity aggregated under ResourcePool
 message QuestionSet {
-  reserved 13;
+  reserved 11, 12, 13;
   string permanent_id = 1;
   string title = 2;
   bool is_onboarding = 3;
@@ -78,8 +78,6 @@ message QuestionSet {
   classtime.entity.EntityRef parent_folder_ref = 8;
   classtime.entity.EntityRef derived_from_ref = 9;
   classtime.entity.EntityRef synchronized_from_ref = 10;
-  classtime.entity.EntityRef anonymous_solo_session_ref = 11;
-  classtime.entity.EntityRef authorized_solo_session_ref = 12;
 }
 
 // Root entity.
