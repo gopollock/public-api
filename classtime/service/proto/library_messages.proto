@@ -197,10 +197,6 @@ message GetQuestionSetRequest {
   string question_set_id = 1;
 }
 
-message GetQuestionSetBySecretRequest {
-  string question_set_secret_link = 1;
-}
-
 message GetQuestionSetResponse {
   option (classtime.service.common.public_api) = true;
   QuestionSetInfo question_set_info = 1;
@@ -418,21 +414,6 @@ message ReorderQuestionsRequest {
 
 message ReorderQuestionsResponse {
   option (classtime.service.common.public_api) = true;
-}
-
-message GetPlaylistDetailsRequest {
-  repeated classtime.service.common.PlaylistEntry playlist = 1;
-}
-
-message GetPlaylistDetailsResponse {
-  message PlaylistDetailsEntry {
-    classtime.service.question.api.QuestionGroup question_group = 1;
-    repeated classtime.service.question.api.Question questions = 2;
-    string publisher_account_id = 3;
-    bytes question_set_version_hash = 4;
-  }
-
-  repeated PlaylistDetailsEntry playlist_details = 1;
 }
 
 message GetFolderQuestionSetsRequest {

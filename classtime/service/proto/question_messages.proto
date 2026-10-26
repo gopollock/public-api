@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package classtime.service.question.api;
+
+import "common_messages.proto";
+import "question_entities.proto";
+
+option java_multiple_files = true;
+option java_outer_classname = "QuestionMessagesProto";
+option java_package = "classtime.service.question.api";
+
+message GetQuestionSetBySecretRequest {
+  string question_set_secret_link = 1;
+}
+
+message GetPlaylistDetailsRequest {
+  repeated classtime.service.common.PlaylistEntry playlist = 1;
+}
+
+message GetPlaylistDetailsResponse {
+  message PlaylistDetailsEntry {
+    QuestionGroup question_group = 1;
+    repeated Question questions = 2;
+    string publisher_account_id = 3;
+    bytes question_set_version_hash = 4;
+  }
+
+  repeated PlaylistDetailsEntry playlist_details = 1;
+}
