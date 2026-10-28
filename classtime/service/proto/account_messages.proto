@@ -467,6 +467,7 @@ message OrganizationSearchInfo {
   string country_code = 9;
   int32 members_count = 10;
   string client_id = 11;
+  int32 licensed_member_count = 12;
 }
 
 message FindOrganizationsByTitleRequest {
