@@ -5,6 +5,7 @@ package classtime.service.library.api;
 import "entity_store_messages.proto";
 import "google/protobuf/timestamp.proto";
 import "question_entities.proto";
+import "question_messages.proto";
 
 option java_multiple_files = true;
 option java_outer_classname = "LibraryEntitiesProto";
@@ -42,23 +43,13 @@ message Folder {
   classtime.entity.EntityRef synchronized_from_ref = 4;
 }
 
-enum QuestionSetPrivacy {
-  QUESTION_SET_PRIVACY_UNSPECIFIED = 0;
-  QUESTION_SET_PRIVACY_DEFAULT = 1;
-  QUESTION_SET_PRIVACY_PROTECTED = 2;
-  QUESTION_SET_PRIVACY_MODERATION = 3;
-  QUESTION_SET_PRIVACY_APPROVED = 4;
-  QUESTION_SET_PRIVACY_REJECTED = 5;
-  QUESTION_SET_PRIVACY_PUBLIC = 6;
-}
-
 // Entity aggregated under ResourcePool
 message QuestionSet {
   reserved 11, 12, 13;
   string permanent_id = 1;
   string title = 2;
   bool is_onboarding = 3;
-  QuestionSetPrivacy privacy = 4;
+  classtime.service.question.api.QuestionSetPrivacy privacy = 4;
   string secret_link = 5;
 
   message PublicInfo {

@@ -3,6 +3,8 @@ syntax = "proto3";
 package classtime.service.question.api;
 
 import "common_messages.proto";
+import "entity_store_messages.proto";
+import "google/protobuf/timestamp.proto";
 import "question_entities.proto";
 
 option java_multiple_files = true;
@@ -11,6 +13,79 @@ option java_package = "classtime.service.question.api";
 
 message GetQuestionSetBySecretRequest {
   string question_set_secret_link = 1;
+}
+
+enum QuestionSetPrivacy {
+  QUESTION_SET_PRIVACY_UNSPECIFIED = 0;
+  QUESTION_SET_PRIVACY_DEFAULT = 1;
+  QUESTION_SET_PRIVACY_PROTECTED = 2;
+  QUESTION_SET_PRIVACY_MODERATION = 3;
+  QUESTION_SET_PRIVACY_APPROVED = 4;
+  QUESTION_SET_PRIVACY_REJECTED = 5;
+  QUESTION_SET_PRIVACY_PUBLIC = 6;
+}
+
+message LibraryItemProvider {
+  string title = 1;
+  string description = 2;
+}
+
+message FolderInfo {
+  string id = 1;
+  string title = 2;
+  string parent_id = 3;
+  bool is_shared = 4;
+  bool is_readonly = 5;
+  bool is_archived = 6;
+  string resource_pool_id = 7;
+  google.protobuf.Timestamp modified_at = 9;
+  string root_folder_id = 10;
+  google.protobuf.Timestamp expires_at = 12;
+  repeated classtime.service.common.BreadCrumb breadcrumbs = 14;
+
+  // TODO(https://app.asana.com/1/29774015570538/project/1176787179185737/task/1216299425862178):
+  // curriculum fields, to be removed after the switch to curriculum service endpoints
+  string icon_image = 11;
+  LibraryItemProvider provider = 13;
+  classtime.service.common.QuestionBank derived_question_bank_details = 15;
+  string synchronized_from_ref = 16;
+}
+
+message QuestionSetInfo {
+  reserved 15, 16, 18, 19, 21, 28, 30, 31, 32, 34;
+  string id = 1;
+  string title = 2;
+  int32 question_count = 3;
+  classtime.service.common.GradingPoint max_points = 4;
+  string parent_folder_id = 5;
+  bool is_shared = 6;
+  bool is_readonly = 7;
+  bool is_archived = 8;
+  string resource_pool_id = 9;
+  google.protobuf.Timestamp created_at = 10;
+  google.protobuf.Timestamp modified_at = 11;
+  string root_folder_id = 12;
+  bool is_onboarding = 13;
+  QuestionSetPrivacy privacy = 14;
+  string solo_session_link = 20;
+  string secret_link = 26;
+  string extra = 22;
+  string author = 23;
+  repeated classtime.service.common.BreadCrumb breadcrumbs = 24;
+  classtime.entity.EntityRef derived_from_ref = 25;
+  string derived_from_id = 33;
+  bool has_questions_with_empty_solutions = 27;
+
+  // curriculum fields, to be removed after the switch to curriculum service endpoints
+  classtime.entity.EntityRef question_bank_ref = 17;
+  string question_bank_id = 29;
+}
+
+message QuestionMetadata {
+  string id = 1;
+  google.protobuf.Timestamp created_at = 2;
+  google.protobuf.Timestamp modified_at = 3;
+  bool is_archived = 4;
 }
 
 message GetPlaylistDetailsRequest {
@@ -26,4 +101,21 @@ message GetPlaylistDetailsResponse {
   }
 
   repeated PlaylistDetailsEntry playlist_details = 1;
+}
+
+message ContainsQuestionSetsRequest {
+  repeated string permanent_ids = 1;
+}
+
+message ContainsQuestionSetsResponse {
+  bool contains_question_sets = 1;
+  repeated string contained_permanent_ids = 2;
+}
+
+message ContainsQuestionSetBySecretLinkRequest {
+  string secret_link = 1;
+}
+
+message ContainsQuestionSetBySecretLinkResponse {
+  bool contains_question_set = 1;
 }
