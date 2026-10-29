@@ -7,6 +7,7 @@ import "entity_store_messages.proto";
 import "google/protobuf/timestamp.proto";
 import "library_entities.proto";
 import "question_entities.proto";
+import "question_messages.proto";
 
 option java_multiple_files = true;
 option java_outer_classname = "LibraryMessagesProto";
@@ -16,62 +17,6 @@ enum EntityStatus {
   ENTITY_STATUS_ALIVE = 0;
   ENTITY_STATUS_ARCHIVED = 1;
   ENTITY_STATUS_DELETED = 2;
-}
-
-message LibraryItemProvider {
-  string title = 1;
-  string description = 2;
-}
-
-message FolderInfo {
-  string id = 1;
-  string title = 2;
-  string parent_id = 3;
-  bool is_shared = 4;
-  bool is_readonly = 5;
-  bool is_archived = 6;
-  string resource_pool_id = 7;
-  google.protobuf.Timestamp modified_at = 9;
-  string root_folder_id = 10;
-  google.protobuf.Timestamp expires_at = 12;
-  repeated common.BreadCrumb breadcrumbs = 14;
-
-  // TODO(https://app.asana.com/1/29774015570538/project/1176787179185737/task/1216299425862178):
-  // curriculum fields, to be removed after the switch to curriculum service endpoints
-  string icon_image = 11;
-  LibraryItemProvider provider = 13;
-  common.QuestionBank derived_question_bank_details = 15;
-  string synchronized_from_ref = 16;
-}
-
-message QuestionSetInfo {
-  reserved 15, 16, 18, 19, 21, 28, 30, 31, 32, 34;
-  string id = 1;
-  string title = 2;
-  int32 question_count = 3;
-  classtime.service.common.GradingPoint max_points = 4;
-  string parent_folder_id = 5;
-  bool is_shared = 6;
-  bool is_readonly = 7;
-  bool is_archived = 8;
-  string resource_pool_id = 9;
-  google.protobuf.Timestamp created_at = 10;
-  google.protobuf.Timestamp modified_at = 11;
-  string root_folder_id = 12;
-  bool is_onboarding = 13;
-  QuestionSetPrivacy privacy = 14;
-  string solo_session_link = 20;
-  string secret_link = 26;
-  string extra = 22;
-  string author = 23;
-  repeated common.BreadCrumb breadcrumbs = 24;
-  classtime.entity.EntityRef derived_from_ref = 25;
-  string derived_from_id = 33;
-  bool has_questions_with_empty_solutions = 27;
-
-  // curriculum fields, to be removed after the switch to curriculum service endpoints
-  classtime.entity.EntityRef question_bank_ref = 17;
-  string question_bank_id = 29;
 }
 
 message QuestionInfo {
@@ -92,13 +37,6 @@ message QuestionInfo {
   classtime.service.question.api.ContextMaterial context_material = 12;
 }
 
-message QuestionMetadata {
-  string id = 1;
-  google.protobuf.Timestamp created_at = 2;
-  google.protobuf.Timestamp modified_at = 3;
-  bool is_archived = 4;
-}
-
 message CreateFolderRequest {
   option (classtime.service.common.public_api) = true;
   reserved 1;
@@ -108,7 +46,7 @@ message CreateFolderRequest {
 
 message CreateFolderResponse {
   option (classtime.service.common.public_api) = true;
-  FolderInfo folder_info = 1;
+  classtime.service.question.api.FolderInfo folder_info = 1;
 }
 
 message UpdateFolderRequest {
@@ -119,9 +57,9 @@ message UpdateFolderRequest {
 
 message UpdateFolderResponse {
   option (classtime.service.common.public_api) = true;
-  FolderInfo folder_info = 1;
-  repeated FolderInfo child_folders = 2;
-  repeated QuestionSetInfo child_question_sets = 3;
+  classtime.service.question.api.FolderInfo folder_info = 1;
+  repeated classtime.service.question.api.FolderInfo child_folders = 2;
+  repeated classtime.service.question.api.QuestionSetInfo child_question_sets = 3;
 }
 
 message MoveFolderRequest {
@@ -132,9 +70,9 @@ message MoveFolderRequest {
 
 message MoveFolderResponse {
   option (classtime.service.common.public_api) = true;
-  FolderInfo folder_info = 1;
-  repeated FolderInfo child_folders = 2;
-  repeated QuestionSetInfo child_question_sets = 3;
+  classtime.service.question.api.FolderInfo folder_info = 1;
+  repeated classtime.service.question.api.FolderInfo child_folders = 2;
+  repeated classtime.service.question.api.QuestionSetInfo child_question_sets = 3;
   string operation_id = 4;
 }
 
@@ -145,9 +83,9 @@ message GetFolderRequest {
 
 message GetFolderResponse {
   option (classtime.service.common.public_api) = true;
-  FolderInfo folder_info = 1;
-  repeated FolderInfo child_folders = 2;
-  repeated QuestionSetInfo child_question_sets = 3;
+  classtime.service.question.api.FolderInfo folder_info = 1;
+  repeated classtime.service.question.api.FolderInfo child_folders = 2;
+  repeated classtime.service.question.api.QuestionSetInfo child_question_sets = 3;
 }
 
 message SetFolderStatusRequest {
@@ -189,9 +127,9 @@ message GetQuestionSetRequest {
 
 message GetQuestionSetResponse {
   option (classtime.service.common.public_api) = true;
-  QuestionSetInfo question_set_info = 1;
+  classtime.service.question.api.QuestionSetInfo question_set_info = 1;
   repeated QuestionInfo question_infos = 2 [deprecated = true];
-  repeated QuestionMetadata question_metadata_entries = 3;
+  repeated classtime.service.question.api.QuestionMetadata question_metadata_entries = 3;
   map<string, classtime.service.question.api.ContextMaterial> context_materials = 4; // question ID -> context material
   map<string, classtime.service.question.api.QuestionInfo> questions = 5; // question ID -> question info
   repeated string incomplete_solution_question_ids = 6;
@@ -217,7 +155,7 @@ message CreateQuestionSetRequest {
 }
 message CreateQuestionSetResponse {
   option (classtime.service.common.public_api) = true;
-  QuestionSetInfo question_set_info = 1;
+  classtime.service.question.api.QuestionSetInfo question_set_info = 1;
   repeated QuestionInfo question_infos = 2 [deprecated = true];
   map<string, classtime.service.question.api.QuestionInfo> questions = 3; // question ID -> question info
 }
@@ -230,9 +168,9 @@ message UpdateQuestionSetRequest {
 
 message UpdateQuestionSetResponse {
   option (classtime.service.common.public_api) = true;
-  QuestionSetInfo question_set_info = 1;
+  classtime.service.question.api.QuestionSetInfo question_set_info = 1;
   repeated QuestionInfo question_infos = 2 [deprecated = true];
-  repeated QuestionMetadata question_metadata_entries = 3;
+  repeated classtime.service.question.api.QuestionMetadata question_metadata_entries = 3;
   map<string, classtime.service.question.api.ContextMaterial> context_materials = 4; // question ID -> context material
   map<string, classtime.service.question.api.QuestionInfo> questions = 5; // question ID -> question info
   repeated string incomplete_solution_question_ids = 6;
@@ -303,10 +241,10 @@ message CopyFolderResponse {
 message GetTrashBinItemsRequest {}
 
 message GetTrashBinItemsResponse {
-  repeated FolderInfo folders = 1;
-  repeated QuestionSetInfo question_sets = 2;
+  repeated classtime.service.question.api.FolderInfo folders = 1;
+  repeated classtime.service.question.api.QuestionSetInfo question_sets = 2;
   repeated QuestionInfo questions = 3 [deprecated = true];
-  repeated QuestionMetadata question_metadata_entries = 4;
+  repeated classtime.service.question.api.QuestionMetadata question_metadata_entries = 4;
   map<string, classtime.service.question.api.QuestionInfo> question_infos = 5; // question ID -> question info
 }
 
@@ -325,7 +263,7 @@ message SubmitQuestionSetForReviewRequest {
 }
 
 message SubmitQuestionSetForReviewResponse {
-  QuestionSetPrivacy privacy = 1;
+  classtime.service.question.api.QuestionSetPrivacy privacy = 1;
 }
 
 message CopyQuestionRequest {
@@ -337,7 +275,7 @@ message CopyQuestionRequest {
 message CopyQuestionResponse {
   option (classtime.service.common.public_api) = true;
   QuestionInfo question = 1 [deprecated = true];
-  QuestionMetadata question_metadata = 2;
+  classtime.service.question.api.QuestionMetadata question_metadata = 2;
   classtime.service.question.api.QuestionInfo question_info = 3;
   bool is_solution_incomplete = 4;
 }
@@ -388,7 +326,7 @@ message GetFolderQuestionSetsRequest {
 }
 
 message GetFolderQuestionSetsResponse {
-  repeated QuestionSetInfo question_sets = 1;
+  repeated classtime.service.question.api.QuestionSetInfo question_sets = 1;
 }
 
 message CreateLibraryQuestionRequest {
@@ -455,7 +393,7 @@ message ImportSharedQuestionSetRequest {
 }
 
 message ImportSharedQuestionSetResponse {
-  QuestionSetInfo question_set_info = 1;
+  classtime.service.question.api.QuestionSetInfo question_set_info = 1;
 }
 
 message GetSharedQuestionSetRequest {
@@ -505,23 +443,6 @@ message UpdateQuestionRequest {
 message UpdateQuestionResponse {
   classtime.service.question.api.Question question = 1;
   google.protobuf.Timestamp modified_at = 2;
-}
-
-message ContainsQuestionSetsRequest {
-  repeated string permanent_ids = 1;
-}
-
-message ContainsQuestionSetsResponse {
-  bool contains_question_sets = 1;
-  repeated string contained_permanent_ids = 2;
-}
-
-message ContainsQuestionSetBySecretLinkRequest {
-  string secret_link = 1;
-}
-
-message ContainsQuestionSetBySecretLinkResponse {
-  bool contains_question_set = 1;
 }
 
 message ContainsQuestionsRequest {
