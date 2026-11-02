@@ -478,3 +478,37 @@ message GetResourcePoolOperationsResponse {
   option (classtime.service.common.public_api) = true;
   repeated ResourcePoolOperationProgress operations = 1;
 }
+
+message AccessInfo {
+  string id = 1;
+  string account_id = 2;
+  string permission = 3;
+  google.protobuf.Timestamp expires_at = 4;
+}
+
+message ResourcePoolInfo {
+  string id = 1;
+  string organization_id = 2;
+  string owner_account_id = 3;
+  bool is_frozen = 4;
+  bool is_archived = 5;
+  repeated AccessInfo accesses = 6;
+}
+
+message GetResourcePoolRequest {
+  string resource_pool_id = 1;
+}
+
+message GetResourcePoolResponse {
+  ResourcePoolInfo resource_pool = 1;
+}
+
+message UpdateResourcePoolRequest {
+  string resource_pool_id = 1;
+  optional bool is_frozen = 2;
+  optional bool is_archived = 3;
+}
+
+message UpdateResourcePoolResponse {
+  ResourcePoolInfo resource_pool = 1;
+}
