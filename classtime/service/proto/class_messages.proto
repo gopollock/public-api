@@ -4,6 +4,7 @@ package classtime.service.classes.api;
 
 import "class_entities.proto";
 import "common_messages.proto";
+import "google/protobuf/timestamp.proto";
 
 option java_multiple_files = true;
 option java_outer_classname = "ClassMessagesProto";
@@ -119,4 +120,30 @@ message GetClassesResponse {
   }
 
   repeated ClassInfo classes = 1;
+}
+
+message GetGoogleClassroomAuthorizationUrlRequest {
+  string account_id = 1;
+}
+
+message GetGoogleClassroomAuthorizationUrlResponse {
+  string authorization_url = 1;
+  string state = 2;
+}
+
+message CompleteGoogleClassroomGrantRequest {
+  string account_id = 1;
+  string authorization_code = 2;
+  string state = 3;
+}
+
+message CompleteGoogleClassroomGrantResponse {}
+
+message GetGoogleClassroomAccessTokenRequest {
+  string account_id = 1;
+}
+
+message GetGoogleClassroomAccessTokenResponse {
+  string access_token_secret = 1;
+  google.protobuf.Timestamp expires_at = 2;
 }
