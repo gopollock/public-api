@@ -42,3 +42,11 @@ message ClassStudentInfo {
   string classtime_id = 4;
   bool is_subscribed_to_emails = 5;
 }
+
+/**
+ * Root entity holding a teacher's Google Classroom OAuth grant.
+ */
+message GoogleClassroomGrant {
+  classtime.entity.EntityRef account_ref = 1;
+  string refresh_token_secret = 2;
+}
