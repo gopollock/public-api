@@ -445,6 +445,12 @@ message RemoveOrganizationRequest {
 
 message RemoveOrganizationResponse {}
 
+message DeleteAccountRequest {
+  string account_id = 1;
+}
+
+message DeleteAccountResponse {}
+
 message OrganizationSearchInfo {
   string organization_id = 1;
   string title = 2;
