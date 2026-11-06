@@ -401,11 +401,8 @@ message GetMemberDataRealmResponse {
 }
 
 message GetOrCreateOrganizationRequest {
+  reserved 2, 6;
   string title = 1;
-  oneof roster_ref {
-    string classlink_ref = 2;
-    string clever_ref = 6;
-  }
   bool are_ai_comments_allowed = 3;
   classtime.service.featureflag.api.OrganizationGroup group = 4;
   bool is_free_text_auto_validation_disabled = 5;
