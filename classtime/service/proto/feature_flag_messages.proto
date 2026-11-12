@@ -63,6 +63,7 @@ message FeatureFlags {
   bool library_is_collaboration_enabled = 22;
   bool library_is_media_service_used_by_teach = 26 [(is_launch_controlled) = true];
   bool library_is_navigation_in_question_editor_enabled = 37;
+  bool library_is_new_tag_service_used = 87 [(is_launch_controlled) = true];
   bool library_is_question_image_copyright_enabled = 28 [(is_launch_controlled) = true];
   bool library_is_question_set_import_enabled = 80;
   bool library_is_service_used_by_teach_library_page = 31;
