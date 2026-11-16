@@ -37,14 +37,13 @@ enum PremiumStatus {
  * e.g. `bool is_some_ab_test = 12 [(is_launch_experiment) = true];
  */
 message FeatureFlags {
-  reserved 10, 14, 17, 19, 21, 23, 24, 25, 27, 29, 32, 33, 34, 38, 39, 40, 41, 42, 43, 44, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 66, 78, 85;
+  reserved 5, 10, 14, 17, 19, 21, 23 to 25, 27, 29, 32 to 34, 38 to 44, 46 to 55, 66, 78, 85;
   bool analytics_report_enabled = 1 [(is_launch_controlled) = true];
 
   bool app_dark_theme = 12 [(is_launch_controlled) = true];
   bool app_has_premium = 2;
   bool app_is_ai_importer_available = 3 [(is_launch_controlled) = true];
   bool app_is_check_teacher_endpoint_available = 4 [(is_launch_controlled) = true];
-  bool app_is_invite_page_ab_test = 5 [(is_launch_controlled) = true];
   bool app_is_new_storing_of_prices_available = 6 [(is_launch_controlled) = true];
   bool app_is_onboarding_checklist_available = 84 [(is_launch_controlled) = true];
   bool app_is_resources_menu_available = 13 [(is_launch_controlled) = true];
