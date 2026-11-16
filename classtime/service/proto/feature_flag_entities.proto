@@ -110,7 +110,7 @@ enum Theme {
  * Dynamic groups allow to store additional information for each user and allows indefinite group branching.
  */
 message UserGroupType {
-  reserved 6;
+  reserved 6, 22;
   oneof this_group {
     bool group_all_users = 3;
 
@@ -127,7 +127,6 @@ message UserGroupType {
     bool group_with_ai_comments_enabled = 21;
     bool group_with_ai_validation_disabled = 18;
     bool group_with_disabled_websockets = 19;
-    bool group_with_new_resource_pool = 22;
     bool group_with_organization = 7;
     bool group_with_organization_collaboration = 8;
     bool group_with_premium_subscription = 9;

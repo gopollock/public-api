@@ -111,6 +111,8 @@ message GetFeatureFlagsRequest {
 message GetFeatureFlagsResponse {
   option (classtime.service.common.public_api) = true;
   FeatureFlags features = 1;
+  /* Field numbers of the `features` fields marked with `is_launch_experiment`. */
+  repeated int32 experiment_feature_flag_field_ids = 2;
 }
 
 message GetUserGroupsRequest {
