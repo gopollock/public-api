@@ -59,6 +59,7 @@ message FeatureFlags {
   string custom_logo = 20;
 
   bool library_create_in_new_db = 79 [(is_launch_controlled) = true];
+  bool library_feature_autograder_v2 = 88 [(is_launch_controlled) = true];
   bool library_is_collaboration_enabled = 22;
   bool library_is_media_service_used_by_teach = 26 [(is_launch_controlled) = true];
   bool library_is_navigation_in_question_editor_enabled = 37;
