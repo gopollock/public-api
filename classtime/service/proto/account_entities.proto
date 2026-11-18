@@ -32,6 +32,7 @@ enum AuthenticationProvider {
   FOBIZZ = 17;
   CLASSLINK = 18;
   PUBLISHER = 19;
+  EDUPLACES = 20;
 }
 
 message UserProfile {
