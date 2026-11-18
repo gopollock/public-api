@@ -340,6 +340,7 @@ message CreateLibraryQuestionRequest {
 
 message CreateQuestionResponse {
   string id = 1;
+  bool is_solution_incomplete = 2;
 }
 
 message GetQuestionRequest {
@@ -443,6 +444,7 @@ message UpdateQuestionRequest {
 message UpdateQuestionResponse {
   classtime.service.question.api.Question question = 1;
   google.protobuf.Timestamp modified_at = 2;
+  bool is_solution_incomplete = 3;
 }
 
 message ContainsQuestionsRequest {
