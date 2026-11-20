@@ -132,3 +132,10 @@ message ResourcePoolOperation {
   classtime.entity.EntityRef follow_up_operation_ref = 11;
   classtime.entity.EntityRef dissolving_resource_pool_ref = 12;
 }
+
+// Root entity.
+message RubricTemplate {
+  string title = 1;
+  string content = 2; // slate string
+  classtime.entity.EntityRef account_ref = 3;
+}

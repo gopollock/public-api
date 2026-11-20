@@ -514,3 +514,25 @@ message UpdateResourcePoolRequest {
 message UpdateResourcePoolResponse {
   ResourcePoolInfo resource_pool = 1;
 }
+
+message CreateRubricTemplateRequest {
+  RubricTemplate rubric_template = 1;
+}
+
+message CreateRubricTemplateResponse {
+  string rubric_template_id = 1;
+  RubricTemplate rubric_template = 2;
+}
+
+message GetRubricTemplatesRequest {}
+
+message GetRubricTemplatesResponse {
+  // RubricTemplateId to RubricTemplate
+  map<string, RubricTemplate> rubric_templates = 1;
+}
+
+message DeleteRubricTemplateRequest {
+  string rubric_template_id = 1;
+}
+
+message DeleteRubricTemplateResponse {}
