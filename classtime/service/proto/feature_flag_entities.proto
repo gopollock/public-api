@@ -103,6 +103,11 @@ enum Theme {
   THEME_ECODRIVE_PARTNER = 26;
   THEME_ECODRIVE_PARTNER_FR = 27;
   THEME_ECODRIVE_PARTNER_IT = 28;
+  THEME_ECODRIVE_QUIZ_DE = 29;
+  THEME_ECODRIVE_QUIZ_EN = 30;
+  THEME_ECODRIVE_QUIZ_FR = 31;
+  THEME_ECODRIVE_QUIZ_IT = 32;
+  THEME_ECODRIVE_REINER_LANGENDORF = 33;
 }
 
 /*
@@ -133,7 +138,8 @@ message UserGroupType {
     bool group_with_purchased_challenge_legacy = 20;
 
     string group_with_custom_logo = 4;
-    Theme group_with_custom_theme = 11;
+    Theme group_with_organization_theme = 11;
+    Theme group_with_email_theme = 26;
     DataRealm group_with_data_realm = 10;
     string group_with_organization_country_code = 5;
     OrganizationGroup group_with_organization_group = 24;
