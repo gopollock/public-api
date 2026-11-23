@@ -4,6 +4,7 @@ package classtime.service.session.api;
 
 import "common_messages.proto";
 import "entity_store_messages.proto";
+import "feature_flag_entities.proto";
 import "feature_flag_messages.proto";
 import "google/protobuf/duration.proto";
 import "google/protobuf/timestamp.proto";
@@ -451,6 +452,9 @@ message CheckSessionHealthResponse {
   repeated classtime.service.common.FeatureFlag feature_flags = 13;
   SessionType session_type = 14;
   bool is_logout_on_marked_as_done_enabled = 15;
+  classtime.service.featureflag.api.Theme theme = 16;
+  string custom_logo = 17;
+  bool is_nickname_auth_disabled = 18;
 }
 
 message GetPusherConfigRequest {
