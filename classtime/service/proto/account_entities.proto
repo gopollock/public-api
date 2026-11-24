@@ -198,6 +198,7 @@ message Organization {
   oneof roster_ref {
     string classlink_ref = 8;
     string clever_ref = 16;
+    string eduplaces_ref = 25;
   }
   bool are_ai_comments_allowed = 9;
   bool is_account_extension_disabled = 10;

@@ -43,6 +43,8 @@ message LoginRequest {
   classtime.service.common.AcquisitionChannel acquisition_channel = 10;
   string referral_info = 11;
   bool is_login = 12;
+  string eduplaces_link_id = 13;
+  bool is_eduplaces_migration_login = 14;
   oneof login_info {
     OpenIdConnectLoginInfo open_id_connect = 7;
   }
@@ -67,6 +69,7 @@ message OpenIdConnectAuthInfo {
   reserved 2;
   string code = 1;
   repeated string scope = 3;
+  string error = 4;
 }
 
 message EmailPasswordAuthInfo {
@@ -207,6 +210,8 @@ message AccountExtension {
   AuthenticationMethod authentication_method = 2;
   string account_extension_secret = 3;
   google.protobuf.Timestamp expiration_date = 4;
+  classtime.service.common.Role role = 6;
+  string continue_url = 7;
 }
 
 message AccountExtensionRequest {
