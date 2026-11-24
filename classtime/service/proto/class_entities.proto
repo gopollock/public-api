@@ -27,6 +27,7 @@ message ClassInfo {
   oneof roster_ref {
     string classlink_class_ref = 14;
     string clever_class_ref = 15;
+    string eduplaces_class_ref = 19;
   }
   string grade = 16;
   string owner_classtime_id = 17;
