@@ -37,7 +37,7 @@ enum PremiumStatus {
  * e.g. `bool is_some_ab_test = 12 [(is_launch_experiment) = true];
  */
 message FeatureFlags {
-  reserved 5, 10, 14, 17, 19, 21, 23 to 25, 27, 29, 32 to 34, 38 to 44, 46 to 55, 66, 78, 85;
+  reserved 5, 10, 14, 17, 19, 21, 23 to 25, 27, 29, 30, 32 to 34, 37 to 55, 66, 70, 72, 78, 85;
   bool analytics_report_enabled = 1 [(is_launch_controlled) = true];
 
   bool app_dark_theme = 12 [(is_launch_controlled) = true];
@@ -62,12 +62,10 @@ message FeatureFlags {
   bool library_feature_autograder_v2 = 88 [(is_launch_controlled) = true];
   bool library_is_collaboration_enabled = 22;
   bool library_is_media_service_used_by_teach = 26 [(is_launch_controlled) = true];
-  bool library_is_navigation_in_question_editor_enabled = 37;
   bool library_is_new_tag_service_used = 87 [(is_launch_controlled) = true];
   bool library_is_question_image_copyright_enabled = 28 [(is_launch_controlled) = true];
   bool library_is_question_set_import_enabled = 80;
   bool library_is_service_used_by_teach_library_page = 31;
-  bool library_is_service_used_by_teach_question_modal = 30;
   int32 library_max_audio_file_size_bytes = 35;
 
   bool school_license_management_enabled = 77 [(is_launch_controlled) = true];
@@ -78,20 +76,17 @@ message FeatureFlags {
   bool session_feature_autograder_v2 = 69 [(is_launch_controlled) = true];
   PremiumStatus session_feature_challenges = 62;
   PremiumStatus session_feature_chat = 63;
-  bool session_feature_comment_function = 70;
   bool session_feature_editor_links = 81 [(is_launch_controlled) = true];
   bool session_feature_essay_pasting_allowed = 71 [(is_launch_controlled) = true];
   bool session_feature_essay_table_enabled = 76;
   PremiumStatus session_feature_excel_export = 64;
   PremiumStatus session_feature_full_session_history = 65;
-  bool session_feature_grading_scale = 72;
   bool session_feature_ihk_grading_scale = 82;
   bool session_feature_dach_standard_linear_grading_scale = 86 [(is_launch_controlled) = true];
   bool session_feature_is_free_text_auto_validation_disabled = 74;
   bool session_feature_is_new_answers_modals_navigation_enabled = 73;
   bool session_feature_spell_check = 75 [(is_launch_controlled) = true];
   PremiumStatus session_feature_text_to_speech = 67;
-  bool session_is_new_evaluation_schema_enabled = 45;
   bool session_nickname_auth_disabled = 60 [(is_launch_controlled) = true];
   int32 session_participant_limit = 56;
   bool session_student_has_export_pdf = 58 [(is_launch_controlled) = true];
