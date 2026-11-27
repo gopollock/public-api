@@ -140,9 +140,12 @@ message UserGroupType {
     string group_with_custom_logo = 4;
     Theme group_with_organization_theme = 11;
     Theme group_with_email_theme = 26;
+
     DataRealm group_with_data_realm = 10;
     string group_with_organization_country_code = 5;
     OrganizationGroup group_with_organization_group = 24;
+    string group_with_organization_id = 27;
+
     string group_with_primary_email = 23;
   }
 }
