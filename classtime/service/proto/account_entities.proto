@@ -213,6 +213,7 @@ message Organization {
   repeated ResourceLink resource_links = 22;
   bool is_session_deletion_prevented = 23;
   repeated string question_bank_product_ids = 24;
+  bool is_onboarding_checklist_enabled = 26;
 }
 
 message OrganizationMerge {
