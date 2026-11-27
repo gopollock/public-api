@@ -451,6 +451,7 @@ message OrganizationSearchInfo {
   int32 members_count = 10;
   string client_id = 11;
   int32 licensed_member_count = 12;
+  bool is_onboarding_checklist_enabled = 13;
 }
 
 message FindOrganizationsByTitleRequest {
